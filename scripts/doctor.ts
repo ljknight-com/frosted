@@ -15,7 +15,6 @@ const fix = process.argv.includes('--fix');
 
 // Nested deps that are deliberate and must NOT be deleted.
 const ALLOWED: Record<string, string[]> = {
-  'apps/tailwind': ['typescript', '@types'], // Next 16 needs classic TS 5.9, scoped here
   'apps/docs': ['typescript'], // generate-props needs the classic TS compiler API
 };
 

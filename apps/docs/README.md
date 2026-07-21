@@ -5,7 +5,7 @@ Documentation site for `@aussieljk/frosted` — Fumadocs on TanStack Start (Vite
 ```bash
 # from the repo root
 bun install
-bun run dev --filter=docs     # dev server on http://localhost:3000
+bun run dev --filter=docs     # dev server on https://frosted.localhost (portless)
 bun run build --filter=docs   # builds @aussieljk/frosted first via turbo
 ```
 

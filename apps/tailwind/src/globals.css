@@ -6,6 +6,26 @@
 @import 'tailwindcss/utilities.css' layer(utilities);
 @import '@aussieljk/frosted/styles.css' layer(frosted_ui);
 
+@font-face {
+  font-family: 'InterVariable';
+  src: url('../fonts/InterVariable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'InterVariable';
+  src: url('../fonts/InterVariable-Italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --inter-variable: 'InterVariable';
+}
+
 body {
   height: 100%;
   width: 100%;

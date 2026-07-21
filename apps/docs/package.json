@@ -4,7 +4,7 @@
   "type": "module",
   "sideEffects": false,
   "scripts": {
-    "dev": "bun run generate:props && vite dev --open",
+    "dev": "bun run generate:props && portless frosted vite dev",
     "build": "bun run generate:props && vite build",
     "generate:props": "bun scripts/generate-props.ts",
     "start": "vite preview",

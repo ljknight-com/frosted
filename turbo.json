@@ -16,7 +16,7 @@
     },
     "tailwind#build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**"]
     },
     "docs#build": {
       "dependsOn": ["^build"],
@@ -37,13 +37,6 @@
       "cache": false,
       "persistent": true,
       "dependsOn": ["^build"]
-    },
-    "test": {
-      "dependsOn": ["build"]
-    },
-    "@aussieljk/frosted#test": {
-      "dependsOn": ["build"],
-      "inputs": ["src/**", "scripts/**", "vitest.config.ts", "package.json"]
     },
     "@aussieljk/frosted#build-storybook": {
       "dependsOn": ["@frosted-ui/icons#build", "build:css"],

@@ -5,7 +5,7 @@
   },
   "workspaces": {
     "packages/frosted-ui": {
-      "entry": ["src/**/*.{ts,tsx}", "!src/**/*.stories.*", "!src/**/*.test.*", "scripts/*.ts"]
+      "entry": ["src/**/*.{ts,tsx}", "!src/**/*.stories.*", "scripts/*.ts"]
     },
     "packages/frosted-ui-icons": {
       "entry": ["src/**/*.tsx", "index.js"]

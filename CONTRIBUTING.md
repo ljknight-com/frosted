@@ -18,7 +18,7 @@ Formatting is [oxfmt](https://oxc.rs) (config in `.oxfmtrc.json`); linting is ES
 
 - Format everything: `bun run format`
 - Lint everything: `bun run lint`
-- Run everything CI runs (lint, typecheck, build, test, publint, attw): `bun run check`
+- Run the full local check (lint, typecheck, build, publint, attw): `bun run check`
 
 ## New components
 
@@ -34,7 +34,7 @@ Use `--namespace` for multi-part components (`<Name>.Root` / `<Name>.Item`, expo
 
 When creating new components or updating existing component APIs be sure to update the storybook.
 
-You can run the storybook locally by running `bun run --filter="@aussieljk/frosted" storybook` and then navigating to `http://localhost:6006/`
+You can run the storybook locally by running `bun run --filter="@aussieljk/frosted" storybook` and then navigating to `https://storybook.frosted.localhost` (served via [portless](https://www.npmjs.com/package/portless)).
 
 ## If something is mysteriously broken
 
@@ -44,10 +44,10 @@ Run `bun run doctor`. Under the hoisted linker, stale nested `packages/*/node_mo
 
 Non-obvious constraints — breaking any of these fails silently or in confusing ways:
 
-- **`scripts/fix-namespace-exports.ts` must run after every tsdown build** (wired into `build:js`). Rolldown lowers `export * as Tabs` into materialized getter objects, which break React Server Components (`<Tabs.Root>` renders undefined in Next: "Element type is invalid … got: undefined"). `src/package-guards.test.ts` guards this. Note `tsdown --watch` (dev) skips the fix, so a dev-built `dist/` is expected to fail that guard until you run a full `bun run build`.
-- **`sideEffects` in `packages/frosted-ui/package.json` must stay `["./dist/icons/adapters/*"]`**, not `false`. The icon adapter subpaths (`@aussieljk/frosted/icons/lucide` etc.) register themselves on import; `sideEffects: false` silently tree-shakes them. Also guarded by `src/package-guards.test.ts`.
-- **TypeScript 7 (native compiler) is the repo default**, and it has no JS compiler API. The seemingly redundant classic-TS pins are load-bearing: `apps/tailwind` has its own `typescript ^5.9.3` (Next 16 requires it), `apps/docs` has a scoped classic TS (prop-table generation needs the compiler API), and the root `overrides` pin `ts-api-utils > typescript` for @typescript-eslint. Don't "clean up" any of them.
-- **`.stylelintrc.js` and `apps/tailwind/postcss.config.js` must stay `.js`** — stylelint's TS config loader and Next 16 both call classic-TS APIs that the TS7 native compiler doesn't export.
+- **`scripts/fix-namespace-exports.ts` must run after every tsdown build** (wired into `build:js`). Rolldown lowers `export * as Tabs` into materialized getter objects, which break React Server Components (`<Tabs.Root>` renders undefined in Next: "Element type is invalid … got: undefined"). Note `tsdown --watch` (dev) skips the fix, so a dev-built `dist/` may misbehave in consumers until you run a full `bun run build`.
+- **`sideEffects` in `packages/frosted-ui/package.json` must stay `["./dist/icons/adapters/*"]`**, not `false`. The icon adapter subpaths (`@aussieljk/frosted/icons/lucide` etc.) register themselves on import; `sideEffects: false` silently tree-shakes them.
+- **TypeScript 7 (native compiler) is the repo default**, and it has no JS compiler API. The seemingly redundant classic-TS pins are load-bearing: `apps/docs` has a scoped classic TS (prop-table generation needs the compiler API), and the root `overrides` pin `ts-api-utils > typescript` for @typescript-eslint. Don't "clean up" either of them.
+- **`.stylelintrc.js` must stay `.js`** — stylelint's TS config loader calls classic-TS APIs that the TS7 native compiler doesn't export.
 - **`src/styles/tokens/tailwind-color.css` is hand-maintained runtime CSS** (per-palette oklch seeds + `:where()` blocks computing all 12 steps via color-mix/relative color syntax). There is no generator anymore; edit it by hand. Tailwind palettes are prefixed `tw-` (`tw-indigo`) to coexist with the Radix scales.
 - **Icon adapters in `src/icons/adapters/` are generated** — edit `scripts/icon-map.ts` and run `bun run generate:icon-adapters`; never edit the adapters directly.
 - **`lucide-react` is v1.x** — the adapter uses v1 names (`House`, `Funnel`, `TriangleAlert`); pre-1.0 aliases like `Home` no longer exist despite the permissive peer range.

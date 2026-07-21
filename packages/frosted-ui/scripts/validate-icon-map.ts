@@ -1,7 +1,5 @@
 /**
- * Validation half of the icon adapter generator, kept free of node API imports
- * so the vitest suite (compiled without node types, like the rest of `src/`)
- * can import and run it directly.
+ * Validation half of the icon adapter generator, kept free of node API imports.
  */
 import { ICON_LIBRARIES, ICON_MAP, LIBRARY_MODULES, type IconLibrary } from './icon-map';
 
