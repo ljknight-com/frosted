@@ -62,7 +62,7 @@
     "build": "bun run build:js && bun run build:css",
     "build:js": "tsdown --config tsdown.config.mts && bun scripts/fix-namespace-exports.ts",
     "build:css": "postcss src/styles/index.css -o styles.css && postcss src/styles/theme.css -o theme.css && bun scripts/build-lite-css.ts src/styles/index.css -o styles.lite.css",
-    "dev": "bun run dev:js & bun run dev:css",
+    "dev": "bun run dev:js & bun run dev:css & storybook dev -p 6006",
     "dev:js": "tsdown --watch",
     "dev:css": "postcss src/styles/index.css -o styles.css --watch",
     "test": "vitest run",
