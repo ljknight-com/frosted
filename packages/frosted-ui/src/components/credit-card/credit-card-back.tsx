@@ -9,8 +9,7 @@ interface CreditCardBackState extends Record<string, unknown> {
   active: boolean;
 }
 
-interface CreditCardBackProps
-  extends useRender.ComponentProps<'div', CreditCardBackState> {
+interface CreditCardBackProps extends useRender.ComponentProps<'div', CreditCardBackState> {
   /**
    * Accent color override for the back face. When omitted, inherits from Content.
    */
@@ -29,10 +28,7 @@ const CreditCardBack = React.forwardRef<HTMLDivElement, CreditCardBackProps>(
     const active = face === 'back';
     const resolvedColor = color ?? contextColor;
 
-    const state = React.useMemo<CreditCardBackState>(
-      () => ({ active }),
-      [active],
-    );
+    const state = React.useMemo<CreditCardBackState>(() => ({ active }), [active]);
 
     return useRender({
       render,

@@ -127,15 +127,7 @@ type CalloutActionProps = Omit<PropsWithoutColor<typeof Button>, 'className'> &
  * it with another element, e.g. `render={<a href="..." />}`.
  */
 const CalloutAction = (props: CalloutActionProps) => {
-  const {
-    children,
-    variant = 'primary',
-    loading,
-    disabled = props.loading,
-    className,
-    render,
-    ...actionProps
-  } = props;
+  const { children, variant = 'primary', loading, disabled = props.loading, className, render, ...actionProps } = props;
 
   const actionClassName = classNames('fui-reset', 'fui-CalloutAction', `fui-variant-${variant}`, className);
 

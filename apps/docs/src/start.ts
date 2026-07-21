@@ -11,11 +11,7 @@ const csrfMiddleware = createCsrfMiddleware({
 const llmMiddleware = createMiddleware().server(({ next, request }) => {
   const url = new URL(request.url);
 
-  if (
-    url.pathname.startsWith(docsRoute) &&
-    !url.pathname.endsWith('.md') &&
-    isMarkdownPreferred(request)
-  ) {
+  if (url.pathname.startsWith(docsRoute) && !url.pathname.endsWith('.md') && isMarkdownPreferred(request)) {
     const slugs = url.pathname
       .slice(docsRoute.length)
       .split('/')

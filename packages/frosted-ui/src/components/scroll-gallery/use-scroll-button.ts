@@ -73,9 +73,7 @@ function useScrollButton({ direction, step }: UseScrollButtonOptions): UseScroll
 
       let vpRef: number;
       if (snapAlign === 'center') {
-        vpRef = isHorizontal
-          ? viewportRect.left + viewportRect.width / 2
-          : viewportRect.top + viewportRect.height / 2;
+        vpRef = isHorizontal ? viewportRect.left + viewportRect.width / 2 : viewportRect.top + viewportRect.height / 2;
       } else if (snapAlign === 'end') {
         vpRef = isHorizontal ? viewportRect.right : viewportRect.bottom;
       } else {
@@ -101,9 +99,7 @@ function useScrollButton({ direction, step }: UseScrollButtonOptions): UseScroll
         }
       }
 
-      const targetIndex = isPrev
-        ? Math.max(0, anchorIndex - step)
-        : Math.min(items.length - 1, anchorIndex + step);
+      const targetIndex = isPrev ? Math.max(0, anchorIndex - step) : Math.min(items.length - 1, anchorIndex + step);
       const target = items[targetIndex];
       if (!target) return;
 
@@ -122,11 +118,24 @@ function useScrollButton({ direction, step }: UseScrollButtonOptions): UseScroll
         behavior: getScrollBehavior(scrollBehavior),
       });
     }
-  }, [canScroll, disabled, getItemElements, isPrev, loop, orientation, scrollBehavior, scrollingRef, scrollTargetRef, scrollToItem, sign, step, viewportRef]);
+  }, [
+    canScroll,
+    disabled,
+    getItemElements,
+    isPrev,
+    loop,
+    orientation,
+    scrollBehavior,
+    scrollingRef,
+    scrollTargetRef,
+    scrollToItem,
+    sign,
+    step,
+    viewportRef,
+  ]);
 
   return { disabled, handleClick };
 }
 
 export { useScrollButton };
 export type { UseScrollButtonOptions, UseScrollButtonReturn };
-

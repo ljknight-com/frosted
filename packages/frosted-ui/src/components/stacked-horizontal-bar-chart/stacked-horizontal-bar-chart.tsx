@@ -83,4 +83,3 @@ StackedHorizontalBarChart.displayName = 'StackedHorizontalBarChart';
 
 export { StackedHorizontalBarChart };
 export type { StackedHorizontalBarChartProps };
-

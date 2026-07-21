@@ -94,8 +94,7 @@ type PopupProps = React.ComponentProps<typeof AlertDialogPrimitive.Popup>;
 type PortalProps = React.ComponentProps<typeof AlertDialogPrimitive.Portal>;
 
 interface AlertDialogContentProps
-  extends Omit<PopupProps, 'className' | 'render' | 'style'>,
-    AlertDialogContentOwnProps {
+  extends Omit<PopupProps, 'className' | 'render' | 'style'>, AlertDialogContentOwnProps {
   className?: string;
   style?: React.CSSProperties;
   /** The element the dialog portal is appended to. Defaults to the document body. */

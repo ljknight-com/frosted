@@ -1,12 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import {
-  CANONICAL_ICON_NAMES,
-  type AdapterIconComponent,
-  type CanonicalIconName,
-  type IconAdapter,
-} from './types';
+import { CANONICAL_ICON_NAMES, type AdapterIconComponent, type CanonicalIconName, type IconAdapter } from './types';
 
 /* -------------------------------------------------------------------------------------------------
  * Global adapter registry

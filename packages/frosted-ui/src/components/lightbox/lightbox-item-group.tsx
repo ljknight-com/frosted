@@ -66,10 +66,7 @@ const LightboxItemGroup = React.forwardRef<HTMLDivElement, LightboxItemGroupProp
       }
     }, [activeIndex]);
 
-    const state = React.useMemo<LightboxItemGroupState>(
-      () => ({ activeIndex, direction }),
-      [activeIndex, direction],
-    );
+    const state = React.useMemo<LightboxItemGroupState>(() => ({ activeIndex, direction }), [activeIndex, direction]);
 
     const groupContext = React.useMemo<LightboxItemGroupContextValue>(
       () => ({ activeIndex, preload, direction, loop, itemCount }),

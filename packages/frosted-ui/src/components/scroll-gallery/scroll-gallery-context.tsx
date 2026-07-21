@@ -85,9 +85,7 @@ const ScrollGalleryContext = React.createContext<ScrollGalleryContextValue | und
 function useScrollGalleryContext(): ScrollGalleryContextValue {
   const context = React.useContext(ScrollGalleryContext);
   if (context === undefined) {
-    throw new Error(
-      'ScrollGallery compound components must be used within a ScrollGallery.Root',
-    );
+    throw new Error('ScrollGallery compound components must be used within a ScrollGallery.Root');
   }
   return context;
 }
@@ -102,9 +100,7 @@ function useScrollGalleryContext(): ScrollGalleryContextValue {
  */
 function getScrollBehavior(preferred: ScrollBehavior = 'smooth'): ScrollBehavior {
   if (typeof window === 'undefined') return preferred;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    ? 'instant'
-    : preferred;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : preferred;
 }
 
 /**
@@ -114,17 +110,11 @@ function getScrollBehavior(preferred: ScrollBehavior = 'smooth'): ScrollBehavior
  *
  * CSS syntax: `scroll-snap-align: [block] [inline]`. One value → both axes.
  */
-function getSnapAlignment(
-  item: HTMLElement,
-  orientation: 'horizontal' | 'vertical',
-): 'start' | 'center' | 'end' {
+function getSnapAlignment(item: HTMLElement, orientation: 'horizontal' | 'vertical'): 'start' | 'center' | 'end' {
   try {
     const raw = getComputedStyle(item).scrollSnapAlign;
     const parts = raw.split(' ');
-    const align =
-      orientation === 'horizontal'
-        ? parts.length > 1 ? parts[1] : parts[0]
-        : parts[0];
+    const align = orientation === 'horizontal' ? (parts.length > 1 ? parts[1] : parts[0]) : parts[0];
     if (align === 'center') return 'center';
     if (align === 'end') return 'end';
   } catch {
@@ -170,11 +160,7 @@ function getAbsoluteScrollPosition(
  * visual-position-based calculation — accurate for runtime scrolling
  * when layout is fully established.
  */
-function getScrollDistance(
-  target: HTMLElement,
-  viewport: HTMLElement,
-  orientation: 'horizontal' | 'vertical',
-): number {
+function getScrollDistance(target: HTMLElement, viewport: HTMLElement, orientation: 'horizontal' | 'vertical'): number {
   const isHorizontal = orientation === 'horizontal';
   const snapAlign = getSnapAlignment(target, orientation);
   const targetRect = target.getBoundingClientRect();
@@ -184,9 +170,7 @@ function getScrollDistance(
   let viewportRef: number;
 
   if (snapAlign === 'center') {
-    targetRef = isHorizontal
-      ? targetRect.left + targetRect.width / 2
-      : targetRect.top + targetRect.height / 2;
+    targetRef = isHorizontal ? targetRect.left + targetRect.width / 2 : targetRect.top + targetRect.height / 2;
     viewportRef = isHorizontal
       ? viewportRect.left + viewportRect.width / 2
       : viewportRect.top + viewportRect.height / 2;
@@ -208,5 +192,13 @@ function getScrollDistance(
  */
 const PAGE_SCROLL_FACTOR = 0.85;
 
-export { getAbsoluteScrollPosition, getScrollBehavior, getScrollDistance, getSnapAlignment, PAGE_SCROLL_FACTOR, ScrollGalleryContext, useScrollGalleryContext };
+export {
+  getAbsoluteScrollPosition,
+  getScrollBehavior,
+  getScrollDistance,
+  getSnapAlignment,
+  PAGE_SCROLL_FACTOR,
+  ScrollGalleryContext,
+  useScrollGalleryContext,
+};
 export type { ChangeSource, ScrollGalleryContextValue };

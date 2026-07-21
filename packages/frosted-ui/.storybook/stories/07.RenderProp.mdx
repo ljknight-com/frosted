@@ -22,9 +22,7 @@ The simplest way to use the `render` prop is to pass a React element:
 import { Text } from 'frosted-ui';
 
 // Text renders as a <label> instead of <span>
-<Text render={<label htmlFor="email" />}>
-  Email address
-</Text>
+<Text render={<label htmlFor="email" />}>Email address</Text>;
 ```
 
 The component will clone your element and merge its props onto it. Your element's attributes (like `htmlFor`) are preserved.
@@ -36,13 +34,7 @@ For more control, you can pass a function that receives the merged props:
 ```tsx
 import { Text } from 'frosted-ui';
 
-<Text
-  render={(props) => (
-    <label {...props} htmlFor="email" />
-  )}
->
-  Email address
-</Text>
+<Text render={(props) => <label {...props} htmlFor="email" />}>Email address</Text>;
 ```
 
 This gives you explicit control over how props are spread and merged.
@@ -51,15 +43,15 @@ This gives you explicit control over how props are spread and merged.
 
 The following components support the `render` prop:
 
-| Component | Default Element | Common Use Cases |
-|-----------|-----------------|------------------|
-| `Text` | `<span>` | Labels, links, custom elements |
-| `Heading` | `<h1>` | Custom heading levels, links |
-| `Card` | `<div>` | Links, buttons, articles |
-| `Theme` | `<div>` | Custom wrapper elements |
-| `Breadcrumbs.Root` | `<nav>` | Custom navigation wrappers |
-| `WidgetStack.Next` | `<button>` | Custom button components |
-| `WidgetStack.Prev` | `<button>` | Custom button components |
+| Component          | Default Element | Common Use Cases               |
+| ------------------ | --------------- | ------------------------------ |
+| `Text`             | `<span>`        | Labels, links, custom elements |
+| `Heading`          | `<h1>`          | Custom heading levels, links   |
+| `Card`             | `<div>`         | Links, buttons, articles       |
+| `Theme`            | `<div>`         | Custom wrapper elements        |
+| `Breadcrumbs.Root` | `<nav>`         | Custom navigation wrappers     |
+| `WidgetStack.Next` | `<button>`      | Custom button components       |
+| `WidgetStack.Prev` | `<button>`      | Custom button components       |
 
 ## Integration with Routing Libraries
 
@@ -89,9 +81,7 @@ import { Text, Card, Heading } from 'frosted-ui';
 import { Link } from 'react-router-dom';
 import { Text } from 'frosted-ui';
 
-<Text render={<Link to="/dashboard" />}>
-  Go to Dashboard
-</Text>
+<Text render={<Link to="/dashboard" />}>Go to Dashboard</Text>;
 ```
 
 ### TanStack Router
@@ -100,9 +90,7 @@ import { Text } from 'frosted-ui';
 import { Link } from '@tanstack/react-router';
 import { Card } from 'frosted-ui';
 
-<Card render={<Link to="/users/$userId" params={{ userId: '123' }} />}>
-  User Profile Card
-</Card>
+<Card render={<Link to="/users/$userId" params={{ userId: '123' }} />}>User Profile Card</Card>;
 ```
 
 ## How Props Are Merged
@@ -144,9 +132,7 @@ This is useful when you want the render element to "own" certain props:
 
 ```tsx
 // NextLink controls the href, Link just adds styling
-<Link render={<NextLink href="/dashboard" prefetch={false} />}>
-  Go to Dashboard
-</Link>
+<Link render={<NextLink href="/dashboard" prefetch={false} />}>Go to Dashboard</Link>
 ```
 
 ### Callback Form: You Control Everything
@@ -173,13 +159,13 @@ Use the callback form when you need the component's props to take precedence.
 
 Not all props follow the "render element wins" rule. Some are merged specially:
 
-| Prop Type | Behavior | Example Result |
-|-----------|----------|----------------|
-| `className` | **Concatenated** - all classes kept | `"fui-Text your-class element-class"` |
-| `style` | **Shallow merged** - render element's keys win | Combined styles, conflicts go to render element |
-| Event handlers (`onClick`, etc.) | **Both run** | Both handlers execute |
-| Everything else | **Render element wins** | `data-x="from-render-element"` |
-| `ref` | Only one ref is kept (component's ref) |
+| Prop Type                        | Behavior                                       | Example Result                                  |
+| -------------------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| `className`                      | **Concatenated** - all classes kept            | `"fui-Text your-class element-class"`           |
+| `style`                          | **Shallow merged** - render element's keys win | Combined styles, conflicts go to render element |
+| Event handlers (`onClick`, etc.) | **Both run**                                   | Both handlers execute                           |
+| Everything else                  | **Render element wins**                        | `data-x="from-render-element"`                  |
+| `ref`                            | Only one ref is kept (component's ref)         |
 
 ## Using the as Prop (Alternative)
 
@@ -199,11 +185,11 @@ import { Text, Heading } from 'frosted-ui';
 
 **When to use `as` vs `render`:**
 
-| Use `as` when... | Use `render` when... |
-|------------------|---------------------|
+| Use `as` when...                 | Use `render` when...                 |
+| -------------------------------- | ------------------------------------ |
 | Changing to a basic HTML element | Integrating with external components |
-| No additional props needed | Need to pass props to the element |
-| Simple semantic changes | Complex composition scenarios |
+| No additional props needed       | Need to pass props to the element    |
+| Simple semantic changes          | Complex composition scenarios        |
 
 ```tsx
 // ✅ Use `as` for simple cases
@@ -225,7 +211,7 @@ import { Text, TextField } from 'frosted-ui';
     Username
   </Text>
   <TextField.Root id="username" placeholder="Enter username" />
-</div>
+</div>;
 ```
 
 ### Clickable Cards
@@ -255,14 +241,12 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'frosted-ui/icons';
     <ChevronLeftIcon />
   </WidgetStack.Prev>
 
-  <WidgetStack.Content>
-    {/* slides */}
-  </WidgetStack.Content>
+  <WidgetStack.Content>{/* slides */}</WidgetStack.Content>
 
   <WidgetStack.Next render={<IconButton variant="soft" />}>
     <ChevronRightIcon />
   </WidgetStack.Next>
-</WidgetStack.Root>
+</WidgetStack.Root>;
 ```
 
 ### Nested Theme with Custom Element
@@ -273,7 +257,7 @@ import { Theme } from 'frosted-ui';
 // Theme as a section element
 <Theme render={<section aria-label="Dark mode preview" />} appearance="dark">
   <MyContent />
-</Theme>
+</Theme>;
 ```
 
 ## Pitfalls and How to Avoid Them
@@ -306,18 +290,14 @@ import { Theme } from 'frosted-ui';
 
 ```tsx
 // ❌ BAD: Lost all Text styling and props
-<Text render={(props) => <label>Email</label>}>
-  Email
-</Text>
+<Text render={(props) => <label>Email</label>}>Email</Text>
 ```
 
 **Solution:** Always spread the props:
 
 ```tsx
 // ✅ GOOD: Props are spread onto the element
-<Text render={(props) => <label {...props}>Email</label>}>
-  Email
-</Text>
+<Text render={(props) => <label {...props}>Email</label>}>Email</Text>
 ```
 
 ### 3. Conflicting Props Confusion
@@ -341,6 +321,7 @@ import { Theme } from 'frosted-ui';
 ```
 
 **Solution:** Remember the priority order:
+
 1. Props on component → can be overridden
 2. Props on render element → win for conflicts
 3. `className` is special → always concatenated
@@ -353,7 +334,7 @@ import { Theme } from 'frosted-ui';
 ```tsx
 // ⚠️ Only one ref will be attached
 const myRef = useRef(null);
-<Text render={<span ref={myRef} />}>Hello</Text>
+<Text render={<span ref={myRef} />}>Hello</Text>;
 ```
 
 **Solution:** Use the callback form and handle refs manually if needed:
@@ -367,7 +348,7 @@ const myRef = useRef(null);
   }}
 >
   Hello
-</Text>
+</Text>;
 ```
 
 ### 5. TypeScript: Missing Props
@@ -384,9 +365,7 @@ const myRef = useRef(null);
 **Solution:** Use the callback form for proper typing:
 
 ```tsx
-<Text render={(props) => <label {...props} htmlFor="email" />}>
-  Email
-</Text>
+<Text render={(props) => <label {...props} htmlFor="email" />}>Email</Text>
 ```
 
 ## Migration from asChild
@@ -406,17 +385,18 @@ If you're migrating from an older version of Frosted UI that used `asChild`, her
 ```
 
 The key differences:
+
 - `asChild` made the child THE element and merged parent props down
 - `render` specifies what element to render and merges YOUR props onto it
 - Children are now passed as normal children, not as the render target
 
 ### Quick Migration Guide
 
-| Old (asChild) | New (render) |
-|---------------|--------------|
-| `<Text asChild><label>Email</label></Text>` | `<Text render={<label />}>Email</Text>` |
-| `<Card asChild><a href="/">...</a></Card>` | `<Card render={<a href="/" />}>...</Card>` |
-| `<Heading asChild><h2>Title</h2></Heading>` | `<Heading as="h2">Title</Heading>` |
+| Old (asChild)                               | New (render)                               |
+| ------------------------------------------- | ------------------------------------------ |
+| `<Text asChild><label>Email</label></Text>` | `<Text render={<label />}>Email</Text>`    |
+| `<Card asChild><a href="/">...</a></Card>`  | `<Card render={<a href="/" />}>...</Card>` |
+| `<Heading asChild><h2>Title</h2></Heading>` | `<Heading as="h2">Title</Heading>`         |
 
 ## Summary
 

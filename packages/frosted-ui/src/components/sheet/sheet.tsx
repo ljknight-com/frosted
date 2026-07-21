@@ -12,21 +12,20 @@ type PrimitiveRootProps = React.ComponentProps<typeof DrawerPrimitive.Root>;
 /** Close reasons that count as a "dismissal" (blocked when `dismissible={false}`). */
 const DISMISS_REASONS = new Set(['escape-key', 'outside-press', 'swipe', 'focus-out', 'close-watcher']);
 
-interface SheetRootProps
-  extends Omit<
-    PrimitiveRootProps,
-    | 'onOpenChange'
-    | 'onOpenChangeComplete'
-    | 'disablePointerDismissal'
-    | 'handle'
-    | 'swipeDirection'
-    // TODO: add support for snap points
-    | 'snapPoints'
-    | 'snapToSequentialPoints'
-    | 'snapPoint'
-    | 'defaultSnapPoint'
-    | 'onSnapPointChange'
-  > {
+interface SheetRootProps extends Omit<
+  PrimitiveRootProps,
+  | 'onOpenChange'
+  | 'onOpenChangeComplete'
+  | 'disablePointerDismissal'
+  | 'handle'
+  | 'swipeDirection'
+  // TODO: add support for snap points
+  | 'snapPoints'
+  | 'snapToSequentialPoints'
+  | 'snapPoint'
+  | 'defaultSnapPoint'
+  | 'onSnapPointChange'
+> {
   /**
    * Fired when the sheet's open state changes. Not fired for dismissals
    * blocked by `dismissible={false}`.
@@ -140,8 +139,10 @@ const SheetOverlay = ({ className, ...props }: SheetOverlayProps) => (
 );
 SheetOverlay.displayName = 'SheetOverlay';
 
-interface SheetContentProps
-  extends Omit<React.ComponentProps<typeof DrawerPrimitive.Popup>, 'className' | 'render' | 'style'> {
+interface SheetContentProps extends Omit<
+  React.ComponentProps<typeof DrawerPrimitive.Popup>,
+  'className' | 'render' | 'style'
+> {
   className?: string;
   style?: React.CSSProperties;
 }

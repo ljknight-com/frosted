@@ -1192,8 +1192,8 @@ function ControlledValueDemo() {
         <Text render={<p />} size="2" color="gray" style={{ maxWidth: 560, lineHeight: 1.6 }}>
           Pass the <Code size="2">value</Code> prop to fully control which item is active. External state changes
           automatically scroll the viewport to the corresponding item. Use <Code size="2">onValueChange</Code> to keep
-          your state in sync when the user scrolls natively. Unlike <Code size="2">defaultValue</Code>, the gallery never
-          updates its own index — your state is the single source of truth.
+          your state in sync when the user scrolls natively. Unlike <Code size="2">defaultValue</Code>, the gallery
+          never updates its own index — your state is the single source of truth.
         </Text>
       </div>
 
@@ -1216,10 +1216,7 @@ function ControlledValueDemo() {
         </div>
       </div>
 
-      <ScrollGallery.Root
-        value={activeIndex}
-        onValueChange={(v) => setActiveIndex(v)}
-      >
+      <ScrollGallery.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)}>
         <ScrollGallery.Viewport
           aria-label="Team members"
           style={{
@@ -1335,12 +1332,10 @@ export const ScrollBehavior: Story = {
     return (
       <div style={{ maxWidth: 600 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
-          <Text size="2" weight="medium">Scroll behavior:</Text>
-          <Button
-            size="1"
-            variant={behavior === 'smooth' ? 'solid' : 'surface'}
-            onClick={() => setBehavior('smooth')}
-          >
+          <Text size="2" weight="medium">
+            Scroll behavior:
+          </Text>
+          <Button size="1" variant={behavior === 'smooth' ? 'solid' : 'surface'} onClick={() => setBehavior('smooth')}>
             Smooth
           </Button>
           <Button
@@ -1364,16 +1359,17 @@ export const ScrollBehavior: Story = {
             }}
           >
             {people.map((person) => (
-              <ScrollGallery.Item
-                key={person.name}
-                style={{ scrollSnapAlign: 'start', flexShrink: 0, width: 200 }}
-              >
+              <ScrollGallery.Item key={person.name} style={{ scrollSnapAlign: 'start', flexShrink: 0, width: 200 }}>
                 <Card>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
                     <Avatar size="3" fallback={person.initials} color={person.color} />
                     <div>
-                      <Text render={<div />} size="2" weight="bold">{person.name}</Text>
-                      <Text render={<div />} size="1" color="gray">{person.role}</Text>
+                      <Text render={<div />} size="2" weight="bold">
+                        {person.name}
+                      </Text>
+                      <Text render={<div />} size="1" color="gray">
+                        {person.role}
+                      </Text>
                     </div>
                   </div>
                 </Card>
@@ -1381,7 +1377,15 @@ export const ScrollBehavior: Story = {
             ))}
           </ScrollGallery.Viewport>
 
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 'var(--space-4)', marginTop: 'var(--space-3)' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 'var(--space-4)',
+              marginTop: 'var(--space-3)',
+            }}
+          >
             <ScrollGallery.Previous step={1} render={<IconButton variant="surface" size="1" color="gray" />}>
               <ChevronLeft16 />
             </ScrollGallery.Previous>

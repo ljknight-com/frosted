@@ -84,9 +84,7 @@ function getPropsType(type: ts.Type): ts.Type | undefined {
   if (!signature) return undefined;
   const propsParam = signature.parameters[0];
   const decl = propsParam.valueDeclaration ?? propsParam.getDeclarations()?.[0];
-  const propsType = decl
-    ? checker.getTypeOfSymbolAtLocation(propsParam, decl)
-    : checker.getTypeOfSymbol(propsParam);
+  const propsType = decl ? checker.getTypeOfSymbolAtLocation(propsParam, decl) : checker.getTypeOfSymbol(propsParam);
   // A props argument must be object-like.
   if (!(propsType.flags & (ts.TypeFlags.Object | ts.TypeFlags.Intersection | ts.TypeFlags.Union))) return undefined;
   return propsType;

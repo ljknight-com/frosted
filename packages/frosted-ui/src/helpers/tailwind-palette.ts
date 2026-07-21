@@ -158,7 +158,9 @@ function parseColor(input: string): Oklab {
 }
 
 function toHexByte(v: number): string {
-  return Math.min(255, Math.max(0, Math.round(v))).toString(16).padStart(2, '0');
+  return Math.min(255, Math.max(0, Math.round(v)))
+    .toString(16)
+    .padStart(2, '0');
 }
 
 function rgbToHex({ r, g, b }: Rgb): string {
@@ -272,12 +274,14 @@ function createPaletteCss(name: string, palette: TailwindPalette, options: Creat
   // (`hasBackground`) at `var(--${name}-1)` from outside any [data-gray-color] scope.
   const light1 = rgbToHex(oklabToRgb(mix(parseColor(palette[50]), WHITE, 0.6)));
   const dark1 = rgbToHex(darkBackgroundStep1(palette));
-  return [
-    accentBlock,
-    block(`[data-gray-color='${name}']`, seedDeclarations('ftw-gray', seeds)),
-    block(':root,\n.light,\n.light-theme', { [`--${name}-1`]: light1 }),
-    block('.dark,\n.dark-theme', { [`--${name}-1`]: dark1 }),
-  ].join('\n\n') + '\n';
+  return (
+    [
+      accentBlock,
+      block(`[data-gray-color='${name}']`, seedDeclarations('ftw-gray', seeds)),
+      block(':root,\n.light,\n.light-theme', { [`--${name}-1`]: light1 }),
+      block('.dark,\n.dark-theme', { [`--${name}-1`]: dark1 }),
+    ].join('\n\n') + '\n'
+  );
 }
 
 /* * * * * * * * * * * * * * * * * * * */

@@ -1,22 +1,31 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [
-    "**/.env.*local"
-  ],
+  "globalDependencies": ["**/.env.*local"],
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "dist/**",
-        "*.css",
-        "index.js",
-        "index.mjs"
-      ],
-      "inputs": [
-        "src/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "@aussieljk/frosted#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "styles.css", "styles.lite.css", "theme.css"]
+    },
+    "@frosted-ui/colors#build": {
+      "dependsOn": ["^build"],
+      "outputs": ["index.js", "index.mjs", "*.css"]
+    },
+    "tailwind#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "docs#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".output/**", "dist/**"],
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/packages/frosted-ui/src/**"]
+    },
+    "build:css": {
+      "dependsOn": ["^build"],
+      "outputs": ["styles.css", "styles.lite.css", "theme.css"]
     },
     "lint": {
       "outputs": []
@@ -30,55 +39,18 @@
       "dependsOn": ["^build"]
     },
     "test": {
-      "dependsOn": [
-        "build"
-      ]
+      "dependsOn": ["build"]
     },
-    "build:css": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "styles.css"
-      ],
-      "inputs": [
-        "src/**"
-      ]
-    },
-    "docs#build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        ".output/**",
-        "dist/**"
-      ],
-      "inputs": [
-        "src/**",
-        "content/**",
-        "scripts/**",
-        "source.config.ts",
-        "vite.config.ts",
-        "$TURBO_ROOT$/packages/frosted-ui/src/**"
-      ]
+    "@aussieljk/frosted#test": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**", "scripts/**", "vitest.config.ts", "package.json"]
     },
     "@aussieljk/frosted#build-storybook": {
-      "dependsOn": [
-        "@frosted-ui/icons#build",
-        "build:css"
-      ],
-      "outputs": [
-        "storybook-static/**"
-      ],
-      "inputs": [
-        "src/**",
-        ".storybook/**"
-      ]
+      "dependsOn": ["@frosted-ui/icons#build", "build:css"],
+      "outputs": ["storybook-static/**"]
     },
     "typecheck": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "outputs": []
     }
   }

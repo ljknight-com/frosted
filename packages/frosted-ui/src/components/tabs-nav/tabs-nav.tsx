@@ -54,9 +54,7 @@ const TabsNavRoot = (props: TabsNavRootProps) => {
       )}
       {...rootProps}
     >
-      <NavigationMenu.List className="fui-reset fui-TabsNavListContents">
-        {children}
-      </NavigationMenu.List>
+      <NavigationMenu.List className="fui-reset fui-TabsNavListContents">{children}</NavigationMenu.List>
     </NavigationMenu.Root>
   );
 };

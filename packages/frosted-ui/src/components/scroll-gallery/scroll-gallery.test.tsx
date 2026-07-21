@@ -50,9 +50,15 @@ beforeEach(() => {
       constructor(cb: IntersectionObserverCallback) {
         intersectionCallbacks.push(cb);
       }
-      observe() { /* noop */ }
-      unobserve() { /* noop */ }
-      disconnect() { /* noop */ }
+      observe() {
+        /* noop */
+      }
+      unobserve() {
+        /* noop */
+      }
+      disconnect() {
+        /* noop */
+      }
     },
   );
 
@@ -62,9 +68,15 @@ beforeEach(() => {
       constructor(cb: ResizeObserverCallback) {
         resizeCallbacks.push(cb);
       }
-      observe() { /* noop */ }
-      unobserve() { /* noop */ }
-      disconnect() { /* noop */ }
+      observe() {
+        /* noop */
+      }
+      unobserve() {
+        /* noop */
+      }
+      disconnect() {
+        /* noop */
+      }
     },
   );
 });
@@ -100,7 +112,12 @@ function Gallery({
   step?: number;
 } = {}) {
   return (
-    <ScrollGalleryRoot defaultValue={defaultValue} loop={loop} orientation={orientation} scrollBehavior={scrollBehavior}>
+    <ScrollGalleryRoot
+      defaultValue={defaultValue}
+      loop={loop}
+      orientation={orientation}
+      scrollBehavior={scrollBehavior}
+    >
       <ScrollGalleryViewport data-testid="viewport" style={{ overflow: 'auto' }}>
         {Array.from({ length: itemCount }, (_, i) => (
           <ScrollGalleryItem key={i} data-testid={`item-${i}`}>
@@ -108,8 +125,12 @@ function Gallery({
           </ScrollGalleryItem>
         ))}
       </ScrollGalleryViewport>
-      <ScrollGalleryPrevious data-testid="prev" step={step}>Previous</ScrollGalleryPrevious>
-      <ScrollGalleryNext data-testid="next" step={step}>Next</ScrollGalleryNext>
+      <ScrollGalleryPrevious data-testid="prev" step={step}>
+        Previous
+      </ScrollGalleryPrevious>
+      <ScrollGalleryNext data-testid="next" step={step}>
+        Next
+      </ScrollGalleryNext>
       {withMarkers && (
         <ScrollGalleryScrollMarkerGroup data-testid="marker-group">
           {Array.from({ length: itemCount }, (_, i) => (
@@ -425,9 +446,7 @@ describe('ScrollGallery', () => {
 
       fireEvent.keyDown(viewport, { key: 'PageDown' });
 
-      expect(viewport.scrollBy).toHaveBeenCalledWith(
-        expect.objectContaining({ left: 400 * 0.85 }),
-      );
+      expect(viewport.scrollBy).toHaveBeenCalledWith(expect.objectContaining({ left: 400 * 0.85 }));
     });
 
     it('PageUp performs reverse page scroll', () => {
@@ -438,9 +457,7 @@ describe('ScrollGallery', () => {
 
       fireEvent.keyDown(viewport, { key: 'PageUp' });
 
-      expect(viewport.scrollBy).toHaveBeenCalledWith(
-        expect.objectContaining({ left: -400 * 0.85 }),
-      );
+      expect(viewport.scrollBy).toHaveBeenCalledWith(expect.objectContaining({ left: -400 * 0.85 }));
     });
 
     it('prevents default on handled keys', () => {
@@ -648,16 +665,34 @@ describe('ScrollGallery', () => {
   describe('step button navigation', () => {
     function mockItemRects(itemCount: number, scrollLeft: number, itemWidth = 200, gap = 10) {
       const viewport = screen.getByTestId('viewport');
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       for (let i = 0; i < itemCount; i++) {
         const absLeft = i * (itemWidth + gap);
         const visualLeft = absLeft - scrollLeft;
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + itemWidth, bottom: 100, width: itemWidth, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + itemWidth,
+          bottom: 100,
+          width: itemWidth,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
     }
 
@@ -670,7 +705,9 @@ describe('ScrollGallery', () => {
       mockViewportScroll(viewport, { scrollLeft: 0, scrollWidth: 1680, clientWidth: 400 });
       mockItemRects(8, 0);
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('next'));
 
@@ -689,7 +726,9 @@ describe('ScrollGallery', () => {
       mockViewportScroll(viewport, { scrollLeft: 210, scrollWidth: 1680, clientWidth: 400 });
       mockItemRects(8, 210);
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('prev'));
 
@@ -708,7 +747,9 @@ describe('ScrollGallery', () => {
       mockViewportScroll(viewport, { scrollLeft: 0, scrollWidth: 1680, clientWidth: 400 });
       mockItemRects(8, 0);
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('next'));
 
@@ -728,7 +769,9 @@ describe('ScrollGallery', () => {
       mockViewportScroll(viewport, { scrollLeft: 630, scrollWidth: 1680, clientWidth: 400 });
       mockItemRects(8, 630);
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('next'));
 
@@ -749,7 +792,9 @@ describe('ScrollGallery', () => {
       mockViewportScroll(viewport, { scrollLeft: 630, scrollWidth: 1680, clientWidth: 400 });
       mockItemRects(8, 630);
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('prev'));
 
@@ -805,7 +850,9 @@ describe('ScrollGallery', () => {
 
       mockViewportScroll(viewport, { scrollLeft: 0, scrollWidth: 1680, clientWidth: 400 });
       mockItemRects(8, 0);
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       // Click next — should NOT lock scrollingRef
       fireEvent.click(screen.getByTestId('next'));
@@ -813,14 +860,18 @@ describe('ScrollGallery', () => {
       // Simulate mid-animation scroll at item 1 position
       mockViewportScroll(viewport, { scrollLeft: 105, scrollWidth: 1680, clientWidth: 400 });
       mockItemRects(8, 105);
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       // Marker should update in real-time (not locked)
       // At scrollLeft=105, nearest item is item 0 (dist=105) or item 1 (dist=105)
       // — tied, so item 0 wins (first in loop). Advance a bit past midpoint:
       mockViewportScroll(viewport, { scrollLeft: 120, scrollWidth: 1680, clientWidth: 400 });
       mockItemRects(8, 120);
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       // At scrollLeft=120, item 1 at pos 210 has dist=90, item 0 at pos 0 has dist=120
       // → item 1 is nearest → marker 1 should be active
@@ -837,8 +888,28 @@ describe('ScrollGallery', () => {
       const scrollBySpy = vi.fn();
       viewport.scrollBy = scrollBySpy;
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
-      const itemRect = { left: 600, top: 0, right: 800, bottom: 100, width: 200, height: 100, x: 600, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
+      const itemRect = {
+        left: 600,
+        top: 0,
+        right: 800,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 600,
+        y: 0,
+        toJSON: () => ({}),
+      };
 
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       const item3 = screen.getByTestId('item-3');
@@ -862,13 +933,31 @@ describe('ScrollGallery', () => {
 
       mockViewportScroll(viewport, { scrollLeft: 0, scrollWidth: 1600, clientWidth: 400 });
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       const lastItem = screen.getByTestId('item-7');
-      vi.spyOn(lastItem, 'getBoundingClientRect').mockReturnValue(
-        { left: 1400, top: 0, right: 1600, bottom: 100, width: 200, height: 100, x: 1400, y: 0, toJSON: () => ({}) },
-      );
+      vi.spyOn(lastItem, 'getBoundingClientRect').mockReturnValue({
+        left: 1400,
+        top: 0,
+        right: 1600,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 1400,
+        y: 0,
+        toJSON: () => ({}),
+      });
 
       fireEvent.click(screen.getByTestId('marker-7'));
       expect(screen.getByTestId('marker-7')).toHaveAttribute('aria-selected', 'true');
@@ -878,9 +967,17 @@ describe('ScrollGallery', () => {
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200 - 600;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -902,13 +999,31 @@ describe('ScrollGallery', () => {
 
       mockViewportScroll(viewport, { scrollLeft: 0, scrollWidth: 1600, clientWidth: 400 });
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       const lastItem = screen.getByTestId('item-7');
-      vi.spyOn(lastItem, 'getBoundingClientRect').mockReturnValue(
-        { left: 1400, top: 0, right: 1600, bottom: 100, width: 200, height: 100, x: 1400, y: 0, toJSON: () => ({}) },
-      );
+      vi.spyOn(lastItem, 'getBoundingClientRect').mockReturnValue({
+        left: 1400,
+        top: 0,
+        right: 1600,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 1400,
+        y: 0,
+        toJSON: () => ({}),
+      });
 
       fireEvent.click(screen.getByTestId('marker-7'));
       expect(screen.getByTestId('marker-7')).toHaveAttribute('aria-selected', 'true');
@@ -919,9 +1034,17 @@ describe('ScrollGallery', () => {
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200 - 1200;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       // Scroll events fire during animation, then settle
@@ -945,13 +1068,31 @@ describe('ScrollGallery', () => {
 
       mockViewportScroll(viewport, { scrollLeft: 0, scrollWidth: 1600, clientWidth: 400 });
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       const lastItem = screen.getByTestId('item-7');
-      vi.spyOn(lastItem, 'getBoundingClientRect').mockReturnValue(
-        { left: 1400, top: 0, right: 1600, bottom: 100, width: 200, height: 100, x: 1400, y: 0, toJSON: () => ({}) },
-      );
+      vi.spyOn(lastItem, 'getBoundingClientRect').mockReturnValue({
+        left: 1400,
+        top: 0,
+        right: 1600,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 1400,
+        y: 0,
+        toJSON: () => ({}),
+      });
 
       // Click last marker — locks scrollTarget=7
       fireEvent.click(screen.getByTestId('marker-7'));
@@ -973,9 +1114,17 @@ describe('ScrollGallery', () => {
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200 - 400;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -994,15 +1143,33 @@ describe('ScrollGallery', () => {
 
       mockViewportScroll(viewport, { scrollLeft: 400, scrollWidth: 1600, clientWidth: 400 });
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200 - 400;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       // No marker click beforehand, pure user scroll — should update immediately
@@ -1019,15 +1186,33 @@ describe('ScrollGallery', () => {
 
       mockViewportScroll(viewport, { scrollLeft: 0, scrollWidth: 1600, clientWidth: 400 });
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       // Fire initial scroll to update boundaries so the button is enabled
@@ -1049,9 +1234,17 @@ describe('ScrollGallery', () => {
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200 - 170;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -1067,9 +1260,17 @@ describe('ScrollGallery', () => {
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200 - 340;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -1083,7 +1284,17 @@ describe('ScrollGallery', () => {
       render(<Gallery withMarkers itemCount={8} />);
       const viewport = screen.getByTestId('viewport');
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       // Items at 200px intervals, midpoint between item 1 (200) and item 2 (400) is at 300
@@ -1092,20 +1303,32 @@ describe('ScrollGallery', () => {
         for (let i = 0; i < 8; i++) {
           const item = screen.getByTestId(`item-${i}`);
           const visualLeft = i * 200 - scrollLeft;
-          vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-            { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-          );
+          vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+            left: visualLeft,
+            top: 0,
+            right: visualLeft + 200,
+            bottom: 100,
+            width: 200,
+            height: 100,
+            x: visualLeft,
+            y: 0,
+            toJSON: () => ({}),
+          });
         }
       };
 
       // Just before midpoint — item 1 is nearest (distance 99 vs 101)
       setupItemsAtScroll(299);
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
       expect(screen.getByTestId('marker-1')).toHaveAttribute('aria-selected', 'true');
 
       // Just after midpoint — item 2 is nearest (distance 99 vs 101)
       setupItemsAtScroll(301);
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
       expect(screen.getByTestId('marker-2')).toHaveAttribute('aria-selected', 'true');
     });
 
@@ -1118,13 +1341,31 @@ describe('ScrollGallery', () => {
 
       mockViewportScroll(viewport, { scrollLeft: 0, scrollWidth: 1600, clientWidth: 400 });
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       const lastItem = screen.getByTestId('item-7');
-      vi.spyOn(lastItem, 'getBoundingClientRect').mockReturnValue(
-        { left: 1400, top: 0, right: 1600, bottom: 100, width: 200, height: 100, x: 1400, y: 0, toJSON: () => ({}) },
-      );
+      vi.spyOn(lastItem, 'getBoundingClientRect').mockReturnValue({
+        left: 1400,
+        top: 0,
+        right: 1600,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 1400,
+        y: 0,
+        toJSON: () => ({}),
+      });
 
       // Click last marker — scrollTarget=7, scrolling=true
       fireEvent.click(screen.getByTestId('marker-7'));
@@ -1138,9 +1379,17 @@ describe('ScrollGallery', () => {
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       // Scroll events from user's swipe — should compute immediately since lock was cancelled
@@ -1166,15 +1415,33 @@ describe('ScrollGallery', () => {
         fireEvent.scroll(viewport);
       });
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       // Set up item rects for marker click
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200, top: 0, right: i * 200 + 200, bottom: 100, width: 200, height: 100, x: i * 200, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200,
+          top: 0,
+          right: i * 200 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       // Click marker 5 — locks scrollTarget=5, sets scrollingRef=true
@@ -1186,9 +1453,17 @@ describe('ScrollGallery', () => {
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200 - 1000;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
       act(() => {
         fireEvent.scroll(viewport);
@@ -1206,9 +1481,17 @@ describe('ScrollGallery', () => {
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
         const visualLeft = i * 200 - 1200;
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: visualLeft, top: 0, right: visualLeft + 200, bottom: 100, width: 200, height: 100, x: visualLeft, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -1238,16 +1521,18 @@ describe('ScrollGallery', () => {
       });
     }
 
-    function mockItemRectsForSnap(
-      itemCount: number,
-      scrollLeft: number,
-      itemWidth = 200,
-      gap = 10,
-    ) {
+    function mockItemRectsForSnap(itemCount: number, scrollLeft: number, itemWidth = 200, gap = 10) {
       const viewport = screen.getByTestId('viewport');
       const viewportRect = {
-        left: 0, top: 0, right: 400, bottom: 300,
-        width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}),
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
       };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
@@ -1256,8 +1541,15 @@ describe('ScrollGallery', () => {
         const visualLeft = absLeft - scrollLeft;
         const item = screen.getByTestId(`item-${i}`);
         vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
-          left: visualLeft, top: 0, right: visualLeft + itemWidth, bottom: 100,
-          width: itemWidth, height: 100, x: visualLeft, y: 0, toJSON: () => ({}),
+          left: visualLeft,
+          top: 0,
+          right: visualLeft + itemWidth,
+          bottom: 100,
+          width: itemWidth,
+          height: 100,
+          x: visualLeft,
+          y: 0,
+          toJSON: () => ({}),
         });
       }
     }
@@ -1271,13 +1563,27 @@ describe('ScrollGallery', () => {
       viewport.scrollBy = scrollBySpy;
 
       const viewportRect = {
-        left: 0, top: 0, right: 400, bottom: 300,
-        width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}),
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
       };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       vi.spyOn(screen.getByTestId('item-2'), 'getBoundingClientRect').mockReturnValue({
-        left: 420, top: 0, right: 620, bottom: 100,
-        width: 200, height: 100, x: 420, y: 0, toJSON: () => ({}),
+        left: 420,
+        top: 0,
+        right: 620,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 420,
+        y: 0,
+        toJSON: () => ({}),
       });
 
       fireEvent.click(screen.getByTestId('marker-2'));
@@ -1298,13 +1604,27 @@ describe('ScrollGallery', () => {
       viewport.scrollBy = scrollBySpy;
 
       const viewportRect = {
-        left: 0, top: 0, right: 400, bottom: 300,
-        width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}),
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
       };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       vi.spyOn(screen.getByTestId('item-2'), 'getBoundingClientRect').mockReturnValue({
-        left: 420, top: 0, right: 620, bottom: 100,
-        width: 200, height: 100, x: 420, y: 0, toJSON: () => ({}),
+        left: 420,
+        top: 0,
+        right: 620,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 420,
+        y: 0,
+        toJSON: () => ({}),
       });
 
       fireEvent.click(screen.getByTestId('marker-2'));
@@ -1328,7 +1648,9 @@ describe('ScrollGallery', () => {
       mockViewportScroll(viewport, { scrollLeft: 210, scrollWidth: 1050, clientWidth: 400 });
       mockItemRectsForSnap(5, 210);
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       expect(screen.getByTestId('marker-1')).toHaveAttribute('aria-selected', 'true');
       vi.useRealTimers();
@@ -1348,7 +1670,9 @@ describe('ScrollGallery', () => {
       mockViewportScroll(viewport, { scrollLeft: 320, scrollWidth: 1050, clientWidth: 400 });
       mockItemRectsForSnap(5, 320);
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       expect(screen.getByTestId('marker-2')).toHaveAttribute('aria-selected', 'true');
       vi.useRealTimers();
@@ -1366,7 +1690,9 @@ describe('ScrollGallery', () => {
       mockViewportScroll(viewport, { scrollLeft: 110, scrollWidth: 1050, clientWidth: 400 });
       mockItemRectsForSnap(5, 110);
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('next'));
 
@@ -1388,13 +1714,27 @@ describe('ScrollGallery', () => {
       viewport.scrollBy = scrollBySpy;
 
       const viewportRect = {
-        left: 0, top: 0, right: 400, bottom: 300,
-        width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}),
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
       };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       vi.spyOn(screen.getByTestId('item-2'), 'getBoundingClientRect').mockReturnValue({
-        left: 420, top: 0, right: 620, bottom: 100,
-        width: 200, height: 100, x: 420, y: 0, toJSON: () => ({}),
+        left: 420,
+        top: 0,
+        right: 620,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 420,
+        y: 0,
+        toJSON: () => ({}),
       });
 
       fireEvent.click(screen.getByTestId('marker-2'));
@@ -1440,14 +1780,32 @@ describe('ScrollGallery', () => {
 
       viewport.scrollBy = vi.fn();
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200, top: 0, right: i * 200 + 200, bottom: 100, width: 200, height: 100, x: i * 200, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200,
+          top: 0,
+          right: i * 200 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       const handle = ref.current;
@@ -1472,14 +1830,32 @@ describe('ScrollGallery', () => {
 
       viewport.scrollBy = vi.fn();
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       for (let i = 0; i < 8; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200, top: 0, right: i * 200 + 200, bottom: 100, width: 200, height: 100, x: i * 200, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200,
+          top: 0,
+          right: i * 200 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       const handle = ref.current;
@@ -1520,14 +1896,32 @@ describe('ScrollGallery', () => {
 
       viewport.scrollBy = vi.fn();
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
 
       for (let i = 0; i < 5; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200, top: 0, right: i * 200 + 200, bottom: 100, width: 200, height: 100, x: i * 200, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200,
+          top: 0,
+          right: i * 200 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       const handle = ref.current;
@@ -1728,9 +2122,7 @@ describe('ScrollGallery', () => {
 
       fireEvent.click(screen.getByTestId('next'));
 
-      expect(viewport.scrollBy).toHaveBeenCalledWith(
-        expect.objectContaining({ behavior: 'smooth' }),
-      );
+      expect(viewport.scrollBy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'smooth' }));
     });
 
     it('Previous button scrolls to last item when at the start with loop=true', () => {
@@ -1761,9 +2153,7 @@ describe('ScrollGallery', () => {
 
       fireEvent.click(screen.getByTestId('prev'));
 
-      expect(viewport.scrollBy).toHaveBeenCalledWith(
-        expect.objectContaining({ behavior: 'smooth' }),
-      );
+      expect(viewport.scrollBy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'smooth' }));
     });
 
     it('Next loop click immediately sets active index to 0', () => {
@@ -1900,13 +2290,31 @@ describe('ScrollGallery', () => {
     }
 
     function setupViewportAndItems(viewport: HTMLElement, itemCount: number) {
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       for (let i = 0; i < itemCount; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200, top: 0, right: i * 200 + 200, bottom: 100, width: 200, height: 100, x: i * 200, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200,
+          top: 0,
+          right: i * 200 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
     }
 
@@ -1956,13 +2364,31 @@ describe('ScrollGallery', () => {
       const viewport = screen.getByTestId('viewport');
 
       mockViewportScroll(viewport, { scrollLeft: 400, scrollWidth: 1000, clientWidth: 400 });
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       for (let i = 0; i < 5; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200 - 400, top: 0, right: i * 200 - 400 + 200, bottom: 100, width: 200, height: 100, x: i * 200 - 400, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200 - 400,
+          top: 0,
+          right: i * 200 - 400 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200 - 400,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -1984,13 +2410,31 @@ describe('ScrollGallery', () => {
       viewport.scrollBy = scrollBySpy;
 
       mockViewportScroll(viewport, { scrollLeft: 400, scrollWidth: 1000, clientWidth: 400 });
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       for (let i = 0; i < 5; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200 - 400, top: 0, right: i * 200 - 400 + 200, bottom: 100, width: 200, height: 100, x: i * 200 - 400, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200 - 400,
+          top: 0,
+          right: i * 200 - 400 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200 - 400,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -2039,13 +2483,31 @@ describe('ScrollGallery', () => {
 
       // User scrolls to item 4
       mockViewportScroll(viewport, { scrollLeft: 800, scrollWidth: 1000, clientWidth: 400 });
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       for (let i = 0; i < 5; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200 - 800, top: 0, right: i * 200 - 800 + 200, bottom: 100, width: 200, height: 100, x: i * 200 - 800, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200 - 800,
+          top: 0,
+          right: i * 200 - 800 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200 - 800,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -2068,13 +2530,31 @@ describe('ScrollGallery', () => {
       const viewport = screen.getByTestId('viewport');
 
       mockViewportScroll(viewport, { scrollLeft: 400, scrollWidth: 1000, clientWidth: 400 });
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       for (let i = 0; i < 5; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200 - 400, top: 0, right: i * 200 - 400 + 200, bottom: 100, width: 200, height: 100, x: i * 200 - 400, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200 - 400,
+          top: 0,
+          right: i * 200 - 400 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200 - 400,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
       act(() => {
@@ -2095,13 +2575,13 @@ describe('ScrollGallery', () => {
       const scrollBySpy = vi.fn();
       viewport.scrollBy = scrollBySpy;
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('next'));
 
-      expect(scrollBySpy).toHaveBeenCalledWith(
-        expect.objectContaining({ behavior: 'smooth' }),
-      );
+      expect(scrollBySpy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'smooth' }));
     });
 
     it('scrollBehavior="instant" makes scroll buttons use instant behavior', () => {
@@ -2111,13 +2591,13 @@ describe('ScrollGallery', () => {
       const scrollBySpy = vi.fn();
       viewport.scrollBy = scrollBySpy;
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('next'));
 
-      expect(scrollBySpy).toHaveBeenCalledWith(
-        expect.objectContaining({ behavior: 'instant' }),
-      );
+      expect(scrollBySpy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'instant' }));
     });
 
     it('scrollBehavior="instant" makes marker clicks use instant behavior', () => {
@@ -2126,17 +2606,33 @@ describe('ScrollGallery', () => {
       const scrollBySpy = vi.fn();
       viewport.scrollBy = scrollBySpy;
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
-      vi.spyOn(screen.getByTestId('item-3'), 'getBoundingClientRect').mockReturnValue(
-        { left: 600, top: 0, right: 800, bottom: 100, width: 200, height: 100, x: 600, y: 0, toJSON: () => ({}) },
-      );
+      vi.spyOn(screen.getByTestId('item-3'), 'getBoundingClientRect').mockReturnValue({
+        left: 600,
+        top: 0,
+        right: 800,
+        bottom: 100,
+        width: 200,
+        height: 100,
+        x: 600,
+        y: 0,
+        toJSON: () => ({}),
+      });
 
       fireEvent.click(screen.getByTestId('marker-3'));
 
-      expect(scrollBySpy).toHaveBeenCalledWith(
-        expect.objectContaining({ behavior: 'instant' }),
-      );
+      expect(scrollBySpy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'instant' }));
     });
 
     it('scrollBehavior="instant" makes step buttons use instant behavior', () => {
@@ -2146,22 +2642,40 @@ describe('ScrollGallery', () => {
       const scrollBySpy = vi.fn();
       viewport.scrollBy = scrollBySpy;
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       for (let i = 0; i < 5; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200, top: 0, right: i * 200 + 200, bottom: 100, width: 200, height: 100, x: i * 200, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200,
+          top: 0,
+          right: i * 200 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
-      act(() => { fireEvent.scroll(viewport); });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
 
       fireEvent.click(screen.getByTestId('next'));
 
-      expect(scrollBySpy).toHaveBeenCalledWith(
-        expect.objectContaining({ behavior: 'instant' }),
-      );
+      expect(scrollBySpy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'instant' }));
     });
 
     it('scrollBehavior="instant" makes PageDown use instant behavior', () => {
@@ -2173,9 +2687,7 @@ describe('ScrollGallery', () => {
 
       fireEvent.keyDown(viewport, { key: 'PageDown' });
 
-      expect(scrollBySpy).toHaveBeenCalledWith(
-        expect.objectContaining({ behavior: 'instant' }),
-      );
+      expect(scrollBySpy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'instant' }));
     });
 
     it('scrollBehavior="instant" sets scroll-behavior: auto on the viewport element', () => {
@@ -2209,20 +2721,38 @@ describe('ScrollGallery', () => {
       const scrollBySpy = vi.fn();
       viewport.scrollBy = scrollBySpy;
 
-      const viewportRect = { left: 0, top: 0, right: 400, bottom: 300, width: 400, height: 300, x: 0, y: 0, toJSON: () => ({}) };
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        right: 400,
+        bottom: 300,
+        width: 400,
+        height: 300,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      };
       vi.spyOn(viewport, 'getBoundingClientRect').mockReturnValue(viewportRect);
       for (let i = 0; i < 5; i++) {
         const item = screen.getByTestId(`item-${i}`);
-        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue(
-          { left: i * 200, top: 0, right: i * 200 + 200, bottom: 100, width: 200, height: 100, x: i * 200, y: 0, toJSON: () => ({}) },
-        );
+        vi.spyOn(item, 'getBoundingClientRect').mockReturnValue({
+          left: i * 200,
+          top: 0,
+          right: i * 200 + 200,
+          bottom: 100,
+          width: 200,
+          height: 100,
+          x: i * 200,
+          y: 0,
+          toJSON: () => ({}),
+        });
       }
 
-      act(() => { ref.current?.scrollTo(3); });
+      act(() => {
+        ref.current?.scrollTo(3);
+      });
 
-      expect(scrollBySpy).toHaveBeenCalledWith(
-        expect.objectContaining({ behavior: 'instant' }),
-      );
+      expect(scrollBySpy).toHaveBeenCalledWith(expect.objectContaining({ behavior: 'instant' }));
     });
   });
 });

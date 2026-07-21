@@ -7,15 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "tailwind",
-    "eslint-config-custom",
-    "tsconfig",
-    "generate-icon-lib",
-    "@frosted-ui/colors",
-    "@frosted-ui/icons",
-    "@frosted-ui/react-native",
-    "frosted-ui-native-colors",
-    "@frosted-ui/figma-icon-sync-plugin"
-  ]
+  "ignore": ["tailwind", "eslint-config-custom", "tsconfig", "@frosted-ui/colors", "@frosted-ui/icons"]
 }

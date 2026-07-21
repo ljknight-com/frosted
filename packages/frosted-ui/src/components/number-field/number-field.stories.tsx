@@ -318,9 +318,8 @@ export const AllowOutOfRange: Story = {
           allowOutOfRange
         </Text>
         <Text size="1" color="gray">
-          The typed value is <strong>preserved on blur</strong>, letting native{' '}
-          <Code size="1">rangeUnderflow</Code> / <Code size="1">rangeOverflow</Code> validation fire. Buttons and
-          arrow keys still clamp.
+          The typed value is <strong>preserved on blur</strong>, letting native <Code size="1">rangeUnderflow</Code> /{' '}
+          <Code size="1">rangeOverflow</Code> validation fire. Buttons and arrow keys still clamp.
         </Text>
         <Form>
           <Field.Root name="age-unclamped" validationMode="onBlur">

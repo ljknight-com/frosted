@@ -1,0 +1,10 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: oxfmt
+      glob: '*.{ts,tsx,js,jsx,mjs,cjs}'
+      run: bun x oxfmt {staged_files}
+      stage_fixed: true
+    - name: oxlint
+      glob: '*.{ts,tsx,js,jsx,mjs,cjs}'
+      run: bun x oxlint {staged_files}

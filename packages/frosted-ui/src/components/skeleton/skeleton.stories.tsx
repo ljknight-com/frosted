@@ -232,7 +232,10 @@ export const RectHighContrast: Story = {
   ),
 };
 
-const SYNC_DEMO_VARIANTS: Array<{ label: string; render: (args: React.ComponentProps<typeof Skeleton.Avatar>) => React.ReactNode }> = [
+const SYNC_DEMO_VARIANTS: Array<{
+  label: string;
+  render: (args: React.ComponentProps<typeof Skeleton.Avatar>) => React.ReactNode;
+}> = [
   {
     label: 'Card (avatar + text + thumb)',
     render: (args) => (
@@ -291,7 +294,16 @@ const SYNC_DEMO_VARIANTS: Array<{ label: string; render: (args: React.ComponentP
         <Skeleton.Text {...args} size="4" style={{ width: '80%', maxWidth: 320 }} />
         <Skeleton.Text {...args} size="2" style={{ width: '100%', maxWidth: 380 }} />
         <Skeleton.Text {...args} size="2" style={{ width: '90%', maxWidth: 360 }} />
-        <Skeleton.Rect {...args} style={{ width: '100%', height: 120, maxWidth: 420, borderRadius: 'var(--radius-2)', marginTop: 'var(--space-1)' }} />
+        <Skeleton.Rect
+          {...args}
+          style={{
+            width: '100%',
+            height: 120,
+            maxWidth: 420,
+            borderRadius: 'var(--radius-2)',
+            marginTop: 'var(--space-1)',
+          }}
+        />
       </div>
     ),
   },
@@ -334,7 +346,15 @@ export const SyncedAnimation: Story = {
     const [rows, setRows] = React.useState(3);
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'flex-start', maxWidth: 480 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--space-4)',
+          alignItems: 'flex-start',
+          maxWidth: 480,
+        }}
+      >
         <p style={{ margin: 0, fontSize: 'var(--font-size-2)', color: 'var(--gray-11)' }}>
           All skeletons pulse in sync. Click &quot;Add row&quot; to see more layouts—new ones join the same phase.
         </p>

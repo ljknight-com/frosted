@@ -9,8 +9,7 @@ interface ScrollGalleryNextState extends Record<string, unknown> {
   disabled: boolean;
 }
 
-interface ScrollGalleryNextProps
-  extends useRender.ComponentProps<'button', ScrollGalleryNextState> {
+interface ScrollGalleryNextProps extends useRender.ComponentProps<'button', ScrollGalleryNextState> {
   /**
    * How many items to scroll by. When set to a number, the button scrolls
    * to bring the item N positions after the current active item into view.
@@ -25,36 +24,32 @@ interface ScrollGalleryNextProps
  * Automatically disabled at the end of the scroll range unless the Root has
  * `loop`, in which case it wraps back to the first item.
  */
-const ScrollGalleryNext = React.forwardRef<
-  HTMLButtonElement,
-  ScrollGalleryNextProps
->(function ScrollGalleryNext(props, forwardedRef) {
-  const { render, step, ...elementProps } = props;
+const ScrollGalleryNext = React.forwardRef<HTMLButtonElement, ScrollGalleryNextProps>(
+  function ScrollGalleryNext(props, forwardedRef) {
+    const { render, step, ...elementProps } = props;
 
-  const { disabled, handleClick } = useScrollButton({ direction: 'next', step });
+    const { disabled, handleClick } = useScrollButton({ direction: 'next', step });
 
-  const state = React.useMemo<ScrollGalleryNextState>(
-    () => ({ disabled }),
-    [disabled],
-  );
+    const state = React.useMemo<ScrollGalleryNextState>(() => ({ disabled }), [disabled]);
 
-  return useRender({
-    render,
-    ref: forwardedRef,
-    state,
-    props: mergeProps<'button'>(
-      {
-        className: 'fui-ScrollGalleryNext',
-        type: 'button',
-        disabled,
-        onClick: handleClick,
-        ...(disabled ? { 'data-disabled': '' } : undefined),
-      } as React.ComponentPropsWithRef<'button'>,
-      elementProps as React.ComponentPropsWithRef<'button'>,
-    ),
-    defaultTagName: 'button',
-  });
-});
+    return useRender({
+      render,
+      ref: forwardedRef,
+      state,
+      props: mergeProps<'button'>(
+        {
+          className: 'fui-ScrollGalleryNext',
+          type: 'button',
+          disabled,
+          onClick: handleClick,
+          ...(disabled ? { 'data-disabled': '' } : undefined),
+        } as React.ComponentPropsWithRef<'button'>,
+        elementProps as React.ComponentPropsWithRef<'button'>,
+      ),
+      defaultTagName: 'button',
+    });
+  },
+);
 
 ScrollGalleryNext.displayName = 'ScrollGalleryNext';
 

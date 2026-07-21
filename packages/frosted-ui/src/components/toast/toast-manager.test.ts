@@ -42,9 +42,7 @@ describe('toast.promise', () => {
       });
 
       expect(result).toBe('data');
-      expect(mockManagerAdd).toHaveBeenCalledWith(
-        expect.objectContaining({ title: 'Loading...', type: 'loading' }),
-      );
+      expect(mockManagerAdd).toHaveBeenCalledWith(expect.objectContaining({ title: 'Loading...', type: 'loading' }));
       expect(mockManagerUpdate).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({ title: 'Done!', type: 'success' }),
@@ -61,9 +59,7 @@ describe('toast.promise', () => {
         }),
       ).rejects.toThrow('boom');
 
-      expect(mockManagerAdd).toHaveBeenCalledWith(
-        expect.objectContaining({ title: 'Loading...', type: 'loading' }),
-      );
+      expect(mockManagerAdd).toHaveBeenCalledWith(expect.objectContaining({ title: 'Loading...', type: 'loading' }));
       expect(mockManagerUpdate).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({ title: 'Failed', type: 'error' }),
@@ -77,9 +73,7 @@ describe('toast.promise', () => {
         success: 'Done!',
       });
 
-      const loadingCalls = mockManagerAdd.mock.calls.filter(
-        (args) => args[0].type === 'loading',
-      );
+      const loadingCalls = mockManagerAdd.mock.calls.filter((args) => args[0].type === 'loading');
       expect(loadingCalls).toHaveLength(0);
     });
 
@@ -88,9 +82,7 @@ describe('toast.promise', () => {
         success: 'Done!',
       });
 
-      const successCalls = mockManagerAdd.mock.calls.filter(
-        (args) => args[0].type === 'success',
-      );
+      const successCalls = mockManagerAdd.mock.calls.filter((args) => args[0].type === 'success');
       expect(successCalls).toHaveLength(1);
       expect(successCalls[0][0]).toMatchObject({ title: 'Done!', type: 'success' });
     });
@@ -102,14 +94,10 @@ describe('toast.promise', () => {
         }),
       ).rejects.toThrow('boom');
 
-      const loadingCalls = mockManagerAdd.mock.calls.filter(
-        (args) => args[0].type === 'loading',
-      );
+      const loadingCalls = mockManagerAdd.mock.calls.filter((args) => args[0].type === 'loading');
       expect(loadingCalls).toHaveLength(0);
 
-      const errorCalls = mockManagerAdd.mock.calls.filter(
-        (args) => args[0].type === 'error',
-      );
+      const errorCalls = mockManagerAdd.mock.calls.filter((args) => args[0].type === 'error');
       expect(errorCalls).toHaveLength(1);
       expect(errorCalls[0][0]).toMatchObject({ title: 'Failed', type: 'error' });
     });
@@ -121,9 +109,7 @@ describe('toast.promise', () => {
         loading: 'Loading...',
       });
 
-      const successUpdateCalls = mockManagerUpdate.mock.calls.filter(
-        (args) => args[1].type === 'success',
-      );
+      const successUpdateCalls = mockManagerUpdate.mock.calls.filter((args) => args[1].type === 'success');
       expect(successUpdateCalls).toHaveLength(0);
 
       expect(mockManagerClose).toHaveBeenCalled();
@@ -138,9 +124,7 @@ describe('toast.promise', () => {
         }),
       ).rejects.toThrow('boom');
 
-      const errorUpdateCalls = mockManagerUpdate.mock.calls.filter(
-        (args) => args[1].type === 'error',
-      );
+      const errorUpdateCalls = mockManagerUpdate.mock.calls.filter((args) => args[1].type === 'error');
       expect(errorUpdateCalls).toHaveLength(0);
 
       expect(mockManagerClose).toHaveBeenCalled();
@@ -175,9 +159,7 @@ describe('toast.promise', () => {
         success: 'Done!',
       });
 
-      const loadingCalls = mockManagerAdd.mock.calls.filter(
-        (args) => args[0].type === 'loading',
-      );
+      const loadingCalls = mockManagerAdd.mock.calls.filter((args) => args[0].type === 'loading');
       expect(loadingCalls).toHaveLength(0);
     });
 
@@ -187,9 +169,7 @@ describe('toast.promise', () => {
         success: () => undefined as unknown as string,
       });
 
-      const successUpdateCalls = mockManagerUpdate.mock.calls.filter(
-        (args) => args[1].type === 'success',
-      );
+      const successUpdateCalls = mockManagerUpdate.mock.calls.filter((args) => args[1].type === 'success');
       expect(successUpdateCalls).toHaveLength(0);
       expect(mockManagerClose).toHaveBeenCalled();
     });
@@ -202,9 +182,7 @@ describe('toast.promise', () => {
         }),
       ).rejects.toThrow('boom');
 
-      const errorUpdateCalls = mockManagerUpdate.mock.calls.filter(
-        (args) => args[1].type === 'error',
-      );
+      const errorUpdateCalls = mockManagerUpdate.mock.calls.filter((args) => args[1].type === 'error');
       expect(errorUpdateCalls).toHaveLength(0);
       expect(mockManagerClose).toHaveBeenCalled();
     });

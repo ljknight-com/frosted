@@ -130,8 +130,7 @@ const justifyMap = {
 
 type TableCellImplOwnProps = GetPropDefTypes<typeof tableCellPropDefs>;
 interface TableCellImplProps
-  extends Omit<React.ComponentProps<'td'>, keyof TableCellImplOwnProps>,
-    TableCellImplOwnProps {
+  extends Omit<React.ComponentProps<'td'>, keyof TableCellImplOwnProps>, TableCellImplOwnProps {
   /**
    * The HTML element to render the cell as.
    * @default 'td'
@@ -165,8 +164,7 @@ const TableCell = (props: TableCellProps) => <TableCellImpl {...props} tag="td" 
 TableCell.displayName = 'TableCell';
 
 interface TableColumnHeaderCellProps
-  extends Omit<React.ComponentProps<'th'>, keyof TableCellImplOwnProps>,
-    TableCellImplOwnProps {}
+  extends Omit<React.ComponentProps<'th'>, keyof TableCellImplOwnProps>, TableCellImplOwnProps {}
 /**
  * A header cell for a column (`<th scope="col">`), used inside `Table.Header` rows.
  */
@@ -176,8 +174,7 @@ const TableColumnHeaderCell = (props: TableColumnHeaderCellProps) => (
 TableColumnHeaderCell.displayName = 'TableColumnHeaderCell';
 
 interface TableRowHeaderCellProps
-  extends Omit<React.ComponentProps<'th'>, keyof TableCellImplOwnProps>,
-    TableCellImplOwnProps {}
+  extends Omit<React.ComponentProps<'th'>, keyof TableCellImplOwnProps>, TableCellImplOwnProps {}
 /**
  * A header cell for a row (`<th scope="row">`), typically the row's identifying column.
  */
@@ -195,8 +192,10 @@ const TableBottomBar = (props: TableBottomBarProps) => (
 );
 TableBottomBar.displayName = 'TableBottomBar';
 
-interface TableColumnHeaderCellButtonProps
-  extends Omit<React.ComponentProps<typeof Button>, 'highContrast' | 'color' | 'variant' | 'size'> {
+interface TableColumnHeaderCellButtonProps extends Omit<
+  React.ComponentProps<typeof Button>,
+  'highContrast' | 'color' | 'variant' | 'size'
+> {
   /** Current sort direction of the column; pass false when the column is not sorted. */
   sortDirection?: 'asc' | 'desc' | false;
   /**

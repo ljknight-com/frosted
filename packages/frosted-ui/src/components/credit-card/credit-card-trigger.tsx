@@ -9,8 +9,7 @@ interface CreditCardTriggerState extends Record<string, unknown> {
   face: CardFace;
 }
 
-interface CreditCardTriggerProps
-  extends useRender.ComponentProps<'button', CreditCardTriggerState> {}
+interface CreditCardTriggerProps extends useRender.ComponentProps<'button', CreditCardTriggerState> {}
 
 const stateAttributesMapping = {
   face: (value: unknown) => ({ 'data-face': String(value) }),
@@ -22,10 +21,7 @@ const CreditCardTrigger = React.forwardRef<HTMLButtonElement, CreditCardTriggerP
     const { render, ...elementProps } = props;
     const { face, toggle } = useCreditCardContext();
 
-    const state = React.useMemo<CreditCardTriggerState>(
-      () => ({ face }),
-      [face],
-    );
+    const state = React.useMemo<CreditCardTriggerState>(() => ({ face }), [face]);
 
     return useRender({
       render,

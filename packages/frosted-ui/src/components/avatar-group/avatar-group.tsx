@@ -56,4 +56,3 @@ AvatarGroupAvatar.displayName = 'AvatarGroupAvatar';
 
 export { AvatarGroupAvatar as Avatar, AvatarGroupRoot as Root };
 export type { AvatarGroupAvatarProps as AvatarProps, AvatarGroupRootProps as RootProps };
-

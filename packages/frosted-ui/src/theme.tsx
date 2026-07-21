@@ -4,11 +4,7 @@ import { DirectionProvider, mergeProps, useRender } from '@base-ui/react';
 import { Tooltip as TooltipPrimitive } from '@base-ui/react/tooltip';
 import classNames from 'classnames';
 import * as React from 'react';
-import {
-  createAccentSeedStyle,
-  createGraySeedStyle,
-  darkPageBackgroundFromColor,
-} from './helpers/tailwind-palette';
+import { createAccentSeedStyle, createGraySeedStyle, darkPageBackgroundFromColor } from './helpers/tailwind-palette';
 import { getMatchingGrayColor, isCustomAccentColor, isCustomGrayColor, themePropDefs } from './theme-options';
 
 import type { ThemeOptions } from './theme-options';

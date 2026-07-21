@@ -5,7 +5,9 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 const flushMicrotasks = () => act(async () => undefined);
-const noop = () => {/* controlled prop placeholder */};
+const noop = () => {
+  /* controlled prop placeholder */
+};
 
 import { LightboxCaption } from './lightbox-caption';
 import { LightboxClose } from './lightbox-close';
@@ -143,8 +145,7 @@ function TestLightbox({
                       Item {i}
                     </div>
                   )
-                : `Item ${i}`
-              }
+                : `Item ${i}`}
             </LightboxItem>
           ))}
         </LightboxItemGroup>
@@ -310,7 +311,9 @@ describe('Lightbox', () => {
         const [isOpen, setIsOpen] = React.useState(false);
         return (
           <>
-            <button data-testid="ext-open" onClick={() => setIsOpen(true)}>Open</button>
+            <button data-testid="ext-open" onClick={() => setIsOpen(true)}>
+              Open
+            </button>
             <TestLightbox open={isOpen} onOpenChange={setIsOpen} />
           </>
         );
@@ -489,15 +492,21 @@ describe('Lightbox', () => {
         const [count, setCount] = React.useState(4);
         return (
           <>
-            <button data-testid="remove" onClick={() => setCount(2)}>Remove</button>
+            <button data-testid="remove" onClick={() => setCount(2)}>
+              Remove
+            </button>
             <LightboxRoot defaultOpen>
               {Array.from({ length: count }, (_, i) => (
-                <LightboxTrigger key={i} index={i}>T{i}</LightboxTrigger>
+                <LightboxTrigger key={i} index={i}>
+                  T{i}
+                </LightboxTrigger>
               ))}
               <LightboxContent aria-label="Dynamic test" data-testid="content">
                 <LightboxItemGroup preload={count}>
                   {Array.from({ length: count }, (_, i) => (
-                    <LightboxItem key={i} index={i}>Item {i}</LightboxItem>
+                    <LightboxItem key={i} index={i}>
+                      Item {i}
+                    </LightboxItem>
                   ))}
                 </LightboxItemGroup>
                 <LightboxCounter data-testid="counter" />
@@ -585,7 +594,9 @@ describe('Lightbox', () => {
           <LightboxContent aria-label="Test">
             <LightboxItemGroup>
               {Array.from({ length: 4 }, (_, i) => (
-                <LightboxItem key={i} index={i}>Item {i}</LightboxItem>
+                <LightboxItem key={i} index={i}>
+                  Item {i}
+                </LightboxItem>
               ))}
             </LightboxItemGroup>
             <LightboxCounter data-testid="counter">
@@ -710,8 +721,12 @@ describe('Lightbox', () => {
         <LightboxRoot ref={ref}>
           <LightboxContent data-testid="content" aria-label="Test">
             <LightboxItemGroup>
-              <LightboxItem index={0} data-testid="item-0">Item 0</LightboxItem>
-              <LightboxItem index={1} data-testid="item-1">Item 1</LightboxItem>
+              <LightboxItem index={0} data-testid="item-0">
+                Item 0
+              </LightboxItem>
+              <LightboxItem index={1} data-testid="item-1">
+                Item 1
+              </LightboxItem>
             </LightboxItemGroup>
           </LightboxContent>
         </LightboxRoot>,
@@ -743,9 +758,15 @@ describe('Lightbox', () => {
         <LightboxRoot ref={ref} defaultOpen>
           <LightboxContent data-testid="content" aria-label="Test">
             <LightboxItemGroup>
-              <LightboxItem index={0} data-testid="item-0">Item 0</LightboxItem>
-              <LightboxItem index={1} data-testid="item-1">Item 1</LightboxItem>
-              <LightboxItem index={2} data-testid="item-2">Item 2</LightboxItem>
+              <LightboxItem index={0} data-testid="item-0">
+                Item 0
+              </LightboxItem>
+              <LightboxItem index={1} data-testid="item-1">
+                Item 1
+              </LightboxItem>
+              <LightboxItem index={2} data-testid="item-2">
+                Item 2
+              </LightboxItem>
             </LightboxItemGroup>
           </LightboxContent>
         </LightboxRoot>,
@@ -802,9 +823,7 @@ describe('Lightbox', () => {
 
       await act(() => new Promise((r) => setTimeout(r, 50)));
 
-      const closeCalls = completeSpy.mock.calls.filter(
-        (call) => call[0] === false,
-      );
+      const closeCalls = completeSpy.mock.calls.filter((call) => call[0] === false);
       expect(closeCalls).toHaveLength(0);
     });
   });
@@ -841,11 +860,17 @@ describe('Lightbox', () => {
     it('multiple triggers for the same index work correctly', () => {
       render(
         <LightboxRoot>
-          <LightboxTrigger index={0} data-testid="trigger-a">A</LightboxTrigger>
-          <LightboxTrigger index={0} data-testid="trigger-b">B</LightboxTrigger>
+          <LightboxTrigger index={0} data-testid="trigger-a">
+            A
+          </LightboxTrigger>
+          <LightboxTrigger index={0} data-testid="trigger-b">
+            B
+          </LightboxTrigger>
           <LightboxContent data-testid="content" aria-label="Test">
             <LightboxItemGroup>
-              <LightboxItem index={0} data-testid="item-0">Item 0</LightboxItem>
+              <LightboxItem index={0} data-testid="item-0">
+                Item 0
+              </LightboxItem>
             </LightboxItemGroup>
           </LightboxContent>
         </LightboxRoot>,
@@ -992,9 +1017,17 @@ describe('Lightbox', () => {
           (result as Promise<void>).catch(vi.fn());
         }
         if (startViewTransition.mock.calls.length === 1) {
-          return { finished: new Promise<void>((r) => { resolveOpen = r; }) };
+          return {
+            finished: new Promise<void>((r) => {
+              resolveOpen = r;
+            }),
+          };
         }
-        return { finished: new Promise<void>((r) => { resolveClose = r; }) };
+        return {
+          finished: new Promise<void>((r) => {
+            resolveClose = r;
+          }),
+        };
       });
 
       Object.defineProperty(document, 'startViewTransition', {
@@ -1024,9 +1057,17 @@ describe('Lightbox', () => {
           (result as Promise<void>).catch(vi.fn());
         }
         if (startViewTransition.mock.calls.length === 1) {
-          return { finished: new Promise<void>((r) => { resolveOpen = r; }) };
+          return {
+            finished: new Promise<void>((r) => {
+              resolveOpen = r;
+            }),
+          };
         }
-        return { finished: new Promise<void>((r) => { resolveClose = r; }) };
+        return {
+          finished: new Promise<void>((r) => {
+            resolveClose = r;
+          }),
+        };
       });
 
       Object.defineProperty(document, 'startViewTransition', {
@@ -1081,9 +1122,17 @@ describe('Lightbox', () => {
             (result as Promise<void>).catch(vi.fn());
           }
           if (startViewTransition.mock.calls.length === 1) {
-            return { finished: new Promise<void>((r) => { resolveOpen = r; }) };
+            return {
+              finished: new Promise<void>((r) => {
+                resolveOpen = r;
+              }),
+            };
           }
-          return { finished: new Promise<void>((r) => { resolveClose = r; }) };
+          return {
+            finished: new Promise<void>((r) => {
+              resolveClose = r;
+            }),
+          };
         });
         Object.defineProperty(document, 'startViewTransition', {
           value: startViewTransition,
@@ -1174,9 +1223,7 @@ describe('Lightbox', () => {
       const event = new TouchEvent('touchmove', {
         bubbles: true,
         cancelable: true,
-        touches: [
-          new Touch({ identifier: 0, target: content, clientX: 0, clientY: 0 }),
-        ],
+        touches: [new Touch({ identifier: 0, target: content, clientX: 0, clientY: 0 })],
       });
       const prevented = !content.dispatchEvent(event);
       expect(prevented).toBe(false);
@@ -1239,7 +1286,10 @@ describe('Lightbox', () => {
   // ---------------------------------------------------------------------------
 
   describe('zoom', () => {
-    function ZoomLightbox({ maxZoom = 4, onZoomChange }: { maxZoom?: number; onZoomChange?: (z: number) => void } = {}) {
+    function ZoomLightbox({
+      maxZoom = 4,
+      onZoomChange,
+    }: { maxZoom?: number; onZoomChange?: (z: number) => void } = {}) {
       return (
         <LightboxRoot defaultOpen>
           <LightboxContent data-testid="content" aria-label="Zoom test">
@@ -1666,7 +1716,16 @@ describe('Lightbox', () => {
       }
     });
 
-    function dispatchPointer(el: Element, type: string, init: Partial<PointerEventInit> & { pointerId?: number; clientX?: number; clientY?: number; timeStamp?: number } = {}) {
+    function dispatchPointer(
+      el: Element,
+      type: string,
+      init: Partial<PointerEventInit> & {
+        pointerId?: number;
+        clientX?: number;
+        clientY?: number;
+        timeStamp?: number;
+      } = {},
+    ) {
       const event = new PointerEvent(type, {
         bubbles: true,
         cancelable: true,
@@ -1680,7 +1739,11 @@ describe('Lightbox', () => {
       el.dispatchEvent(event);
     }
 
-    function PullDismissLightbox({ pullToClose, withZoom, zoomRef }: { pullToClose?: boolean; withZoom?: boolean; zoomRef?: React.RefObject<LightboxZoomRef | null> } = {}) {
+    function PullDismissLightbox({
+      pullToClose,
+      withZoom,
+      zoomRef,
+    }: { pullToClose?: boolean; withZoom?: boolean; zoomRef?: React.RefObject<LightboxZoomRef | null> } = {}) {
       return (
         <LightboxRoot defaultOpen>
           <LightboxContent data-testid="content" aria-label="Pull dismiss test" pullToClose={pullToClose}>

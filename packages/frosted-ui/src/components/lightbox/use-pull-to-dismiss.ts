@@ -30,13 +30,7 @@ interface PullToDismissOptions {
 // Hook
 // ---------------------------------------------------------------------------
 
-function usePullToDismiss({
-  contentRef,
-  backdropRef,
-  getZoom,
-  onClose,
-  disabled = false,
-}: PullToDismissOptions) {
+function usePullToDismiss({ contentRef, backdropRef, getZoom, onClose, disabled = false }: PullToDismissOptions) {
   const pointerIdRef = React.useRef<number | null>(null);
   const startYRef = React.useRef(0);
   const startXRef = React.useRef(0);
@@ -121,34 +115,33 @@ function usePullToDismiss({
       backdrop.style.opacity = '';
     }
 
-    const targetAnim = target.animate(
-      [
-        { transform: currentTransform },
-        { transform: 'translate(0, 0) scale(1)' },
-      ],
-      { duration: SNAP_DURATION, easing: SNAP_EASING },
-    );
+    const targetAnim = target.animate([{ transform: currentTransform }, { transform: 'translate(0, 0) scale(1)' }], {
+      duration: SNAP_DURATION,
+      easing: SNAP_EASING,
+    });
 
     let backdropAnim: Animation | undefined;
     if (backdrop) {
-      backdropAnim = backdrop.animate(
-        [{ opacity: currentBackdropOpacity }, { opacity: '1' }],
-        { duration: SNAP_DURATION, easing: SNAP_EASING },
-      );
+      backdropAnim = backdrop.animate([{ opacity: currentBackdropOpacity }, { opacity: '1' }], {
+        duration: SNAP_DURATION,
+        easing: SNAP_EASING,
+      });
     }
 
     animationRef.current = targetAnim;
 
-    targetAnim.finished.then(() => {
-      animationRef.current = null;
-      targetAnim.cancel();
-      backdropAnim?.cancel();
-      content?.removeAttribute('data-pulling');
-      backdrop?.removeAttribute('data-pulling');
-      dragTargetRef.current = null;
-    }).catch(() => {
-      // Animation cancelled — cleanup already handled
-    });
+    targetAnim.finished
+      .then(() => {
+        animationRef.current = null;
+        targetAnim.cancel();
+        backdropAnim?.cancel();
+        content?.removeAttribute('data-pulling');
+        backdrop?.removeAttribute('data-pulling');
+        dragTargetRef.current = null;
+      })
+      .catch(() => {
+        // Animation cancelled — cleanup already handled
+      });
   }, [contentRef, backdropRef, clearTransform]);
 
   const computeVelocity = React.useCallback(() => {
@@ -174,9 +167,7 @@ function usePullToDismiss({
       // Only activate when touching the visual content (morph target) inside
       // an item — not controls, backdrop, or the item's empty padding area.
       const target = event.target as HTMLElement | null;
-      if (
-        !target?.closest('[data-lightbox-morph], .fui-LightboxItem img, .fui-LightboxItem video')
-      ) return;
+      if (!target?.closest('[data-lightbox-morph], .fui-LightboxItem img, .fui-LightboxItem video')) return;
 
       // Don't activate if zoomed or if zoom gestures are in progress
       if (getZoom() > 1) return;
@@ -264,10 +255,7 @@ function usePullToDismiss({
       const absVelocity = Math.abs(velocity);
       const sameDirection = (deltaY > 0 && velocity > 0) || (deltaY < 0 && velocity < 0);
 
-      if (
-        absDeltaY >= DISMISS_DISTANCE ||
-        (absVelocity >= DISMISS_VELOCITY && sameDirection)
-      ) {
+      if (absDeltaY >= DISMISS_DISTANCE || (absVelocity >= DISMISS_VELOCITY && sameDirection)) {
         el.removeAttribute('data-pulling');
         backdropRef.current?.removeAttribute('data-pulling');
         dragTargetRef.current = null;
@@ -315,7 +303,18 @@ function usePullToDismiss({
       }
       clearTransform();
     };
-  }, [disabled, contentRef, backdropRef, getZoom, onClose, applyTransform, clearTransform, snapBack, cleanup, computeVelocity]);
+  }, [
+    disabled,
+    contentRef,
+    backdropRef,
+    getZoom,
+    onClose,
+    applyTransform,
+    clearTransform,
+    snapBack,
+    cleanup,
+    computeVelocity,
+  ]);
 }
 
 export { usePullToDismiss };

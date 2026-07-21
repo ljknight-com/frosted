@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "rules": {
+    "duplicates": "off"
+  },
+  "workspaces": {
+    "packages/frosted-ui": {
+      "entry": ["src/**/*.{ts,tsx}", "!src/**/*.stories.*", "!src/**/*.test.*", "scripts/*.ts"]
+    },
+    "packages/frosted-ui-icons": {
+      "entry": ["src/**/*.tsx", "index.js"]
+    }
+  }
+}

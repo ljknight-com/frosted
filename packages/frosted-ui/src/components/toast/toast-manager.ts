@@ -435,4 +435,11 @@ export {
   subscribeBump,
   toast,
 };
-export type { CustomToastRenderFn, CustomToastRenderProps, ToastEventData, ToastOptions, ToastPromiseOptions, ToastType };
+export type {
+  CustomToastRenderFn,
+  CustomToastRenderProps,
+  ToastEventData,
+  ToastOptions,
+  ToastPromiseOptions,
+  ToastType,
+};

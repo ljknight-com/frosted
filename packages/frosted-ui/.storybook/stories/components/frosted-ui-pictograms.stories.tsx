@@ -78,9 +78,8 @@ const AllPictogramsComponent = () => {
           Pictograms
         </Text>
         <Text size="2" color="gray">
-          {pictograms.length} pictograms. The <code>auto</code> tile (default) uses CSS{' '}
-          <code>light-dark()</code> to follow the page color scheme. Toggle Storybook's theme
-          between light and dark to watch it flip.
+          {pictograms.length} pictograms. The <code>auto</code> tile (default) uses CSS <code>light-dark()</code> to
+          follow the page color scheme. Toggle Storybook's theme between light and dark to watch it flip.
         </Text>
       </div>
 
@@ -122,10 +121,7 @@ const AllPictogramsComponent = () => {
                       overflow: 'hidden',
                     }}
                   >
-                    <Component
-                      variant={variant}
-                      style={{ width: '100%', height: '100%', display: 'block' }}
-                    />
+                    <Component variant={variant} style={{ width: '100%', height: '100%', display: 'block' }} />
                   </div>
                   <Text size="1" color="gray">
                     {variant}

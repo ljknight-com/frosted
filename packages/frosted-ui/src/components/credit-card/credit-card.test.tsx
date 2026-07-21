@@ -69,9 +69,7 @@ function TestCard({
         </CreditCardFront>
         <CreditCardBack data-testid="back" color={backColor}>
           <CreditCardMagStripe data-testid="stripe" />
-          <CreditCardBackContent data-testid="back-content">
-            {children}
-          </CreditCardBackContent>
+          <CreditCardBackContent data-testid="back-content">{children}</CreditCardBackContent>
         </CreditCardBack>
       </CreditCardContent>
       <CreditCardTrigger data-testid="trigger">Flip</CreditCardTrigger>
@@ -123,7 +121,12 @@ function TestCardBack({
 function CardTypeReader() {
   const { cardType, cardNiceType, face } = useCreditCard();
   return (
-    <div data-testid="hook-reader" data-card-type={cardType ?? ''} data-nice-type={cardNiceType ?? ''} data-face={face} />
+    <div
+      data-testid="hook-reader"
+      data-card-type={cardType ?? ''}
+      data-nice-type={cardNiceType ?? ''}
+      data-face={face}
+    />
   );
 }
 
@@ -310,9 +313,7 @@ describe('Card number formatting', () => {
   });
 
   it('pre-formats readOnly defaultValue on mount', () => {
-    render(
-      <TestCardBack numberProps={{ readOnly: true, defaultValue: '4242424242424242' }} />,
-    );
+    render(<TestCardBack numberProps={{ readOnly: true, defaultValue: '4242424242424242' }} />);
     const input = screen.getByTestId('number-input') as HTMLInputElement;
     expect(input.value).toBe('4242 4242 4242 4242');
   });
@@ -383,10 +384,7 @@ describe('Card type detection', () => {
     );
     const input = screen.getByTestId('number-input') as HTMLInputElement;
     simulateInputChange(input, '378282246310005');
-    expect(screen.getByTestId('hook-reader')).toHaveAttribute(
-      'data-card-type',
-      'american-express',
-    );
+    expect(screen.getByTestId('hook-reader')).toHaveAttribute('data-card-type', 'american-express');
     expect(screen.getByTestId('hook-reader')).toHaveAttribute('data-nice-type', 'American Express');
   });
 
@@ -408,10 +406,7 @@ describe('Card type detection', () => {
     );
     const input = screen.getByTestId('number-input') as HTMLInputElement;
     simulateInputChange(input, '5425233430109903');
-    expect(screen.getByTestId('hook-reader')).toHaveAttribute(
-      'data-card-type',
-      'mastercard',
-    );
+    expect(screen.getByTestId('hook-reader')).toHaveAttribute('data-card-type', 'mastercard');
   });
 
   it('detects type on mount for readOnly defaultValue', () => {
@@ -422,11 +417,7 @@ describe('Card type detection', () => {
           <CreditCardBack>
             <CreditCardBackContent>
               <CreditCardField>
-                <CreditCardNumberField
-                  data-testid="number-input"
-                  readOnly
-                  defaultValue="4242424242424242"
-                />
+                <CreditCardNumberField data-testid="number-input" readOnly defaultValue="4242424242424242" />
               </CreditCardField>
             </CreditCardBackContent>
           </CreditCardBack>
@@ -500,7 +491,10 @@ describe('Expiry input formatting', () => {
   });
 
   it('places caret after slash when month is padded (1/ → 01/)', () => {
-    const rafSpy = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => { cb(0); return 0; });
+    const rafSpy = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+      cb(0);
+      return 0;
+    });
     render(<TestCardBack />);
     const input = screen.getByTestId('expiry-input') as HTMLInputElement;
     const setSelectionSpy = vi.spyOn(input, 'setSelectionRange');
@@ -512,7 +506,10 @@ describe('Expiry input formatting', () => {
   });
 
   it('places caret after slash when year digit is backspaced (01/2 → 01/)', () => {
-    const rafSpy = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => { cb(0); return 0; });
+    const rafSpy = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+      cb(0);
+      return 0;
+    });
     render(<TestCardBack />);
     const input = screen.getByTestId('expiry-input') as HTMLInputElement;
     simulateInputChange(input, '01/25');
@@ -543,9 +540,7 @@ describe('CVV input', () => {
   });
 
   it('has maxLength of 4 for Amex', () => {
-    render(
-      <TestCardBack numberProps={{ defaultValue: '378282246310005' }} />,
-    );
+    render(<TestCardBack numberProps={{ defaultValue: '378282246310005' }} />);
     const input = screen.getByTestId('cvv-input') as HTMLInputElement;
     expect(input).toHaveAttribute('maxlength', '4');
   });
@@ -563,9 +558,7 @@ describe('CVV input', () => {
   });
 
   it('has 4-digit placeholder for Amex', () => {
-    render(
-      <TestCardBack numberProps={{ defaultValue: '378282246310005' }} />,
-    );
+    render(<TestCardBack numberProps={{ defaultValue: '378282246310005' }} />);
     const input = screen.getByTestId('cvv-input') as HTMLInputElement;
     expect(input).toHaveAttribute('placeholder', '0000');
   });

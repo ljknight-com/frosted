@@ -4,13 +4,13 @@ import { radixColorScales } from '../../../src/helpers/radix-colors';
 import type { RGBColor } from './emoji-renderer';
 
 // Color scales from radix-colors.ts
-export const COLOR_SCALES = [...radixColorScales, 'gray'] as const;
+const COLOR_SCALES = [...radixColorScales, 'gray'] as const;
 
 export type ColorScale = (typeof COLOR_SCALES)[number];
 
 // Dynamically build COLOR_9_VALUES from the light theme colors
 // These are the solid, vibrant colors (9th shade) from each scale
-export const COLOR_9_VALUES: Record<ColorScale, string> = {} as Record<ColorScale, string>;
+const COLOR_9_VALUES: Record<ColorScale, string> = {} as Record<ColorScale, string>;
 
 for (const scale of COLOR_SCALES) {
   const colorObj = lightColors[scale as keyof typeof lightColors];

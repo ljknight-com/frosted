@@ -47,7 +47,7 @@ export async function extractColors(imageBuffer: Buffer): Promise<ExtractedColor
 /**
  * Gets the best color from extracted palettes, prioritizing vibrant over muted
  */
-export function getBestColor(colors: ExtractedColors): RGBColor | null {
+function getBestColor(colors: ExtractedColors): RGBColor | null {
   // Priority order: Vibrant > LightVibrant > DarkVibrant > Dominant > Muted
   return (
     colors.vibrant ||

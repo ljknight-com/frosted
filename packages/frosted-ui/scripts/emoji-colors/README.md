@@ -268,6 +268,7 @@ If an emoji has an unexpected color assignment, this is usually because:
 2. The color detection algorithm needs refinement for edge cases
 
 To improve the detection, you can adjust the color extraction or matching logic in:
+
 - `scripts/emoji-colors/utils/color-extractor.ts` - Color weighting and extraction
 - `scripts/emoji-colors/utils/color-matcher.ts` - Grayscale detection and color distance calculation
 

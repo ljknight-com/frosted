@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2018",
-    "lib": [
-      "DOM",
-      "ESNext",
-      "DOM.Iterable"
-    ],
+    "lib": ["DOM", "ESNext", "DOM.Iterable"],
     "jsx": "react",
     "module": "ESNext",
     "moduleResolution": "Bundler",
@@ -20,14 +16,6 @@
     "alwaysStrict": true,
     "skipLibCheck": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "scripts",
-    "**/*.stories.tsx",
-    "**/*.stories.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "scripts", "**/*.stories.tsx", "**/*.stories.ts"]
 }

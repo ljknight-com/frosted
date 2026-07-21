@@ -5,25 +5,25 @@
 
 ## File Inventory
 
-| File | Purpose |
-|---|---|
-| `lightbox.ts` | Barrel export — public API surface |
-| `index.ts` | Re-export as `Lightbox` namespace |
-| `lightbox-context.tsx` | Shared context, VT helpers (`findMorphTarget`, `supportsViewTransitions`) |
-| `lightbox-root.tsx` | State provider, open/close orchestration, VT morph logic |
-| `lightbox-content.tsx` | Native `<dialog>` modal, keyboard nav, backdrop click |
-| `lightbox-trigger.tsx` | Per-index trigger button, registers element for VT |
-| `lightbox-item.tsx` | Individual media item, lazy render, caption registration |
-| `lightbox-item-group.tsx` | Item container, preload window, direction tracking |
-| `lightbox-close.tsx` | Close button |
-| `lightbox-previous.tsx` | Previous navigation button |
-| `lightbox-next.tsx` | Next navigation button |
-| `lightbox-counter.tsx` | "1 / 12" counter with `aria-live` |
-| `lightbox-caption.tsx` | Active item caption from registry |
-| `lightbox-thumbnail.tsx` | Tab button for thumbnail navigation |
-| `lightbox-thumbnail-group.tsx` | Tablist container with roving tabindex |
-| `lightbox.css` | All default styles, transitions, and VT rules |
-| `lightbox.stories.tsx` | Storybook demos |
+| File                           | Purpose                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------- |
+| `lightbox.ts`                  | Barrel export — public API surface                                        |
+| `index.ts`                     | Re-export as `Lightbox` namespace                                         |
+| `lightbox-context.tsx`         | Shared context, VT helpers (`findMorphTarget`, `supportsViewTransitions`) |
+| `lightbox-root.tsx`            | State provider, open/close orchestration, VT morph logic                  |
+| `lightbox-content.tsx`         | Native `<dialog>` modal, keyboard nav, backdrop click                     |
+| `lightbox-trigger.tsx`         | Per-index trigger button, registers element for VT                        |
+| `lightbox-item.tsx`            | Individual media item, lazy render, caption registration                  |
+| `lightbox-item-group.tsx`      | Item container, preload window, direction tracking                        |
+| `lightbox-close.tsx`           | Close button                                                              |
+| `lightbox-previous.tsx`        | Previous navigation button                                                |
+| `lightbox-next.tsx`            | Next navigation button                                                    |
+| `lightbox-counter.tsx`         | "1 / 12" counter with `aria-live`                                         |
+| `lightbox-caption.tsx`         | Active item caption from registry                                         |
+| `lightbox-thumbnail.tsx`       | Tab button for thumbnail navigation                                       |
+| `lightbox-thumbnail-group.tsx` | Tablist container with roving tabindex                                    |
+| `lightbox.css`                 | All default styles, transitions, and VT rules                             |
+| `lightbox.stories.tsx`         | Storybook demos                                                           |
 
 ---
 
@@ -128,7 +128,9 @@ Since `{...rest}` comes after, a consumer's `aria-label` will override the defau
 **Suggested fix**: Use `.finally()` for cleanup that must always run:
 
 ```tsx
-const transition = startViewTransition(() => { /* ... */ });
+const transition = startViewTransition(() => {
+  /* ... */
+});
 
 transition.finished.finally(() => {
   if (triggerTarget) triggerTarget.style.viewTransitionName = '';
@@ -155,7 +157,9 @@ const captionsRef = React.useRef(new Map<number, React.ReactNode>());
 
 const registerCaption = React.useCallback((index: number, caption: React.ReactNode) => {
   captionsRef.current.set(index, caption);
-  return () => { captionsRef.current.delete(index); };
+  return () => {
+    captionsRef.current.delete(index);
+  };
 }, []);
 ```
 
@@ -286,24 +290,24 @@ const counterStateAttributesMapping = {
 
 ## 5. Priority Matrix
 
-| # | Issue | Priority | Effort | Category |
-|---|---|---|---|---|
-| 1.1 | `setItemCount` never shrinks | **High** | Medium | Bug |
-| 1.2 | VT callbacks not generation-guarded | **High** | Low | Bug |
-| 1.3 | Preload ignores loop | **High** | Low | Bug |
-| 1.4 | No default `aria-label` | Medium | Trivial | A11y |
-| 1.5 | VT rejection not handled | **High** | Low | Bug |
-| 2.1 | Caption registry re-renders | Medium | Medium | Perf |
-| 2.2 | Dual context for activeIndex | Low | — | Docs |
-| 2.3 | Imperative ref overlap | Low | Trivial | Docs |
-| 3.1 | No touch/swipe | Medium | High | Feature |
-| 3.2 | No pinch-to-zoom | Low | High | Feature |
-| 3.3 | No lifecycle callbacks | Medium | Low | Feature |
-| 3.4 | No drag-to-dismiss | Low | High | Feature |
-| 3.5 | `scrollTriggerIntoView.behavior` ignored | Medium | Trivial | Bug |
-| 4.1 | `value` naming | Low | — | API |
-| 4.2 | Counter null attributes | Low | Trivial | Cleanup |
-| 4.3 | Hardcoded dark theme | Medium | Low | API |
+| #   | Issue                                    | Priority | Effort  | Category |
+| --- | ---------------------------------------- | -------- | ------- | -------- |
+| 1.1 | `setItemCount` never shrinks             | **High** | Medium  | Bug      |
+| 1.2 | VT callbacks not generation-guarded      | **High** | Low     | Bug      |
+| 1.3 | Preload ignores loop                     | **High** | Low     | Bug      |
+| 1.4 | No default `aria-label`                  | Medium   | Trivial | A11y     |
+| 1.5 | VT rejection not handled                 | **High** | Low     | Bug      |
+| 2.1 | Caption registry re-renders              | Medium   | Medium  | Perf     |
+| 2.2 | Dual context for activeIndex             | Low      | —       | Docs     |
+| 2.3 | Imperative ref overlap                   | Low      | Trivial | Docs     |
+| 3.1 | No touch/swipe                           | Medium   | High    | Feature  |
+| 3.2 | No pinch-to-zoom                         | Low      | High    | Feature  |
+| 3.3 | No lifecycle callbacks                   | Medium   | Low     | Feature  |
+| 3.4 | No drag-to-dismiss                       | Low      | High    | Feature  |
+| 3.5 | `scrollTriggerIntoView.behavior` ignored | Medium   | Trivial | Bug      |
+| 4.1 | `value` naming                           | Low      | —       | API      |
+| 4.2 | Counter null attributes                  | Low      | Trivial | Cleanup  |
+| 4.3 | Hardcoded dark theme                     | Medium   | Low     | API      |
 
 ### Recommended action order
 

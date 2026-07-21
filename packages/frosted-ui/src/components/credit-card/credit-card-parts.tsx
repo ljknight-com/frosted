@@ -88,8 +88,7 @@ function formatExpiry(raw: string): string {
 
 interface CreditCardLogoState extends Record<string, unknown> {}
 
-interface CreditCardLogoProps
-  extends useRender.ComponentProps<'div', CreditCardLogoState> {}
+interface CreditCardLogoProps extends useRender.ComponentProps<'div', CreditCardLogoState> {}
 
 /** A slot for the card issuer or organisation logo, typically inside `FrontHeader`. */
 const CreditCardLogo = React.forwardRef<HTMLDivElement, CreditCardLogoProps>(
@@ -117,8 +116,7 @@ CreditCardLogo.displayName = 'CreditCardLogo';
 
 interface CreditCardBrandState extends Record<string, unknown> {}
 
-interface CreditCardBrandProps
-  extends useRender.ComponentProps<'span', CreditCardBrandState> {}
+interface CreditCardBrandProps extends useRender.ComponentProps<'span', CreditCardBrandState> {}
 
 /** Text for the card network and tier (e.g. "Visa Platinum"), typically inside `FrontHeader`. */
 const CreditCardBrand = React.forwardRef<HTMLSpanElement, CreditCardBrandProps>(
@@ -146,8 +144,7 @@ CreditCardBrand.displayName = 'CreditCardBrand';
 
 interface CreditCardTitleState extends Record<string, unknown> {}
 
-interface CreditCardTitleProps
-  extends useRender.ComponentProps<'span', CreditCardTitleState> {}
+interface CreditCardTitleProps extends useRender.ComponentProps<'span', CreditCardTitleState> {}
 
 /** The card's name or description text (e.g. the holder or product name). */
 const CreditCardTitle = React.forwardRef<HTMLSpanElement, CreditCardTitleProps>(
@@ -175,8 +172,7 @@ CreditCardTitle.displayName = 'CreditCardTitle';
 
 interface CreditCardLastFourState extends Record<string, unknown> {}
 
-interface CreditCardLastFourProps
-  extends useRender.ComponentProps<'span', CreditCardLastFourState> {}
+interface CreditCardLastFourProps extends useRender.ComponentProps<'span', CreditCardLastFourState> {}
 
 /** The masked card number shown on the front face (e.g. "•••• 0991"). */
 const CreditCardLastFour = React.forwardRef<HTMLSpanElement, CreditCardLastFourProps>(
@@ -204,8 +200,7 @@ CreditCardLastFour.displayName = 'CreditCardLastFour';
 
 interface CreditCardMagStripeState extends Record<string, unknown> {}
 
-interface CreditCardMagStripeProps
-  extends useRender.ComponentProps<'div', CreditCardMagStripeState> {}
+interface CreditCardMagStripeProps extends useRender.ComponentProps<'div', CreditCardMagStripeState> {}
 
 /** The decorative magnetic stripe bar on the back face. */
 const CreditCardMagStripe = React.forwardRef<HTMLDivElement, CreditCardMagStripeProps>(
@@ -233,8 +228,7 @@ CreditCardMagStripe.displayName = 'CreditCardMagStripe';
 
 interface CreditCardFrontHeaderState extends Record<string, unknown> {}
 
-interface CreditCardFrontHeaderProps
-  extends useRender.ComponentProps<'div', CreditCardFrontHeaderState> {}
+interface CreditCardFrontHeaderProps extends useRender.ComponentProps<'div', CreditCardFrontHeaderState> {}
 
 /** The top row of the front face, laying out `Logo` (left) and `Brand` (right). */
 const CreditCardFrontHeader = React.forwardRef<HTMLDivElement, CreditCardFrontHeaderProps>(
@@ -262,8 +256,7 @@ CreditCardFrontHeader.displayName = 'CreditCardFrontHeader';
 
 interface CreditCardFrontFooterState extends Record<string, unknown> {}
 
-interface CreditCardFrontFooterProps
-  extends useRender.ComponentProps<'div', CreditCardFrontFooterState> {}
+interface CreditCardFrontFooterProps extends useRender.ComponentProps<'div', CreditCardFrontFooterState> {}
 
 /** The bottom row of the front face, laying out `Title` (left) and `LastFour` (right). */
 const CreditCardFrontFooter = React.forwardRef<HTMLDivElement, CreditCardFrontFooterProps>(
@@ -291,8 +284,7 @@ CreditCardFrontFooter.displayName = 'CreditCardFrontFooter';
 
 interface CreditCardBackContentState extends Record<string, unknown> {}
 
-interface CreditCardBackContentProps
-  extends useRender.ComponentProps<'div', CreditCardBackContentState> {}
+interface CreditCardBackContentProps extends useRender.ComponentProps<'div', CreditCardBackContentState> {}
 
 /** The main content area of the back face, below the magnetic stripe. */
 const CreditCardBackContent = React.forwardRef<HTMLDivElement, CreditCardBackContentProps>(
@@ -318,8 +310,7 @@ CreditCardBackContent.displayName = 'CreditCardBackContent';
 // Fieldset — semantic group for all related card fields; base-ui Fieldset
 // ---------------------------------------------------------------------------
 
-interface CreditCardFieldsetProps
-  extends React.ComponentProps<typeof FieldsetPrimitive.Root> {}
+interface CreditCardFieldsetProps extends React.ComponentProps<typeof FieldsetPrimitive.Root> {}
 
 /** A semantic `<fieldset>` grouping all card input fields, built on Base UI Fieldset. */
 const CreditCardFieldset = React.forwardRef<HTMLFieldSetElement, CreditCardFieldsetProps>(
@@ -340,19 +331,14 @@ CreditCardFieldset.displayName = 'CreditCardFieldset';
 // Field — wraps a single label + input pair on the card
 // ---------------------------------------------------------------------------
 
-interface CreditCardFieldProps
-  extends React.ComponentProps<typeof FieldPrimitive.Root> {}
+interface CreditCardFieldProps extends React.ComponentProps<typeof FieldPrimitive.Root> {}
 
 /** Wraps a single label + input pair, wiring up accessibility and validation via Base UI Field. */
 const CreditCardField = React.forwardRef<HTMLDivElement, CreditCardFieldProps>(
   function CreditCardField(props, forwardedRef) {
     const { className, ...rootProps } = props;
     return (
-      <FieldPrimitive.Root
-        {...rootProps}
-        ref={forwardedRef}
-        className={classNames('fui-CreditCardField', className)}
-      />
+      <FieldPrimitive.Root {...rootProps} ref={forwardedRef} className={classNames('fui-CreditCardField', className)} />
     );
   },
 );
@@ -364,8 +350,7 @@ CreditCardField.displayName = 'CreditCardField';
 
 interface CreditCardFieldGroupState extends Record<string, unknown> {}
 
-interface CreditCardFieldGroupProps
-  extends useRender.ComponentProps<'div', CreditCardFieldGroupState> {}
+interface CreditCardFieldGroupProps extends useRender.ComponentProps<'div', CreditCardFieldGroupState> {}
 
 /** A horizontal row layout for related fields, e.g. `ExpiryField` next to `CVVField`. */
 const CreditCardFieldGroup = React.forwardRef<HTMLDivElement, CreditCardFieldGroupProps>(
@@ -486,17 +471,7 @@ interface CreditCardFieldErrorProps
  */
 const CreditCardFieldError = React.forwardRef<HTMLDivElement, CreditCardFieldErrorProps>(
   function CreditCardFieldError(props, forwardedRef) {
-    const {
-      className,
-      size = '1',
-      weight,
-      align,
-      trim,
-      color = 'danger',
-      highContrast,
-      render,
-      ...errorProps
-    } = props;
+    const { className, size = '1', weight, align, trim, color = 'danger', highContrast, render, ...errorProps } = props;
 
     const { errorsContainer } = useCreditCardContext();
 
@@ -534,8 +509,7 @@ CreditCardFieldError.displayName = 'CreditCardFieldError';
 // TextField — base input primitive for card fields
 // ---------------------------------------------------------------------------
 
-interface CreditCardTextFieldProps
-  extends Omit<React.ComponentProps<typeof BaseInput>, 'className'> {
+interface CreditCardTextFieldProps extends Omit<React.ComponentProps<typeof BaseInput>, 'className'> {
   className?: string;
 }
 
@@ -615,10 +589,8 @@ const CreditCardNumberField = React.forwardRef<HTMLInputElement, CreditCardNumbe
       return formatWithGaps(digits.slice(0, maxDigits), info.gaps);
     };
 
-    const formattedDefault =
-      defaultValue != null ? formatDefaultOrValue(String(defaultValue)) : undefined;
-    const formattedValue =
-      value != null ? formatDefaultOrValue(String(value)) : undefined;
+    const formattedDefault = defaultValue != null ? formatDefaultOrValue(String(defaultValue)) : undefined;
+    const formattedValue = value != null ? formatDefaultOrValue(String(value)) : undefined;
 
     useIsomorphicLayoutEffect(() => {
       const raw = value ?? defaultValue;
@@ -690,10 +662,8 @@ const CreditCardExpiryField = React.forwardRef<HTMLInputElement, CreditCardExpir
       [onChange],
     );
 
-    const formattedDefault =
-      defaultValue != null ? formatExpiry(String(defaultValue)) : undefined;
-    const formattedValue =
-      value != null ? formatExpiry(String(value)) : undefined;
+    const formattedDefault = defaultValue != null ? formatExpiry(String(defaultValue)) : undefined;
+    const formattedValue = value != null ? formatExpiry(String(value)) : undefined;
 
     return (
       <CreditCardTextField
@@ -798,4 +768,3 @@ export type {
   CreditCardTitleProps,
   CreditCardTitleState,
 };
-

@@ -157,10 +157,7 @@ const LightboxContent = React.forwardRef<HTMLDivElement, LightboxContentProps>(
     // ZoomContext is provided by LightboxZoom (a descendant), so we can't
     // read it via useContext here. Instead check the data-zoomed attribute
     // that LightboxZoom sets imperatively on the content element.
-    const getZoom = React.useCallback(
-      () => (contentRef.current?.hasAttribute('data-zoomed') ? 2 : 1),
-      [],
-    );
+    const getZoom = React.useCallback(() => (contentRef.current?.hasAttribute('data-zoomed') ? 2 : 1), []);
     const stableSetOpen = React.useCallback(() => setOpen(false), [setOpen]);
 
     usePullToDismiss({
@@ -304,4 +301,3 @@ LightboxContent.displayName = 'LightboxContent';
 
 export { LightboxContent };
 export type { LightboxContentProps };
-

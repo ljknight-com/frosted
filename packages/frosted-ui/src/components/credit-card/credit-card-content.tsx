@@ -9,8 +9,7 @@ interface CreditCardContentState extends Record<string, unknown> {
   face: CardFace;
 }
 
-interface CreditCardContentProps
-  extends useRender.ComponentProps<'div', CreditCardContentState> {
+interface CreditCardContentProps extends useRender.ComponentProps<'div', CreditCardContentState> {
   /** Accent color applied to the card. Inherited by Front and Back faces. */
   color?: string;
 }
@@ -28,15 +27,9 @@ const CreditCardContent = React.forwardRef<HTMLDivElement, CreditCardContentProp
     const { render, color, ...elementProps } = props;
     const parentCtx = useCreditCardContext();
 
-    const ctxWithColor = React.useMemo(
-      () => ({ ...parentCtx, color }),
-      [parentCtx, color],
-    );
+    const ctxWithColor = React.useMemo(() => ({ ...parentCtx, color }), [parentCtx, color]);
 
-    const state = React.useMemo<CreditCardContentState>(
-      () => ({ face: parentCtx.face }),
-      [parentCtx.face],
-    );
+    const state = React.useMemo<CreditCardContentState>(() => ({ face: parentCtx.face }), [parentCtx.face]);
 
     return (
       <CreditCardContext.Provider value={ctxWithColor}>

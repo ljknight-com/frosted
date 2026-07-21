@@ -42,7 +42,8 @@ const triggerStateAttributesMapping = {
 const LightboxTrigger = React.forwardRef<HTMLButtonElement, LightboxTriggerProps>(
   function LightboxTrigger(props, forwardedRef) {
     const { render, index, crossfade, ...elementProps } = props;
-    const { open, activeIndex, setOpen, setActiveIndex, triggerElementsRef, openingTriggerIndexRef, morphTo } = useLightboxContext();
+    const { open, activeIndex, setOpen, setActiveIndex, triggerElementsRef, openingTriggerIndexRef, morphTo } =
+      useLightboxContext();
 
     const internalRef = React.useRef<HTMLButtonElement | null>(null);
 
@@ -81,14 +82,20 @@ const LightboxTrigger = React.forwardRef<HTMLButtonElement, LightboxTriggerProps
         let bestDist = Infinity;
         for (const idx of triggerElementsRef.current.keys()) {
           const dist = Math.abs(idx - activeIndex);
-          if (dist < bestDist) { bestDist = dist; best = idx; }
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = idx;
+          }
         }
         return index === best;
       }
       return active;
     }, [open, morphTo, activeIndex, index, active, openingTriggerIndexRef, triggerElementsRef]);
 
-    const state = React.useMemo<LightboxTriggerState>(() => ({ open, active, morphTarget }), [open, active, morphTarget]);
+    const state = React.useMemo<LightboxTriggerState>(
+      () => ({ open, active, morphTarget }),
+      [open, active, morphTarget],
+    );
 
     return useRender({
       render,

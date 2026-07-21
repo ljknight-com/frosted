@@ -5,13 +5,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build/Test/Lint Commands
 
 ### Monorepo
+
 - **Install**: `bun install`
 - **Dev server**: `bun run dev --filter=<app>` (Example: `bun run dev --filter=tailwind`)
 - **Build**: `bun run build --filter=<app>`
 - **Lint**: `bun run lint --filter=<app>`
 - **Typecheck**: `bun run typecheck` (turbo, all packages; TypeScript 7)
+- **CI parity**: `bun run check` (lint, typecheck, build, test, publint, attw)
+- **Scaffold a component**: `bun run new:component <kebab-name> [--namespace] [--no-docs]`
+- **Env problems**: `bun run doctor [--fix]` (stale nested node_modules, bun version)
 
 ### Frosted UI Package (`@aussieljk/frosted`, in `packages/frosted-ui`)
+
 - **Dev server**: `bun run --filter="@aussieljk/frosted" dev`
 - **Build**: `bun run --filter="@aussieljk/frosted" build`
 - **Test**: `bun run --filter="@aussieljk/frosted" test`
@@ -26,7 +31,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Formatting**: Single quotes, semicolons required, trailing commas in multiline
 - **Project**: Bun workspaces with Turborepo, NextJS for applications
 - **Commits**: Semantic commit messages (feat, fix, docs, style, refactor, perf, test, chore)
-- **Quality**: ESLint for linting, Prettier for formatting, Storybook for component docs
+- **Quality**: ESLint + oxlint for linting, oxfmt for formatting (`bun run format`; lefthook pre-commit runs both on staged files), Storybook for component docs
 
 ## Publishing
 

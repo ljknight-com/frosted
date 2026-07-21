@@ -824,4 +824,4 @@ export const ICON_MAP = {
   },
 } as const satisfies Record<string, IconMapEntry>;
 
-export type MappedCanonicalName = keyof typeof ICON_MAP;
+type MappedCanonicalName = keyof typeof ICON_MAP;

@@ -1,28 +1,22 @@
 {
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true
+  },
+  "ts-node": {
+    "esm": false,
     "compilerOptions": {
-        "target": "ES2020",
-        "lib": [
-            "ES2020"
-        ],
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "strict": false,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "noEmit": true
-    },
-    "ts-node": {
-        "esm": false,
-        "compilerOptions": {
-            "module": "CommonJS"
-        }
-    },
-    "include": [
-        "**/*.ts"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+      "module": "CommonJS"
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }

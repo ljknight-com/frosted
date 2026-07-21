@@ -7,7 +7,7 @@ import { Avatar } from '../avatar';
 import { avatarStackPropDefs } from './avatar-stack.props';
 
 const AvatarStackContext = React.createContext<{
-  size: (typeof avatarStackPropDefs.size.values)[number]; 
+  size: (typeof avatarStackPropDefs.size.values)[number];
 }>({
   size: avatarStackPropDefs.size.default,
 });
@@ -38,19 +38,11 @@ const AvatarStackRoot = (props: AvatarStackRootProps) => {
   } = props;
 
   // Convert children to array and reverse it only once during render
-  const reversedChildren = React.useMemo(
-    () => React.Children.toArray(children).reverse(),
-    [children]
-  );
+  const reversedChildren = React.useMemo(() => React.Children.toArray(children).reverse(), [children]);
 
   return (
-    <div
-      {...rootProps}
-      className={classNames('fui-AvatarStackRoot', className, `fui-r-size-${size}`)}
-    >
-      <AvatarStackContext.Provider value={{ size }}>
-        {reversedChildren}
-      </AvatarStackContext.Provider>
+    <div {...rootProps} className={classNames('fui-AvatarStackRoot', className, `fui-r-size-${size}`)}>
+      <AvatarStackContext.Provider value={{ size }}>{reversedChildren}</AvatarStackContext.Provider>
     </div>
   );
 };
@@ -62,11 +54,10 @@ type AvatarStackAvatarProps = Omit<React.ComponentProps<typeof Avatar>, 'size'>;
 /** An avatar within `AvatarStack.Root`. Its `size` is inherited from the stack. */
 const AvatarStackAvatar = ({ className, ...props }: AvatarStackAvatarProps) => {
   const { size } = React.useContext(AvatarStackContext);
-  return <Avatar size={size}  className={classNames('fui-AvatarStackAvatar', className)} {...props} />;
+  return <Avatar size={size} className={classNames('fui-AvatarStackAvatar', className)} {...props} />;
 };
 
 AvatarStackAvatar.displayName = 'AvatarStackAvatar';
 
 export { AvatarStackAvatar as Avatar, AvatarStackRoot as Root };
 export type { AvatarStackAvatarProps as AvatarProps, AvatarStackRootProps as RootProps };
-

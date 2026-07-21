@@ -28,8 +28,7 @@ function useZoomAnimation(
   const startTransform = React.useRef<string | undefined>(undefined);
   const overrideOpts = React.useRef<CaptureOptions | undefined>(undefined);
 
-  const reducedMotion =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const play = React.useCallback(() => {
     runningAnimation.current?.cancel();
@@ -70,11 +69,14 @@ function useZoomAnimation(
    * Pass options to override the animation duration/easing for
    * this particular transition (e.g. faster snap-back).
    */
-  const captureStart = React.useCallback((opts?: CaptureOptions) => {
-    const el = wrapperRef.current;
-    startTransform.current = el ? getComputedStyle(el).transform : undefined;
-    overrideOpts.current = opts;
-  }, [wrapperRef]);
+  const captureStart = React.useCallback(
+    (opts?: CaptureOptions) => {
+      const el = wrapperRef.current;
+      startTransform.current = el ? getComputedStyle(el).transform : undefined;
+      overrideOpts.current = opts;
+    },
+    [wrapperRef],
+  );
 
   return captureStart;
 }

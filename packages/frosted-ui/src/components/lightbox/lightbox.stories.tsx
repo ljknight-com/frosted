@@ -1367,7 +1367,13 @@ function HeroGrid() {
         <img
           src={propertyPhotos[0].thumb}
           alt={propertyPhotos[0].alt}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: heroCornerRadius(0, heroR) }}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+            borderRadius: heroCornerRadius(0, heroR),
+          }}
         />
       </Lightbox.Trigger>
       {propertyPhotos.slice(1, 5).map((photo, i) => (
@@ -1384,7 +1390,13 @@ function HeroGrid() {
           <img
             src={photo.thumb}
             alt={photo.alt}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: heroCornerRadius(i + 1, heroR) }}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+              borderRadius: heroCornerRadius(i + 1, heroR),
+            }}
           />
         </Lightbox.Trigger>
       ))}
@@ -3064,7 +3076,7 @@ export const ScrollGalleryWithZoom: Story = {
             }
           `}</style>
 
-          <ScrollGallery.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)} scrollBehavior='instant'>
+          <ScrollGallery.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)} scrollBehavior="instant">
             <Lightbox.ItemGroup
               render={<ScrollGallery.Viewport aria-label="Full-size images" />}
               preload={images.length}

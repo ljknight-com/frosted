@@ -66,19 +66,29 @@ export const Default: Story = {
   args: {},
   render: (args) => {
     return (
-      <div style={{ display: 'flex',flexDirection:'column', gap: 'var(--space-5)' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
         <AvatarStack.Root {...args} size="3">
           {availableUsers.map((user, index) => (
-            <AvatarStack.Avatar shape={index % 2 === 0 ? 'circle' : 'square'} fallback={user.name} color={user.color} key={user.name} src={user.src} />
+            <AvatarStack.Avatar
+              shape={index % 2 === 0 ? 'circle' : 'square'}
+              fallback={user.name}
+              color={user.color}
+              key={user.name}
+              src={user.src}
+            />
           ))}
         </AvatarStack.Root>
-        <AvatarStack.Root {...args} size="3" >
+        <AvatarStack.Root {...args} size="3">
           {availableUsers.map((user) => (
             <AvatarStack.Avatar shape="square" fallback={user.name} color={user.color} key={user.name} src={user.src} />
           ))}
         </AvatarStack.Root>
         <AvatarStack.Root {...args} size="3">
-          <AvatarStack.Avatar fallback={availableUsers[0].name} color={availableUsers[0].color}  src={availableUsers[0].src} />
+          <AvatarStack.Avatar
+            fallback={availableUsers[0].name}
+            color={availableUsers[0].color}
+            src={availableUsers[0].src}
+          />
         </AvatarStack.Root>
       </div>
     );
@@ -88,7 +98,7 @@ export const Default: Story = {
 export const Size: Story = {
   args: {},
   render: (args) => (
-    <div style={{ display: 'flex',flexDirection:'column', gap: 'var(--space-4)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
       <AvatarStack.Root {...args} size="0">
         {availableUsers.map((user) => (
           <AvatarStack.Avatar fallback={user.name} color={user.color} key={user.name} src={user.src} />

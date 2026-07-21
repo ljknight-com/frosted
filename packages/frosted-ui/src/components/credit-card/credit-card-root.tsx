@@ -54,13 +54,7 @@ interface CreditCardRootProps {
  * ```
  */
 function CreditCardRoot(props: CreditCardRootProps) {
-  const {
-    children,
-    ref,
-    face: faceProp,
-    defaultFace = 'front',
-    onFaceChange,
-  } = props;
+  const { children, ref, face: faceProp, defaultFace = 'front', onFaceChange } = props;
 
   const isControlled = faceProp !== undefined;
   const [internalFace, setInternalFace] = React.useState<CardFace>(defaultFace);
@@ -69,7 +63,7 @@ function CreditCardRoot(props: CreditCardRootProps) {
   const [cardType, setCardType] = React.useState<CreditCardTypeCardBrandId | null>(null);
 
   const cardNiceType = React.useMemo(
-    () => (cardType ? creditCardType.getTypeInfo(cardType)?.niceType ?? null : null),
+    () => (cardType ? (creditCardType.getTypeInfo(cardType)?.niceType ?? null) : null),
     [cardType],
   );
 
@@ -92,21 +86,21 @@ function CreditCardRoot(props: CreditCardRootProps) {
     setFace(face === 'front' ? 'back' : 'front');
   }, [face, setFace]);
 
-  React.useImperativeHandle(ref, () => ({
-    setFace,
-    flip: toggle,
-  }), [setFace, toggle]);
+  React.useImperativeHandle(
+    ref,
+    () => ({
+      setFace,
+      flip: toggle,
+    }),
+    [setFace, toggle],
+  );
 
   const contextValue = React.useMemo<CreditCardContextValue>(
     () => ({ face, setFace, toggle, errorsContainer, setErrorsContainer, cardType, setCardType, cardNiceType }),
     [face, setFace, toggle, errorsContainer, cardType, cardNiceType],
   );
 
-  return (
-    <CreditCardContext.Provider value={contextValue}>
-      {children}
-    </CreditCardContext.Provider>
-  );
+  return <CreditCardContext.Provider value={contextValue}>{children}</CreditCardContext.Provider>;
 }
 
 CreditCardRoot.displayName = 'CreditCardRoot';

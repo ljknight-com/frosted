@@ -8,7 +8,6 @@ export const withTheme: Decorator = (Story, context) => {
   // Get values from story parameter first, else fallback to globals
   const theme = (context.parameters.theme || context.globals.theme) as 'light' | 'dark';
 
-
   return (
     <>
       <style>

@@ -23,9 +23,7 @@ const CreditCardContext = React.createContext<CreditCardContextValue | undefined
 function useCreditCardContext(): CreditCardContextValue {
   const context = React.useContext(CreditCardContext);
   if (context === undefined) {
-    throw new Error(
-      'CreditCard compound components must be used within a CreditCard.Root',
-    );
+    throw new Error('CreditCard compound components must be used within a CreditCard.Root');
   }
   return context;
 }

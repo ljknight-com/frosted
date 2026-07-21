@@ -9,8 +9,7 @@ interface CreditCardFrontState extends Record<string, unknown> {
   active: boolean;
 }
 
-interface CreditCardFrontProps
-  extends useRender.ComponentProps<'div', CreditCardFrontState> {
+interface CreditCardFrontProps extends useRender.ComponentProps<'div', CreditCardFrontState> {
   /**
    * Accent color override for the front face. When omitted, inherits from Content.
    */
@@ -29,10 +28,7 @@ const CreditCardFront = React.forwardRef<HTMLDivElement, CreditCardFrontProps>(
     const active = face === 'front';
     const resolvedColor = color ?? contextColor;
 
-    const state = React.useMemo<CreditCardFrontState>(
-      () => ({ active }),
-      [active],
-    );
+    const state = React.useMemo<CreditCardFrontState>(() => ({ active }), [active]);
 
     return useRender({
       render,

@@ -2,7 +2,7 @@ import { TypeTable } from 'fumadocs-ui/components/type-table';
 
 import data from '@/generated/component-props.json';
 
-export interface PropInfo {
+interface PropInfo {
   name: string;
   type: string;
   required: boolean;

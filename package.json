@@ -18,17 +18,22 @@
   "scripts": {
     "build": "turbo run build",
     "build:storybook": "turbo run build-storybook",
-    "dev": "turbo run dev",
+    "check": "turbo run lint typecheck build test && bun run --filter=@aussieljk/frosted health",
+    "dev": "turbo run dev --filter=docs --filter=tailwind --filter=@aussieljk/frosted",
+    "doctor": "bun scripts/doctor.ts",
+    "format": "oxfmt",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "new:component": "bun scripts/new-component.ts",
+    "prepare": "lefthook install",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test"
   },
   "devDependencies": {
-    "eslint-config-custom": "workspace:*",
-    "prettier": "latest",
-    "turbo": "^2.10.5",
-    "@changesets/cli": "^2.31.1"
+    "@changesets/cli": "^2.31.1",
+    "lefthook": "^2.1.10",
+    "oxfmt": "^0.59.0",
+    "oxlint": "^1.74.0",
+    "turbo": "^2.10.5"
   },
   "engines": {
     "node": "22.x",

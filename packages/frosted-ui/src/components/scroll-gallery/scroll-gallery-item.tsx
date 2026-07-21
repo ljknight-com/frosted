@@ -10,8 +10,7 @@ interface ScrollGalleryItemState extends Record<string, unknown> {
   index: number;
 }
 
-interface ScrollGalleryItemProps
-  extends useRender.ComponentProps<'div', ScrollGalleryItemState> {}
+interface ScrollGalleryItemProps extends useRender.ComponentProps<'div', ScrollGalleryItemState> {}
 
 const itemStateAttributesMapping = {
   active: (value: unknown) => (value ? { 'data-active': '' } : null),
@@ -29,63 +28,58 @@ const itemStateAttributesMapping = {
  * Provides `data-active` and `data-in-view` attributes for consumer styling.
  * The `data-in-view` attribute is managed by the Viewport's IntersectionObserver.
  */
-const ScrollGalleryItem = React.forwardRef<
-  HTMLDivElement,
-  ScrollGalleryItemProps
->(function ScrollGalleryItem(props, forwardedRef) {
-  const { render, ...elementProps } = props;
+const ScrollGalleryItem = React.forwardRef<HTMLDivElement, ScrollGalleryItemProps>(
+  function ScrollGalleryItem(props, forwardedRef) {
+    const { render, ...elementProps } = props;
 
-  const { activeIndex, registerItem, getItemElements, itemsVersion } =
-    useScrollGalleryContext();
+    const { activeIndex, registerItem, getItemElements, itemsVersion } = useScrollGalleryContext();
 
-  const internalRef = React.useRef<HTMLDivElement | null>(null);
+    const internalRef = React.useRef<HTMLDivElement | null>(null);
 
-  const mergedRefCallback = React.useCallback(
-    (node: HTMLDivElement | null) => {
-      internalRef.current = node;
-      if (typeof forwardedRef === 'function') {
-        forwardedRef(node);
-      } else if (forwardedRef) {
-        forwardedRef.current = node;
-      }
-    },
-    [forwardedRef],
-  );
+    const mergedRefCallback = React.useCallback(
+      (node: HTMLDivElement | null) => {
+        internalRef.current = node;
+        if (typeof forwardedRef === 'function') {
+          forwardedRef(node);
+        } else if (forwardedRef) {
+          forwardedRef.current = node;
+        }
+      },
+      [forwardedRef],
+    );
 
-  React.useLayoutEffect(() => {
-    const element = internalRef.current;
-    if (!element) return;
-    return registerItem(element);
-  }, [registerItem]);
+    React.useLayoutEffect(() => {
+      const element = internalRef.current;
+      if (!element) return;
+      return registerItem(element);
+    }, [registerItem]);
 
-  const index = React.useMemo(() => {
-    const element = internalRef.current;
-    if (!element) return -1;
-    return getItemElements().indexOf(element);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- itemsVersion invalidates when items are added/removed
-  }, [getItemElements, itemsVersion]);
+    const index = React.useMemo(() => {
+      const element = internalRef.current;
+      if (!element) return -1;
+      return getItemElements().indexOf(element);
+      // eslint-disable-next-line react-hooks/exhaustive-deps -- itemsVersion invalidates when items are added/removed
+    }, [getItemElements, itemsVersion]);
 
-  const isActive = index === activeIndex;
+    const isActive = index === activeIndex;
 
-  const state = React.useMemo<ScrollGalleryItemState>(
-    () => ({ active: isActive, index }),
-    [isActive, index],
-  );
+    const state = React.useMemo<ScrollGalleryItemState>(() => ({ active: isActive, index }), [isActive, index]);
 
-  return useRender({
-    render,
-    ref: mergedRefCallback,
-    state,
-    stateAttributesMapping: itemStateAttributesMapping,
-    props: mergeProps<'div'>(
-      {
-        className: 'fui-ScrollGalleryItem',
-      } as React.ComponentPropsWithRef<'div'>,
-      elementProps as React.ComponentPropsWithRef<'div'>,
-    ),
-    defaultTagName: 'div',
-  });
-});
+    return useRender({
+      render,
+      ref: mergedRefCallback,
+      state,
+      stateAttributesMapping: itemStateAttributesMapping,
+      props: mergeProps<'div'>(
+        {
+          className: 'fui-ScrollGalleryItem',
+        } as React.ComponentPropsWithRef<'div'>,
+        elementProps as React.ComponentPropsWithRef<'div'>,
+      ),
+      defaultTagName: 'div',
+    });
+  },
+);
 
 ScrollGalleryItem.displayName = 'ScrollGalleryItem';
 

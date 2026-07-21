@@ -180,6 +180,5 @@ export type {
   HoverCardContentProps as ContentProps,
   HoverCardHandle as Handle,
   HoverCardRootProps as RootProps,
-  HoverCardTriggerProps as TriggerProps
+  HoverCardTriggerProps as TriggerProps,
 };
-

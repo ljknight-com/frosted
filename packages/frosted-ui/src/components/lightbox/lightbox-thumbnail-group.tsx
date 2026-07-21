@@ -9,8 +9,7 @@ interface LightboxThumbnailGroupState extends Record<string, unknown> {
   focusWithin: boolean;
 }
 
-interface LightboxThumbnailGroupProps
-  extends useRender.ComponentProps<'div', LightboxThumbnailGroupState> {}
+interface LightboxThumbnailGroupProps extends useRender.ComponentProps<'div', LightboxThumbnailGroupState> {}
 
 const thumbnailGroupStateAttributesMapping = {
   focusWithin: (value: unknown) => (value ? { 'data-focus-within': '' } : null),
@@ -46,9 +45,7 @@ const LightboxThumbnailGroup = React.forwardRef<HTMLDivElement, LightboxThumbnai
             break;
           case 'ArrowLeft':
           case 'ArrowUp':
-            nextIndex = loop
-              ? (currentIndex - 1 + tabs.length) % tabs.length
-              : Math.max(currentIndex - 1, 0);
+            nextIndex = loop ? (currentIndex - 1 + tabs.length) % tabs.length : Math.max(currentIndex - 1, 0);
             break;
           case 'Home':
             nextIndex = 0;

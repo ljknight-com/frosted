@@ -149,7 +149,8 @@ const OTPFieldGroup = ({ className, color, ...props }: OTPFieldGroupProps) => {
 OTPFieldGroup.displayName = 'OTPFieldGroup';
 
 interface OTPFieldSlotProps
-  extends Omit<React.ComponentProps<typeof OTPFieldPrimitive.Input>, 'children' | 'className'>,
+  extends
+    Omit<React.ComponentProps<typeof OTPFieldPrimitive.Input>, 'children' | 'className'>,
     Partial<OTPFieldSlotState> {
   className?: string;
 }

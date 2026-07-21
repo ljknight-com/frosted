@@ -64,9 +64,4 @@ const comboboxChipPropDefs = {
   highContrast: typeof highContrastProp;
 };
 
-export {
-  comboboxChipPropDefs,
-  comboboxContentPropDefs,
-  comboboxItemPropDefs,
-  comboboxRootPropDefs,
-};
+export { comboboxChipPropDefs, comboboxContentPropDefs, comboboxItemPropDefs, comboboxRootPropDefs };

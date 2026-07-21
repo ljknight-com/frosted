@@ -55,9 +55,6 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Build @aussieljk/frosted
         run: bun x turbo build --filter=@aussieljk/frosted
-      - name: publint
-        run: bun x publint
-        working-directory: packages/frosted-ui
-      - name: Are the types wrong?
-        run: bun x @arethetypeswrong/cli --pack . --profile esm-only --exclude-entrypoints styles.css styles.lite.css
+      - name: publint + Are the types wrong?
+        run: bun run health
         working-directory: packages/frosted-ui

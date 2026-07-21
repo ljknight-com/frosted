@@ -322,7 +322,8 @@ ComboboxClear.displayName = 'ComboboxClear';
 // ============================================================================
 
 interface ComboboxContentProps
-  extends Omit<React.ComponentProps<typeof ComboboxPrimitive.Popup>, 'className' | 'render' | 'style'>,
+  extends
+    Omit<React.ComponentProps<typeof ComboboxPrimitive.Popup>, 'className' | 'render' | 'style'>,
     ComboboxContentOwnProps {
   className?: string;
   style?: React.CSSProperties;

@@ -9,6 +9,11 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  optimizeDeps: {
+    // the frosted watch build rewrites dist/ while the dev server runs;
+    // pre-bundling it leaves Vite pointing at stale chunks
+    exclude: ['@aussieljk/frosted'],
+  },
   plugins: [
     mdx(),
     tailwindcss(),

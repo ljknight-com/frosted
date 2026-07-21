@@ -151,412 +151,429 @@ function elasticClamp(value: number, min: number, max: number): number {
  * pan when zoomed, with elastic overscroll and snap-back. Zoom resets
  * whenever the active item changes.
  */
-const LightboxZoom = React.forwardRef<LightboxZoomRef, LightboxZoomProps>(
-  function LightboxZoom(props, forwardedRef) {
-    const {
-      children,
-      overlay,
-      minZoom = DEFAULT_MIN_ZOOM,
-      maxZoom: maxZoomProp,
-      zoomStep = DEFAULT_ZOOM_STEP,
-      scrollToZoom = false,
-      wheelSensitivity = DEFAULT_WHEEL_SENSITIVITY,
-      keyboardPanDistance = DEFAULT_KEYBOARD_PAN,
-      doubleClickMaxStops = DEFAULT_DOUBLE_CLICK_STOPS,
-      doubleClickDelay = DEFAULT_DOUBLE_CLICK_DELAY,
-      animationDuration = DEFAULT_ANIMATION_DURATION,
-      onZoomChange,
-      className,
-      wrapperClassName,
-    } = props;
+const LightboxZoom = React.forwardRef<LightboxZoomRef, LightboxZoomProps>(function LightboxZoom(props, forwardedRef) {
+  const {
+    children,
+    overlay,
+    minZoom = DEFAULT_MIN_ZOOM,
+    maxZoom: maxZoomProp,
+    zoomStep = DEFAULT_ZOOM_STEP,
+    scrollToZoom = false,
+    wheelSensitivity = DEFAULT_WHEEL_SENSITIVITY,
+    keyboardPanDistance = DEFAULT_KEYBOARD_PAN,
+    doubleClickMaxStops = DEFAULT_DOUBLE_CLICK_STOPS,
+    doubleClickDelay = DEFAULT_DOUBLE_CLICK_DELAY,
+    animationDuration = DEFAULT_ANIMATION_DURATION,
+    onZoomChange,
+    className,
+    wrapperClassName,
+  } = props;
 
-    const { activeIndex, dialogElementRef } = useLightboxContext();
+  const { activeIndex, dialogElementRef } = useLightboxContext();
 
-    // ----- State -----
-    const [zoom, setZoom] = React.useState(minZoom);
-    const [offsetX, setOffsetX] = React.useState(0);
-    const [offsetY, setOffsetY] = React.useState(0);
-    const [dragging, setDragging] = React.useState(false);
-    const [imageDimensions, setImageDimensions] = React.useState<{ w: number; h: number } | null>(null);
+  // ----- State -----
+  const [zoom, setZoom] = React.useState(minZoom);
+  const [offsetX, setOffsetX] = React.useState(0);
+  const [offsetY, setOffsetY] = React.useState(0);
+  const [dragging, setDragging] = React.useState(false);
+  const [imageDimensions, setImageDimensions] = React.useState<{ w: number; h: number } | null>(null);
 
-    const containerRef = React.useRef<HTMLDivElement | null>(null);
-    const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
 
-    const onZoomChangeRef = React.useRef(onZoomChange);
-    onZoomChangeRef.current = onZoomChange;
+  const onZoomChangeRef = React.useRef(onZoomChange);
+  onZoomChangeRef.current = onZoomChange;
 
-    // ----- Max zoom computation -----
-    const maxZoom = React.useMemo(() => {
-      if (maxZoomProp !== undefined) return maxZoomProp;
-      if (!imageDimensions || !containerRef.current) return DEFAULT_MAX_ZOOM_FALLBACK;
-      const rect = containerRef.current.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return DEFAULT_MAX_ZOOM_FALLBACK;
-      const scaleX = imageDimensions.w / rect.width;
-      const scaleY = imageDimensions.h / rect.height;
-      const natural = Math.max(scaleX, scaleY);
-      return Math.max(natural, minZoom + 1);
-    }, [maxZoomProp, imageDimensions, minZoom]);
+  // ----- Max zoom computation -----
+  const maxZoom = React.useMemo(() => {
+    if (maxZoomProp !== undefined) return maxZoomProp;
+    if (!imageDimensions || !containerRef.current) return DEFAULT_MAX_ZOOM_FALLBACK;
+    const rect = containerRef.current.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return DEFAULT_MAX_ZOOM_FALLBACK;
+    const scaleX = imageDimensions.w / rect.width;
+    const scaleY = imageDimensions.h / rect.height;
+    const natural = Math.max(scaleX, scaleY);
+    return Math.max(natural, minZoom + 1);
+  }, [maxZoomProp, imageDimensions, minZoom]);
 
-    // ----- Observe images inside wrapper to get natural dimensions -----
-    React.useEffect(() => {
-      const wrapper = wrapperRef.current;
-      if (!wrapper || maxZoomProp !== undefined) return;
+  // ----- Observe images inside wrapper to get natural dimensions -----
+  React.useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper || maxZoomProp !== undefined) return;
 
-      const detect = () => {
-        const img = wrapper.querySelector('img');
-        if (img && img.naturalWidth > 0) {
-          setImageDimensions({ w: img.naturalWidth, h: img.naturalHeight });
+    const detect = () => {
+      const img = wrapper.querySelector('img');
+      if (img && img.naturalWidth > 0) {
+        setImageDimensions({ w: img.naturalWidth, h: img.naturalHeight });
+      }
+    };
+
+    detect();
+
+    const observer = new MutationObserver(detect);
+    observer.observe(wrapper, { childList: true, subtree: true });
+
+    const imgs = wrapper.querySelectorAll('img');
+    const handlers: Array<() => void> = [];
+    imgs.forEach((img) => {
+      const handler = () => detect();
+      img.addEventListener('load', handler);
+      handlers.push(() => img.removeEventListener('load', handler));
+    });
+
+    return () => {
+      observer.disconnect();
+      handlers.forEach((h) => h());
+    };
+  }, [maxZoomProp, activeIndex]);
+
+  // ----- Reset on slide change -----
+  React.useEffect(() => {
+    setZoom(minZoom);
+    setOffsetX(0);
+    setOffsetY(0);
+    setImageDimensions(null);
+  }, [activeIndex, minZoom]);
+
+  // ----- Fire callback on zoom change -----
+  React.useEffect(() => {
+    onZoomChangeRef.current?.(zoom);
+  }, [zoom]);
+
+  // ----- Sync data-zoomed attribute on Content element -----
+  React.useEffect(() => {
+    const el = dialogElementRef.current;
+    if (!el) return;
+    if (zoom > minZoom) {
+      el.setAttribute('data-zoomed', '');
+    } else {
+      el.removeAttribute('data-zoomed');
+    }
+  }, [zoom, minZoom, dialogElementRef]);
+
+  // ----- Offset clamping -----
+  const clampOffsets = React.useCallback((newOffsetX: number, newOffsetY: number, newZoom: number) => {
+    const el = containerRef.current;
+    if (!el) return { x: 0, y: 0 };
+
+    const containerRect = el.getBoundingClientRect();
+    const wrapper = wrapperRef.current;
+    let contentW = containerRect.width;
+    let contentH = containerRect.height;
+
+    if (wrapper) {
+      const img = wrapper.querySelector('img');
+      if (img && img.offsetWidth > 0) {
+        contentW = img.offsetWidth;
+        contentH = img.offsetHeight;
+      }
+    }
+
+    const maxOffX = Math.max((contentW * newZoom - containerRect.width) / 2 / newZoom, 0);
+    const maxOffY = Math.max((contentH * newZoom - containerRect.height) / 2 / newZoom, 0);
+
+    return {
+      x: Math.min(Math.abs(newOffsetX), maxOffX) * Math.sign(newOffsetX),
+      y: Math.min(Math.abs(newOffsetY), maxOffY) * Math.sign(newOffsetY),
+    };
+  }, []);
+
+  // ----- Core actions -----
+  const captureStart = useZoomAnimation(zoom, offsetX, offsetY, wrapperRef, animationDuration);
+
+  const offsetXRef = React.useRef(offsetX);
+  offsetXRef.current = offsetX;
+  const offsetYRef = React.useRef(offsetY);
+  offsetYRef.current = offsetY;
+
+  // Raw (unclamped) offsets during elastic touch drag. The elastic
+  // formula is applied to these to compute the displayed value, so
+  // resistance is based on total overshoot rather than compounding.
+  const rawOffsetX = React.useRef(0);
+  const rawOffsetY = React.useRef(0);
+  const isElasticDrag = React.useRef(false);
+
+  const getMaxOffsets = React.useCallback((z: number) => {
+    const el = containerRef.current;
+    if (!el) return { maxX: 0, maxY: 0 };
+    const rect = el.getBoundingClientRect();
+    const wrapper = wrapperRef.current;
+    let cw = rect.width;
+    let ch = rect.height;
+    if (wrapper) {
+      const img = wrapper.querySelector('img');
+      if (img && img.offsetWidth > 0) {
+        cw = img.offsetWidth;
+        ch = img.offsetHeight;
+      }
+    }
+    return {
+      maxX: Math.max((cw * z - rect.width) / 2 / z, 0),
+      maxY: Math.max((ch * z - rect.height) / 2 / z, 0),
+    };
+  }, []);
+
+  const applyElastic = (val: number, max: number) => {
+    const abs = Math.abs(val);
+    if (abs <= max) return val;
+    const over = abs - max;
+    return (max + over * ELASTIC_FACTOR) * Math.sign(val);
+  };
+
+  const changeOffsetsAction = React.useCallback(
+    (dx: number, dy: number, overscroll?: boolean) => {
+      if (overscroll) {
+        if (!isElasticDrag.current) {
+          isElasticDrag.current = true;
+          rawOffsetX.current = offsetXRef.current;
+          rawOffsetY.current = offsetYRef.current;
         }
-      };
+        rawOffsetX.current -= dx;
+        rawOffsetY.current -= dy;
+        const { maxX, maxY } = getMaxOffsets(zoomRef.current);
+        setOffsetX(applyElastic(rawOffsetX.current, maxX));
+        setOffsetY(applyElastic(rawOffsetY.current, maxY));
+      } else {
+        const clamped = clampOffsets(offsetXRef.current - dx, offsetYRef.current - dy, zoomRef.current);
+        setOffsetX(clamped.x);
+        setOffsetY(clamped.y);
+      }
+    },
+    [clampOffsets, getMaxOffsets],
+  );
 
-      detect();
+  const changeZoomAction = React.useCallback(
+    (target: number, rapid: boolean, dx?: number, dy?: number, overscroll?: boolean) => {
+      const clamped = round(
+        overscroll ? elasticClamp(target, minZoom, maxZoom) : Math.min(Math.max(target, minZoom), maxZoom),
+        5,
+      );
 
-      const observer = new MutationObserver(detect);
-      observer.observe(wrapper, { childList: true, subtree: true });
+      if (!rapid) captureStart();
 
-      const imgs = wrapper.querySelectorAll('img');
-      const handlers: Array<() => void> = [];
-      imgs.forEach((img) => {
-        const handler = () => detect();
-        img.addEventListener('load', handler);
-        handlers.push(() => img.removeEventListener('load', handler));
-      });
+      const currentZoom = zoomRef.current;
+      const currentOffX = offsetXRef.current;
+      const currentOffY = offsetYRef.current;
 
-      return () => {
-        observer.disconnect();
-        handlers.forEach((h) => h());
-      };
-    }, [maxZoomProp, activeIndex]);
+      if (dx !== undefined && dy !== undefined) {
+        const newOffX = currentOffX + dx * (1 / clamped - 1 / currentZoom);
+        const newOffY = currentOffY + dy * (1 / clamped - 1 / currentZoom);
+        const offsets = clampOffsets(newOffX, newOffY, clamped);
+        setOffsetX(offsets.x);
+        setOffsetY(offsets.y);
+      } else {
+        const offsets = clampOffsets(currentOffX, currentOffY, clamped);
+        setOffsetX(offsets.x);
+        setOffsetY(offsets.y);
+      }
 
-    // ----- Reset on slide change -----
-    React.useEffect(() => {
+      setZoom(clamped);
+    },
+    [minZoom, maxZoom, clampOffsets, captureStart],
+  );
+
+  const zoomInAction = React.useCallback(() => {
+    const target = zoom * zoomStep;
+    changeZoomAction(zoom < 1 && target > 1 ? 1 : target, false);
+  }, [zoom, zoomStep, changeZoomAction]);
+
+  const zoomOutAction = React.useCallback(() => {
+    const target = zoom / zoomStep;
+    changeZoomAction(zoom > 1 && target < 1 ? 1 : target, false);
+  }, [zoom, zoomStep, changeZoomAction]);
+
+  const resetAction = React.useCallback(
+    (rapid = false) => {
+      if (!rapid) captureStart();
       setZoom(minZoom);
       setOffsetX(0);
       setOffsetY(0);
-      setImageDimensions(null);
-    }, [activeIndex, minZoom]);
+    },
+    [minZoom, captureStart],
+  );
 
-    // ----- Fire callback on zoom change -----
-    React.useEffect(() => {
-      onZoomChangeRef.current?.(zoom);
-    }, [zoom]);
+  const snapToBoundsAction = React.useCallback(() => {
+    const currentZoom = zoomRef.current;
+    if (currentZoom >= minZoom && currentZoom <= maxZoom) return;
+    captureStart(SNAP_OPTS);
+    const snapped = Math.min(Math.max(currentZoom, minZoom), maxZoom);
+    const offsets = clampOffsets(offsetXRef.current, offsetYRef.current, snapped);
+    setZoom(snapped);
+    setOffsetX(offsets.x);
+    setOffsetY(offsets.y);
+  }, [minZoom, maxZoom, clampOffsets, captureStart]);
 
-    // ----- Sync data-zoomed attribute on Content element -----
-    React.useEffect(() => {
-      const el = dialogElementRef.current;
-      if (!el) return;
-      if (zoom > minZoom) {
-        el.setAttribute('data-zoomed', '');
-      } else {
-        el.removeAttribute('data-zoomed');
-      }
-    }, [zoom, minZoom, dialogElementRef]);
+  const snapOffsetsToBoundsAction = React.useCallback(() => {
+    isElasticDrag.current = false;
+    const clamped = clampOffsets(offsetXRef.current, offsetYRef.current, zoomRef.current);
+    if (clamped.x === offsetXRef.current && clamped.y === offsetYRef.current) return;
+    captureStart(SNAP_OPTS);
+    setOffsetX(clamped.x);
+    setOffsetY(clamped.y);
+  }, [clampOffsets, captureStart]);
 
-    // ----- Offset clamping -----
-    const clampOffsets = React.useCallback(
-      (newOffsetX: number, newOffsetY: number, newZoom: number) => {
-        const el = containerRef.current;
-        if (!el) return { x: 0, y: 0 };
-
-        const containerRect = el.getBoundingClientRect();
-        const wrapper = wrapperRef.current;
-        let contentW = containerRect.width;
-        let contentH = containerRect.height;
-
-        if (wrapper) {
-          const img = wrapper.querySelector('img');
-          if (img && img.offsetWidth > 0) {
-            contentW = img.offsetWidth;
-            contentH = img.offsetHeight;
-          }
-        }
-
-        const maxOffX = Math.max((contentW * newZoom - containerRect.width) / 2 / newZoom, 0);
-        const maxOffY = Math.max((contentH * newZoom - containerRect.height) / 2 / newZoom, 0);
-
-        return {
-          x: Math.min(Math.abs(newOffsetX), maxOffX) * Math.sign(newOffsetX),
-          y: Math.min(Math.abs(newOffsetY), maxOffY) * Math.sign(newOffsetY),
-        };
-      },
-      [],
-    );
-
-    // ----- Core actions -----
-    const captureStart = useZoomAnimation(zoom, offsetX, offsetY, wrapperRef, animationDuration);
-
-    const offsetXRef = React.useRef(offsetX);
-    offsetXRef.current = offsetX;
-    const offsetYRef = React.useRef(offsetY);
-    offsetYRef.current = offsetY;
-
-    // Raw (unclamped) offsets during elastic touch drag. The elastic
-    // formula is applied to these to compute the displayed value, so
-    // resistance is based on total overshoot rather than compounding.
-    const rawOffsetX = React.useRef(0);
-    const rawOffsetY = React.useRef(0);
-    const isElasticDrag = React.useRef(false);
-
-    const getMaxOffsets = React.useCallback(
-      (z: number) => {
-        const el = containerRef.current;
-        if (!el) return { maxX: 0, maxY: 0 };
-        const rect = el.getBoundingClientRect();
-        const wrapper = wrapperRef.current;
-        let cw = rect.width;
-        let ch = rect.height;
-        if (wrapper) {
-          const img = wrapper.querySelector('img');
-          if (img && img.offsetWidth > 0) { cw = img.offsetWidth; ch = img.offsetHeight; }
-        }
-        return {
-          maxX: Math.max((cw * z - rect.width) / 2 / z, 0),
-          maxY: Math.max((ch * z - rect.height) / 2 / z, 0),
-        };
-      },
-      [],
-    );
-
-    const applyElastic = (val: number, max: number) => {
-      const abs = Math.abs(val);
-      if (abs <= max) return val;
-      const over = abs - max;
-      return (max + over * ELASTIC_FACTOR) * Math.sign(val);
-    };
-
-    const changeOffsetsAction = React.useCallback(
-      (dx: number, dy: number, overscroll?: boolean) => {
-        if (overscroll) {
-          if (!isElasticDrag.current) {
-            isElasticDrag.current = true;
-            rawOffsetX.current = offsetXRef.current;
-            rawOffsetY.current = offsetYRef.current;
-          }
-          rawOffsetX.current -= dx;
-          rawOffsetY.current -= dy;
-          const { maxX, maxY } = getMaxOffsets(zoomRef.current);
-          setOffsetX(applyElastic(rawOffsetX.current, maxX));
-          setOffsetY(applyElastic(rawOffsetY.current, maxY));
-        } else {
-          const clamped = clampOffsets(offsetXRef.current - dx, offsetYRef.current - dy, zoomRef.current);
-          setOffsetX(clamped.x);
-          setOffsetY(clamped.y);
-        }
-      },
-      [clampOffsets, getMaxOffsets],
-    );
-
-    const changeZoomAction = React.useCallback(
-      (target: number, rapid: boolean, dx?: number, dy?: number, overscroll?: boolean) => {
-        const clamped = round(
-          overscroll
-            ? elasticClamp(target, minZoom, maxZoom)
-            : Math.min(Math.max(target, minZoom), maxZoom),
-          5,
-        );
-
-        if (!rapid) captureStart();
-
-        const currentZoom = zoomRef.current;
-        const currentOffX = offsetXRef.current;
-        const currentOffY = offsetYRef.current;
-
-        if (dx !== undefined && dy !== undefined) {
-          const newOffX = currentOffX + dx * (1 / clamped - 1 / currentZoom);
-          const newOffY = currentOffY + dy * (1 / clamped - 1 / currentZoom);
-          const offsets = clampOffsets(newOffX, newOffY, clamped);
-          setOffsetX(offsets.x);
-          setOffsetY(offsets.y);
-        } else {
-          const offsets = clampOffsets(currentOffX, currentOffY, clamped);
-          setOffsetX(offsets.x);
-          setOffsetY(offsets.y);
-        }
-
-        setZoom(clamped);
-      },
-      [minZoom, maxZoom, clampOffsets, captureStart],
-    );
-
-    const zoomInAction = React.useCallback(() => {
-      const target = zoom * zoomStep;
-      changeZoomAction(zoom < 1 && target > 1 ? 1 : target, false);
-    }, [zoom, zoomStep, changeZoomAction]);
-
-    const zoomOutAction = React.useCallback(() => {
-      const target = zoom / zoomStep;
-      changeZoomAction(zoom > 1 && target < 1 ? 1 : target, false);
-    }, [zoom, zoomStep, changeZoomAction]);
-
-    const resetAction = React.useCallback(
-      (rapid = false) => {
-        if (!rapid) captureStart();
-        setZoom(minZoom);
-        setOffsetX(0);
-        setOffsetY(0);
-      },
-      [minZoom, captureStart],
-    );
-
-    const snapToBoundsAction = React.useCallback(() => {
-      const currentZoom = zoomRef.current;
-      if (currentZoom >= minZoom && currentZoom <= maxZoom) return;
-      captureStart(SNAP_OPTS);
-      const snapped = Math.min(Math.max(currentZoom, minZoom), maxZoom);
-      const offsets = clampOffsets(offsetXRef.current, offsetYRef.current, snapped);
-      setZoom(snapped);
-      setOffsetX(offsets.x);
-      setOffsetY(offsets.y);
-    }, [minZoom, maxZoom, clampOffsets, captureStart]);
-
-    const snapOffsetsToBoundsAction = React.useCallback(() => {
+  const momentumPanAction = React.useCallback(
+    (targetX: number, targetY: number) => {
       isElasticDrag.current = false;
-      const clamped = clampOffsets(offsetXRef.current, offsetYRef.current, zoomRef.current);
+      const clamped = clampOffsets(targetX, targetY, zoomRef.current);
       if (clamped.x === offsetXRef.current && clamped.y === offsetYRef.current) return;
-      captureStart(SNAP_OPTS);
+      captureStart(MOMENTUM_OPTS);
       setOffsetX(clamped.x);
       setOffsetY(clamped.y);
-    }, [clampOffsets, captureStart]);
+    },
+    [clampOffsets, captureStart],
+  );
 
-    const momentumPanAction = React.useCallback(
-      (targetX: number, targetY: number) => {
-        isElasticDrag.current = false;
-        const clamped = clampOffsets(targetX, targetY, zoomRef.current);
-        if (clamped.x === offsetXRef.current && clamped.y === offsetYRef.current) return;
-        captureStart(MOMENTUM_OPTS);
-        setOffsetX(clamped.x);
-        setOffsetY(clamped.y);
-      },
-      [clampOffsets, captureStart],
-    );
+  // ----- Gesture hook -----
+  const zoomRef = React.useRef(zoom);
+  zoomRef.current = zoom;
 
-    // ----- Gesture hook -----
-    const zoomRef = React.useRef(zoom);
-    zoomRef.current = zoom;
+  const gestureConfig = React.useMemo<ZoomGestureConfig>(
+    () => ({
+      minZoom,
+      maxZoom,
+      zoomStep,
+      scrollToZoom,
+      wheelSensitivity,
+      keyboardPanDistance,
+      doubleClickMaxStops,
+      doubleClickDelay,
+    }),
+    [
+      minZoom,
+      maxZoom,
+      zoomStep,
+      scrollToZoom,
+      wheelSensitivity,
+      keyboardPanDistance,
+      doubleClickMaxStops,
+      doubleClickDelay,
+    ],
+  );
 
-    const gestureConfig = React.useMemo<ZoomGestureConfig>(
-      () => ({
-        minZoom,
-        maxZoom,
-        zoomStep,
-        scrollToZoom,
-        wheelSensitivity,
-        keyboardPanDistance,
-        doubleClickMaxStops,
-        doubleClickDelay,
-      }),
-      [minZoom, maxZoom, zoomStep, scrollToZoom, wheelSensitivity, keyboardPanDistance, doubleClickMaxStops, doubleClickDelay],
-    );
+  const gestureActions = React.useMemo<ZoomGestureActions>(
+    () => ({
+      getZoom: () => zoomRef.current,
+      getOffsets: () => ({ x: offsetXRef.current, y: offsetYRef.current }),
+      zoomIn: zoomInAction,
+      zoomOut: zoomOutAction,
+      changeZoom: changeZoomAction,
+      changeOffsets: changeOffsetsAction,
+      setDragging,
+      snapToBounds: snapToBoundsAction,
+      snapOffsetsToBounds: snapOffsetsToBoundsAction,
+      momentumPan: momentumPanAction,
+    }),
+    [
+      zoomInAction,
+      zoomOutAction,
+      changeZoomAction,
+      changeOffsetsAction,
+      snapToBoundsAction,
+      snapOffsetsToBoundsAction,
+      momentumPanAction,
+    ],
+  );
 
-    const gestureActions = React.useMemo<ZoomGestureActions>(
-      () => ({
-        getZoom: () => zoomRef.current,
-        getOffsets: () => ({ x: offsetXRef.current, y: offsetYRef.current }),
-        zoomIn: zoomInAction,
-        zoomOut: zoomOutAction,
-        changeZoom: changeZoomAction,
-        changeOffsets: changeOffsetsAction,
-        setDragging,
-        snapToBounds: snapToBoundsAction,
-        snapOffsetsToBounds: snapOffsetsToBoundsAction,
-        momentumPan: momentumPanAction,
-      }),
-      [zoomInAction, zoomOutAction, changeZoomAction, changeOffsetsAction, snapToBoundsAction, snapOffsetsToBoundsAction, momentumPanAction],
-    );
+  useZoomGestures(containerRef, wrapperRef, gestureConfig, gestureActions, false, dialogElementRef, zoom);
 
-    useZoomGestures(containerRef, wrapperRef, gestureConfig, gestureActions, false, dialogElementRef, zoom);
+  // ----- Imperative ref -----
+  React.useImperativeHandle(
+    forwardedRef,
+    () => ({
+      zoom,
+      maxZoom,
+      offsetX,
+      offsetY,
+      zoomIn: zoomInAction,
+      zoomOut: zoomOutAction,
+      zoomTo: (target, opts) => changeZoomAction(target, opts?.rapid ?? false, opts?.dx, opts?.dy),
+      reset: resetAction,
+    }),
+    [zoom, maxZoom, offsetX, offsetY, zoomInAction, zoomOutAction, changeZoomAction, resetAction],
+  );
 
-    // ----- Imperative ref -----
-    React.useImperativeHandle(
-      forwardedRef,
-      () => ({
-        zoom,
-        maxZoom,
-        offsetX,
-        offsetY,
-        zoomIn: zoomInAction,
-        zoomOut: zoomOutAction,
-        zoomTo: (target, opts) => changeZoomAction(target, opts?.rapid ?? false, opts?.dx, opts?.dy),
-        reset: resetAction,
-      }),
-      [zoom, maxZoom, offsetX, offsetY, zoomInAction, zoomOutAction, changeZoomAction, resetAction],
-    );
+  // ----- Context value -----
+  const canZoomIn = zoom < maxZoom;
+  const canZoomOut = zoom > minZoom;
 
-    // ----- Context value -----
-    const canZoomIn = zoom < maxZoom;
-    const canZoomOut = zoom > minZoom;
+  const contextValue = React.useMemo<ZoomContextValue>(
+    () => ({
+      zoom,
+      maxZoom,
+      offsetX,
+      offsetY,
+      canZoomIn,
+      canZoomOut,
+      zoomIn: zoomInAction,
+      zoomOut: zoomOutAction,
+      zoomTo: (target, opts) => changeZoomAction(target, opts?.rapid ?? false, opts?.dx, opts?.dy),
+      reset: resetAction,
+      changeOffsets: changeOffsetsAction,
+    }),
+    [
+      zoom,
+      maxZoom,
+      offsetX,
+      offsetY,
+      canZoomIn,
+      canZoomOut,
+      zoomInAction,
+      zoomOutAction,
+      changeZoomAction,
+      resetAction,
+      changeOffsetsAction,
+    ],
+  );
 
-    const contextValue = React.useMemo<ZoomContextValue>(
-      () => ({
-        zoom,
-        maxZoom,
-        offsetX,
-        offsetY,
-        canZoomIn,
-        canZoomOut,
-        zoomIn: zoomInAction,
-        zoomOut: zoomOutAction,
-        zoomTo: (target, opts) => changeZoomAction(target, opts?.rapid ?? false, opts?.dx, opts?.dy),
-        reset: resetAction,
-        changeOffsets: changeOffsetsAction,
-      }),
-      [zoom, maxZoom, offsetX, offsetY, canZoomIn, canZoomOut, zoomInAction, zoomOutAction, changeZoomAction, resetAction, changeOffsetsAction],
-    );
+  // ----- Render -----
+  const stateSnapshot = { zoom, maxZoom, offsetX, offsetY, canZoomIn, canZoomOut };
 
-    // ----- Render -----
-    const stateSnapshot = { zoom, maxZoom, offsetX, offsetY, canZoomIn, canZoomOut };
+  const resolvedChildren = typeof children === 'function' ? children(stateSnapshot) : children;
 
-    const resolvedChildren = typeof children === 'function'
-      ? children(stateSnapshot)
-      : children;
+  const resolvedOverlay = typeof overlay === 'function' ? overlay(stateSnapshot) : overlay;
 
-    const resolvedOverlay = typeof overlay === 'function'
-      ? overlay(stateSnapshot)
-      : overlay;
-
-    return (
-      <ZoomContext.Provider value={contextValue}>
+  return (
+    <ZoomContext.Provider value={contextValue}>
+      <div
+        ref={containerRef}
+        className={className}
+        data-zoom={zoom > 1 ? '' : undefined}
+        data-dragging={dragging ? '' : undefined}
+        style={{
+          overflow: 'hidden',
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          touchAction: zoom > minZoom ? 'none' : 'pan-x pan-y',
+          cursor: dragging ? 'grabbing' : zoom > 1 ? 'grab' : undefined,
+          userSelect: 'none',
+        }}
+        tabIndex={-1}
+      >
         <div
-          ref={containerRef}
-          className={className}
-          data-zoom={zoom > 1 ? '' : undefined}
-          data-dragging={dragging ? '' : undefined}
+          ref={wrapperRef}
+          className={wrapperClassName}
           style={{
-            overflow: 'hidden',
-            position: 'relative',
             width: '100%',
             height: '100%',
-            touchAction: zoom > minZoom ? 'none' : 'pan-x pan-y',
-            cursor: dragging ? 'grabbing' : zoom > 1 ? 'grab' : undefined,
-            userSelect: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transformOrigin: 'center center',
+            transform: `scale(${zoom}) translate(${offsetX}px, ${offsetY}px)`,
+            willChange: zoom > 1 ? 'transform' : undefined,
           }}
-          tabIndex={-1}
         >
-          <div
-            ref={wrapperRef}
-            className={wrapperClassName}
-            style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transformOrigin: 'center center',
-              transform: `scale(${zoom}) translate(${offsetX}px, ${offsetY}px)`,
-              willChange: zoom > 1 ? 'transform' : undefined,
-            }}
-          >
-            {resolvedChildren}
-          </div>
-          {resolvedOverlay}
+          {resolvedChildren}
         </div>
-      </ZoomContext.Provider>
-    );
-  },
-);
+        {resolvedOverlay}
+      </div>
+    </ZoomContext.Provider>
+  );
+});
 
 LightboxZoom.displayName = 'LightboxZoom';
 
 export { LightboxZoom };
 export type { LightboxZoomProps, LightboxZoomRef, LightboxZoomState };
-

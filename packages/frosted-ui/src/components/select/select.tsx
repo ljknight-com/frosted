@@ -181,7 +181,8 @@ SelectTrigger.displayName = 'SelectTrigger';
 
 type SelectContentOwnProps = GetPropDefTypes<typeof selectContentPropDefs>;
 interface SelectContentProps
-  extends Omit<React.ComponentProps<typeof SelectPrimitive.Popup>, 'className' | 'render' | 'style'>,
+  extends
+    Omit<React.ComponentProps<typeof SelectPrimitive.Popup>, 'className' | 'render' | 'style'>,
     SelectContentOwnProps {
   className?: string;
   style?: React.CSSProperties;

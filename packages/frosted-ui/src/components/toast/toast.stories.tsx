@@ -155,11 +155,14 @@ export const PromiseConditional: Story = {
         <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
           <Button
             onClick={() =>
-              toast.promise(delay(2000).then(() => 'done'), {
-                loading: 'Saving...',
-                success: 'Saved!',
-                error: 'Failed to save',
-              })
+              toast.promise(
+                delay(2000).then(() => 'done'),
+                {
+                  loading: 'Saving...',
+                  success: 'Saved!',
+                  error: 'Failed to save',
+                },
+              )
             }
           >
             All options defined
@@ -167,10 +170,13 @@ export const PromiseConditional: Story = {
 
           <Button
             onClick={() =>
-              toast.promise(delay(2000).then(() => 'done'), {
-                loading: 'Working...',
-                success: undefined,
-              })
+              toast.promise(
+                delay(2000).then(() => 'done'),
+                {
+                  loading: 'Working...',
+                  success: undefined,
+                },
+              )
             }
           >
             No success toast
@@ -194,9 +200,12 @@ export const PromiseConditional: Story = {
 
           <Button
             onClick={() =>
-              toast.promise(delay(1500).then(() => 'done'), {
-                success: 'Background task complete!',
-              })
+              toast.promise(
+                delay(1500).then(() => 'done'),
+                {
+                  success: 'Background task complete!',
+                },
+              )
             }
           >
             No loading, only success
@@ -219,7 +228,10 @@ export const PromiseConditional: Story = {
 
           <Button
             onClick={() =>
-              toast.promise(delay(1000).then(() => 'silent'), {})
+              toast.promise(
+                delay(1000).then(() => 'silent'),
+                {},
+              )
             }
           >
             All undefined (silent)

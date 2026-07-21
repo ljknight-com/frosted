@@ -79,10 +79,13 @@ function useZoomGestures(
   const lastTapPos = React.useRef<{ x: number; y: number } | null>(null);
   const tapCandidate = React.useRef(false);
   const tapStartPos = React.useRef<{ x: number; y: number } | null>(null);
-  const pinchState = React.useRef<{
-    initialDistance: number;
-    initialZoom: number;
-  } | undefined>(undefined);
+  const pinchState = React.useRef<
+    | {
+        initialDistance: number;
+        initialZoom: number;
+      }
+    | undefined
+  >(undefined);
   const zoomingTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Velocity tracking for momentum pan on touch release.
@@ -103,10 +106,7 @@ function useZoomGestures(
       const el = containerRef.current;
       if (!el) return [0, 0];
       const rect = el.getBoundingClientRect();
-      return [
-        event.clientX - rect.left - rect.width / 2,
-        event.clientY - rect.top - rect.height / 2,
-      ];
+      return [event.clientX - rect.left - rect.width / 2, event.clientY - rect.top - rect.height / 2];
     },
     [containerRef],
   );
@@ -213,9 +213,7 @@ function useZoomGestures(
         lastTapPos.current = null;
 
         const { minZoom, maxZoom } = configRef.current;
-        const targetZoom = zoom > minZoom
-          ? minZoom
-          : Math.min(zoomStep, maxZoom);
+        const targetZoom = zoom > minZoom ? minZoom : Math.min(zoomStep, maxZoom);
 
         setZooming(true);
         changeZoom(targetZoom, false, ...translateCoordinates(event));
@@ -293,11 +291,7 @@ function useZoomGestures(
         event.stopPropagation();
         if (pointers.length === 1) {
           const isTouch = event.pointerType === 'touch';
-          changeOffsets(
-            (existing.clientX - event.clientX) / zoom,
-            (existing.clientY - event.clientY) / zoom,
-            isTouch,
-          );
+          changeOffsets((existing.clientX - event.clientX) / zoom, (existing.clientY - event.clientY) / zoom, isTouch);
           // Track positions for momentum calculation on touch release
           if (isTouch) {
             const now = event.timeStamp;
@@ -382,9 +376,7 @@ function useZoomGestures(
   // gesturechange there. The wheel handler skips ctrlKey only while a
   // gesture is active to avoid double-processing. Physical Ctrl+wheel
   // (no gesture) is still handled normally on Safari.
-  const hasSafariGesturesRef = React.useRef(
-    typeof window !== 'undefined' && 'GestureEvent' in window,
-  );
+  const hasSafariGesturesRef = React.useRef(typeof window !== 'undefined' && 'GestureEvent' in window);
   const gestureActiveRef = React.useRef(false);
 
   const handleWheel = React.useCallback(
@@ -395,18 +387,13 @@ function useZoomGestures(
 
       // Skip ctrlKey+wheel during an active Safari trackpad pinch gesture
       // (GestureEvent handles it). Physical Ctrl+wheel still works.
-      const shouldZoom =
-        (event.ctrlKey && !gestureActiveRef.current) || scrollToZoom;
+      const shouldZoom = (event.ctrlKey && !gestureActiveRef.current) || scrollToZoom;
 
       if (shouldZoom) {
         if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
           event.preventDefault();
           event.stopPropagation();
-          changeZoom(
-            scaleZoom(zoom, -event.deltaY, wheelSensitivity),
-            true,
-            ...translateCoordinates(event),
-          );
+          changeZoom(scaleZoom(zoom, -event.deltaY, wheelSensitivity), true, ...translateCoordinates(event));
           return;
         }
       }
@@ -426,44 +413,49 @@ function useZoomGestures(
   // Keyboard — Cmd+/-, Cmd+0, arrows for pan
   // -------------------------------------------------------------------
 
-  const handleKeyDown = React.useCallback(
-    (event: KeyboardEvent) => {
-      const { keyboardPanDistance } = configRef.current;
-      const { getZoom, zoomIn, zoomOut, changeZoom, changeOffsets } = actionsRef.current;
-      const zoom = getZoom();
-      const meta = event.metaKey || event.ctrlKey;
+  const handleKeyDown = React.useCallback((event: KeyboardEvent) => {
+    const { keyboardPanDistance } = configRef.current;
+    const { getZoom, zoomIn, zoomOut, changeZoom, changeOffsets } = actionsRef.current;
+    const zoom = getZoom();
+    const meta = event.metaKey || event.ctrlKey;
 
-      if (zoom > 1) {
-        const pan = (dx: number, dy: number) => {
-          event.preventDefault();
-          event.stopPropagation();
-          changeOffsets(dx, dy);
-        };
+    if (zoom > 1) {
+      const pan = (dx: number, dy: number) => {
+        event.preventDefault();
+        event.stopPropagation();
+        changeOffsets(dx, dy);
+      };
 
-        switch (event.key) {
-          case 'ArrowDown': pan(0, keyboardPanDistance); return;
-          case 'ArrowUp': pan(0, -keyboardPanDistance); return;
-          case 'ArrowLeft': pan(-keyboardPanDistance, 0); return;
-          case 'ArrowRight': pan(keyboardPanDistance, 0); return;
-        }
+      switch (event.key) {
+        case 'ArrowDown':
+          pan(0, keyboardPanDistance);
+          return;
+        case 'ArrowUp':
+          pan(0, -keyboardPanDistance);
+          return;
+        case 'ArrowLeft':
+          pan(-keyboardPanDistance, 0);
+          return;
+        case 'ArrowRight':
+          pan(keyboardPanDistance, 0);
+          return;
       }
+    }
 
-      if (event.key === '+' || (meta && event.key === '=')) {
-        event.preventDefault();
-        event.stopPropagation();
-        zoomIn();
-      } else if (event.key === '-' || (meta && (event.key === '-' || event.key === '_'))) {
-        event.preventDefault();
-        event.stopPropagation();
-        zoomOut();
-      } else if (meta && event.key === '0') {
-        event.preventDefault();
-        event.stopPropagation();
-        changeZoom(1, false);
-      }
-    },
-    [],
-  );
+    if (event.key === '+' || (meta && event.key === '=')) {
+      event.preventDefault();
+      event.stopPropagation();
+      zoomIn();
+    } else if (event.key === '-' || (meta && (event.key === '-' || event.key === '_'))) {
+      event.preventDefault();
+      event.stopPropagation();
+      zoomOut();
+    } else if (meta && event.key === '0') {
+      event.preventDefault();
+      event.stopPropagation();
+      changeZoom(1, false);
+    }
+  }, []);
 
   // -------------------------------------------------------------------
   // Attach / detach listeners
@@ -500,9 +492,7 @@ function useZoomGestures(
   // On Safari, trackpad pinch-to-zoom is handled via GestureEvent (below),
   // NOT via ctrlKey+wheel, so the wheel handler only needs non-passive
   // when zoomed in (for pan preventDefault) or scrollToZoom is on.
-  const needsNonPassiveWheel = hasSafariGesturesRef.current
-    ? currentZoom > 1 || config.scrollToZoom
-    : true;
+  const needsNonPassiveWheel = hasSafariGesturesRef.current ? currentZoom > 1 || config.scrollToZoom : true;
 
   React.useEffect(() => {
     if (disabled) return;

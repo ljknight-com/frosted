@@ -1,14 +1,7 @@
 import type { PropDef } from '../../helpers';
 
 const swipeDirections = ['down', 'right', 'left', 'up'] as const;
-const toastPositions = [
-  'bottom-right',
-  'bottom-left',
-  'bottom-center',
-  'top-right',
-  'top-left',
-  'top-center',
-] as const;
+const toastPositions = ['bottom-right', 'bottom-left', 'bottom-center', 'top-right', 'top-left', 'top-center'] as const;
 
 const toastProviderPropDefs = {
   /**
