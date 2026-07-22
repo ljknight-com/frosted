@@ -35,5 +35,6 @@ packages/frosted-ui/build-storybook.log
 
 #storybook
 storybook-static
+screenshots
 packages/frosted-ui/.storybook/generated
 packages/frosted-ui/.storybook/public

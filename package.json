@@ -23,6 +23,7 @@
     "lint": "turbo run lint",
     "new:component": "bun scripts/new-component.ts",
     "prepare": "lefthook install",
+    "screenshot": "bun scripts/screenshot-demos.ts",
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
