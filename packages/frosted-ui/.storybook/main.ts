@@ -5,6 +5,14 @@ import { mergeConfig } from 'vite';
 
 const srcDir = resolve(dirname(fileURLToPath(import.meta.url)), '../src');
 
+// Under portless the dev server sits behind an HTTPS proxy on 443, but vite still tells the
+// browser to open its HMR socket on the private port — so the socket never connects. Vite's
+// only way to recover from optimizing newly-discovered deps is a full-reload over that socket,
+// so without this the first load of a docs page dies on "Failed to fetch dynamically imported
+// module" and stays broken until a manual refresh.
+const portlessUrl = process.env.PORTLESS_URL;
+const hmr = portlessUrl ? { protocol: 'wss', host: new URL(portlessUrl).hostname, clientPort: 443 } : undefined;
+
 const config: StorybookConfig = {
   stories: ['./**/*.mdx', './**/*.stories.@(js|jsx|mjs|ts|tsx)', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
 
@@ -38,6 +46,11 @@ const config: StorybookConfig = {
           { find: /^@aussieljk\/frosted$/, replacement: srcDir },
         ],
       },
+      server: { hmr },
+      // The docs pages reach the whole library through .storybook/demos, but vite's dep scanner
+      // can't read .mdx — so without these entries those deps are discovered one request at a
+      // time, forcing a re-optimize mid-render. Scanning them up front keeps first load stable.
+      optimizeDeps: { entries: ['.storybook/demos/*.tsx', '.storybook/components/*.tsx'] },
     }),
 };
 export default config;
