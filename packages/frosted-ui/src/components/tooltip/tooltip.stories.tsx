@@ -42,7 +42,8 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+  // Docs page is authored in .storybook/stories/components/tooltip.mdx.
+  tags: ['!autodocs'],
 } satisfies Meta<typeof Tooltip>;
 
 export default meta;

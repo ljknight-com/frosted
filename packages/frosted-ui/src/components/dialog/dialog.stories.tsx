@@ -38,7 +38,8 @@ const meta = {
     layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
-  tags: ['autodocs'],
+  // Docs page is authored in .storybook/stories/components/dialog.mdx.
+  tags: ['!autodocs'],
 } satisfies Meta<typeof Dialog.Content>;
 
 export default meta;

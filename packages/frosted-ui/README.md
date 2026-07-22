@@ -3,8 +3,7 @@
 <p align="center">Frosted UI — a React design system with a themeable component library, SwiftUI-style layout primitives, and pluggable icon sets</p>
 
 <h3 align="center">
-  <a href="https://frosted.localhost">Docs</a> -
-  <a href="https://storybook.frosted.localhost">Storybook</a>
+  <a href="https://frosted.localhost">Docs &amp; Storybook</a>
 </h3>
 
 > [!WARNING]

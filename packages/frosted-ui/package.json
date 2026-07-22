@@ -66,12 +66,14 @@
     "lint:css": "stylelint \"src/**/*.css\"",
     "generate:emoji-colors": "bun scripts/emoji-colors/generate.ts",
     "generate:icon-adapters": "bun scripts/generate-icon-adapters.ts",
+    "generate:llms": "bun scripts/generate-llms.ts",
     "generate:palettes": "bun scripts/generate-palettes.ts",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf styles.css && rm -rf styles.lite.css && rm -rf theme.css",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf styles.css && rm -rf styles.lite.css && rm -rf theme.css && rm -rf .storybook/generated && rm -rf .storybook/public",
     "prepublishOnly": "bun run lint && bun run build",
     "storybook": "concurrently -k -n css,thm,sb \"bun run dev:css\" \"bun run dev:theme\" \"bun run storybook:serve\"",
-    "storybook:serve": "portless storybook.frosted sh -c 'storybook dev -p \"$PORT\" --no-open'",
-    "build-storybook": "storybook build",
+    "storybook:serve": "portless frosted sh -c 'storybook dev -p \"$PORT\" --no-open'",
+    "build-storybook": "bun run generate:props && bun run generate:llms && storybook build",
+    "generate:props": "bun ../../tools/props-gen/generate-props.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

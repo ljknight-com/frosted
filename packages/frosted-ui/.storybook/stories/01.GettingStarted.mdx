@@ -4,30 +4,43 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Getting Started
 
-### 1. Install Frosted UI
+Frosted UI (`@aussieljk/frosted`) is a React design system with a themeable component library,
+SwiftUI-style layout primitives, and pluggable icon sets.
 
-`bun add @aussieljk/frosted`
+## Installation
 
-### 2. Import the CSS file
+Install the package:
 
-Import the global CSS file at the root of your application.
-
-```tsx
-import 'frosted-ui/styles.css';
+```bash
+bun add @aussieljk/frosted
 ```
 
-### 3. Add the Theme component
+React 16.8+ (up to React 19) is supported as a peer dependency.
 
-Add `Theme` to your application, wrapping the root component inside of body.
+## Set up styles
+
+Import the stylesheet once, at the root of your app:
 
 ```tsx
-import { Theme } from 'frosted-ui';
+import '@aussieljk/frosted/styles.css';
+```
 
-export default function () {
+A lighter bundle without some optional component styles is also available as
+`@aussieljk/frosted/styles.lite.css`.
+
+## Wrap your app in `Theme`
+
+All components must render inside a `Theme`, which provides the design tokens
+(colors, radii, typography):
+
+```tsx
+import { Theme } from '@aussieljk/frosted';
+
+export default function App() {
   return (
     <html>
       <body>
-        <Theme>
+        <Theme accentColor="blue" grayColor="gray" appearance="inherit">
           <MyApp />
         </Theme>
       </body>
@@ -36,41 +49,29 @@ export default function () {
 }
 ```
 
-### 4. Start building
+- `appearance="inherit"` follows a `light`/`dark` class on a parent element (e.g. set by your
+  theme switcher). You can also force `appearance="light"` or `appearance="dark"`.
+- See **Guides → Theming** for accent colors, custom palettes, fonts, and more.
 
-You are now ready to use Frosted UI components!
+## Use components
 
 ```tsx
-import { Heading, Button } from 'frosted-ui';
+import { Button, Card, Text } from '@aussieljk/frosted';
 
-export default function MyApp() {
+export function Example() {
   return (
-    <div>
-      <Heading>Frosted UI</Heading>
-      <Button>Start building</Button>
-    </div>
+    <Card size="2">
+      <Text size="2">Ready to go.</Text>
+      <Button variant="classic">Get started</Button>
+    </Card>
   );
 }
 ```
 
-## Customizing your theme
+## Where to next
 
-Configuration is managed and applied via the `<Theme />` component.
-
-```tsx
-<Theme
-  // Sets Light or Dark mode
-  appearance="dark"
-  // Neutral color of the UI
-  grayColor="gray"
-  // Accent color (mainly used as a default color for interactive elements)
-  accentColor="blue"
-  // Semantic colors
-  infoColor="sky"
-  successColor="green"
-  warningColor="yellow"
-  dangerColor="red"
->
-  {children}
-</Theme>
-```
+- **Theming** — accent colors, palettes, fonts and scrollbars
+- **Color** — how the 12-step scales work
+- **Layout** — HStack, VStack, ZStack, Grid, Spacer, Overlay
+- **Icons** — pluggable icon sets via adapter subpaths
+- **Examples** — every demo on one page

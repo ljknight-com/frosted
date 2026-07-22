@@ -10,11 +10,6 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", "styles.css", "styles.lite.css", "theme.css"]
     },
-    "docs#build": {
-      "dependsOn": ["^build"],
-      "outputs": [".output/**", "dist/**"],
-      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/packages/frosted-ui/src/**"]
-    },
     "build:css": {
       "dependsOn": ["^build"],
       "outputs": ["styles.css", "styles.lite.css", "theme.css"]

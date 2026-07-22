@@ -12,7 +12,8 @@ const meta = {
     layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
-  tags: ['autodocs'],
+  // Docs page is authored in .storybook/stories/components/checkbox.mdx.
+  tags: ['!autodocs'],
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;

@@ -15,7 +15,7 @@ const fix = process.argv.includes('--fix');
 
 // Nested deps that are deliberate and must NOT be deleted.
 const ALLOWED: Record<string, string[]> = {
-  'apps/docs': ['typescript'], // generate-props needs the classic TS compiler API
+  'tools/props-gen': ['typescript'], // generate-props needs the classic TS compiler API
 };
 
 let problems = 0;
@@ -37,7 +37,7 @@ function versionOf(dir: string): string {
   }
 }
 
-for (const group of ['packages', 'apps']) {
+for (const group of ['packages', 'tools']) {
   const groupDir = join(ROOT, group);
   if (!existsSync(groupDir)) continue;
   for (const ws of readdirSync(groupDir)) {
