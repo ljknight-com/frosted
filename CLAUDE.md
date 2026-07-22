@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Lint**: `bun run lint --filter=<app>`
 - **Typecheck**: `bun run typecheck` (turbo, all packages; TypeScript 7)
 - **Full check**: `bun run check` (lint, typecheck, build, publint, attw)
-- **Screenshot every demo**: `bun run screenshot [--out <dir>] [--only stories|demos] [--filter <substr>] [--concurrency <n>]` (`scripts/screenshot-demos.ts`; headless via the `agent-browser` CLI, starts storybook itself if it isn't running, writes `screenshots/` + a contact-sheet `index.html`)
+- **Screenshot every demo**: `bun run screenshot [--static] [--out <dir>] [--only stories|demos] [--filter <substr>] [--concurrency <n>] [--shard <i>/<n>]` (`scripts/screenshot-demos.ts`; headless via the `agent-browser` CLI, starts storybook itself if it isn't running, writes `screenshots/` + a contact-sheet `index.html`). ~600 shots in ~1 min on an idle laptop. `--static` serves the last `build:storybook` output instead of the dev server (~30% faster, but only as fresh as that build); `--shard` splits the work across machines.
 - **Scaffold a component**: `bun run new:component <kebab-name> [--namespace] [--no-docs]`
 - **Regenerate prop tables**: `bun run generate:props` (also runs automatically from `bun run dev`)
 - **Env problems**: `bun run doctor [--fix]` (stale nested node_modules, bun version)

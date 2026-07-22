@@ -15,6 +15,8 @@
  *   --concurrency <n>    parallel browser sessions for stories (default: 6)
  *   --filter <substr>    only capture ids containing <substr>
  *   --only <kind>        `stories` or `demos`
+ *   --shard <i>/<n>      capture only this slice of the work, for splitting across machines
+ *   --static             serve packages/frosted-ui/storybook-static instead of the dev server
  */
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { cpus } from 'node:os';
@@ -38,14 +40,20 @@ const flag = (name: string, fallback?: string) => {
   return i === -1 ? fallback : argv[i + 1];
 };
 
-const base = (flag('url', process.env.STORYBOOK_URL ?? 'https://frosted.localhost') as string).replace(/\/$/, '');
+let base = (flag('url', process.env.STORYBOOK_URL ?? 'https://frosted.localhost') as string).replace(/\/$/, '');
+const useStatic = argv.includes('--static');
 const outDir = resolve(root, flag('out', 'screenshots') as string);
 // Every worker is a chromium of its own competing with the vite dev server, so leave it cores.
 const concurrency = Number(flag('concurrency', String(Math.max(2, cpus().length - 2))));
-const filter = flag('filter');
 const only = flag('only');
 const wantStories = only !== 'demos';
 const wantDemos = only !== 'stories';
+
+// `--filter foo --shard 1/4` = the ids matching `foo`, every 4th one, offset 1.
+const substring = flag('filter');
+const [shard, shards] = (flag('shard', '0/1') as string).split('/').map(Number);
+const select = (ids: string[]) =>
+  ids.filter((id) => !substring || id.includes(substring)).filter((_, i) => i % shards! === shard!);
 
 // The docs page the demo registry renders on, and the preview box inside each demo card.
 const EXAMPLES_ID = 'examples--docs';
@@ -143,8 +151,32 @@ const probe = async () => {
   }
 };
 
+/**
+ * `--static` serves the last `bun run build-storybook` output instead of the dev server, which is
+ * worth ~30% on a full sweep — vite transforming modules is a bigger cost than serving files. It
+ * screenshots whatever that build contains, so it's opt-in rather than automatic.
+ */
+function serveStatic(): () => void {
+  const dir = join(root, 'packages/frosted-ui/storybook-static');
+  if (!existsSync(join(dir, 'index.json'))) {
+    throw new Error(`no static build at ${dir} — run \`bun run build:storybook\` first`);
+  }
+  const server = Bun.serve({
+    port: 0,
+    fetch: async (req) => {
+      const path = new URL(req.url).pathname;
+      const file = Bun.file(join(dir, path === '/' ? 'index.html' : path));
+      return (await file.exists()) ? new Response(file) : new Response('not found', { status: 404 });
+    },
+  });
+  base = `http://localhost:${server.port}`;
+  console.log(c.dim(`serving ${dir} at ${base}`));
+  return () => server.stop(true);
+}
+
 /** Starts `bun run dev` when storybook isn't up; returns a teardown for that case only. */
 async function ensureStorybook(): Promise<() => void> {
+  if (useStatic) return serveStatic();
   if (await probe()) {
     console.log(c.dim(`storybook already running at ${base}`));
     return () => {};
@@ -257,11 +289,10 @@ async function captureDemos(): Promise<Shot[]> {
     return [];
   }
 
-  let ids = ((await evaluate(
-    session,
-    `JSON.stringify([...document.querySelectorAll('section[id]')].map((s) => s.id))`,
-  )) ?? []) as string[];
-  if (filter) ids = ids.filter((id) => id.includes(filter));
+  const ids = select(
+    ((await evaluate(session, `JSON.stringify([...document.querySelectorAll('section[id]')].map((s) => s.id))`)) ??
+      []) as string[],
+  );
   total += ids.length;
 
   const shots: Shot[] = [];
@@ -334,8 +365,7 @@ try {
   if (existsSync(outDir)) rmSync(outDir, { recursive: true });
   mkdirSync(outDir, { recursive: true });
 
-  let ids = wantStories ? await storyIds() : [];
-  if (filter) ids = ids.filter((id) => id.includes(filter));
+  const ids = wantStories ? select(await storyIds()) : [];
   total += ids.length;
 
   const demos = wantDemos ? await captureDemos() : [];
