@@ -8,28 +8,47 @@
  * workflow; the only CI-specific bits are the npm token and the git identity.
  *
  *   1. refuse to run with uncommitted changes
- *   2. in CI, write ~/.npmrc from NPM_TOKEN (npm publish has no token flag)
+ *   2. in CI, make sure npm is new enough to publish over OIDC
  *   3. bump 0.0.1-N → 0.0.1-N+1 and publish (the package's `release` script;
  *      prepublishOnly runs check-version + lint + build)
  *   4. refresh bun.lock — it records the workspace version, so skipping this
  *      leaves the next `bun install --frozen-lockfile` failing in CI
  *   5. commit package.json + bun.lock and push
  *
+ * There is no npm token anywhere. In CI the publish authenticates by trusted
+ * publishing: the job's `id-token: write` permission mints an OIDC token that
+ * npm trades for scoped, short-lived publish rights, and provenance is attached
+ * automatically. Locally it just uses your `npm login` session.
+ *
  * The push uses GITHUB_TOKEN, whose pushes deliberately do not trigger further
  * workflow runs — so the release commit does not kick off a second CI + deploy.
  */
-import { appendFileSync } from 'node:fs';
-import { homedir } from 'node:os';
-import { join } from 'node:path';
 import { CI, PKG, capture, fail, requireCleanTree, run, step, summary, version } from './lib.ts';
+
+/** Trusted publishing landed in npm 11.5.1; older npm silently falls back to token auth. */
+const MIN_NPM = [11, 5, 1];
+
+const olderThanMin = (found: number[]) => {
+  for (const [i, min] of MIN_NPM.entries()) {
+    const part = found[i] ?? 0;
+    if (part !== min) return part < min;
+  }
+  return false;
+};
 
 step('Checking the working tree');
 requireCleanTree();
 
 if (CI) {
-  const token = process.env.NPM_TOKEN;
-  if (!token) fail('NPM_TOKEN is not set — add it under Settings → Secrets and variables → Actions');
-  appendFileSync(join(homedir(), '.npmrc'), `\n//registry.npmjs.org/:_authToken=${token}\n`);
+  if (process.env.NODE_AUTH_TOKEN) {
+    fail('NODE_AUTH_TOKEN is set — npm would use legacy token auth instead of trusted publishing');
+  }
+
+  const npm = capture(['npm', '--version']);
+  if (olderThanMin(npm.split('.').map(Number))) {
+    step(`npm ${npm} predates trusted publishing (need ${MIN_NPM.join('.')}) — upgrading`);
+    run(['npm', 'install', '-g', 'npm@latest']);
+  }
 
   run(['git', 'config', 'user.name', 'github-actions[bot]']);
   run(['git', 'config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com']);

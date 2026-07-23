@@ -90,6 +90,13 @@ export const setupBun = (version: string): Step => ({
   with: { 'bun-version': version },
 });
 
+/** Only the release needs node — `npm publish` is what talks OIDC to the registry. */
+export const setupNode = (version: string): Step => ({
+  name: 'Setup node',
+  uses: 'actions/setup-node@v7',
+  with: { 'node-version': version },
+});
+
 /**
  * Blacksmith serves the stock `actions/cache` from a colocated cache, so there
  * is nothing vendor-specific to do here — the standard action is the fast path.

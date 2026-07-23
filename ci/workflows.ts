@@ -16,18 +16,43 @@
  * Both run on Blacksmith runners, which are a drop-in `runs-on` swap: the cache
  * actions and everything else stay stock.
  *
+ * npm needs no token at all: the release publishes over OIDC (trusted
+ * publishing), configured against this repo + `release.yml` on npmjs.com.
+ *
  * Secrets (Settings → Secrets and variables → Actions):
- *   NPM_TOKEN         npm granular automation token with publish rights on
- *                     @aussieljk/frosted (automation tokens bypass 2FA/OTP)
  *   VERCEL_TOKEN      vercel.com/account/tokens
  *   VERCEL_ORG_ID     `orgId` from .vercel/project.json (gitignored)
  *   VERCEL_PROJECT_ID `projectId` from .vercel/project.json
  */
-import { cacheBunStore, cacheTurbo, checkout, install, setupBun, sh, type Runner, type Workflow } from './dsl.ts';
+import {
+  cacheBunStore,
+  cacheTurbo,
+  checkout,
+  install,
+  setupBun,
+  setupNode,
+  sh,
+  type Runner,
+  type Workflow,
+} from './dsl.ts';
 import root from '../package.json' with { type: 'json' };
 
 /** 4 vCPU is the sweet spot here: turbo fans lint/typecheck/build out across cores. */
 const RUNNER: Runner = 'blacksmith-4vcpu-ubuntu-2404';
+
+/**
+ * The release runs GitHub-hosted, NOT on Blacksmith — deliberately.
+ *
+ * npm's trusted publishing rejects self-hosted runners ("Trusted publishing
+ * currently supports only cloud-hosted runners"), and Blacksmith registers its
+ * boxes through GitHub's org-level *self-hosted* runner API, so an OIDC token
+ * minted on one is refused by the registry. A release is manual and occasional,
+ * so the slower runner costs nothing here. Do not "unify" this with RUNNER.
+ */
+const RELEASE_RUNNER: Runner = 'ubuntu-latest';
+
+/** Trusted publishing needs npm >= 11.5.1 / node >= 22.14.0; node 24 ships npm 11. */
+const NODE_VERSION = '24';
 
 /** Same bun the lockfile and this laptop use, straight off `packageManager`. */
 const BUN_VERSION = root.packageManager.replace('bun@', '');
@@ -108,26 +133,29 @@ const release: Workflow = {
   },
   // Never overlap releases, and never cancel one mid-publish.
   concurrency: { group: 'release', 'cancel-in-progress': false },
-  // Pushing the version-bump commit back to master.
-  permissions: { contents: 'write' },
+  // contents: pushing the version-bump commit back to master.
+  // id-token: minting the OIDC token npm trades for publish rights.
+  permissions: { contents: 'write', 'id-token': 'write' },
   jobs: {
     release: {
       name: 'Publish + deploy',
-      'runs-on': RUNNER,
+      'runs-on': RELEASE_RUNNER,
       'timeout-minutes': 30,
       if: ON_MASTER,
       steps: [
         checkout(),
         setupBun(BUN_VERSION),
+        setupNode(NODE_VERSION),
         cacheBunStore(),
         install(),
         cacheTurbo(),
         // Full gate before anything leaves the machine. npm publish re-runs
         // lint + build through prepublishOnly; that's cheap against turbo cache.
         sh('Check', 'bun run check'),
-        sh('Publish to npm', 'bun scripts/release.ts', {
-          env: { NPM_TOKEN: '${{ secrets.NPM_TOKEN }}' },
-        }),
+        // No NPM_TOKEN: `id-token: write` above lets npm publish authenticate
+        // over OIDC. Setting NODE_AUTH_TOKEN here would send npm back down the
+        // legacy token path and silently skip trusted publishing.
+        sh('Publish to npm', 'bun scripts/release.ts'),
         sh('Deploy to Vercel', 'bun scripts/deploy.ts --prod', {
           if: '${{ inputs.deploy }}',
           env: VERCEL_ENV,

@@ -78,13 +78,22 @@ Keep every `run:` a single line: Bun's YAML writer emits multi-line strings as q
 - **CI** — every PR and every push to master. `check` job: workflows-in-sync, format, lint, typecheck, build, package health (publint + attw), cosmos export. Then `deploy`: preview on PRs (URL commented on the PR), production on master.
 - **Release** — manual `workflow_dispatch` on master, with a `deploy` input. Runs `bun run check`, then `scripts/release.ts` and `scripts/deploy.ts --prod`.
 
-**Runners are [Blacksmith](https://docs.blacksmith.sh/blacksmith-runners/overview)** (`blacksmith-4vcpu-ubuntu-2404`). They are a drop-in `runs-on` swap — Blacksmith serves the stock `actions/cache` from a colocated cache, so there is nothing vendor-specific in the workflows and `actions/*` stays upstream. `Runner` in `ci/dsl.ts` types the full label set. Note that `actionlint` flags these labels as unknown; that's expected.
+**Runners are [Blacksmith](https://docs.blacksmith.sh/blacksmith-runners/overview)** (`blacksmith-4vcpu-ubuntu-2404`) — a drop-in `runs-on` swap. Blacksmith serves the stock `actions/cache` from a colocated cache, so there is nothing vendor-specific in the workflows and `actions/*` stays upstream. `Runner` in `ci/dsl.ts` types the full label set. `actionlint` flags these labels as unknown; that's expected.
+
+**Except the release job, which runs on `ubuntu-latest` on purpose.** npm's trusted publishing only accepts cloud-hosted runners, and Blacksmith registers its boxes through GitHub's org-level *self-hosted* runner API — so an OIDC token minted on a Blacksmith runner is refused by the registry. Releases are manual and rare, so the slower runner costs nothing. Don't "unify" `RELEASE_RUNNER` with `RUNNER`.
+
+**npm auth is trusted publishing (OIDC) — there is no npm token anywhere.** The release job's `id-token: write` mints an OIDC token that npm trades for short-lived, scoped publish rights, and provenance is attached automatically (public repo + public package). It is configured on npmjs.com under the package's Settings → Trusted publisher: org `ljknight-com`, repo `frosted`, workflow `release.yml`, no environment. Consequences worth knowing:
+
+- **Never set `NODE_AUTH_TOKEN` in the release job** — npm would quietly take the legacy token path and skip trusted publishing. `release.ts` hard-fails if it sees one.
+- Needs npm ≥ 11.5.1 and node ≥ 22.14.0, hence `setup-node` with node 24 (which ships npm 11). `release.ts` re-checks and self-upgrades npm as a backstop.
+- The workflow **filename** is part of the trust config. Renaming `release.yml` breaks publishing until npmjs.com is updated to match.
+- `repository.url` in the package must match the GitHub repo exactly, or provenance fails.
+- Local `bun run prod` is unaffected — it publishes with your `npm login` session.
 
 **Secrets** (Settings → Secrets and variables → Actions):
 
 | Secret | Where it comes from |
 | --- | --- |
-| `NPM_TOKEN` | npm granular automation token with publish rights on `@aussieljk/frosted` (automation tokens bypass 2FA/OTP) |
 | `VERCEL_TOKEN` | <https://vercel.com/account/tokens> |
 | `VERCEL_ORG_ID` | `orgId` in `.vercel/project.json` (gitignored, so it has to be a secret) |
 | `VERCEL_PROJECT_ID` | `projectId` in `.vercel/project.json` |
