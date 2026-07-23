@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { Card, SegmentedControl, Separator, StackedHorizontalBarChart, Text } from '.';
+import { Card, SegmentedControl, Separator, StackedHorizontalBarChart, Text } from '..';
 import type { StackedHorizontalBarChartProps } from '../../../src/components/stacked-horizontal-bar-chart';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {

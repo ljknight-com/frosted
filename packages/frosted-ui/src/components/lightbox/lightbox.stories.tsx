@@ -2,7 +2,19 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { ChevronLeft, ChevronRight, Globe, Heart, Mail, MessageSquare, Play, Upload, X } from 'lucide-react';
 import React, { useRef, useState } from 'react';
-import { Avatar, Badge, Button, Heading, IconButton, Lightbox, Link, ScrollGallery, Separator, Text, Tooltip } from '.';
+import {
+  Avatar,
+  Badge,
+  Button,
+  Heading,
+  IconButton,
+  Lightbox,
+  Link,
+  ScrollGallery,
+  Separator,
+  Text,
+  Tooltip,
+} from '..';
 import type { LightboxZoomRef } from './lightbox-zoom';
 
 const images = [

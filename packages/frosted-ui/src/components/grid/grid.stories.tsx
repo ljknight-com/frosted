@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { Grid, Text, gridPropDefs } from '.';
+import { Grid, Text, gridPropDefs } from '..';
 
 const Cell = ({ children }: { children: React.ReactNode }) => (
   <div

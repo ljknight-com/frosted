@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
-import { Button } from '../../../src/components/button';
-import { Card } from '../../../src/components/card';
-import { Code } from '../../../src/components/code';
-import { Switch } from '../../../src/components/switch';
-import { Text } from '../../../src/components/text';
-import { TextArea } from '../../../src/components/text-area';
+import { Button, Card, Code, Switch, Text, TextArea } from '../../../src/components';
 import { Theme } from '../../../src/theme';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

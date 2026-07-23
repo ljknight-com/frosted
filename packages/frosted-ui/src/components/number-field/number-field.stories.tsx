@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { DollarSign, Percent } from 'lucide-react';
 import React from 'react';
-import { Button, Code, Field, Form, NumberField, Text, TextField, numberFieldPropDefs } from '.';
+import { Button, Code, Field, Form, NumberField, Text, TextField, numberFieldPropDefs } from '..';
 
 const meta = {
   title: 'Controls/NumberField',

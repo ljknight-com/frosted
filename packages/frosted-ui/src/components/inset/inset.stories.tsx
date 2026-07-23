@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { Card, Inset, Text, insetPropDefs } from '.';
+import { Card, Inset, Text, insetPropDefs } from '..';
 
 const meta = {
   title: 'Layout/Inset',

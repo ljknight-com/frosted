@@ -318,6 +318,28 @@ async function captureDemos(): Promise<Shot[]> {
     return [];
   }
 
+  // Sections mount their demo only once near the viewport, so isolating them one at a time would
+  // pay a lazy load per screenshot (2.6x slower over the full sweep). One scroll pass mounts the
+  // lot up front, and the capture loop below then finds every section already rendered.
+  await evaluate(
+    session,
+    `(async () => {
+      for (let y = 0; y <= document.body.scrollHeight; y += window.innerHeight) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 60));
+      }
+      window.scrollTo(0, 0);
+      const deadline = Date.now() + 60000;
+      while (Date.now() < deadline) {
+        const sections = [...document.querySelectorAll('section[id]')];
+        const ready = sections.length > 0 && sections.every((s) => s.querySelector('.frosted-ui'));
+        if (ready && !document.querySelector('[data-demo-pending]')) return 'mounted';
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return 'timeout';
+    })()`,
+  );
+
   const ids = select(
     ((await evaluate(session, `JSON.stringify([...document.querySelectorAll('section[id]')].map((s) => s.id))`)) ??
       []) as string[],

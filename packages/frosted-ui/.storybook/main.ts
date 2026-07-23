@@ -95,6 +95,9 @@ const config: StorybookConfig = {
           { find: /^@aussieljk\/frosted\/icons\/(.+)$/, replacement: `${srcDir}/icons/adapters/$1` },
           { find: /^@aussieljk\/frosted$/, replacement: srcDir },
         ],
+        // react-aria keeps global state (focus-visible in particular) in module scope, so two
+        // copies in one page throw "Illegal invocation" and blank the preview.
+        dedupe: ['react', 'react-dom', 'react-aria', 'react-aria-components', '@base-ui/react'],
       },
       server: { hmr },
       // Build-only, and worth being precise about: this does NOT reduce the total payload (7.1 MB
@@ -120,13 +123,19 @@ const config: StorybookConfig = {
           },
         },
       },
-      // The docs pages reach the whole library through .storybook/demos, but vite's dep scanner
-      // can't read .mdx — so without these entries those deps are discovered one request at a
-      // time, forcing a re-optimize mid-render. Scanning them up front keeps first load stable.
-      // `include` pins the two heavy runtime deps the scanner reaches only through src/, which
-      // is where the mid-render re-optimize used to come from.
+      // Everything here exists to make the dep optimizer finish in ONE pass. Vite's scanner can't
+      // read .mdx, and a dep discovered later forces a re-optimize mid-session — which leaves the
+      // live page holding two generations of the same pre-bundled chunk. For react-aria that means
+      // two copies of its focus-visible global and an "Illegal invocation" that blanks the preview,
+      // so the story globs and the full react-aria surface are listed explicitly rather than left
+      // to discovery.
       optimizeDeps: {
-        entries: ['.storybook/demos/*.tsx', '.storybook/components/*.tsx'],
+        entries: [
+          '.storybook/demos/*.tsx',
+          '.storybook/components/*.tsx',
+          '.storybook/stories/**/*.stories.tsx',
+          'src/**/*.stories.tsx',
+        ],
         include: ['@base-ui/react', 'react-aria-components'],
       },
     }),

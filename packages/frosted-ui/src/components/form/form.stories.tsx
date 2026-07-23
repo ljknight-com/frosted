@@ -25,7 +25,7 @@ import {
   Switch,
   Text,
   TextField,
-} from '.';
+} from '..';
 
 const meta = {
   title: 'Forms/Form',

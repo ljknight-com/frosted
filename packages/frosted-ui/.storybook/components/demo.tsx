@@ -1,8 +1,8 @@
 import { Source } from '@storybook/addon-docs/blocks';
-import React, { lazy, Suspense, type ComponentType } from 'react';
+import React, { useEffect, useState, type ComponentType } from 'react';
 
 import { Theme } from '../../src/theme';
-import { getDemo, loadDemo, type DemoEntry } from '../demos';
+import { getDemo, loadDemo, type DemoEntry, type LoadedDemo } from '../demos';
 
 // The chrome around a demo sits outside `Theme`, so it can't use frosted tokens.
 const BORDER = '1px solid rgba(128, 128, 128, 0.3)';
@@ -46,31 +46,37 @@ function DemoBody({ Component, source }: { Component: ComponentType; source: str
   );
 }
 
-// One lazy component per demo id, memoized so React sees a stable type across re-renders.
-const loaders = new Map<string, ComponentType>();
+/**
+ * Loads a demo in an effect rather than through React.lazy/Suspense. That distinction matters:
+ * a demo module is the first thing to pull in the component library, and react-aria sets up
+ * global focus tracking at module scope. Evaluating that during React's render phase throws
+ * "Illegal invocation" and blanks the page, so the import is kept out of render entirely.
+ */
+function useDemo(id: string): LoadedDemo | undefined {
+  const [loaded, setLoaded] = useState<LoadedDemo>();
 
-function lazyDemo(id: string): ComponentType {
-  let loader = loaders.get(id);
-  if (!loader) {
-    loader = lazy(async () => {
-      const { Component, source } = await loadDemo(id);
-      return { default: () => <DemoBody Component={Component} source={source} /> };
+  useEffect(() => {
+    let live = true;
+    loadDemo(id).then((demo) => {
+      if (live) setLoaded(demo);
     });
-    loaders.set(id, loader);
-  }
-  return loader;
+    return () => {
+      live = false;
+    };
+  }, [id]);
+
+  return loaded;
 }
 
 /** Renders a demo entry: live preview on top, its source code below. */
 export function DemoView({ entry }: { entry: DemoEntry }) {
-  const LazyDemo = lazyDemo(entry.id);
+  const demo = useDemo(entry.id);
 
+  if (!demo) return <Frame pending />;
   return (
-    <Suspense fallback={<Frame pending />}>
-      <Frame>
-        <LazyDemo />
-      </Frame>
-    </Suspense>
+    <Frame>
+      <DemoBody Component={demo.Component} source={demo.source} />
+    </Frame>
   );
 }
 

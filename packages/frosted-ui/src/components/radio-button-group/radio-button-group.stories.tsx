@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { Avatar, Button, Card, Code, RadioButtonGroup, Text, Tooltip, radioGroupPropDefs } from '.';
+import { Avatar, Button, Card, Code, RadioButtonGroup, Text, Tooltip, radioGroupPropDefs } from '..';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {

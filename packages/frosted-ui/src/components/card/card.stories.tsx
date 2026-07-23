@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { Avatar, Card, Code, Text, cardPropDefs } from '.';
+import { Avatar, Card, Code, Text, cardPropDefs } from '..';
 
 const CardContentExample = () => (
   <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>

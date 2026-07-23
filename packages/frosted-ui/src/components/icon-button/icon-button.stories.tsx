@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { IconButton, buttonPropDefs } from '.';
+import { IconButton, buttonPropDefs } from '..';
 
 const ExampleIcon = ({ size }: { size: number }) => (
   <svg width={size} height={size} viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
