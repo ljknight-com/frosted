@@ -281,6 +281,8 @@ const output = {
 };
 
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
-fs.writeFileSync(outFile, `${JSON.stringify(output, null, 2)}\n`);
+// Minified: this is generated, gitignored, and imported into the storybook preview on every boot,
+// so nobody reads it by hand and the indentation was ~20% of the bytes.
+fs.writeFileSync(outFile, `${JSON.stringify(output)}\n`);
 
 console.log(`Extracted prop tables for ${components.size} components -> ${path.relative(repoRoot, outFile)}`);

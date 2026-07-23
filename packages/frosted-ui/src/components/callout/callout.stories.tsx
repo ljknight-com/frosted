@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Info } from 'lucide-react';
 import React from 'react';
-import { Callout, Code, Link, Text, calloutRootPropDefs } from '..';
+import { Callout, Code, Link, Text, calloutRootPropDefs } from '.';
 import { RootProps as CalloutRootProps } from '../../../src/components/callout/callout';
 
 const meta = {

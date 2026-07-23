@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from 'lucide-react';
 import React, { useRef, useState } from 'react';
-import { Avatar, Badge, Button, Card, Code, Heading, IconButton, ScrollGallery, Strong, Text } from '..';
+import { Avatar, Badge, Button, Card, Code, Heading, IconButton, ScrollGallery, Strong, Text } from '.';
 
 const people = [
   { name: 'Olivia Chen', role: 'Design Lead', color: 'rose' as const, initials: 'OC' },

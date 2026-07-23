@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Phone } from 'lucide-react';
 import React from 'react';
-import { Avatar, Button, CircularProgress, Code, Heading, IconButton, Text, toast } from '..';
+import { Avatar, Button, CircularProgress, Code, Heading, IconButton, Text, toast } from '.';
 import { Theme } from '../../theme';
 
 const meta = {

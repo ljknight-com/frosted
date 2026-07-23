@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { Code, Select, selectTriggerPropDefs, Text } from '..';
+import { Code, Select, selectTriggerPropDefs, Text } from '.';
 import { InfoCircledIcon } from '../../icons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

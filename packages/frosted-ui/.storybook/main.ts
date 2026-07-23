@@ -14,7 +14,13 @@ const portlessUrl = process.env.PORTLESS_URL;
 const hmr = portlessUrl ? { protocol: 'wss', host: new URL(portlessUrl).hostname, clientPort: 443 } : undefined;
 
 const config: StorybookConfig = {
-  stories: ['./**/*.mdx', './**/*.stories.@(js|jsx|mjs|ts|tsx)', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  // Scoped to where these actually live — `./**/*` also walked demos/, components/, generated/
+  // and public/ on every boot, and storybook indexes whatever it finds before serving anything.
+  stories: [
+    './stories/**/*.mdx',
+    './stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+  ],
 
   addons: ['@storybook/addon-links', '@storybook/addon-docs'],
 
@@ -55,6 +61,18 @@ const config: StorybookConfig = {
       retitle();
     </script>`,
 
+  // Storybook inlines @font-face rules for Nunito Sans into the preview and uses the family for
+  // its own loading placeholders (.sb-loader, .sb-previewBlock, …), so every preview boot fetches
+  // two woff2 files for chrome that flashes past. Re-declaring the same three faces as local
+  // aliases keeps them looking right and drops the network cost — everything else is SF Pro
+  // already (see fonts.ts). Storybook's own rules come first, so these win.
+  previewHead: (head) => `${head}
+    <style>
+      @font-face { font-family: 'Nunito Sans'; font-weight: 400; font-style: normal; src: local('SF Pro Text'), local('Helvetica Neue'); }
+      @font-face { font-family: 'Nunito Sans'; font-weight: 400; font-style: italic; src: local('SF Pro Text Italic'), local('Helvetica Neue Italic'); }
+      @font-face { font-family: 'Nunito Sans'; font-weight: 700; font-style: normal; src: local('SF Pro Text Bold'), local('Helvetica Neue Bold'); }
+    </style>`,
+
   framework: {
     name: '@storybook/react-vite',
     options: {},
@@ -79,10 +97,38 @@ const config: StorybookConfig = {
         ],
       },
       server: { hmr },
+      // Build-only, and worth being precise about: this does NOT reduce the total payload (7.1 MB
+      // either way) and does not shrink the big `iframe` chunk. What it does is collect react and
+      // the base-ui/react-aria stack — which rolldown otherwise smears across library chunks like
+      // `components` and `theme-options` — into two chunks that only change when those deps do,
+      // so a library change stops invalidating ~830 kB of otherwise stable cache.
+      //
+      // Deliberately no group for @storybook/* itself: storybook already splits its manager and
+      // preview code, and forcing them together produced one 2 MB chunk instead.
+      build: {
+        rolldownOptions: {
+          output: {
+            advancedChunks: {
+              groups: [
+                { name: 'react', test: /node_modules[/\\](react|react-dom|scheduler)[/\\]/ },
+                {
+                  name: 'ui-vendor',
+                  test: /node_modules[/\\](@base-ui|react-aria|@react-aria|@react-stately|@internationalized)/,
+                },
+              ],
+            },
+          },
+        },
+      },
       // The docs pages reach the whole library through .storybook/demos, but vite's dep scanner
       // can't read .mdx — so without these entries those deps are discovered one request at a
       // time, forcing a re-optimize mid-render. Scanning them up front keeps first load stable.
-      optimizeDeps: { entries: ['.storybook/demos/*.tsx', '.storybook/components/*.tsx'] },
+      // `include` pins the two heavy runtime deps the scanner reaches only through src/, which
+      // is where the mid-render re-optimize used to come from.
+      optimizeDeps: {
+        entries: ['.storybook/demos/*.tsx', '.storybook/components/*.tsx'],
+        include: ['@base-ui/react', 'react-aria-components'],
+      },
     }),
 };
 export default config;

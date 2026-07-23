@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { OTPField, Text } from '..';
+import { OTPField, Text } from '.';
 
 // Previously imported from 'input-otp'
 const REGEXP_ONLY_DIGITS_AND_CHARS = '^[a-zA-Z0-9]+$';

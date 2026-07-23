@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Download as DownloadIcon } from 'lucide-react';
 import React from 'react';
-import { Button, Code, Spinner, Text, buttonPropDefs } from '..';
+import { Button, Code, Spinner, Text, buttonPropDefs } from '.';
 
 const ExampleIcon = () => (
   <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">

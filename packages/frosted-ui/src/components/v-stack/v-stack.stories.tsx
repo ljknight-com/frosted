@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { VStack, vStackPropDefs } from '..';
+import { VStack, vStackPropDefs } from '.';
 
 const Box = ({ width, children }: { width: number; children: React.ReactNode }) => (
   <div

@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React, { useState } from 'react';
-import { Badge, StackedHorizontalBarChart, Text, TextField } from '../../../src/components';
+import { Badge } from '../../../src/components/badge';
+import { StackedHorizontalBarChart } from '../../../src/components/stacked-horizontal-bar-chart';
+import { Text } from '../../../src/components/text';
+import { TextField } from '../../../src/components/text-field';
 import { emojiColorMap, getColorForEmoji, type ColorScale } from '../../../src/helpers/emoji-colors';
 
 const meta = {

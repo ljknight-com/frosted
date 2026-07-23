@@ -17,7 +17,7 @@ import {
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
 import { getColorForEmoji } from '../../helpers/emoji-colors';
-import { Button, Code, EmptyState, IconButton, Kbd, ScrollArea, Spinner, Text, TextField, toast } from '../index';
+import { Button, Code, EmptyState, IconButton, Kbd, ScrollArea, Spinner, Text, TextField, toast } from '.';
 import * as Autocomplete from './autocomplete';
 
 const meta: Meta<typeof Autocomplete.Root> = {

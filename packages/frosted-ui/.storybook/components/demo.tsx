@@ -8,7 +8,7 @@ import { getDemo, loadDemo, type DemoEntry } from '../demos';
 const BORDER = '1px solid rgba(128, 128, 128, 0.3)';
 
 /** The frame renders immediately, so the page keeps its layout while the demo resolves. */
-function Frame({ children, pending }: { children?: React.ReactNode; pending?: boolean }) {
+export function Frame({ children, pending }: { children?: React.ReactNode; pending?: boolean }) {
   return (
     <div
       // `bun run screenshot` waits for every demo to drop this attribute before capturing.

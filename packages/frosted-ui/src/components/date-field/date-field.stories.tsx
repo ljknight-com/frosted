@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { getLocalTimeZone, parseDate, parseZonedDateTime, today } from '@internationalized/date';
 import React from 'react';
-import { DateField, dateFieldPropDefs } from '..';
+import { DateField, dateFieldPropDefs } from '.';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: 'Controls/Dates/DateField',

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { Badge, Overlay, overlayPropDefs } from '..';
+import { Badge, Overlay, overlayPropDefs } from '.';
 
 const meta = {
   title: 'Layout/Overlay',

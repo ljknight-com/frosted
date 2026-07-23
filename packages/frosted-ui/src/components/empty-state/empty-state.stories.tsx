@@ -32,7 +32,7 @@ import {
   Shine,
   Text,
   TextField,
-} from '..';
+} from '.';
 import { getColorForEmoji } from '../../helpers/emoji-colors';
 
 const meta = {

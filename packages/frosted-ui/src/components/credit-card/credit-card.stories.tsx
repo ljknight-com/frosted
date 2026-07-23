@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import creditCardType from 'credit-card-type';
 
 import React, { useState } from 'react';
-import { Button, Callout, CreditCard, Form, SegmentedControlRadioGroup, Text } from '..';
+import { Button, Callout, CreditCard, Form, SegmentedControlRadioGroup, Text } from '.';
 import { Theme } from '../../theme';
 import './credit-card.css';
 

@@ -1,7 +1,7 @@
 import { ChevronDown, Search as SearchIcon } from 'lucide-react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import * as React from 'react';
-import { Avatar, Button, Callout, Dialog, Field, Form, ScrollArea, Spinner, Text, TextField } from '../index';
+import { Avatar, Button, Callout, Dialog, Field, Form, ScrollArea, Spinner, Text, TextField } from '.';
 import * as Combobox from './combobox';
 
 const meta: Meta<typeof Combobox.Root> = {

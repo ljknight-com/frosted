@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { DateValue, getLocalTimeZone, isWeekend, parseDate, today } from '@internationalized/date';
 import { useLocale } from '@react-aria/i18n';
 import React from 'react';
-import { Calendar } from '..';
+import { Calendar } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {

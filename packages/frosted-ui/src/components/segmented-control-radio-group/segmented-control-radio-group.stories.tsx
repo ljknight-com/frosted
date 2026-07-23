@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Monitor, Moon, Sun } from 'lucide-react';
 import React from 'react';
-import { Button, Code, SegmentedControlRadioGroup, Text } from '..';
+import { Button, Code, SegmentedControlRadioGroup, Text } from '.';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: 'Controls/SegmentedControlRadioGroup',

@@ -16,9 +16,13 @@
  *   --filter <substr>    only capture ids containing <substr>
  *   --only <kind>        `stories` or `demos`
  *   --shard <i>/<n>      capture only this slice of the work, for splitting across machines
- *   --static             serve packages/frosted-ui/storybook-static instead of the dev server
+ *   --static             force serving packages/frosted-ui/storybook-static
+ *   --dev                force the dev server (skip the static build even when it is fresh)
+ *
+ * By default a static build is used when it is newer than every source file, and the dev server
+ * otherwise — serving files is ~30% faster than transforming them.
  */
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { cpus } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -42,6 +46,7 @@ const flag = (name: string, fallback?: string) => {
 
 let base = (flag('url', process.env.STORYBOOK_URL ?? 'https://frosted.localhost') as string).replace(/\/$/, '');
 const useStatic = argv.includes('--static');
+const useDev = argv.includes('--dev');
 const outDir = resolve(root, flag('out', 'screenshots') as string);
 // Every worker is a chromium of its own competing with the vite dev server, so leave it cores.
 const concurrency = Number(flag('concurrency', String(Math.max(2, cpus().length - 2))));
@@ -154,15 +159,32 @@ const probe = async () => {
   }
 };
 
+const staticDir = join(root, 'packages/frosted-ui/storybook-static');
+
 /**
- * `--static` serves the last `bun run build-storybook` output instead of the dev server, which is
- * worth ~30% on a full sweep — vite transforming modules is a bigger cost than serving files. It
- * screenshots whatever that build contains, so it's opt-in rather than automatic.
+ * Serving a build beats the dev server by ~30% on a full sweep — vite transforming modules costs
+ * more than reading files. The catch was always staleness, so this is used automatically only when
+ * the build is newer than every source file it was made from; otherwise we fall back to the dev
+ * server. `--static` forces it regardless, `--dev` opts out.
  */
+function staticBuildIsFresh(): boolean {
+  const index = join(staticDir, 'index.json');
+  if (!existsSync(index)) return false;
+
+  const builtAt = statSync(index).mtimeMs;
+  const sources = new Bun.Glob('packages/frosted-ui/{src,.storybook}/**/*.{ts,tsx,mdx,css,json}');
+  for (const file of sources.scanSync({ cwd: root, absolute: true })) {
+    // The build writes into .storybook/public and .storybook/generated, so they're always newer.
+    if (file.includes('/.storybook/public/') || file.includes('/.storybook/generated/')) continue;
+    if (statSync(file).mtimeMs > builtAt) return false;
+  }
+  return true;
+}
+
 function serveStatic(): () => void {
-  const dir = join(root, 'packages/frosted-ui/storybook-static');
+  const dir = staticDir;
   if (!existsSync(join(dir, 'index.json'))) {
-    throw new Error(`no static build at ${dir} — run \`bun run build:storybook\` first`);
+    throw new Error(`no static build at ${dir} — run \`bun run build-storybook\` first`);
   }
   const server = Bun.serve({
     port: 0,
@@ -180,6 +202,10 @@ function serveStatic(): () => void {
 /** Starts `bun run dev` when storybook isn't up; returns a teardown for that case only. */
 async function ensureStorybook(): Promise<() => void> {
   if (useStatic) return serveStatic();
+  if (!useDev && staticBuildIsFresh()) {
+    console.log(c.dim('using the static build (up to date with src/ and .storybook/) — `--dev` to override'));
+    return serveStatic();
+  }
   if (await probe()) {
     console.log(c.dim(`storybook already running at ${base}`));
     return () => {};
@@ -303,10 +329,20 @@ async function captureDemos(): Promise<Shot[]> {
     await evaluate(
       session,
       `(async () => {
+        const wanted = ${JSON.stringify(id)};
         for (const section of document.querySelectorAll('section[id]')) {
-          section.style.display = section.id === ${JSON.stringify(id)} ? '' : 'none';
+          section.style.display = section.id === wanted ? '' : 'none';
         }
         window.scrollTo(0, 0);
+        // Sections on the Examples page mount their demo only once near the viewport, and the
+        // demo itself then loads lazily — so wait for the survivor to actually be on screen.
+        const section = document.getElementById(wanted);
+        const deadline = Date.now() + 20000;
+        while (Date.now() < deadline) {
+          const settled = section && !section.querySelector('[data-demo-pending]') && section.querySelector('.frosted-ui');
+          if (settled) break;
+          await new Promise((r) => setTimeout(r, 20));
+        }
         await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
         return 'ok';
       })()`,

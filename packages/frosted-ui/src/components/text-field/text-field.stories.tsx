@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Copy as CopyIcon, Ellipsis, Eye, EyeOff, Link, Lock, Mail, Search as SearchIcon, X } from 'lucide-react';
 import React from 'react';
-import { Button, Code, IconButton, Text, TextField, textFieldPropDefs } from '..';
+import { Button, Code, IconButton, Text, TextField, textFieldPropDefs } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {

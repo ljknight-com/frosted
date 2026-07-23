@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { ZStack, zStackPropDefs } from '..';
+import { ZStack, zStackPropDefs } from '.';
 
 const meta = {
   title: 'Layout/ZStack',

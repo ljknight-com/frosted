@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import React from 'react';
-import { Button, HStack, Spacer } from '..';
+import { Button, HStack, Spacer } from '.';
 
 const meta = {
   title: 'Layout/Spacer',
