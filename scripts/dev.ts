@@ -230,6 +230,11 @@ if (!existsSync(propsJson)) {
   await refreshProps();
 }
 
+// The cosmos renderer is served through the proxy as https://frosted-renderer.localhost —
+// Safari blocks plain-http localhost iframes inside the https playground. The alias is
+// machine state (~/.portless/routes.json), so re-register it idempotently on every boot.
+Bun.spawnSync([join(root, 'node_modules/.bin/portless'), 'alias', 'frosted-renderer', '5050']);
+
 procs.forEach(start);
 refreshProps();
 Promise.all(servers.map(waitAndOpen)).then(() => {

@@ -10,6 +10,14 @@ const srcDir = resolve(dirname(fileURLToPath(import.meta.url)), 'src');
 // automatically); nothing else in the package builds with vite.
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // The renderer is served through the portless HTTPS proxy (https://frosted-renderer.localhost
+  // → vite on 5050; Safari blocks plain-http localhost iframes inside the https playground, so
+  // the renderer must be https too). Vite still tells the browser to open its HMR socket on the
+  // private port, so point it at the proxy's TLS port instead — without this, recovering from a
+  // mid-session dep re-optimize needs a full-reload over that socket and the page stays broken.
+  server: {
+    hmr: { protocol: 'wss', host: 'frosted-renderer.localhost', clientPort: 443 },
+  },
   resolve: {
     // The demos are shown to users as copy-pasteable source, so they import from the
     // public package name; alias it to src/ (never dist/).

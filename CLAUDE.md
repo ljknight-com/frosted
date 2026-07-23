@@ -22,7 +22,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 The react-cosmos playground is the only site; it runs from this laptop under the `frosted.localhost` tenant:
 
 - **Cosmos playground**: <https://frosted.localhost> (`packages/frosted-ui`)
-- The playground UI goes through the portless HTTPS proxy, but the **renderer iframe is plain `http://localhost:5050`** (the vite dev server, port pinned in `cosmos.config.json`). Browsers exempt `http://localhost` from mixed-content blocking, so this works — and it keeps vite HMR same-origin, which is why no websocket workaround is needed anywhere.
+- **Renderer iframe**: <https://frosted-renderer.localhost> — a static portless alias to the vite dev server on 5050 (port pinned in `cosmos.config.json`, alias re-registered by `dev.ts` on every boot). Both URLs must be https: Safari (unlike Chrome) blocks plain-http `localhost` iframes inside an https page. Because the renderer sits behind the TLS proxy, `vite.config.ts` points the HMR websocket at `wss://…:443` — same trick the storybook config needed.
 
 ### The package (`@aussieljk/frosted`, in `packages/frosted-ui`)
 
@@ -79,6 +79,7 @@ Non-obvious constraints — breaking any of these fails silently or in confusing
 - **Icon adapters in `src/icons/adapters/` are generated** — edit `scripts/icon-map.ts` and run `bun run generate:icon-adapters`; never edit the adapters directly.
 - **`lucide-react` is v1.x** — the adapter uses v1 names (`House`, `Funnel`, `TriangleAlert`); pre-1.0 aliases like `Home` no longer exist despite the permissive peer range.
 - **The vite renderer must dep-optimize in one pass** — `vite.config.ts` lists the fixture globs as `optimizeDeps.entries` and the full react-aria surface in `include`; a dep discovered mid-session forces a re-optimize that leaves two copies of react-aria's focus-visible global in the page ("Illegal invocation", blank renderer). The same reason `resolve.dedupe` is set.
+- **`react-cosmos-plugin-vite` is patched** (`patches/`, wired via `patchedDependencies`): upstream derives the vite port from `rendererUrl`, which breaks when the rendererUrl is a reverse-proxied https URL with no explicit port — the patch falls back to `vite.port` from `cosmos.config.json`. Bumping the cosmos version requires re-checking the patch still applies.
 - **If something is mysteriously broken, run `bun run doctor`** — under the hoisted linker, stale nested `packages/*/node_modules` dirs from older installs can shadow the root binaries (a package silently using an ancient `tsc`). `doctor --fix` deletes them.
 
 ## History

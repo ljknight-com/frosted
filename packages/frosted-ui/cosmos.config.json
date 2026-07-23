@@ -4,5 +4,9 @@
   "globalImports": ["./cosmos/preview.css"],
   "lazy": true,
   "exportPath": "cosmos-export",
+  "rendererUrl": {
+    "dev": "https://frosted-renderer.localhost",
+    "export": "/renderer.html"
+  },
   "vite": { "port": 5050 }
 }
