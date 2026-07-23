@@ -7,7 +7,7 @@ export default function HoverCardDemo() {
       Follow{' '}
       <HoverCard.Root>
         <HoverCard.Trigger>
-          <Link href="https://github.com/aussieljk/frosted" target="_blank">
+          <Link href="https://github.com/ljknight-com/frosted" target="_blank">
             frosted
           </Link>
         </HoverCard.Trigger>

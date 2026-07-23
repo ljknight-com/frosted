@@ -10,8 +10,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Dev server**: `bun run dev [--no-open] [--kill]` (`scripts/dev.ts`; react-cosmos through [portless](https://www.npmjs.com/package/portless), opens Safari when ready; `--kill` clears stale sessions)
 - **Build**: `bun run build --filter=<app>`
 - **Lint**: `bun run lint --filter=<app>`
-- **Typecheck**: `bun run typecheck` (turbo, all packages; TypeScript 7)
-- **Full check**: `bun run check` (lint, typecheck, build, publint, attw)
+- **Typecheck**: `bun run typecheck` (turbo for the packages, then root `tsconfig.json` for `scripts/` + `ci/`; TypeScript 7)
+- **Full check**: `bun run check` — everything CI runs (workflows in sync, format, lint, typecheck, build, publint, attw)
+- **Format**: `bun run format` / `bun run format:check` (oxfmt, JS/TS only — oxfmt would otherwise rewrite the generated workflow YAML and the markdown)
+- **Regenerate the workflows**: `bun run workflows` (see [CI/CD](#cicd))
 - **Screenshot every fixture**: `bun run screenshot [--static] [--out <dir>] [--filter <substr>] [--concurrency <n>] [--shard <i>/<n>]` (`scripts/screenshot-demos.ts`; headless via the `agent-browser` CLI, starts cosmos itself if it isn't running, writes `screenshots/` + a contact-sheet `index.html`). One shot per component, since a fixture page holds every example. `--static` serves the last `build:cosmos` export instead of the dev server (faster, but only as fresh as that build); `--shard` splits the work across machines.
 - **Scaffold a component**: `bun run new:component <kebab-name> [--namespace] [--no-docs]` (`--no-docs` skips the usage demo)
 - **Env problems**: `bun run doctor [--fix]` (stale nested node_modules, bun version)
@@ -36,13 +38,13 @@ The react-cosmos playground is the only site; it runs from this laptop under the
 - **React**: Functional components with hooks, JSX format
 - **CSS**: Tailwind CSS v4, PostCSS with nesting/custom media/imports
 - **Formatting**: Single quotes, semicolons required, trailing commas in multiline
-- **Project**: Bun workspaces with Turborepo (`packages/*`, `tools/*`), Vite everywhere (no Next.js, no tests, no CI)
+- **Project**: Bun workspaces with Turborepo (`packages/*`, `tools/*`), Vite everywhere (no Next.js, no tests)
 - **Commits**: Semantic commit messages (feat, fix, docs, style, refactor, perf, test, chore)
 - **Quality**: oxlint for linting (root `.oxlintrc.json`), oxfmt for formatting (`bun run format`; lefthook pre-commit runs both on staged files), react-cosmos for the component workbench
 
 ## Publishing
 
-The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted-ui`). Publishing happens locally from this laptop, and there is no CI/CD.
+The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted-ui`). Releases normally run from the **Release** workflow (Actions → Release → Run workflow); `bun run prod` does the same thing from this laptop.
 
 **The version stays on 0.0.1 forever.** Every release is a prerelease of it — `0.0.1-1`, `0.0.1-2`, … — so the patch number never reaches 0.0.2. To release, from `packages/frosted-ui`:
 
@@ -50,13 +52,46 @@ The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted
 bun run release   # npm version prerelease --no-git-tag-version && npm publish --tag latest
 ```
 
-`bun run prod` (from the root, `scripts/prod.ts`) is the full pipeline: refuses to run on a dirty tree, then `release` (bump + publish), commits and pushes the version bump, then `vercel --prod` (deploys the cosmos export per root `vercel.json`).
+The pipeline is two root scripts, shared by `bun run prod` and the Release workflow so there is only one implementation:
+
+- `scripts/release.ts` — refuses a dirty tree, writes `~/.npmrc` from `NPM_TOKEN` when running in CI, runs the package's `release` (bump + publish), refreshes `bun.lock` (**it records the workspace version** — skip this and the next `bun install --frozen-lockfile` fails in CI), commits and pushes.
+- `scripts/deploy.ts` — `vercel pull` / `build` / `deploy --prebuilt`, so the site is built on the runner rather than by Vercel. Production with `--prod` or on a master push; otherwise a preview whose URL it comments on the PR.
 
 `--tag latest` is required: npm refuses to publish a prerelease to the default tag, and without it `latest` would never move, so plain `bun add @aussieljk/frosted` would fail to resolve.
 
 `prepublishOnly` runs `scripts/check-version.ts` (hard-fails on any version that isn't `0.0.1-<n>`), then lint + build.
 
 Never publish a plain `0.0.1`: it outranks every later `0.0.1-N`, and `^0.0.1` ranges don't match prereleases, so consumers would be stuck on that one release. Installing normally (`bun add @aussieljk/frosted`) resolves the `latest` dist-tag and records `^0.0.1-N`, which does pick up subsequent `0.0.1-N` releases.
+
+## CI/CD
+
+**The workflows are written in TypeScript, not YAML.** `ci/workflows.ts` is the source; `bun run workflows` renders it to `.github/workflows/*.yml`, and CI fails if the YAML on disk has drifted (`bun run workflows:check`, the first step of the check job). Never hand-edit a file under `.github/workflows` — it will be overwritten, and the generator deletes any `.yml` there that isn't in the `workflows` map.
+
+- `ci/dsl.ts` — the typed subset of the Actions schema, the step builders, and the YAML renderer (`Bun.YAML.stringify`, no dependency).
+- `ci/workflows.ts` — the two workflows.
+- `ci/generate.ts` — `bun run workflows` / `bun run workflows:check`.
+
+Keep every `run:` a single line: Bun's YAML writer emits multi-line strings as quoted scalars with `\n` escapes instead of `|` blocks. Anything longer belongs in a `scripts/*.ts`, which is the point — the workflows stay a list of named one-liners and the logic is typechecked TypeScript.
+
+**Workflows**
+
+- **CI** — every PR and every push to master. `check` job: workflows-in-sync, format, lint, typecheck, build, package health (publint + attw), cosmos export. Then `deploy`: preview on PRs (URL commented on the PR), production on master.
+- **Release** — manual `workflow_dispatch` on master, with a `deploy` input. Runs `bun run check`, then `scripts/release.ts` and `scripts/deploy.ts --prod`.
+
+**Runners are [Blacksmith](https://docs.blacksmith.sh/blacksmith-runners/overview)** (`blacksmith-4vcpu-ubuntu-2404`). They are a drop-in `runs-on` swap — Blacksmith serves the stock `actions/cache` from a colocated cache, so there is nothing vendor-specific in the workflows and `actions/*` stays upstream. `Runner` in `ci/dsl.ts` types the full label set. Note that `actionlint` flags these labels as unknown; that's expected.
+
+**Secrets** (Settings → Secrets and variables → Actions):
+
+| Secret | Where it comes from |
+| --- | --- |
+| `NPM_TOKEN` | npm granular automation token with publish rights on `@aussieljk/frosted` (automation tokens bypass 2FA/OTP) |
+| `VERCEL_TOKEN` | <https://vercel.com/account/tokens> |
+| `VERCEL_ORG_ID` | `orgId` in `.vercel/project.json` (gitignored, so it has to be a secret) |
+| `VERCEL_PROJECT_ID` | `projectId` in `.vercel/project.json` |
+
+A PR from a fork has no secrets, so `deploy.ts` skips with a warning instead of failing.
+
+The release commit is pushed with `GITHUB_TOKEN`, whose pushes deliberately do not trigger further workflow runs — so a release does not kick off a second CI + production deploy.
 
 ## Cosmos (component workbench)
 

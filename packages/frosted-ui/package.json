@@ -170,13 +170,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/aussieljk/frosted",
+  "homepage": "https://github.com/ljknight-com/frosted",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aussieljk/frosted.git"
+    "url": "git+https://github.com/ljknight-com/frosted.git"
   },
   "bugs": {
-    "url": "https://github.com/aussieljk/frosted/issues"
+    "url": "https://github.com/ljknight-com/frosted/issues"
   },
   "engines": {
     "node": ">=20"
