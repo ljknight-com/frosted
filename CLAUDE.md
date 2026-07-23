@@ -51,6 +51,8 @@ The main package publishes to npm as `@aussieljk/frosted` (see `packages/frosted
 bun run release   # npm version prerelease --no-git-tag-version && npm publish --tag latest
 ```
 
+`bun run prod` (from the root, `scripts/prod.ts`) is the full pipeline: refuses to run on a dirty tree, then `release` (bump + publish), commits and pushes the version bump, then `vercel --prod` (deploys the cosmos export per root `vercel.json`).
+
 `--tag latest` is required: npm refuses to publish a prerelease to the default tag, and without it `latest` would never move, so plain `bun add @aussieljk/frosted` would fail to resolve.
 
 `prepublishOnly` runs `scripts/check-version.ts` (hard-fails on any version that isn't `0.0.1-<n>`), then lint + build.
