@@ -1,9 +1,11 @@
 import type { Decorator, Preview } from '@storybook/react-vite';
 import React from 'react';
+import { create } from 'storybook/theming';
 import { Toaster } from '../src/components/toast';
 import { themePropDefs } from '../src/theme-options';
 import { Theme } from '../src/theme';
 import { enhanceArgTypesFromProps } from './enhance-arg-types';
+import { fontBase, fontCode } from './fonts';
 import '../styles.css';
 
 export const withTheme: Decorator = (Story, context) => {
@@ -12,26 +14,13 @@ export const withTheme: Decorator = (Story, context) => {
   const accentColor = (context.parameters.accentColor || context.globals.accentColor || 'blue') as string;
   const grayColor = (context.parameters.grayColor || context.globals.grayColor || 'gray') as string;
 
+  // No font override here: components use --default-font-family (SF Pro via -apple-system).
   return (
-    <>
-      <style>
-        {`
-.frosted-ui {
-  --default-font-family: Inter, sans-serif;
-}
-@supports (font-variation-settings: normal) {
-  .frosted-ui {
-    --default-font-family: InterVariable, sans-serif;
-  }
-}
-`}
-      </style>
-      <Theme accentColor={accentColor} grayColor={grayColor} appearance={theme}>
-        <Story />
-        <Toaster />
-        {/* <ThemePanel /> */}
-      </Theme>
-    </>
+    <Theme accentColor={accentColor} grayColor={grayColor} appearance={theme}>
+      <Story />
+      <Toaster />
+      {/* <ThemePanel /> */}
+    </Theme>
   );
 };
 
@@ -84,6 +73,7 @@ const preview: Preview = {
 
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
+    docs: { theme: create({ base: 'light', fontBase, fontCode }) },
     controls: {
       matchers: {
         color: /(background|color)$/i,
