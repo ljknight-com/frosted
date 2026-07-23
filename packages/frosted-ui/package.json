@@ -138,7 +138,6 @@
     "@napi-rs/canvas": "^1.0.2",
     "@phosphor-icons/react": "^2.1.10",
     "@storybook/addon-docs": "^10.5.3",
-    "@storybook/addon-links": "^10.5.3",
     "@storybook/react-vite": "^10.5.3",
     "@tabler/icons-react": "^3.45.0",
     "@tanstack/react-form": "^1.33.2",

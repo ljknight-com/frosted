@@ -162,7 +162,7 @@ async function waitAndOpen({ name, url }: { name: string; url: string }) {
       const res = await fetch(url, { tls: { rejectUnauthorized: false } } as RequestInit);
       if (res.status < 400) break; // portless answers 404 for unregistered routes, 5xx while the backend boots
     } catch {}
-    await Bun.sleep(250);
+    await Bun.sleep(100);
   }
   if (shuttingDown) return;
   console.log(`${c.green('✓')} ${c.bold(name.padEnd(9))} ${url}  ${c.dim(elapsed())}`);
@@ -185,11 +185,12 @@ function propsFingerprint(): string {
   return `${count}:${maxMtime}`;
 }
 
+const propsJson = join(frostedDir, '.storybook/generated/component-props.json');
+
 async function refreshProps() {
-  const json = join(frostedDir, '.storybook/generated/component-props.json');
   const stampFile = join(frostedDir, '.storybook/generated/.props-stamp');
   const stamp = propsFingerprint();
-  const fresh = existsSync(json) && existsSync(stampFile) && readFileSync(stampFile, 'utf8') === stamp;
+  const fresh = existsSync(propsJson) && existsSync(stampFile) && readFileSync(stampFile, 'utf8') === stamp;
   if (fresh) return;
 
   const run = (cmd: string[], cwd: string) =>
@@ -197,21 +198,11 @@ async function refreshProps() {
       spawn(cmd[0], cmd.slice(1), { cwd, stdio: 'ignore' }).on('exit', (code) => done(code ?? 1));
     });
 
-  const generate = async () => {
-    if ((await run(['bun', 'generate-props.ts'], propsGenDir)) !== 0) return;
-    // llms.txt inlines the prop tables, so it regenerates with them.
-    await run(['bun', 'scripts/generate-llms.ts'], frostedDir);
-    writeFileSync(stampFile, stamp);
-    if (!shuttingDown) console.log(`${c.green('✓')} ${c.bold('props')}     refreshed  ${c.dim(elapsed())}`);
-  };
-
-  // Storybook imports the JSON, so it can't boot without it; otherwise refresh behind vite.
-  if (!existsSync(json)) {
-    console.log(c.dim('generating prop tables…'));
-    await generate();
-  } else {
-    generate();
-  }
+  if ((await run(['bun', 'generate-props.ts'], propsGenDir)) !== 0) return;
+  // llms.txt inlines the prop tables, so it regenerates with them.
+  await run(['bun', 'scripts/generate-llms.ts'], frostedDir);
+  writeFileSync(stampFile, stamp);
+  if (!shuttingDown) console.log(`${c.green('✓')} ${c.bold('props')}     refreshed  ${c.dim(elapsed())}`);
 }
 
 // --- go ---
@@ -236,9 +227,16 @@ if (!existsSync(join(frostedDir, 'styles.css')) || !existsSync(join(frostedDir, 
   if (build.exitCode !== 0) process.exit(build.exitCode);
 }
 
-await refreshProps();
+// Storybook imports the prop-table JSON, so on a pristine checkout it must exist before
+// storybook spawns; otherwise the freshness check (a stat-walk of src/) and any
+// regeneration run behind the servers while they boot.
+if (!existsSync(propsJson)) {
+  console.log(c.dim('generating prop tables…'));
+  await refreshProps();
+}
 
 procs.forEach(start);
+refreshProps();
 Promise.all(servers.map(waitAndOpen)).then(() => {
   if (!shuttingDown) console.log(c.dim(`\nall ready in ${elapsed()} — ctrl-c to stop\n`));
 });

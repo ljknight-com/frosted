@@ -14,7 +14,7 @@
     },
     "packages/frosted-ui": {
       "name": "@aussieljk/frosted",
-      "version": "0.0.1",
+      "version": "0.0.1-1",
       "dependencies": {
         "@base-ui/react": "^1.6.0",
         "@internationalized/date": "^3.12.2",
@@ -38,7 +38,6 @@
         "@napi-rs/canvas": "^1.0.2",
         "@phosphor-icons/react": "^2.1.10",
         "@storybook/addon-docs": "^10.5.3",
-        "@storybook/addon-links": "^10.5.3",
         "@storybook/react-vite": "^10.5.3",
         "@tabler/icons-react": "^3.45.0",
         "@tanstack/react-form": "^1.33.2",
@@ -592,8 +591,6 @@
     "@sindresorhus/merge-streams": ["@sindresorhus/merge-streams@4.0.0", "", {}, "sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ=="],
 
     "@storybook/addon-docs": ["@storybook/addon-docs@10.5.3", "", { "dependencies": { "@mdx-js/react": "^3.0.0", "@storybook/csf-plugin": "10.5.3", "@storybook/icons": "^2.0.2", "@storybook/react-dom-shim": "10.5.3", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "ts-dedent": "^2.0.0" }, "peerDependencies": { "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "storybook": "^10.5.3" }, "optionalPeers": ["@types/react"] }, "sha512-MI1VDMSMQk78YxjIdt7WlrVOiA3TzTP00lRed1LeXh0fCvA9jxz9YXJI2+XigsLaxCSuOAEf/l35/GTLDMHD8A=="],
-
-    "@storybook/addon-links": ["@storybook/addon-links@10.5.3", "", { "dependencies": { "@storybook/global": "^5.0.0" }, "peerDependencies": { "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "storybook": "^10.5.3" }, "optionalPeers": ["@types/react", "react"] }, "sha512-awu6nBV/MRFv+zu9hIqFrqnKa37LnWfZ3/UHeS68il0QxWfy6uSU1dfpxqiYbCjs9Ct0+bsaO6ZaPamA+jlFLA=="],
 
     "@storybook/builder-vite": ["@storybook/builder-vite@10.5.3", "", { "dependencies": { "@storybook/csf-plugin": "10.5.3", "ts-dedent": "^2.0.0" }, "peerDependencies": { "storybook": "^10.5.3", "vite": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0" } }, "sha512-qX1jb1nbG1mWJrCn3YrDkpbii+KA1uxdVgENeNusD80RrWCwVG8ce+awjZxKuT8qjYyALSAPBvTHUqZ4C1b7Pg=="],
 

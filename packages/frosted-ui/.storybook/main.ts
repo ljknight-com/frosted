@@ -11,7 +11,7 @@ const srcDir = resolve(dirname(fileURLToPath(import.meta.url)), '../src');
 // so without this the first load of a docs page dies on "Failed to fetch dynamically imported
 // module" and stays broken until a manual refresh.
 const portlessUrl = process.env.PORTLESS_URL;
-const hmr = portlessUrl ? { protocol: 'wss', host: new URL(portlessUrl).hostname, clientPort: 443 } : undefined;
+const ws = portlessUrl ? { protocol: 'wss', host: new URL(portlessUrl).hostname, clientPort: 443 } : undefined;
 
 const config: StorybookConfig = {
   // Scoped to where these actually live — `./**/*` also walked demos/, components/, generated/
@@ -19,10 +19,10 @@ const config: StorybookConfig = {
   stories: [
     './stories/**/*.mdx',
     './stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/components/**/*.stories.@(ts|tsx)',
   ],
 
-  addons: ['@storybook/addon-links', '@storybook/addon-docs'],
+  addons: ['@storybook/addon-docs'],
 
   // ./public holds the generated llms.txt / llms-full.txt; ./assets holds the checked-in
   // favicon.svg (public/ is gitignored and wiped by `clean`). Both are served at the site root,
@@ -99,7 +99,7 @@ const config: StorybookConfig = {
         // copies in one page throw "Illegal invocation" and blank the preview.
         dedupe: ['react', 'react-dom', 'react-aria', 'react-aria-components', '@base-ui/react'],
       },
-      server: { hmr },
+      server: { ws },
       // Build-only, and worth being precise about: this does NOT reduce the total payload (7.1 MB
       // either way) and does not shrink the big `iframe` chunk. What it does is collect react and
       // the base-ui/react-aria stack — which rolldown otherwise smears across library chunks like
@@ -134,7 +134,7 @@ const config: StorybookConfig = {
           '.storybook/demos/*.tsx',
           '.storybook/components/*.tsx',
           '.storybook/stories/**/*.stories.tsx',
-          'src/**/*.stories.tsx',
+          'src/components/**/*.stories.tsx',
         ],
         include: ['@base-ui/react', 'react-aria-components'],
       },
