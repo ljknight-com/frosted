@@ -1,7 +1,7 @@
 /**
  * Screenshot every fixture in the cosmos — `bun run screenshot [options]`.
  *
- * There is one fixture per component (packages/frosted-ui/fixtures/<name>.fixture.tsx) and
+ * There is one fixture per component (packages/frosted-ui/fixtures/<Component>.fixture.tsx) and
  * it renders every example of that component, so one screenshot covers the whole component.
  *
  * Fixtures are enumerated with the react-cosmos Node API, and each one is rendered isolated
@@ -130,7 +130,7 @@ function staticExportIsFresh(): boolean {
   if (!existsSync(index)) return false;
 
   const builtAt = statSync(index).mtimeMs;
-  const sources = new Bun.Glob('packages/frosted-ui/{src,demos,cosmos}/**/*.{ts,tsx,css,json}');
+  const sources = new Bun.Glob('packages/frosted-ui/{src,demos,cosmos,fixtures}/**/*.{ts,tsx,css,json}');
   for (const file of sources.scanSync({ cwd: root, absolute: true })) {
     if (statSync(file).mtimeMs > builtAt) return false;
   }
@@ -158,7 +158,9 @@ function serveStatic(): () => void {
 async function ensureCosmos(): Promise<() => void> {
   if (useStatic) return serveStatic();
   if (!useDev && staticExportIsFresh()) {
-    console.log(c.dim('using the static export (up to date with src/, demos/ and cosmos/) — `--dev` to override'));
+    console.log(
+      c.dim('using the static export (up to date with src/, demos/, cosmos/ and fixtures/) — `--dev` to override'),
+    );
     return serveStatic();
   }
   if (await probe()) {
@@ -204,7 +206,7 @@ async function fixtureTargets(): Promise<Target[]> {
   const config = await getCosmosConfigAtPath(join(frostedDir, 'cosmos.config.json'));
   const fixtures = await getFixtures(config, { rendererUrl: absoluteRendererUrl });
 
-  // The tree is flat, so the path is just the component name: fixtures/button → "button".
+  // The tree is flat, so the path is just the component name: fixtures/Button → "Button".
   return fixtures.map((fixture) => {
     const id = fixture.treePath.filter((p) => p !== 'fixtures').join('-');
     return { id, url: `${fixture.rendererUrl}&locked=true` };

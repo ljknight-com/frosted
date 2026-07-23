@@ -163,9 +163,10 @@ create(
 );
 
 // The cosmos sidebar is a flat list of components: one fixture file per component, in
-// packages/frosted-ui/fixtures, whose Gallery renders the usage demo + every example.
+// packages/frosted-ui/fixtures, named after the component (the file name is the sidebar
+// label), whose Gallery renders the usage demo + every example.
 create(
-  join(UI, 'fixtures', `${name}.fixture.tsx`),
+  join(UI, 'fixtures', `${pascal}.fixture.tsx`),
   `import React from 'react';
 import { Gallery } from '../cosmos/Gallery';${withDocs ? `\nimport Demo from '../demos/${name}.demo';` : ''}
 import { ${pascal} } from '../src/components';
@@ -244,6 +245,6 @@ export default function ${pascal}Demo() {
 console.log(`
 Done. Next steps:
   1. Implement ${pascal} in packages/frosted-ui/src/components/${name}/${name}.tsx (+ its .css and .props.ts)
-  2. Flesh out packages/frosted-ui/fixtures/${name}.fixture.tsx${withDocs ? ' and the demo' : ' (demo skipped — rerun without --no-docs or add one by hand)'}
+  2. Flesh out packages/frosted-ui/fixtures/${pascal}.fixture.tsx${withDocs ? ' and the demo' : ' (demo skipped — rerun without --no-docs or add one by hand)'}
   3. Run it: bun run dev
 `);
