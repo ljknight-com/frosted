@@ -1,5 +1,5 @@
 import React from 'react';
-import { RadioButtonGroup, Text } from '@aussieljk/frosted';
+import { RadioButtonGroup, Typography } from '@aussieljk/frosted';
 
 const plans = ['Hobby', 'Pro', 'Enterprise'];
 
@@ -11,7 +11,7 @@ export default function RadioButtonGroupDemo() {
           <RadioButtonGroup.Item key={plan} value={plan}>
             <div className="flex items-center gap-2 rounded-lg border border-gray-alpha-500 px-4 py-2">
               <RadioButtonGroup.Icon />
-              <Text size="2">{plan}</Text>
+              <Typography.Text size="2">{plan}</Typography.Text>
             </div>
           </RadioButtonGroup.Item>
         ))}

@@ -4,7 +4,7 @@
   isolation: isolate;
 }
 
-/* Input styling - extends TextField styles */
+/* Input styling - extends Input styles */
 .fui-NumberFieldInput {
   /* Remove spinner buttons in WebKit/Blink */
   &::-webkit-outer-spin-button,
@@ -224,19 +224,19 @@
     text-align: left;
 
     &:where(.fui-r-size-1) {
-      text-indent: calc(var(--space-1) * 1.5 - var(--text-field-border-width));
+      text-indent: calc(var(--space-1) * 1.5 - var(--input-border-width));
       border-radius: max(6px, var(--radius-full)) 0 0 max(6px, var(--radius-full));
     }
     &:where(.fui-r-size-2) {
-      text-indent: calc(var(--space-2) - var(--text-field-border-width));
+      text-indent: calc(var(--space-2) - var(--input-border-width));
       border-radius: max(8px, var(--radius-full)) 0 0 max(8px, var(--radius-full));
     }
     &:where(.fui-r-size-3) {
-      text-indent: calc(var(--space-3) - var(--text-field-border-width));
+      text-indent: calc(var(--space-3) - var(--input-border-width));
       border-radius: max(10px, var(--radius-full)) 0 0 max(10px, var(--radius-full));
     }
     &:where(.fui-r-size-4) {
-      text-indent: calc(var(--space-3) - var(--text-field-border-width));
+      text-indent: calc(var(--space-3) - var(--input-border-width));
       border-radius: max(14px, var(--radius-full)) 0 0 max(14px, var(--radius-full));
     }
   }
@@ -289,19 +289,19 @@
     text-align: left;
 
     &:where(.fui-r-size-1) {
-      text-indent: calc(var(--space-1) * 1.5 - var(--text-field-border-width));
+      text-indent: calc(var(--space-1) * 1.5 - var(--input-border-width));
       border-radius: max(6px, var(--radius-full));
     }
     &:where(.fui-r-size-2) {
-      text-indent: calc(var(--space-2) - var(--text-field-border-width));
+      text-indent: calc(var(--space-2) - var(--input-border-width));
       border-radius: max(8px, var(--radius-full));
     }
     &:where(.fui-r-size-3) {
-      text-indent: calc(var(--space-3) - var(--text-field-border-width));
+      text-indent: calc(var(--space-3) - var(--input-border-width));
       border-radius: max(10px, var(--radius-full));
     }
     &:where(.fui-r-size-4) {
-      text-indent: calc(var(--space-3) - var(--text-field-border-width));
+      text-indent: calc(var(--space-3) - var(--input-border-width));
       border-radius: max(14px, var(--radius-full));
     }
   }

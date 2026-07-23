@@ -1,11 +1,11 @@
 import React from 'react';
-import { Quote, Text } from '@aussieljk/frosted';
+import { Typography } from '@aussieljk/frosted';
 
 export default function QuoteDemo() {
   return (
-    <Text size="3">
-      His famous quote, <Quote>Styles come and go. Good design is a language, not a style</Quote>, elegantly sums up
-      Massimo’s philosophy of design.
-    </Text>
+    <Typography.Text size="3">
+      His famous quote, <Typography.Quote>Styles come and go. Good design is a language, not a style</Typography.Quote>,
+      elegantly sums up Massimo’s philosophy of design.
+    </Typography.Text>
   );
 }

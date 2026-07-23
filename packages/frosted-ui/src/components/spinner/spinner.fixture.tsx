@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Spinner, Switch, Text, spinnerPropDefs } from '..';
+import { Spinner, Switch, Typography, spinnerPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 export default {
@@ -32,10 +32,11 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', maxWidth: 640 }}>
-        <Text>
-          Use the <Code>loading</Code> prop to control whether the spinner or its children are displayed. Spinner
-          preserves the dimensions of children when they are hidden and disables interactive elements.
-        </Text>
+        <Typography.Text>
+          Use the <Typography.Code>loading</Typography.Code> prop to control whether the spinner or its children are
+          displayed. Spinner preserves the dimensions of children when they are hidden and disables interactive
+          elements.
+        </Typography.Text>
         <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
           <Spinner {...args} loading={true}>
             <Switch defaultChecked />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, TextField } from '@aussieljk/frosted';
+import { Field, Input } from '@aussieljk/frosted';
 
 export default function FieldDemo() {
   return (
@@ -7,9 +7,9 @@ export default function FieldDemo() {
       <Field.Root name="username">
         <Field.Label>Username</Field.Label>
         <Field.Description>Must be at least 3 characters</Field.Description>
-        <TextField.Root>
-          <TextField.Input placeholder="johndoe" required minLength={3} />
-        </TextField.Root>
+        <Input.Root>
+          <Input.Control placeholder="johndoe" required minLength={3} />
+        </Input.Root>
         <Field.Error match="valueMissing">Username is required</Field.Error>
         <Field.Error match="tooShort">Username must be at least 3 characters</Field.Error>
       </Field.Root>

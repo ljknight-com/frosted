@@ -107,7 +107,7 @@ const LightboxContent = React.forwardRef<HTMLDivElement, LightboxContentProps>(
     //
     // Safari quirk: a non-passive `wheel` listener on an ancestor forces Safari
     // to fall back from compositor-thread scrolling to main-thread scrolling,
-    // killing momentum/flick scrolling in descendant ScrollGallery containers.
+    // killing momentum/flick scrolling in descendant Carousel containers.
     // Safari fires its own GestureEvent (gesturestart/gesturechange) for
     // trackpad pinch — preventing those stops native zoom without touching the
     // wheel event path. For Chrome/Firefox (no GestureEvent), trackpad pinch

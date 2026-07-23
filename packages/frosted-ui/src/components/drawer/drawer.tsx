@@ -4,7 +4,7 @@ import { DialogRootActions, Dialog as DrawerPrimitive } from '@base-ui/react/dia
 import classNames from 'classnames';
 import * as React from 'react';
 import { Theme } from '../../theme';
-import { Heading } from '../heading';
+import { Heading } from '../typography/heading';
 
 // Re-export createHandle for detached triggers
 /** Creates a detached handle for opening a drawer imperatively, optionally with a typed payload. */

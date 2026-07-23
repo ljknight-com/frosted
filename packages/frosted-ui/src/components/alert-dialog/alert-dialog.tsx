@@ -4,12 +4,12 @@ import { AlertDialog as AlertDialogPrimitive, AlertDialogRootActions } from '@ba
 import classNames from 'classnames';
 import * as React from 'react';
 import { Theme } from '../../theme';
-import { Heading } from '../heading';
-import { Text } from '../text';
+import { Heading } from '../typography/heading';
+import { Text } from '../typography/text';
 import { alertDialogContentPropDefs } from './alert-dialog.props';
 
 import type { GetPropDefTypes } from '../../helpers';
-import type { TextProps } from '../text';
+import type { TextProps } from '../typography/text';
 
 // Handle type - extracts the return type of createHandle with a generic
 type AlertDialogHandle<T = unknown> = ReturnType<typeof AlertDialogPrimitive.createHandle<T>>;

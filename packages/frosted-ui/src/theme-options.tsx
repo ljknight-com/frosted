@@ -22,7 +22,7 @@ const themePropDefs = {
   hasBackground: { type: 'boolean', default: true },
   appearance: { type: 'enum', values: appearances, default: 'inherit' },
   accentColor: { type: 'enum', values: accentColors, default: 'blue' },
-  grayColor: { type: 'enum', values: grayColors, default: 'gray' },
+  grayColor: { type: 'enum', values: grayColors, default: 'neutral' },
   dangerColor: { type: 'enum', values: dangerColors, default: 'red' },
   warningColor: { type: 'enum', values: warningColors, default: 'amber' },
   successColor: { type: 'enum', values: successColors, default: 'green' },

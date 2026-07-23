@@ -1,0 +1,53 @@
+.fui-ButtonGroupRoot {
+  display: inline-flex;
+  align-items: stretch;
+
+  &[data-orientation='horizontal'] {
+    flex-direction: row;
+
+    & > :not(:first-child) {
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+      margin-inline-start: -1px;
+    }
+    & > :not(:last-child) {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+    }
+  }
+
+  &[data-orientation='vertical'] {
+    flex-direction: column;
+
+    & > :not(:first-child) {
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
+      margin-block-start: -1px;
+    }
+    & > :not(:last-child) {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+    }
+  }
+
+  /* Lift the focused/hovered button so its ring is not clipped by its neighbour. */
+  & > :where(:hover, :focus-visible) {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.fui-ButtonGroupText {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--space-3);
+  font-size: var(--font-size-2);
+  color: var(--gray-alpha-900);
+  background-color: var(--gray-alpha-100);
+  box-shadow: 0 0 0 1px var(--gray-alpha-300) inset;
+  white-space: nowrap;
+}
+
+.fui-ButtonGroupSeparator {
+  align-self: stretch;
+}

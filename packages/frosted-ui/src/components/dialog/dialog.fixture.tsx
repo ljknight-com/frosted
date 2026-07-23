@@ -6,21 +6,19 @@ import {
   Badge,
   Button,
   Checkbox,
-  Code,
   ContextMenu,
   Dialog,
   DropdownMenu,
-  Heading,
   HoverCard,
+  Input,
   Inset,
   Link,
   Popover,
   ScrollArea,
   Select,
   Table,
-  Text,
-  TextArea,
-  TextField,
+  Textarea,
+  Typography,
   dialogContentPropDefs,
 } from '..';
 
@@ -41,16 +39,16 @@ export default {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <label>
-              <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+              <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                 Name
-              </Text>
-              <TextField.Input defaultValue="Freja Johnsen" placeholder="Enter your full name" />
+              </Typography.Text>
+              <Input.Control defaultValue="Freja Johnsen" placeholder="Enter your full name" />
             </label>
             <label>
-              <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+              <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                 Email
-              </Text>
-              <TextField.Input defaultValue="freja@example.com" placeholder="Enter your email" />
+              </Typography.Text>
+              <Input.Control defaultValue="freja@example.com" placeholder="Enter your email" />
             </label>
           </div>
 
@@ -255,10 +253,10 @@ export default {
     const args = { size: dialogContentPropDefs.size.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>Dialog.createHandle()</Code> to control a dialog from a trigger located outside the{' '}
-          <Code>Dialog.Root</Code>.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>Dialog.createHandle()</Typography.Code> to control a dialog from a trigger located
+          outside the <Typography.Code>Dialog.Root</Typography.Code>.
+        </Typography.Text>
 
         <Dialog.Trigger handle={detachedHandle}>
           <Button>Detached Trigger</Button>
@@ -299,10 +297,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Multiple triggers can control the same dialog. Each trigger can pass a different <Code>payload</Code>. The
-          payload type is inferred from the handle - TypeScript will catch type errors.
-        </Text>
+        <Typography.Text>
+          Multiple triggers can control the same dialog. Each trigger can pass a different{' '}
+          <Typography.Code>payload</Typography.Code>. The payload type is inferred from the handle - TypeScript will
+          catch type errors.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           {/* TypeScript will catch payload type errors because handle infers the type */}
@@ -336,10 +335,10 @@ export default {
                 }}
               >
                 <label>
-                  <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                  <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                     Project Name
-                  </Text>
-                  <TextField.Input
+                  </Typography.Text>
+                  <Input.Control
                     defaultValue={payload?.mode !== 'create' ? 'My Awesome Project' : ''}
                     placeholder="Enter project name"
                     readOnly={payload?.mode === 'view'}
@@ -386,9 +385,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>open</Code> and <Code>onOpenChange</Code> for fully controlled mode.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>open</Typography.Code> and <Typography.Code>onOpenChange</Typography.Code> for fully
+          controlled mode.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Button onClick={() => setOpen(true)}>Open Dialog Programmatically</Button>
@@ -408,20 +408,20 @@ export default {
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', marginTop: 'var(--space-3)' }}
             >
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Name
-                </Text>
-                <TextField.Input
+                </Typography.Text>
+                <Input.Control
                   value={formData.name}
                   onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                   placeholder="Enter name"
                 />
               </label>
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Email
-                </Text>
-                <TextField.Input
+                </Typography.Text>
+                <Input.Control
                   value={formData.email}
                   onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                   placeholder="Enter email"
@@ -468,9 +468,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>actionsRef</Code> to close the dialog programmatically after an async operation.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>actionsRef</Typography.Code> to close the dialog programmatically after an async
+          operation.
+        </Typography.Text>
 
         <Dialog.Root actionsRef={actionsRef}>
           <Dialog.Trigger>
@@ -486,10 +487,10 @@ export default {
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', marginTop: 'var(--space-3)' }}
             >
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Feedback
-                </Text>
-                <TextArea placeholder="Enter your feedback..." style={{ minHeight: 100 }} />
+                </Typography.Text>
+                <Textarea placeholder="Enter your feedback..." style={{ minHeight: 100 }} />
               </label>
             </div>
 
@@ -522,9 +523,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>initialFocus</Code> to control which element receives focus when the dialog opens.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>initialFocus</Typography.Code> to control which element receives focus when the dialog
+          opens.
+        </Typography.Text>
 
         <Dialog.Root>
           <Dialog.Trigger>
@@ -538,16 +540,16 @@ export default {
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', marginTop: 'var(--space-3)' }}
             >
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Name
-                </Text>
-                <TextField.Input ref={nameInputRef} placeholder="Enter item name" />
+                </Typography.Text>
+                <Input.Control ref={nameInputRef} placeholder="Enter item name" />
               </label>
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Description
-                </Text>
-                <TextField.Input placeholder="Enter description" />
+                </Typography.Text>
+                <Input.Control placeholder="Enter description" />
               </label>
             </div>
 
@@ -580,9 +582,9 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>finalFocus</Code> to control where focus returns when the dialog closes.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>finalFocus</Typography.Code> to control where focus returns when the dialog closes.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
           <Dialog.Root>
@@ -638,10 +640,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Compare <Code>onOpenChange</Code> (fires immediately) vs <Code>onOpenChangeComplete</Code> (fires after
-          animations).
-        </Text>
+        <Typography.Text>
+          Compare <Typography.Code>onOpenChange</Typography.Code> (fires immediately) vs{' '}
+          <Typography.Code>onOpenChangeComplete</Typography.Code> (fires after animations).
+        </Typography.Text>
 
         <Dialog.Root
           onOpenChange={(open) => addLog(`onOpenChange: ${open ? 'opening' : 'closing'}`)}
@@ -684,13 +686,13 @@ export default {
             width: 400,
           }}
         >
-          <Text size="1" weight="medium" style={{ marginBottom: 8, display: 'block' }}>
+          <Typography.Text size="1" weight="medium" style={{ marginBottom: 8, display: 'block' }}>
             Event Log:
-          </Text>
+          </Typography.Text>
           {logs.length === 0 ? (
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               Open/close the dialog to see events...
-            </Text>
+            </Typography.Text>
           ) : (
             logs.map((log, i) => (
               <div key={i} style={{ color: log.includes('Complete') ? 'var(--accent-900)' : 'var(--gray-900)' }}>
@@ -707,9 +709,9 @@ export default {
     const args = { size: dialogContentPropDefs.size.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text style={{ maxWidth: 500, textAlign: 'center' }}>
+        <Typography.Text style={{ maxWidth: 500, textAlign: 'center' }}>
           Dialogs can be nested within one another. The parent dialog dims when a child dialog opens.
-        </Text>
+        </Typography.Text>
 
         <Dialog.Root>
           <Dialog.Trigger>
@@ -772,10 +774,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text style={{ maxWidth: 500, textAlign: 'center' }}>
-          This demo shows how to use a nested <Code>AlertDialog</Code> inside a <Code>Dialog</Code> to confirm
-          discarding unsaved changes. Type something in the textarea, then try to close the dialog.
-        </Text>
+        <Typography.Text style={{ maxWidth: 500, textAlign: 'center' }}>
+          This demo shows how to use a nested <Typography.Code>AlertDialog</Typography.Code> inside a{' '}
+          <Typography.Code>Dialog</Typography.Code> to confirm discarding unsaved changes. Type something in the
+          textarea, then try to close the dialog.
+        </Typography.Text>
 
         <Dialog.Root
           open={dialogOpen}
@@ -805,7 +808,7 @@ export default {
               }}
               style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', marginTop: 'var(--space-3)' }}
             >
-              <TextArea
+              <Textarea
                 required
                 placeholder="What's on your mind?"
                 value={textareaValue}
@@ -866,10 +869,10 @@ export default {
     const args = { size: dialogContentPropDefs.size.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text style={{ maxWidth: 500, textAlign: 'center' }}>
+        <Typography.Text style={{ maxWidth: 500, textAlign: 'center' }}>
           Dialogs can contain other floating elements like Popovers and HoverCards. Focus management and layering work
           correctly.
-        </Text>
+        </Typography.Text>
 
         <Dialog.Root>
           <Dialog.Trigger>
@@ -894,12 +897,12 @@ export default {
                 }}
               >
                 <div>
-                  <Text render={<div />} weight="medium">
+                  <Typography.Text render={<div />} weight="medium">
                     Notification Preferences
-                  </Text>
-                  <Text render={<div />} size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text render={<div />} size="2" color="gray">
                     Choose how you want to be notified
-                  </Text>
+                  </Typography.Text>
                 </div>
                 <Popover.Root>
                   <Popover.Trigger>
@@ -908,25 +911,25 @@ export default {
                     </Button>
                   </Popover.Trigger>
                   <Popover.Content style={{ width: 280 }}>
-                    <Heading size="3" style={{ marginBottom: 'var(--space-3)' }}>
+                    <Typography.Heading size="3" style={{ marginBottom: 'var(--space-3)' }}>
                       Notifications
-                    </Heading>
+                    </Typography.Heading>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                       <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
                         <Checkbox defaultChecked />
-                        <Text size="2">Email notifications</Text>
+                        <Typography.Text size="2">Email notifications</Typography.Text>
                       </label>
                       <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
                         <Checkbox defaultChecked />
-                        <Text size="2">Push notifications</Text>
+                        <Typography.Text size="2">Push notifications</Typography.Text>
                       </label>
                       <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
                         <Checkbox />
-                        <Text size="2">SMS notifications</Text>
+                        <Typography.Text size="2">SMS notifications</Typography.Text>
                       </label>
                       <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
                         <Checkbox defaultChecked />
-                        <Text size="2">Weekly digest</Text>
+                        <Typography.Text size="2">Weekly digest</Typography.Text>
                       </label>
                     </div>
                     <div
@@ -966,9 +969,9 @@ export default {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
                   <Avatar fallback="A" size="2" />
                   <div>
-                    <Text render={<div />} weight="medium">
+                    <Typography.Text render={<div />} weight="medium">
                       Account Owner
-                    </Text>
+                    </Typography.Text>
                     <HoverCard.Root>
                       <HoverCard.Trigger>
                         <Link size="2" href="#">
@@ -979,22 +982,28 @@ export default {
                         <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
                           <Avatar size="3" fallback="A" />
                           <div>
-                            <Heading size="3" render={<h3 />}>
+                            <Typography.Heading size="3" render={<h3 />}>
                               Alex Johnson
-                            </Heading>
-                            <Text render={<p />} size="2" color="gray">
+                            </Typography.Heading>
+                            <Typography.Text render={<p />} size="2" color="gray">
                               @alexjohnson
-                            </Text>
-                            <Text render={<p />} size="2" style={{ marginTop: 'var(--space-2)', maxWidth: 280 }}>
+                            </Typography.Text>
+                            <Typography.Text
+                              render={<p />}
+                              size="2"
+                              style={{ marginTop: 'var(--space-2)', maxWidth: 280 }}
+                            >
                               Senior Developer at Acme Corp. Loves building great user experiences.
-                            </Text>
+                            </Typography.Text>
                             <div style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-3)' }}>
-                              <Text size="2">
-                                <Text weight="bold">142</Text> <Text color="gray">following</Text>
-                              </Text>
-                              <Text size="2">
-                                <Text weight="bold">2,891</Text> <Text color="gray">followers</Text>
-                              </Text>
+                              <Typography.Text size="2">
+                                <Typography.Text weight="bold">142</Typography.Text>{' '}
+                                <Typography.Text color="gray">following</Typography.Text>
+                              </Typography.Text>
+                              <Typography.Text size="2">
+                                <Typography.Text weight="bold">2,891</Typography.Text>{' '}
+                                <Typography.Text color="gray">followers</Typography.Text>
+                              </Typography.Text>
                             </div>
                           </div>
                         </div>
@@ -1017,12 +1026,12 @@ export default {
                 }}
               >
                 <div>
-                  <Text render={<div />} weight="medium">
+                  <Typography.Text render={<div />} weight="medium">
                     Language
-                  </Text>
-                  <Text render={<div />} size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text render={<div />} size="2" color="gray">
                     Choose your preferred language
-                  </Text>
+                  </Typography.Text>
                 </div>
                 <Select.Root defaultValue="en">
                   <Select.Trigger style={{ minWidth: 150 }} />
@@ -1052,12 +1061,12 @@ export default {
                 }}
               >
                 <div>
-                  <Text render={<div />} weight="medium">
+                  <Typography.Text render={<div />} weight="medium">
                     Quick Actions
-                  </Text>
-                  <Text render={<div />} size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text render={<div />} size="2" color="gray">
                     Common account operations
-                  </Text>
+                  </Typography.Text>
                 </div>
                 <DropdownMenu.Root>
                   <DropdownMenu.Trigger>
@@ -1108,12 +1117,12 @@ export default {
                     }}
                   >
                     <div>
-                      <Text render={<div />} weight="medium">
+                      <Typography.Text render={<div />} weight="medium">
                         Context Menu Area
-                      </Text>
-                      <Text render={<div />} size="2" color="gray">
+                      </Typography.Text>
+                      <Typography.Text render={<div />} size="2" color="gray">
                         Right-click here to open context menu
-                      </Text>
+                      </Typography.Text>
                     </div>
                     <Badge color="gray">Right-click</Badge>
                   </div>
@@ -1164,10 +1173,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text style={{ maxWidth: 500, textAlign: 'center' }}>
-          Open a dialog from a dropdown menu using controlled state. The dialog is controlled via <Code>open</Code> and{' '}
-          <Code>onOpenChange</Code> props, and opened imperatively via <Code>onClick</Code> on the menu item.
-        </Text>
+        <Typography.Text style={{ maxWidth: 500, textAlign: 'center' }}>
+          Open a dialog from a dropdown menu using controlled state. The dialog is controlled via{' '}
+          <Typography.Code>open</Typography.Code> and <Typography.Code>onOpenChange</Typography.Code> props, and opened
+          imperatively via <Typography.Code>onClick</Typography.Code> on the menu item.
+        </Typography.Text>
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
@@ -1199,16 +1209,16 @@ export default {
               }}
             >
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Name
-                </Text>
-                <TextField.Input defaultValue="My Project" placeholder="Enter name" />
+                </Typography.Text>
+                <Input.Control defaultValue="My Project" placeholder="Enter name" />
               </label>
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Description
-                </Text>
-                <TextArea defaultValue="A sample project description" placeholder="Enter description" />
+                </Typography.Text>
+                <Textarea defaultValue="A sample project description" placeholder="Enter description" />
               </label>
             </div>
 
@@ -1269,19 +1279,20 @@ export default {
     const args = { size: dialogContentPropDefs.size.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 540, textAlign: 'center' }}>
-          When wrapping a menu item with <Code>Dialog.Trigger</Code>:
+        <Typography.Text render={<div />} style={{ maxWidth: 540, textAlign: 'center' }}>
+          When wrapping a menu item with <Typography.Code>Dialog.Trigger</Typography.Code>:
           <ul style={{ textAlign: 'left', marginTop: 'var(--space-2)' }}>
             <li>
-              Add <Code>keepMounted</Code> to <Code>DropdownMenu.Content</Code> so the Dialog.Root stays mounted when
-              the menu closes.
+              Add <Typography.Code>keepMounted</Typography.Code> to{' '}
+              <Typography.Code>DropdownMenu.Content</Typography.Code> so the Dialog.Root stays mounted when the menu
+              closes.
             </li>
             <li>
-              Add <Code>tabIndex=&#123;-1&#125;</Code> to the trigger to prevent it from stealing focus when the
-              dropdown opens (preserves roving focus).
+              Add <Typography.Code>tabIndex=&#123;-1&#125;</Typography.Code> to the trigger to prevent it from stealing
+              focus when the dropdown opens (preserves roving focus).
             </li>
           </ul>
-        </Text>
+        </Typography.Text>
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
@@ -1309,16 +1320,16 @@ export default {
                   }}
                 >
                   <label>
-                    <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                    <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                       Name
-                    </Text>
-                    <TextField.Input defaultValue="My Project" placeholder="Enter name" />
+                    </Typography.Text>
+                    <Input.Control defaultValue="My Project" placeholder="Enter name" />
                   </label>
                   <label>
-                    <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                    <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                       Description
-                    </Text>
-                    <TextArea defaultValue="A sample project description" placeholder="Enter description" />
+                    </Typography.Text>
+                    <Textarea defaultValue="A sample project description" placeholder="Enter description" />
                   </label>
                 </div>
 
@@ -1393,7 +1404,7 @@ export default {
           alignItems: 'center',
         }}
       >
-        <Text
+        <Typography.Text
           render={<div />}
           style={{
             maxWidth: 540,
@@ -1402,10 +1413,12 @@ export default {
           }}
         >
           Open dialogs directly from dropdown menu items using detached triggers with handles. Create a handle with{' '}
-          <Code>Dialog.createHandle()</Code>, wrap the menu item with <Code>Dialog.Trigger</Code> passing the handle,
-          then connect it to a <Code>Dialog.Root</Code> with the same handle. Add <Code>tabIndex=&#123;-1&#125;</Code>{' '}
-          to the trigger to preserve keyboard navigation in the menu.
-        </Text>
+          <Typography.Code>Dialog.createHandle()</Typography.Code>, wrap the menu item with{' '}
+          <Typography.Code>Dialog.Trigger</Typography.Code> passing the handle, then connect it to a{' '}
+          <Typography.Code>Dialog.Root</Typography.Code> with the same handle. Add{' '}
+          <Typography.Code>tabIndex=&#123;-1&#125;</Typography.Code> to the trigger to preserve keyboard navigation in
+          the menu.
+        </Typography.Text>
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
@@ -1440,16 +1453,16 @@ export default {
               }}
             >
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Name
-                </Text>
-                <TextField.Input defaultValue="My Project" placeholder="Enter name" />
+                </Typography.Text>
+                <Input.Control defaultValue="My Project" placeholder="Enter name" />
               </label>
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Description
-                </Text>
-                <TextArea defaultValue="A sample project description" placeholder="Enter description" />
+                </Typography.Text>
+                <Textarea defaultValue="A sample project description" placeholder="Enter description" />
               </label>
             </div>
 

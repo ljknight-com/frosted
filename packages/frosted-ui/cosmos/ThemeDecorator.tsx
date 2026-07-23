@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { useFixtureSelect } from 'react-cosmos/client';
-import { Toaster } from '../src/components/toast';
+import { Toaster } from '../src/components/sonner';
 import { Theme } from '../src/theme';
 import { themePropDefs } from '../src/theme-options';
 

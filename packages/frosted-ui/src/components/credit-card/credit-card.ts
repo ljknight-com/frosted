@@ -9,7 +9,7 @@
  * Key design decisions:
  *
  * - **Controlled & uncontrolled**: `face` / `defaultFace` / `onFaceChange`
- *   on Root follows the same pattern as ScrollGallery's value API.
+ *   on Root follows the same pattern as Carousel's value API.
  *
  * - **CSS 3D flip**: Content uses `perspective` + `backface-visibility` +
  *   `rotateY` transforms driven by `data-face` attribute. Reduced motion
@@ -42,7 +42,7 @@
  *   FieldError   — Validation error message for a Field; portals into Errors when present
  *   Errors       — Portal target for FieldError messages, rendered outside the card
  *   FieldLabel   — Accessible label for a Field input; base-ui Field.Label
- *   TextField    — Base input primitive; soft style when editable, plain text when readOnly
+ *   Input    — Base input primitive; soft style when editable, plain text when readOnly
  *   NumberField  — Card number input (use readOnly for display)
  *   ExpiryField  — Expiration date input (use readOnly for display)
  *   CVVField     — CVV code input (use readOnly for display)
@@ -71,7 +71,7 @@ export {
   CreditCardField as Field,
   CreditCardFieldError as FieldError,
   CreditCardFieldLabel as FieldLabel,
-  CreditCardTextField as TextField,
+  CreditCardTextField as Input,
   CreditCardNumberField as NumberField,
   CreditCardExpiryField as ExpiryField,
   CreditCardCVVField as CVVField,

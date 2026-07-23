@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Code, ContextMenu, contextMenuContentPropDefs, Dialog, Text, TextArea, TextField } from '..';
+import { Button, ContextMenu, Dialog, Input, Textarea, Typography, contextMenuContentPropDefs } from '..';
 
 export default {
   Default() {
@@ -191,10 +191,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Open a dialog from a context menu using controlled state. The dialog is controlled via <Code>open</Code> and{' '}
-          <Code>onOpenChange</Code> props, and opened imperatively via <Code>onClick</Code> on the menu item.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Open a dialog from a context menu using controlled state. The dialog is controlled via{' '}
+          <Typography.Code>open</Typography.Code> and <Typography.Code>onOpenChange</Typography.Code> props, and opened
+          imperatively via <Typography.Code>onClick</Typography.Code> on the menu item.
+        </Typography.Text>
 
         <ContextMenu.Root>
           <ContextMenu.Trigger>
@@ -238,16 +239,16 @@ export default {
               }}
             >
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Name
-                </Text>
-                <TextField.Input defaultValue="My Item" placeholder="Enter name" />
+                </Typography.Text>
+                <Input.Control defaultValue="My Item" placeholder="Enter name" />
               </label>
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 4 }} weight="bold">
                   Description
-                </Text>
-                <TextArea defaultValue="A sample item description" placeholder="Enter description" />
+                </Typography.Text>
+                <Textarea defaultValue="A sample item description" placeholder="Enter description" />
               </label>
             </div>
 
@@ -311,10 +312,10 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Control where the menu appears relative to the click position using <Code>side</Code> and <Code>align</Code>{' '}
-          props. Try right-clicking each box.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Control where the menu appears relative to the click position using <Typography.Code>side</Typography.Code>{' '}
+          and <Typography.Code>align</Typography.Code> props. Try right-clicking each box.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <ContextMenu.Root>
@@ -424,10 +425,10 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Fine-tune menu positioning with <Code>sideOffset</Code> (distance from click) and <Code>alignOffset</Code>{' '}
-          (shift along the alignment axis). Right-click each box.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Fine-tune menu positioning with <Typography.Code>sideOffset</Typography.Code> (distance from click) and{' '}
+          <Typography.Code>alignOffset</Typography.Code> (shift along the alignment axis). Right-click each box.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <ContextMenu.Root>

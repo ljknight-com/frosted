@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Text } from '@aussieljk/frosted';
+import { Grid, Typography } from '@aussieljk/frosted';
 
 const cell: React.CSSProperties = {
   minWidth: 48,
@@ -12,19 +12,19 @@ const cell: React.CSSProperties = {
 
 export default function GridDemo() {
   return (
-    <Grid horizontalSpacing={8} verticalSpacing={8}>
-      <Grid.Row>
+    <Grid.Root horizontalSpacing={8} verticalSpacing={8}>
+      <Grid.Root.Row>
         <div style={cell}>1</div>
         <div style={cell}>2</div>
         <div style={cell}>3</div>
-      </Grid.Row>
-      <Grid.Row>
+      </Grid.Root.Row>
+      <Grid.Root.Row>
         <div style={cell}>4</div>
         <div style={cell}>5</div>
-      </Grid.Row>
-      <Text size="2" color="gray">
+      </Grid.Root.Row>
+      <Typography.Text size="2" color="gray">
         Spans every column
-      </Text>
-    </Grid>
+      </Typography.Text>
+    </Grid.Root>
   );
 }

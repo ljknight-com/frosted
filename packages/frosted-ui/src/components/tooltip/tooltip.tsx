@@ -4,7 +4,7 @@ import { Tooltip as TooltipPrimitive } from '@base-ui/react/tooltip';
 import classNames from 'classnames';
 import * as React from 'react';
 import { ReversedTheme } from '../../theme';
-import { Text } from '../text';
+import { Text } from '../typography/text';
 import { tooltipPropDefs } from './tooltip.props';
 
 import type { GetPropDefTypes } from '../../helpers';

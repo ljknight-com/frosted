@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Code, Switch, Text } from '..';
+import { Button, Switch, Typography } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 export default {
@@ -58,23 +58,23 @@ export default {
     const args = { disabled: false };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-        <Text render={<label />} size="2">
+        <Typography.Text render={<label />} size="2">
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <Switch {...args} size="1" defaultChecked /> Sync settings
           </div>
-        </Text>
+        </Typography.Text>
 
-        <Text render={<label />} size="3">
+        <Typography.Text render={<label />} size="3">
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <Switch {...args} size="2" defaultChecked /> Sync settings
           </div>
-        </Text>
+        </Typography.Text>
 
-        <Text render={<label />} size="4">
+        <Typography.Text render={<label />} size="4">
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <Switch {...args} size="3" defaultChecked /> Sync settings
           </div>
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -92,36 +92,36 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 400 }}>
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           The <strong>uncheckedValue</strong> prop lets you specify a value to submit when the switch is OFF. This is
           useful when your backend needs to explicitly know the user chose "off" vs the field being absent.
-        </Text>
+        </Typography.Text>
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text render={<label />} size="2" weight="bold">
+          <Typography.Text render={<label />} size="2" weight="bold">
             Notification Preferences
-          </Text>
+          </Typography.Text>
 
-          <Text render={<label />} size="2">
+          <Typography.Text render={<label />} size="2">
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Switch {...args} name="email_notifications" uncheckedValue="disabled" defaultChecked />
               Email notifications
             </div>
-          </Text>
+          </Typography.Text>
 
-          <Text render={<label />} size="2">
+          <Typography.Text render={<label />} size="2">
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Switch {...args} name="sms_notifications" uncheckedValue="disabled" />
               SMS notifications
             </div>
-          </Text>
+          </Typography.Text>
 
-          <Text render={<label />} size="2">
+          <Typography.Text render={<label />} size="2">
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Switch {...args} name="marketing" uncheckedValue="opt-out" />
               Marketing emails
             </div>
-          </Text>
+          </Typography.Text>
 
           <Button variant="solid" type="submit" style={{ marginTop: 'var(--space-2)' }}>
             Submit Form
@@ -130,9 +130,9 @@ export default {
 
         {formData && (
           <div>
-            <Text size="2" weight="bold">
+            <Typography.Text size="2" weight="bold">
               Form Data:
-            </Text>
+            </Typography.Text>
             <pre
               style={{
                 background: 'var(--gray-100)',
@@ -144,9 +144,9 @@ export default {
             >
               {formData}
             </pre>
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               Notice: OFF switches submit their uncheckedValue instead of being absent from the form data.
-            </Text>
+            </Typography.Text>
           </div>
         )}
       </div>
@@ -164,45 +164,46 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          The <Code>readOnly</Code> prop prevents users from toggling a switch while still showing its current state.
-          Unlike <Code>disabled</Code>, read-only switches remain focusable and their values are submitted with forms.
-          This is useful for displaying settings users cannot modify, or showing computed/derived states.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>readOnly</Typography.Code> prop prevents users from toggling a switch while still showing
+          its current state. Unlike <Typography.Code>disabled</Typography.Code>, read-only switches remain focusable and
+          their values are submitted with forms. This is useful for displaying settings users cannot modify, or showing
+          computed/derived states.
+        </Typography.Text>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Plan Features (Premium Plan)
-          </Text>
-          <Text render={<label />} size="2">
+          </Typography.Text>
+          <Typography.Text render={<label />} size="2">
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Switch {...args} checked={isPremium} readOnly /> Advanced features enabled
             </div>
-          </Text>
-          <Text render={<label />} size="2">
+          </Typography.Text>
+          <Typography.Text render={<label />} size="2">
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Switch {...args} checked={isPremium} readOnly /> Priority support
             </div>
-          </Text>
+          </Typography.Text>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Organization Settings (managed by admin)
-          </Text>
-          <Text render={<label />} size="2">
+          </Typography.Text>
+          <Typography.Text render={<label />} size="2">
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Switch {...args} checked={settings.darkMode} readOnly /> Dark mode
             </div>
-          </Text>
-          <Text render={<label />} size="2">
+          </Typography.Text>
+          <Typography.Text render={<label />} size="2">
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Switch {...args} checked={settings.autoBackup} readOnly /> Auto backup
             </div>
-          </Text>
-          <Text render={<label />} size="2">
+          </Typography.Text>
+          <Typography.Text render={<label />} size="2">
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Switch {...args} checked={settings.analytics} readOnly /> Usage analytics
             </div>
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -237,16 +238,16 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          The <Code>inputRef</Code> prop provides direct access to the hidden native <Code>&lt;input&gt;</Code> element.
-          This is useful for programmatic focus management, form validation, or integrating with third-party libraries
-          that need direct DOM access.
-        </Text>
-        <Text render={<label />} size="2">
+        <Typography.Text>
+          The <Typography.Code>inputRef</Typography.Code> prop provides direct access to the hidden native{' '}
+          <Typography.Code>&lt;input&gt;</Typography.Code> element. This is useful for programmatic focus management,
+          form validation, or integrating with third-party libraries that need direct DOM access.
+        </Typography.Text>
+        <Typography.Text render={<label />} size="2">
           <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
             <Switch {...args} inputRef={inputRef} name="notifications" defaultChecked /> Enable notifications
           </div>
-        </Text>
+        </Typography.Text>
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Button variant="soft" size="1" onClick={focusInput}>
             Focus Input
@@ -258,7 +259,7 @@ export default {
             Toggle via Ref
           </Button>
         </div>
-        <Code style={{ padding: 'var(--space-2)' }}>{info}</Code>
+        <Typography.Code style={{ padding: 'var(--space-2)' }}>{info}</Typography.Code>
       </div>
     );
   },

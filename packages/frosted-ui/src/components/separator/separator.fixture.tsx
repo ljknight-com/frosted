@@ -1,12 +1,12 @@
 import React from 'react';
-import { Separator, Text, separatorPropDefs } from '..';
+import { Separator, Typography, separatorPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 export default {
   Default() {
     const args = useComponentControls('Separator');
     return (
-      <Text size="2">
+      <Typography.Text size="2">
         Tools for building high-quality, accessible UI.
         <Separator {...args} orientation="horizontal" size="4" style={{ margin: 'var(--space-3) 0' }} />
         <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
@@ -18,7 +18,7 @@ export default {
           <Separator {...args} orientation="vertical" />
           Colors
         </div>
-      </Text>
+      </Typography.Text>
     );
   },
 

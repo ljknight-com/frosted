@@ -4,17 +4,15 @@ import {
   Avatar,
   Button,
   Checkbox,
-  Code,
-  Heading,
   IconButton,
+  Input,
   Inset,
   Popover,
-  SegmentedControl,
   Separator,
   Switch,
-  Text,
-  TextArea,
-  TextField,
+  Textarea,
+  ToggleGroup,
+  Typography,
   popoverContentPropDefs,
 } from '..';
 
@@ -140,7 +138,7 @@ export default {
               fallback="A"
             />
             <div style={{ flexGrow: 1 }}>
-              <TextArea placeholder="Write a comment…" style={{ height: 80 }} />
+              <Textarea placeholder="Write a comment…" style={{ height: 80 }} />
               <div
                 style={{
                   display: 'flex',
@@ -179,31 +177,31 @@ export default {
             </IconButton>
           </Popover.Trigger>
           <Popover.Content {...args} variant="translucent" align="center" style={{ width: 292 }}>
-            <Heading size="3" style={{ marginBottom: 12 }}>
+            <Typography.Heading size="3" style={{ marginBottom: 12 }}>
               Theme
-            </Heading>
-            <SegmentedControl.Root
+            </Typography.Heading>
+            <ToggleGroup.Root
               value={appearance}
               onValueChange={(appearance) => setAppearance(appearance as Appearance)}
             >
-              <SegmentedControl.List>
-                <SegmentedControl.Trigger value="light">
+              <ToggleGroup.List>
+                <ToggleGroup.Trigger value="light">
                   <LightModeIcon />
                   Light
-                </SegmentedControl.Trigger>
-                <SegmentedControl.Trigger value="dark">
+                </ToggleGroup.Trigger>
+                <ToggleGroup.Trigger value="dark">
                   <DarkModeIcon />
                   Dark
-                </SegmentedControl.Trigger>
-              </SegmentedControl.List>
-            </SegmentedControl.Root>
+                </ToggleGroup.Trigger>
+              </ToggleGroup.List>
+            </ToggleGroup.Root>
             <Separator orientation="horizontal" size="4" style={{ marginTop: 12, marginBottom: 12 }} />
-            <Text render={<label />} size="2">
+            <Typography.Text render={<label />} size="2">
               <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
                 <Switch />
                 Auto switching
               </div>
-            </Text>
+            </Typography.Text>
           </Popover.Content>
         </Popover.Root>
         <Popover.Root>
@@ -213,31 +211,31 @@ export default {
             </IconButton>
           </Popover.Trigger>
           <Popover.Content {...args} variant="solid" align="center" style={{ width: 292 }}>
-            <Heading size="3" style={{ marginBottom: 8 }}>
+            <Typography.Heading size="3" style={{ marginBottom: 8 }}>
               Theme
-            </Heading>
-            <SegmentedControl.Root
+            </Typography.Heading>
+            <ToggleGroup.Root
               value={appearance}
               onValueChange={(appearance) => setAppearance(appearance as Appearance)}
             >
-              <SegmentedControl.List>
-                <SegmentedControl.Trigger value="light">
+              <ToggleGroup.List>
+                <ToggleGroup.Trigger value="light">
                   <LightModeIcon />
                   Light
-                </SegmentedControl.Trigger>
-                <SegmentedControl.Trigger value="dark">
+                </ToggleGroup.Trigger>
+                <ToggleGroup.Trigger value="dark">
                   <DarkModeIcon />
                   Dark
-                </SegmentedControl.Trigger>
-              </SegmentedControl.List>
-            </SegmentedControl.Root>
+                </ToggleGroup.Trigger>
+              </ToggleGroup.List>
+            </ToggleGroup.Root>
             <Separator orientation="horizontal" size="4" style={{ marginTop: 16, marginBottom: 16 }} />
-            <Text render={<label />} size="2">
+            <Typography.Text render={<label />} size="2">
               <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
                 <Switch />
                 Auto switching
               </div>
-            </Text>
+            </Typography.Text>
           </Popover.Content>
         </Popover.Root>
       </div>
@@ -264,12 +262,12 @@ export default {
             </Inset>
 
             <div>
-              <Heading size="2" style={{ marginBottom: 4 }}>
+              <Typography.Heading size="2" style={{ marginBottom: 4 }}>
                 Share this image
-              </Heading>
-              <Text render={<p />} size="2" style={{ marginBottom: 16 }} color="gray">
+              </Typography.Heading>
+              <Typography.Text render={<p />} size="2" style={{ marginBottom: 16 }} color="gray">
                 Minimalistic 3D rendering wallpaper.
-              </Text>
+              </Typography.Text>
 
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
                 <Popover.Close>
@@ -292,22 +290,22 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           Use <code>openOnHover</code> to open the popover on hover. Use <code>delay</code> to specify how long to wait
           before opening.
-        </Text>
+        </Typography.Text>
         <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
           <Popover.Root>
             <Popover.Trigger openOnHover>
               <Button variant="soft">Hover me (default delay)</Button>
             </Popover.Trigger>
             <Popover.Content {...args} style={{ width: 280 }}>
-              <Heading size="3" style={{ marginBottom: 8 }}>
+              <Typography.Heading size="3" style={{ marginBottom: 8 }}>
                 Quick Preview
-              </Heading>
-              <Text size="2" color="gray">
+              </Typography.Heading>
+              <Typography.Text size="2" color="gray">
                 This popover opens on hover with the default 300ms delay.
-              </Text>
+              </Typography.Text>
             </Popover.Content>
           </Popover.Root>
 
@@ -316,12 +314,12 @@ export default {
               <Button variant="soft">Hover me (no delay)</Button>
             </Popover.Trigger>
             <Popover.Content {...args} style={{ width: 280 }}>
-              <Heading size="3" style={{ marginBottom: 8 }}>
+              <Typography.Heading size="3" style={{ marginBottom: 8 }}>
                 Instant Preview
-              </Heading>
-              <Text size="2" color="gray">
+              </Typography.Heading>
+              <Typography.Text size="2" color="gray">
                 This popover opens immediately on hover with no delay.
-              </Text>
+              </Typography.Text>
             </Popover.Content>
           </Popover.Root>
         </div>
@@ -336,10 +334,10 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           Use <code>Popover.createHandle()</code> to control a popover from a trigger located outside the{' '}
           <code>Popover.Root</code>.
-        </Text>
+        </Typography.Text>
 
         <Popover.Trigger handle={detachedHandle}>
           <Button>Detached Trigger</Button>
@@ -347,12 +345,12 @@ export default {
 
         <Popover.Root handle={detachedHandle}>
           <Popover.Content {...args} style={{ width: 280 }}>
-            <Heading size="3" style={{ marginBottom: 8 }}>
+            <Typography.Heading size="3" style={{ marginBottom: 8 }}>
               Detached Popover
-            </Heading>
-            <Text size="2" color="gray">
+            </Typography.Heading>
+            <Typography.Text size="2" color="gray">
               This popover is controlled by a trigger outside of its Root component.
-            </Text>
+            </Typography.Text>
             <Popover.Close>
               <Button size="1" variant="soft" style={{ marginTop: 12 }}>
                 Close
@@ -377,10 +375,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           Multiple triggers can control the same popover using a shared handle. Each trigger passes a typed{' '}
           <code>payload</code> that is inferred from the handle.
-        </Text>
+        </Typography.Text>
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Popover.Trigger handle={handle} payload={{ user: 'Alice', role: 'admin' }}>
             <Button variant="soft" color="red">
@@ -409,19 +407,19 @@ export default {
                   color={payload?.role === 'admin' ? 'red' : payload?.role === 'editor' ? 'blue' : 'gray'}
                 />
                 <div>
-                  <Heading size="3">{payload?.user ?? 'Unknown'}</Heading>
-                  <Text size="1" color="gray" style={{ textTransform: 'capitalize' }}>
+                  <Typography.Heading size="3">{payload?.user ?? 'Unknown'}</Typography.Heading>
+                  <Typography.Text size="1" color="gray" style={{ textTransform: 'capitalize' }}>
                     {payload?.role ?? 'No role'}
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
-              <Text size="2" color="gray">
+              <Typography.Text size="2" color="gray">
                 {payload?.role === 'admin'
                   ? 'Full access to all settings and user management.'
                   : payload?.role === 'editor'
                     ? 'Can edit content but cannot manage users.'
                     : 'Read-only access to view content.'}
-              </Text>
+              </Typography.Text>
               <Popover.Close>
                 <Button size="1" variant="soft" style={{ marginTop: 12 }}>
                   Close
@@ -450,10 +448,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text size="2" color="gray">
-          Use <Code>open</Code>, <Code>onOpenChange</Code>, and <Code>triggerId</Code> for fully controlled mode with
-          multiple detached triggers.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          Use <Typography.Code>open</Typography.Code>, <Typography.Code>onOpenChange</Typography.Code>, and{' '}
+          <Typography.Code>triggerId</Typography.Code> for fully controlled mode with multiple detached triggers.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Popover.Trigger handle={handle} id="trigger-1">
@@ -484,12 +482,12 @@ export default {
 
         <Popover.Root handle={handle} open={open} onOpenChange={handleOpenChange} triggerId={triggerId}>
           <Popover.Content {...args} style={{ width: 280 }}>
-            <Heading size="3" style={{ marginBottom: 8 }}>
+            <Typography.Heading size="3" style={{ marginBottom: 8 }}>
               Notifications
-            </Heading>
-            <Text size="2" color="gray">
+            </Typography.Heading>
+            <Typography.Text size="2" color="gray">
               You are all caught up. Good job!
-            </Text>
+            </Typography.Text>
           </Popover.Content>
         </Popover.Root>
       </div>
@@ -505,11 +503,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          Use the <Code>anchor</Code> prop to position the popover relative to a different element than the trigger.
-          This is useful for tooltips on specific parts of a component, or when you want visual separation between the
-          trigger and the anchored content.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          Use the <Typography.Code>anchor</Typography.Code> prop to position the popover relative to a different element
+          than the trigger. This is useful for tooltips on specific parts of a component, or when you want visual
+          separation between the trigger and the anchored content.
+        </Typography.Text>
 
         <div
           style={{
@@ -526,12 +524,12 @@ export default {
               <Button>Edit Profile</Button>
             </Popover.Trigger>
             <Popover.Content {...args} anchor={anchor} side="top" align="start">
-              <Heading size="3" style={{ marginBottom: 8 }}>
+              <Typography.Heading size="3" style={{ marginBottom: 8 }}>
                 Profile Picture
-              </Heading>
-              <Text size="2" color="gray">
+              </Typography.Heading>
+              <Typography.Text size="2" color="gray">
                 Click to upload a new profile picture. Recommended size: 400×400px.
-              </Text>
+              </Typography.Text>
             </Popover.Content>
           </Popover.Root>
 
@@ -545,9 +543,9 @@ export default {
           </div>
         </div>
 
-        <Text size="1" color="gray">
+        <Typography.Text size="1" color="gray">
           The button triggers the popover, but it anchors to the avatar element instead.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -561,10 +559,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          The <Code>disableAnchorTracking</Code> prop controls whether the popover repositions when the anchor element
-          moves due to layout changes (not scrolling). Open both popovers and click the button to move the anchors.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          The <Typography.Code>disableAnchorTracking</Typography.Code> prop controls whether the popover repositions
+          when the anchor element moves due to layout changes (not scrolling). Open both popovers and click the button
+          to move the anchors.
+        </Typography.Text>
 
         <Button size="1" onClick={() => setPosition((p) => (p === 0 ? 50 : 0))}>
           Move anchors
@@ -572,12 +571,12 @@ export default {
 
         <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Default (tracking enabled)
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Popover follows when anchor moves
-            </Text>
+            </Typography.Text>
             <div
               style={{
                 width: 200,
@@ -601,19 +600,19 @@ export default {
                   </Button>
                 </Popover.Trigger>
                 <Popover.Content {...args} side="bottom">
-                  <Text size="2">Follows anchor movement</Text>
+                  <Typography.Text size="2">Follows anchor movement</Typography.Text>
                 </Popover.Content>
               </Popover.Root>
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               disableAnchorTracking=true
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Popover stays in original position
-            </Text>
+            </Typography.Text>
             <div
               style={{
                 width: 200,
@@ -637,7 +636,7 @@ export default {
                   </Button>
                 </Popover.Trigger>
                 <Popover.Content {...args} disableAnchorTracking side="bottom">
-                  <Text size="2">Stays in place</Text>
+                  <Typography.Text size="2">Stays in place</Typography.Text>
                 </Popover.Content>
               </Popover.Root>
             </div>
@@ -654,51 +653,51 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          The <Code>sticky</Code> prop controls whether the popover stays visible in the viewport when the anchor is
-          scrolled out of view. Open the popover then scroll this page to see the effect.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          The <Typography.Code>sticky</Typography.Code> prop controls whether the popover stays visible in the viewport
+          when the anchor is scrolled out of view. Open the popover then scroll this page to see the effect.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-6)', marginTop: 'var(--space-4)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               sticky=false (default)
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 200 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 200 }}>
               Popover hides when anchor leaves viewport
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open Popover</Button>
               </Popover.Trigger>
               <Popover.Content {...args} sticky={false} side="right">
-                <Text size="2">I hide when anchor leaves viewport</Text>
+                <Typography.Text size="2">I hide when anchor leaves viewport</Typography.Text>
               </Popover.Content>
             </Popover.Root>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               sticky=true
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 200 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 200 }}>
               Popover stays visible at viewport edge
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open Popover</Button>
               </Popover.Trigger>
               <Popover.Content {...args} sticky={true} side="right">
-                <Text size="2">I stay visible at the viewport edge</Text>
+                <Typography.Text size="2">I stay visible at the viewport edge</Typography.Text>
               </Popover.Content>
             </Popover.Root>
           </div>
         </div>
 
         <div style={{ height: '150vh' }} />
-        <Text size="1" color="gray">
+        <Typography.Text size="1" color="gray">
           ↑ Scroll back up to see the buttons
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -712,16 +711,17 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          The <Code>collisionBoundary</Code> prop defines the area within which the popover should stay. By default,
-          it&apos;s the viewport. You can set it to a specific element to constrain the popover within that container.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          The <Typography.Code>collisionBoundary</Typography.Code> prop defines the area within which the popover should
+          stay. By default, it&apos;s the viewport. You can set it to a specific element to constrain the popover within
+          that container.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Default (viewport boundary)
-            </Text>
+            </Typography.Text>
             <div
               style={{
                 width: 250,
@@ -739,16 +739,16 @@ export default {
                   <Button size="1">Open (prefers bottom)</Button>
                 </Popover.Trigger>
                 <Popover.Content {...args} side="bottom">
-                  <Text size="2">May extend outside the dashed box</Text>
+                  <Typography.Text size="2">May extend outside the dashed box</Typography.Text>
                 </Popover.Content>
               </Popover.Root>
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Custom boundary (dashed box)
-            </Text>
+            </Typography.Text>
             <div
               ref={setBoundary}
               style={{
@@ -767,7 +767,7 @@ export default {
                   <Button size="1">Open (prefers bottom)</Button>
                 </Popover.Trigger>
                 <Popover.Content {...args} side="bottom" collisionBoundary={boundary ?? undefined}>
-                  <Text size="2">Stays within the dashed box</Text>
+                  <Typography.Text size="2">Stays within the dashed box</Typography.Text>
                 </Popover.Content>
               </Popover.Root>
             </div>
@@ -786,10 +786,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          The <Code>collisionAvoidance</Code> prop controls how the popover avoids collisions with the boundary. You can
-          configure behavior for both the <Code>side</Code> axis (flip or shift) and the <Code>align</Code> axis.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          The <Typography.Code>collisionAvoidance</Typography.Code> prop controls how the popover avoids collisions with
+          the boundary. You can configure behavior for both the <Typography.Code>side</Typography.Code> axis (flip or
+          shift) and the <Typography.Code>align</Typography.Code> axis.
+        </Typography.Text>
 
         <div
           ref={setBoundary}
@@ -803,12 +804,12 @@ export default {
           }}
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               side: "flip" (default)
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 150 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 150 }}>
               Flips to opposite side when there&apos;s not enough space
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
@@ -819,18 +820,18 @@ export default {
                 collisionBoundary={boundary ?? undefined}
                 collisionAvoidance={{ side: 'flip', align: 'shift' }}
               >
-                <Text size="2">Flips to top if no space below</Text>
+                <Typography.Text size="2">Flips to top if no space below</Typography.Text>
               </Popover.Content>
             </Popover.Root>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               side: "shift"
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 150 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 150 }}>
               Shifts along the side instead of flipping
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
@@ -841,18 +842,18 @@ export default {
                 collisionBoundary={boundary ?? undefined}
                 collisionAvoidance={{ side: 'shift', align: 'shift' }}
               >
-                <Text size="2">Shifts position, stays on same side</Text>
+                <Typography.Text size="2">Shifts position, stays on same side</Typography.Text>
               </Popover.Content>
             </Popover.Root>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               side: "none"
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 150 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 150 }}>
               No collision avoidance on side axis
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
@@ -863,16 +864,16 @@ export default {
                 collisionBoundary={boundary ?? undefined}
                 collisionAvoidance={{ side: 'none', align: 'shift' }}
               >
-                <Text size="2">Stays on preferred side regardless</Text>
+                <Typography.Text size="2">Stays on preferred side regardless</Typography.Text>
               </Popover.Content>
             </Popover.Root>
           </div>
         </div>
 
-        <Text size="1" color="gray">
+        <Typography.Text size="1" color="gray">
           The dashed box is set as the collision boundary. Try positioning your browser so the triggers are near the
           edge of the boundary.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -884,59 +885,60 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          The <Code>modal</Code> prop on <Code>Popover.Root</Code> controls how the popover interacts with the rest of
-          the page. Open each popover and try interacting with the input below.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          The <Typography.Code>modal</Typography.Code> prop on <Typography.Code>Popover.Root</Typography.Code> controls
+          how the popover interacts with the rest of the page. Open each popover and try interacting with the input
+          below.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               modal=false (default)
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               No restrictions. You can interact with elements outside the popover.
-            </Text>
+            </Typography.Text>
             <Popover.Root modal={false}>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
               </Popover.Trigger>
               <Popover.Content {...args}>
-                <Text size="2">Click outside or interact with other elements freely.</Text>
+                <Typography.Text size="2">Click outside or interact with other elements freely.</Typography.Text>
               </Popover.Content>
             </Popover.Root>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               modal=true
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Full modal: scroll locked, outside interactions disabled, focus trapped.
-            </Text>
+            </Typography.Text>
             <Popover.Root modal={true}>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
               </Popover.Trigger>
               <Popover.Content {...args}>
-                <Text size="2">Page scroll is locked. Click outside to close.</Text>
+                <Typography.Text size="2">Page scroll is locked. Click outside to close.</Typography.Text>
               </Popover.Content>
             </Popover.Root>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               modal="trap-focus"
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Focus trapped, but scroll allowed and outside clicks work.
-            </Text>
+            </Typography.Text>
             <Popover.Root modal="trap-focus">
               <Popover.Trigger>
                 <Button size="1">Open</Button>
               </Popover.Trigger>
               <Popover.Content {...args}>
-                <Text size="2">Focus is trapped but you can scroll the page.</Text>
+                <Typography.Text size="2">Focus is trapped but you can scroll the page.</Typography.Text>
               </Popover.Content>
             </Popover.Root>
           </div>
@@ -953,16 +955,16 @@ export default {
             gap: 'var(--space-2)',
           }}
         >
-          <Text size="1" weight="medium">
+          <Typography.Text size="1" weight="medium">
             Test interaction area
-          </Text>
-          <TextField.Input placeholder="Try to focus this input while popover is open..." />
+          </Typography.Text>
+          <Input.Control placeholder="Try to focus this input while popover is open..." />
         </div>
 
         <div style={{ height: '100vh' }} />
-        <Text size="1" color="gray">
+        <Typography.Text size="1" color="gray">
           ↑ Extra space to test scroll locking with modal=true
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -987,10 +989,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          Compare <Code>onOpenChange</Code> (fires immediately) vs <Code>onOpenChangeComplete</Code> (fires after
-          animations complete). Open and close the popover to see the timing difference.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          Compare <Typography.Code>onOpenChange</Typography.Code> (fires immediately) vs{' '}
+          <Typography.Code>onOpenChangeComplete</Typography.Code> (fires after animations complete). Open and close the
+          popover to see the timing difference.
+        </Typography.Text>
 
         <Popover.Root
           onOpenChange={(open) => addLog(`onOpenChange: ${open ? 'opening' : 'closing'}`)}
@@ -1000,12 +1003,12 @@ export default {
             <Button>Toggle Popover</Button>
           </Popover.Trigger>
           <Popover.Content {...args}>
-            <Heading size="3" style={{ marginBottom: 8 }}>
+            <Typography.Heading size="3" style={{ marginBottom: 8 }}>
               Animated Popover
-            </Heading>
-            <Text size="2" color="gray">
+            </Typography.Heading>
+            <Typography.Text size="2" color="gray">
               Watch the event log to see callback timing.
-            </Text>
+            </Typography.Text>
           </Popover.Content>
         </Popover.Root>
 
@@ -1019,13 +1022,13 @@ export default {
             minHeight: 200,
           }}
         >
-          <Text size="1" weight="medium" style={{ marginBottom: 8, display: 'block' }}>
+          <Typography.Text size="1" weight="medium" style={{ marginBottom: 8, display: 'block' }}>
             Event Log:
-          </Text>
+          </Typography.Text>
           {logs.length === 0 ? (
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               Open/close the popover to see events...
-            </Text>
+            </Typography.Text>
           ) : (
             logs.map((log, i) => (
               <div key={i} style={{ color: log.includes('Complete') ? 'var(--accent-900)' : 'var(--gray-900)' }}>
@@ -1035,11 +1038,11 @@ export default {
           )}
         </div>
 
-        <Text size="1" color="gray">
-          <Code>onOpenChange</Code> fires instantly when state changes.
+        <Typography.Text size="1" color="gray">
+          <Typography.Code>onOpenChange</Typography.Code> fires instantly when state changes.
           <br />
-          <Code>onOpenChangeComplete</Code> fires after the enter/exit animation finishes.
-        </Text>
+          <Typography.Code>onOpenChangeComplete</Typography.Code> fires after the enter/exit animation finishes.
+        </Typography.Text>
       </div>
     );
   },
@@ -1077,16 +1080,17 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          The <Code>actionsRef</Code> prop provides imperative control over the popover. Use <Code>close()</Code> to
-          programmatically close the popover after a form submission or async action completes.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          The <Typography.Code>actionsRef</Typography.Code> prop provides imperative control over the popover. Use{' '}
+          <Typography.Code>close()</Typography.Code> to programmatically close the popover after a form submission or
+          async action completes.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Newsletter Signup (auto-closes on success)
-            </Text>
+            </Typography.Text>
             <Popover.Root actionsRef={actionsRef}>
               <Popover.Trigger>
                 <Button>Subscribe to Newsletter</Button>
@@ -1094,20 +1098,20 @@ export default {
               <Popover.Content {...args} style={{ width: 280 }}>
                 {status === 'success' ? (
                   <div style={{ textAlign: 'center', padding: 'var(--space-2)' }}>
-                    <Text size="2" color="green" weight="medium">
+                    <Typography.Text size="2" color="green" weight="medium">
                       ✓ Successfully subscribed!
-                    </Text>
+                    </Typography.Text>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
-                    <Heading size="3" style={{ marginBottom: 8 }}>
+                    <Typography.Heading size="3" style={{ marginBottom: 8 }}>
                       Stay Updated
-                    </Heading>
-                    <Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
+                    </Typography.Heading>
+                    <Typography.Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
                       Get the latest news delivered to your inbox.
-                    </Text>
+                    </Typography.Text>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                      <TextField.Input
+                      <Input.Control
                         type="email"
                         placeholder="Enter your email"
                         value={email}
@@ -1125,16 +1129,16 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Quick Actions Menu
-            </Text>
+            </Typography.Text>
             <QuickActionsDemo args={args} />
           </div>
         </div>
 
-        <Text size="1" color="gray">
+        <Typography.Text size="1" color="gray">
           The popover closes automatically after successful form submission or when an action completes.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -1149,25 +1153,25 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          The <Code>finalFocus</Code> prop controls where focus returns after the popover closes. By default, focus
-          returns to the trigger element.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          The <Typography.Code>finalFocus</Typography.Code> prop controls where focus returns after the popover closes.
+          By default, focus returns to the trigger element.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Default behavior
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Focus returns to the trigger after close
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
               </Popover.Trigger>
               <Popover.Content {...args}>
-                <Text size="2">Close me and focus returns to the trigger button.</Text>
+                <Typography.Text size="2">Close me and focus returns to the trigger button.</Typography.Text>
                 <Popover.Close>
                   <Button size="1" variant="soft" style={{ marginTop: 12 }}>
                     Close
@@ -1178,18 +1182,18 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               finalFocus=false
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Focus is not moved after close
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
               </Popover.Trigger>
               <Popover.Content {...args} finalFocus={false}>
-                <Text size="2">Close me and focus stays where it is (not moved).</Text>
+                <Typography.Text size="2">Close me and focus stays where it is (not moved).</Typography.Text>
                 <Popover.Close>
                   <Button size="1" variant="soft" style={{ marginTop: 12 }}>
                     Close
@@ -1200,19 +1204,19 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               finalFocus={'{ref}'}
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Focus moves to a specific element
-            </Text>
+            </Typography.Text>
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Popover.Root>
                 <Popover.Trigger>
                   <Button size="1">Open</Button>
                 </Popover.Trigger>
                 <Popover.Content {...args} finalFocus={alternateRef}>
-                  <Text size="2">Close me and focus moves to the &quot;Target&quot; button.</Text>
+                  <Typography.Text size="2">Close me and focus moves to the &quot;Target&quot; button.</Typography.Text>
                   <Popover.Close>
                     <Button size="1" variant="soft" style={{ marginTop: 12 }}>
                       Close
@@ -1227,12 +1231,12 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               finalFocus={'{function}'}
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Dynamic focus based on close method
-            </Text>
+            </Typography.Text>
             <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
               <Popover.Root>
                 <Popover.Trigger>
@@ -1248,11 +1252,11 @@ export default {
                     return true; // Default: return to trigger
                   }}
                 >
-                  <Text size="2">
-                    Press <Code>Escape</Code> → focuses the input.
+                  <Typography.Text size="2">
+                    Press <Typography.Code>Escape</Typography.Code> → focuses the input.
                     <br />
                     Click outside → returns to trigger.
-                  </Text>
+                  </Typography.Text>
                   <Popover.Close>
                     <Button size="1" variant="soft" style={{ marginTop: 12 }}>
                       Close
@@ -1275,16 +1279,17 @@ export default {
             gap: 'var(--space-2)',
           }}
         >
-          <Text size="1" weight="medium">
+          <Typography.Text size="1" weight="medium">
             Focus target for dynamic example
-          </Text>
-          <TextField.Input ref={inputRef} placeholder="Focus lands here when pressing Escape..." />
+          </Typography.Text>
+          <Input.Control ref={inputRef} placeholder="Focus lands here when pressing Escape..." />
         </div>
 
-        <Text size="1" color="gray">
-          The <Code>finalFocus</Code> function receives the interaction type (<Code>keyboard</Code>,{' '}
-          <Code>pointer</Code>, <Code>touch</Code>) so you can customize behavior based on how the popover was closed.
-        </Text>
+        <Typography.Text size="1" color="gray">
+          The <Typography.Code>finalFocus</Typography.Code> function receives the interaction type (
+          <Typography.Code>keyboard</Typography.Code>, <Typography.Code>pointer</Typography.Code>,{' '}
+          <Typography.Code>touch</Typography.Code>) so you can customize behavior based on how the popover was closed.
+        </Typography.Text>
       </div>
     );
   },
@@ -1300,30 +1305,30 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text size="2" color="gray">
-          The <Code>initialFocus</Code> prop controls which element receives focus when the popover opens. By default,
-          focus moves to the first focusable element inside the popover.
-        </Text>
+        <Typography.Text size="2" color="gray">
+          The <Typography.Code>initialFocus</Typography.Code> prop controls which element receives focus when the
+          popover opens. By default, focus moves to the first focusable element inside the popover.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Default behavior
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               First focusable element receives focus
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
               </Popover.Trigger>
               <Popover.Content {...args} style={{ width: 260 }}>
-                <Heading size="3" style={{ marginBottom: 8 }}>
+                <Typography.Heading size="3" style={{ marginBottom: 8 }}>
                   Edit Item
-                </Heading>
+                </Typography.Heading>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                  <TextField.Input placeholder="Item name" defaultValue="My Item" />
-                  <TextArea placeholder="Description" defaultValue="A short description..." />
+                  <Input.Control placeholder="Item name" defaultValue="My Item" />
+                  <Textarea placeholder="Description" defaultValue="A short description..." />
                   <div style={{ display: 'flex', gap: 'var(--space-2)', justifyContent: 'flex-end' }}>
                     <Popover.Close>
                       <Button size="1" variant="soft">
@@ -1338,24 +1343,24 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               initialFocus=false
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               No element is focused on open
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Open</Button>
               </Popover.Trigger>
               <Popover.Content {...args} initialFocus={false} style={{ width: 260 }}>
-                <Heading size="3" style={{ marginBottom: 8 }}>
+                <Typography.Heading size="3" style={{ marginBottom: 8 }}>
                   Information
-                </Heading>
-                <Text size="2" color="gray">
+                </Typography.Heading>
+                <Typography.Text size="2" color="gray">
                   This is a read-only info panel. No element receives focus when it opens, which can be useful for
                   non-interactive popovers.
-                </Text>
+                </Typography.Text>
                 <Popover.Close>
                   <Button size="1" variant="soft" style={{ marginTop: 12 }}>
                     Got it
@@ -1366,12 +1371,12 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               initialFocus={'{ref}'}
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Focus a specific element (the Delete button)
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1" color="red" variant="soft">
@@ -1379,12 +1384,12 @@ export default {
                 </Button>
               </Popover.Trigger>
               <Popover.Content {...args} initialFocus={deleteButtonRef} style={{ width: 260 }}>
-                <Heading size="3" style={{ marginBottom: 8 }}>
+                <Typography.Heading size="3" style={{ marginBottom: 8 }}>
                   Confirm Deletion
-                </Heading>
-                <Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
+                </Typography.Heading>
+                <Typography.Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
                   Are you sure you want to delete this item? This action cannot be undone.
-                </Text>
+                </Typography.Text>
                 <div style={{ display: 'flex', gap: 'var(--space-2)', justifyContent: 'flex-end' }}>
                   <Popover.Close>
                     <Button size="1" variant="soft">
@@ -1402,12 +1407,12 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               initialFocus={'{function}'}
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Dynamic focus based on open method
-            </Text>
+            </Typography.Text>
             <Popover.Root>
               <Popover.Trigger>
                 <Button size="1">Search</Button>
@@ -1424,11 +1429,11 @@ export default {
                 }}
                 style={{ width: 280 }}
               >
-                <Heading size="3" style={{ marginBottom: 8 }}>
+                <Typography.Heading size="3" style={{ marginBottom: 8 }}>
                   Quick Search
-                </Heading>
+                </Typography.Heading>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-                  <TextField.Input ref={searchInputRef} placeholder="Search..." />
+                  <Input.Control ref={searchInputRef} placeholder="Search..." />
                   <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
                     <Button ref={recentButtonRef} size="1" variant="soft" style={{ flex: 1 }}>
                       Recent
@@ -1437,22 +1442,23 @@ export default {
                       Favorites
                     </Button>
                   </div>
-                  <Text size="1" color="gray">
+                  <Typography.Text size="1" color="gray">
                     Keyboard open → focuses input
                     <br />
                     Click open → focuses first button
-                  </Text>
+                  </Typography.Text>
                 </div>
               </Popover.Content>
             </Popover.Root>
           </div>
         </div>
 
-        <Text size="1" color="gray">
-          The <Code>initialFocus</Code> function receives the interaction type (<Code>keyboard</Code>,{' '}
-          <Code>pointer</Code>, <Code>touch</Code>) so you can customize initial focus based on how the popover was
+        <Typography.Text size="1" color="gray">
+          The <Typography.Code>initialFocus</Typography.Code> function receives the interaction type (
+          <Typography.Code>keyboard</Typography.Code>, <Typography.Code>pointer</Typography.Code>,{' '}
+          <Typography.Code>touch</Typography.Code>) so you can customize initial focus based on how the popover was
           opened.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },

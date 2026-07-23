@@ -1,0 +1,103 @@
+.fui-NavigationMenuList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fui-NavigationMenuTrigger,
+.fui-NavigationMenuList > .fui-NavigationMenuItem > .fui-NavigationMenuLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: var(--space-6);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-2);
+  font-size: var(--font-size-2);
+  color: var(--gray-alpha-900);
+  text-decoration: none;
+  cursor: default;
+  user-select: none;
+  white-space: nowrap;
+
+  &:where(:hover) {
+    background-color: var(--gray-alpha-100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-root);
+    outline-offset: -1px;
+  }
+}
+
+.fui-NavigationMenuTrigger[data-popup-open] {
+  background-color: var(--gray-alpha-200);
+  color: var(--gray-950);
+}
+
+.fui-NavigationMenuTriggerIcon {
+  display: inline-flex;
+  transform: rotate(90deg);
+  transition: transform 200ms ease;
+
+  &[data-open] {
+    transform: rotate(-90deg);
+  }
+}
+
+.fui-NavigationMenuPositioner {
+  z-index: 50;
+}
+
+.fui-NavigationMenuPopup {
+  border-radius: var(--radius-3);
+  background-color: var(--color-panel-solid);
+  box-shadow: var(--shadow-4);
+  overflow: hidden;
+  transition: width 200ms ease, height 200ms ease;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+
+.fui-NavigationMenuViewport {
+  position: relative;
+  overflow: hidden;
+}
+
+.fui-NavigationMenuContent {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  min-width: 220px;
+}
+
+.fui-NavigationMenuContent .fui-NavigationMenuLink {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-2);
+  font-size: var(--font-size-2);
+  color: var(--gray-alpha-900);
+  text-decoration: none;
+
+  &:where(:hover) {
+    background-color: var(--gray-alpha-100);
+    color: var(--gray-950);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-root);
+    outline-offset: -1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fui-NavigationMenuPopup,
+  .fui-NavigationMenuTriggerIcon {
+    transition: none;
+  }
+}

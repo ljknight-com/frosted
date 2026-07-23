@@ -80,7 +80,7 @@ const NumberFieldRoot = (props: NumberFieldRootProps) => {
           role="group"
           className={classNames(
             'fui-NumberFieldRoot',
-            'fui-TextFieldRoot',
+            'fui-InputRoot',
             `fui-r-size-${size}`,
             `fui-variant-${variant}`,
             `fui-button-layout-${buttonLayout}`,
@@ -160,7 +160,7 @@ const NumberFieldInput = React.forwardRef<HTMLInputElement, NumberFieldInputProp
       ref={forwardedRef}
       className={classNames(
         'fui-NumberFieldInput',
-        'fui-TextFieldInput',
+        'fui-InputControl',
         className,
         `fui-r-size-${size}`,
         `fui-variant-${variant}`,

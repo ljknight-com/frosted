@@ -1,0 +1,74 @@
+.fui-InputOTPRoot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fui-InputOTPGroup {
+  display: flex;
+  align-items: center;
+  --otp-focus-color: var(--color-focus-root);
+}
+
+/* Slots are real <input> elements (Base UI InputOTP.Input) */
+.fui-InputOTPSlot {
+  position: relative;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  width: 40px;
+
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  border-style: solid;
+  border-width: 0;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: inherit;
+  caret-color: var(--gray-alpha-800);
+  outline: none;
+  transition-property: outline;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+
+  box-shadow: var(--shadow-1);
+
+  background-color: var(--color-surface);
+  border-color: transparent;
+  font-variant-numeric: tabular-nums slashed-zero;
+  &:where(:first-child) {
+    border-left-width: 1px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  &:where(:last-child) {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  &:where(:focus, [data-otp-active='true']) {
+    outline: 2px solid var(--otp-focus-color);
+    z-index: 1;
+  }
+}
+
+.fui-InputOTPSeparator {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.fui-InputOTPSeparator::before {
+  content: '';
+  width: 10px;
+  height: 4px;
+  border-radius: 2px;
+  box-shadow: var(--shadow-1);
+}

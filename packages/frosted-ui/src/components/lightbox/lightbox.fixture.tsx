@@ -1,18 +1,6 @@
 import { ChevronLeft, ChevronRight, Globe, Heart, Mail, MessageSquare, Play, Upload, X } from 'lucide-react';
 import React, { useRef, useState } from 'react';
-import {
-  Avatar,
-  Badge,
-  Button,
-  Heading,
-  IconButton,
-  Lightbox,
-  Link,
-  ScrollGallery,
-  Separator,
-  Text,
-  Tooltip,
-} from '..';
+import { Avatar, Badge, Button, Carousel, IconButton, Lightbox, Link, Separator, Tooltip, Typography } from '..';
 import type { LightboxZoomRef } from './lightbox-zoom';
 
 const images = [
@@ -91,7 +79,7 @@ const NavControls = () => (
 
     <Lightbox.Counter>
       {({ current, total }) => (
-        <Text
+        <Typography.Text
           size="2"
           style={{
             color: 'rgba(255,255,255,0.7)',
@@ -101,7 +89,7 @@ const NavControls = () => (
           }}
         >
           {current} / {total}
-        </Text>
+        </Typography.Text>
       )}
     </Lightbox.Counter>
 
@@ -118,7 +106,7 @@ const NavControls = () => (
 const CaptionText = () => (
   <Lightbox.Caption
     render={
-      <Text
+      <Typography.Text
         size="2"
         style={{
           color: 'rgba(255,255,255,0.8)',
@@ -250,15 +238,15 @@ function ControlledStory() {
   return (
     <div>
       <div style={{ display: 'flex', gap: 'var(--space-3)', marginBottom: 'var(--space-4)', alignItems: 'center' }}>
-        <Text size="2">
+        <Typography.Text size="2">
           Active: <Badge size="1">{value}</Badge>
-        </Text>
-        <Text size="2">
+        </Typography.Text>
+        <Typography.Text size="2">
           Open:{' '}
           <Badge size="1" color={open ? 'green' : 'gray'}>
             {String(open)}
           </Badge>
-        </Text>
+        </Typography.Text>
       </div>
 
       <Lightbox.Root open={open} onOpenChange={setOpen} value={value} onValueChange={(v) => setValue(v)} viewTransition>
@@ -303,9 +291,9 @@ function ImperativeAPIStory() {
 
   return (
     <div>
-      <Heading size="3" style={{ marginBottom: 'var(--space-3)' }}>
+      <Typography.Heading size="3" style={{ marginBottom: 'var(--space-3)' }}>
         Open by index
-      </Heading>
+      </Typography.Heading>
 
       <div style={{ display: 'flex', gap: 'var(--space-2)', marginBottom: 'var(--space-3)', flexWrap: 'wrap' }}>
         {images.map((_, i) => (
@@ -359,9 +347,9 @@ function LazyLoadingStory() {
                   <div
                     style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 200, height: 150 }}
                   >
-                    <Text size="2" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                    <Typography.Text size="2" style={{ color: 'rgba(255,255,255,0.5)' }}>
                       Loading…
-                    </Text>
+                    </Typography.Text>
                   </div>
                 )
               }
@@ -392,9 +380,9 @@ function WithScrollGalleryStory() {
       <Lightbox.Content aria-label="Photo gallery with scroll gallery">
         <CloseButton />
 
-        <ScrollGallery.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)}>
+        <Carousel.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)}>
           <Lightbox.ItemGroup
-            render={<ScrollGallery.Viewport aria-label="Full-size images" />}
+            render={<Carousel.Viewport aria-label="Full-size images" />}
             preload={images.length}
             style={{
               overflowX: 'auto',
@@ -408,7 +396,7 @@ function WithScrollGalleryStory() {
                 key={img.id}
                 index={i}
                 caption={img.caption}
-                render={<ScrollGallery.Item />}
+                render={<Carousel.Item />}
                 style={{
                   position: 'relative',
                   inset: 'auto',
@@ -431,7 +419,7 @@ function WithScrollGalleryStory() {
 
           <CaptionText />
 
-          <ScrollGallery.ScrollMarkerGroup
+          <Carousel.ScrollMarkerGroup
             aria-label="Photo thumbnails"
             style={{
               display: 'flex',
@@ -441,7 +429,7 @@ function WithScrollGalleryStory() {
             }}
           >
             {images.map((img, i) => (
-              <ScrollGallery.ScrollMarker
+              <Carousel.ScrollMarker
                 key={img.id}
                 index={i}
                 render={(props, state) => (
@@ -469,8 +457,8 @@ function WithScrollGalleryStory() {
                 )}
               />
             ))}
-          </ScrollGallery.ScrollMarkerGroup>
-        </ScrollGallery.Root>
+          </Carousel.ScrollMarkerGroup>
+        </Carousel.Root>
       </Lightbox.Content>
     </Lightbox.Root>
   );
@@ -542,9 +530,14 @@ const ArticleImage = ({
       <Lightbox.Trigger index={index} style={{ ...triggerStyle, display: 'block', width: '100%' }}>
         <img src={image.inline} alt={image.alt} style={{ width: '100%', borderRadius: 12, display: 'block' }} />
       </Lightbox.Trigger>
-      <Text render={<figcaption />} size="1" color="gray" style={{ marginTop: 'var(--space-2)', fontStyle: 'italic' }}>
+      <Typography.Text
+        render={<figcaption />}
+        size="1"
+        color="gray"
+        style={{ marginTop: 'var(--space-2)', fontStyle: 'italic' }}
+      >
         {image.caption}
-      </Text>
+      </Typography.Text>
     </figure>
   );
 };
@@ -553,115 +546,124 @@ function WithinArticleStory() {
   return (
     <Lightbox.Root viewTransition scrollTriggerIntoView={{ type: 'onChange', behavior: 'smooth' }}>
       <article style={{ maxWidth: 680, margin: '0 auto', lineHeight: 1.7 }}>
-        <Heading size="7" style={{ marginBottom: 'var(--space-2)' }}>
+        <Typography.Heading size="7" style={{ marginBottom: 'var(--space-2)' }}>
           Lofoten: Where the Mountains Meet the Sea
-        </Heading>
-        <Text size="2" color="gray" style={{ display: 'block', marginBottom: 'var(--space-5)' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ display: 'block', marginBottom: 'var(--space-5)' }}>
           A photographic journey through Norway's most dramatic archipelago
-        </Text>
+        </Typography.Text>
 
         <Separator size="4" style={{ marginBottom: 'var(--space-5)' }} />
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           Rising abruptly from the Norwegian Sea, the Lofoten Islands are a study in contrasts. Jagged granite peaks
           soar above sheltered fishing villages, while white-sand beaches sit beneath Arctic skies. Despite lying well
           above the Arctic Circle, Lofoten enjoys a remarkably mild climate thanks to the Gulf Stream — winter
           temperatures rarely drop below -5°C, and summer brings the midnight sun for weeks on end.
-        </Text>
+        </Typography.Text>
 
         <ArticleImage index={0} image={articleImages[0]} />
 
         <ArticleImage index={1} image={articleImages[1]} float="right" />
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           The archipelago stretches roughly 200 kilometres from the mainland, connected by a series of bridges and
           tunnels that make it possible to drive the entire chain. Along the way, every bend in the road reveals another
           postcard vista — a red rorbuer reflected in glassy water, a dramatic headland catching the last light.
-        </Text>
+        </Typography.Text>
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           Fishing has shaped these islands for over a thousand years. The annual cod migration — the skrei — brought
           wealth and culture to even the most remote settlements. Today, wooden drying racks (hjell) still dominate the
           landscape from February to June, their skeletal frames hung with thousands of split cod destined to become
           stockfish, Norway's oldest export.
-        </Text>
+        </Typography.Text>
 
-        <Heading size="5" style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)', clear: 'both' }}>
+        <Typography.Heading
+          size="5"
+          style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)', clear: 'both' }}
+        >
           The Mountains
-        </Heading>
+        </Typography.Heading>
 
         <ArticleImage index={2} image={articleImages[2]} float="left" />
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           Lofoten's peaks are modest by Alpine standards — the highest, Higravstinden, reaches just 1,161 metres — but
           their proximity to the sea makes them feel immense. Ridgelines launch almost vertically from the shoreline,
           and many of the most rewarding hikes start at sea level. Reinebringen, perhaps the most famous, climbs 448
           metres via a recently built Sherpa staircase and rewards hikers with a panorama that frequently appears on
           "best views in the world" lists.
-        </Text>
+        </Typography.Text>
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           In winter, the mountains take on an entirely different character. Snow softens the granite, avalanche paths
           stripe the slopes, and the low-angle Arctic light paints everything in shades of pink and blue. Ski touring is
           increasingly popular, with descents that end at the water's edge — you can literally ski from summit to sea.
-        </Text>
+        </Typography.Text>
 
-        <Heading size="5" style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)', clear: 'both' }}>
+        <Typography.Heading
+          size="5"
+          style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)', clear: 'both' }}
+        >
           The Beaches
-        </Heading>
+        </Typography.Heading>
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           It seems improbable, but some of the world's most beautiful beaches lie above 68°N. Haukland, Uttakleiv, and
           Kvalvika could be mistaken for the Caribbean if it weren't for the snow-dusted mountains framing them. The
           water's turquoise tint is real — caused by the white sand bottom and the clarity of the Arctic Sea — though a
           swim will quickly remind you that this is not, in fact, the tropics.
-        </Text>
+        </Typography.Text>
 
         <ArticleImage index={3} image={articleImages[3]} />
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           Surfers have discovered these beaches too. Unstad, on the northern coast, has become one of the world's most
           northerly surf spots, offering consistent swells and a backdrop that no other break on the planet can match.
           In winter, hardy surfers ride waves under the northern lights.
-        </Text>
+        </Typography.Text>
 
-        <Heading size="5" style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)' }}>
+        <Typography.Heading size="5" style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)' }}>
           The Light
-        </Heading>
+        </Typography.Heading>
 
         <ArticleImage index={4} image={articleImages[4]} float="right" />
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           Photographers flock to Lofoten for the light. From late May to mid-July, the sun never sets, casting a warm
           golden glow that rolls around the horizon through the night. In the polar night of December and January, the
           sun never rises, but the twilight hours produce extraordinary pastel skies that last for hours. And then
           there's the aurora.
-        </Text>
+        </Typography.Text>
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           From September through March, the northern lights dance across Lofoten's skies with remarkable frequency. The
           islands' position within the auroral oval, combined with their relatively dry climate and dark skies, makes
           them one of the best places on Earth to witness the phenomenon.
-        </Text>
+        </Typography.Text>
 
-        <Heading size="5" style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)', clear: 'both' }}>
+        <Typography.Heading
+          size="5"
+          style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-3)', clear: 'both' }}
+        >
           Looking Ahead
-        </Heading>
+        </Typography.Heading>
 
         <ArticleImage index={5} image={articleImages[5]} float="left" />
 
-        <Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
+        <Typography.Text render={<p />} size="3" style={{ marginBottom: 'var(--space-4)' }}>
           Tourism has grown rapidly in recent years, bringing both economic opportunity and environmental pressure. The
           communities of Lofoten are navigating a careful balance: welcoming visitors while preserving the pristine
           landscape and traditional way of life that make the islands special. Sustainable tourism initiatives, strict
           building codes, and a deep cultural connection to the sea offer reasons for optimism.
-        </Text>
+        </Typography.Text>
 
-        <Text render={<p />} size="3" style={{ clear: 'both' }}>
+        <Typography.Text render={<p />} size="3" style={{ clear: 'both' }}>
           Whether you come for the hiking, the fishing, the surfing, or simply to stand in awe of the scenery, Lofoten
           has a way of resetting your sense of scale. In a world that often feels thoroughly mapped and explored, these
           islands retain a wildness that is increasingly rare — and utterly unforgettable.
-        </Text>
+        </Typography.Text>
       </article>
 
       <Lightbox.Content aria-label="Article photos">
@@ -1016,9 +1018,9 @@ function ImageGrid({ imgs }: { imgs: FeedPost['images'] }) {
                   pointerEvents: 'none',
                 }}
               >
-                <Text size="6" weight="bold" style={{ color: '#fff' }}>
+                <Typography.Text size="6" weight="bold" style={{ color: '#fff' }}>
                   +{extra}
-                </Text>
+                </Typography.Text>
               </div>
             )}
           </div>
@@ -1061,23 +1063,27 @@ function FeedPostCard({ post, morphTo }: { post: FeedPost; morphTo?: 'active' | 
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
-            <Text size="2" weight="bold">
+            <Typography.Text size="2" weight="bold">
               {post.user.name}
-            </Text>
-            <Text size="2" color="gray">
+            </Typography.Text>
+            <Typography.Text size="2" color="gray">
               {post.user.handle}
-            </Text>
-            <Text size="1" color="gray">
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
               ·
-            </Text>
-            <Text size="1" color="gray">
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
               {post.time}
-            </Text>
+            </Typography.Text>
           </div>
 
-          <Text render={<p />} size="2" style={{ margin: 'var(--space-1) 0 var(--space-3)', lineHeight: 1.5 }}>
+          <Typography.Text
+            render={<p />}
+            size="2"
+            style={{ margin: 'var(--space-1) 0 var(--space-3)', lineHeight: 1.5 }}
+          >
             {post.text}
-          </Text>
+          </Typography.Text>
 
           <ImageGrid imgs={post.images} />
           <ActionBar stats={post.stats} />
@@ -1105,7 +1111,7 @@ function SocialFeedStory() {
   return (
     <div style={{ maxWidth: 560, margin: '0 auto' }}>
       <div style={{ padding: 'var(--space-4) 0 var(--space-2)', borderBottom: '1px solid var(--gray-alpha-200)' }}>
-        <Heading size="5">Home</Heading>
+        <Typography.Heading size="5">Home</Typography.Heading>
       </div>
 
       {feedPosts.map((post, i) => (
@@ -1185,9 +1191,13 @@ function ScreenCard({ screen, index }: { screen: (typeof designScreens)[number];
           alignItems: 'baseline',
         }}
       >
-        <Text size="1" weight="medium" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        <Typography.Text
+          size="1"
+          weight="medium"
+          style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+        >
           {screen.alt}
-        </Text>
+        </Typography.Text>
         <Badge size="1" variant="soft" color="gray" style={{ flexShrink: 0, marginLeft: 'var(--space-2)' }}>
           {screen.isPortrait ? 'Mobile' : 'Desktop'}
         </Badge>
@@ -1369,12 +1379,12 @@ function HeroGrid() {
 function StatItem({ value, label }: { value: string; label: string }) {
   return (
     <div style={{ textAlign: 'center' }}>
-      <Text size="6" weight="bold" style={{ display: 'block', lineHeight: 1 }}>
+      <Typography.Text size="6" weight="bold" style={{ display: 'block', lineHeight: 1 }}>
         {value}
-      </Text>
-      <Text size="2" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
+      </Typography.Text>
+      <Typography.Text size="2" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
         {label}
-      </Text>
+      </Typography.Text>
     </div>
   );
 }
@@ -1382,9 +1392,9 @@ function StatItem({ value, label }: { value: string; label: string }) {
 function RemainingPhotosGrid() {
   return (
     <div>
-      <Heading size="4" style={{ marginBottom: 'var(--space-4)' }}>
+      <Typography.Heading size="4" style={{ marginBottom: 'var(--space-4)' }}>
         All Photos
-      </Heading>
+      </Typography.Heading>
       <div
         style={{
           display: 'grid',
@@ -1410,9 +1420,9 @@ function RemainingPhotosGrid() {
                   background: 'linear-gradient(transparent, rgba(0,0,0,0.6))',
                 }}
               >
-                <Text size="1" weight="medium" style={{ color: 'white' }}>
+                <Typography.Text size="1" weight="medium" style={{ color: 'white' }}>
                   {photo.label}
-                </Text>
+                </Typography.Text>
               </div>
             </div>
           </Lightbox.Trigger>
@@ -1458,17 +1468,17 @@ function RealEstateListingStory() {
               <Badge size="1" variant="soft" color="green">
                 Active
               </Badge>
-              <Text size="1" color="gray">
+              <Typography.Text size="1" color="gray">
                 Listed 3 days ago
-              </Text>
+              </Typography.Text>
             </div>
 
-            <Heading size="7" style={{ marginBottom: 'var(--space-1)' }}>
+            <Typography.Heading size="7" style={{ marginBottom: 'var(--space-1)' }}>
               The Olive Grove Residence
-            </Heading>
-            <Text size="3" color="gray" style={{ display: 'block', marginBottom: 'var(--space-4)' }}>
+            </Typography.Heading>
+            <Typography.Text size="3" color="gray" style={{ display: 'block', marginBottom: 'var(--space-4)' }}>
               742 Hillcrest Drive, Montecito, CA 93108
-            </Text>
+            </Typography.Text>
 
             <div
               style={{
@@ -1498,22 +1508,22 @@ function RealEstateListingStory() {
               gap: 'var(--space-3)',
             }}
           >
-            <Text size="7" weight="bold" style={{ display: 'block', lineHeight: 1 }}>
+            <Typography.Text size="7" weight="bold" style={{ display: 'block', lineHeight: 1 }}>
               $4,250,000
-            </Text>
-            <Text size="2" color="gray" style={{ display: 'block' }}>
+            </Typography.Text>
+            <Typography.Text size="2" color="gray" style={{ display: 'block' }}>
               Est. $18,420/mo with 20% down
-            </Text>
+            </Typography.Text>
             <Separator size="4" />
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
               <Avatar size="3" src="https://i.pravatar.cc/150?u=agent-claire" fallback="CR" shape="circle" />
               <div>
-                <Text size="2" weight="bold" style={{ display: 'block' }}>
+                <Typography.Text size="2" weight="bold" style={{ display: 'block' }}>
                   Claire Rousseau
-                </Text>
-                <Text size="1" color="gray">
+                </Typography.Text>
+                <Typography.Text size="1" color="gray">
                   Montecito Luxury Realty
-                </Text>
+                </Typography.Text>
               </div>
             </div>
             <Button size="2" variant="solid">
@@ -1526,36 +1536,40 @@ function RealEstateListingStory() {
         </div>
 
         <div style={{ marginTop: 'var(--space-6)' }}>
-          <Heading size="4" style={{ marginBottom: 'var(--space-3)' }}>
+          <Typography.Heading size="4" style={{ marginBottom: 'var(--space-3)' }}>
             About This Property
-          </Heading>
-          <Text render={<p />} size="3" style={{ lineHeight: 1.7, marginBottom: 'var(--space-3)' }}>
+          </Typography.Heading>
+          <Typography.Text render={<p />} size="3" style={{ lineHeight: 1.7, marginBottom: 'var(--space-3)' }}>
             Perched on a sun-drenched hillside with unobstructed ocean and mountain views, The Olive Grove Residence is
             a masterful blend of contemporary architecture and Mediterranean warmth. Designed by acclaimed architect
             Rafael Mendes, the home flows seamlessly between indoor and outdoor living through walls of retractable
             glass that frame the Santa Ynez Mountains to the north and the Pacific to the south.
-          </Text>
-          <Text render={<p />} size="3" style={{ lineHeight: 1.7, marginBottom: 'var(--space-3)' }}>
+          </Typography.Text>
+          <Typography.Text render={<p />} size="3" style={{ lineHeight: 1.7, marginBottom: 'var(--space-3)' }}>
             The open-plan living and dining area features 12-foot ceilings, white oak floors, and a sculptural fireplace
             that anchors the space. The chef's kitchen is outfitted with Gaggenau appliances, a waterfall marble island,
             and a butler's pantry with wine refrigeration. Five bedroom suites are spread across two levels, with the
             primary occupying the entire upper wing — complete with a private terrace, dual walk-in closets, and a spa
             bathroom with soaking tub overlooking the garden.
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ marginTop: 'var(--space-6)' }}>
-          <Heading size="4" style={{ marginBottom: 'var(--space-3)' }}>
+          <Typography.Heading size="4" style={{ marginBottom: 'var(--space-3)' }}>
             Features &amp; Amenities
-          </Heading>
+          </Typography.Heading>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-2) var(--space-4)' }}>
             {amenities.map((a) => (
-              <Text key={a} size="2" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+              <Typography.Text
+                key={a}
+                size="2"
+                style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}
+              >
                 <span
                   style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent-700)', flexShrink: 0 }}
                 />
                 {a}
-              </Text>
+              </Typography.Text>
             ))}
           </div>
         </div>
@@ -1565,12 +1579,12 @@ function RealEstateListingStory() {
         <RemainingPhotosGrid />
 
         <div style={{ marginTop: 'var(--space-6)', textAlign: 'center' }}>
-          <Text size="2" color="gray">
+          <Typography.Text size="2" color="gray">
             {propertyPhotos.length} photos · Listing courtesy of Montecito Luxury Realty ·{' '}
             <Link href="#" size="2">
               Report this listing
             </Link>
-          </Text>
+          </Typography.Text>
         </div>
       </div>
 
@@ -1580,16 +1594,16 @@ function RealEstateListingStory() {
         <div style={{ position: 'absolute', top: 'var(--space-4)', left: 'var(--space-4)', zIndex: 1 }}>
           <Lightbox.Counter>
             {({ current, total }) => (
-              <Text size="2" style={{ color: 'rgba(255,255,255,0.7)', fontVariantNumeric: 'tabular-nums' }}>
+              <Typography.Text size="2" style={{ color: 'rgba(255,255,255,0.7)', fontVariantNumeric: 'tabular-nums' }}>
                 {current} / {total}
-              </Text>
+              </Typography.Text>
             )}
           </Lightbox.Counter>
         </div>
 
-        <ScrollGallery.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)}>
+        <Carousel.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)}>
           <Lightbox.ItemGroup
-            render={<ScrollGallery.Viewport aria-label="Property photos" />}
+            render={<Carousel.Viewport aria-label="Property photos" />}
             preload={propertyPhotos.length}
             style={{
               display: 'flex',
@@ -1606,7 +1620,7 @@ function RealEstateListingStory() {
                 key={photo.id}
                 index={i}
                 caption={`${photo.label} — The Olive Grove Residence`}
-                render={<ScrollGallery.Item />}
+                render={<Carousel.Item />}
                 style={{
                   position: 'relative',
                   inset: 'auto',
@@ -1629,7 +1643,7 @@ function RealEstateListingStory() {
 
           <CaptionText />
 
-          <ScrollGallery.ScrollMarkerGroup
+          <Carousel.ScrollMarkerGroup
             aria-label="Property photo thumbnails"
             style={{
               display: 'flex',
@@ -1642,7 +1656,7 @@ function RealEstateListingStory() {
             }}
           >
             {propertyPhotos.map((photo, i) => (
-              <ScrollGallery.ScrollMarker
+              <Carousel.ScrollMarker
                 key={photo.id}
                 index={i}
                 render={(props, state) => (
@@ -1671,8 +1685,8 @@ function RealEstateListingStory() {
                 )}
               />
             ))}
-          </ScrollGallery.ScrollMarkerGroup>
-        </ScrollGallery.Root>
+          </Carousel.ScrollMarkerGroup>
+        </Carousel.Root>
       </Lightbox.Content>
     </Lightbox.Root>
   );
@@ -1807,16 +1821,16 @@ function SwatchCard({ color, index }: { color: (typeof colorPalette)[number]; in
         }}
       />
       <div style={{ padding: 'var(--space-2) var(--space-1)' }}>
-        <Text size="2" weight="medium" style={{ display: 'block' }}>
+        <Typography.Text size="2" weight="medium" style={{ display: 'block' }}>
           {color.name}
-        </Text>
+        </Typography.Text>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             {color.family}
-          </Text>
-          <Text size="1" color="gray" style={{ fontFamily: 'var(--code-font-family)' }}>
+          </Typography.Text>
+          <Typography.Text size="1" color="gray" style={{ fontFamily: 'var(--code-font-family)' }}>
             {color.hex}
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     </Lightbox.Trigger>
@@ -1828,12 +1842,12 @@ function ColorPaletteStory() {
     <Lightbox.Root viewTransition loop>
       <div style={{ maxWidth: 780, margin: '0 auto', padding: 'var(--space-4) 0' }}>
         <div style={{ marginBottom: 'var(--space-5)' }}>
-          <Heading size="6" style={{ marginBottom: 'var(--space-1)' }}>
+          <Typography.Heading size="6" style={{ marginBottom: 'var(--space-1)' }}>
             Chromatic
-          </Heading>
-          <Text size="3" color="gray" style={{ display: 'block' }}>
+          </Typography.Heading>
+          <Typography.Text size="3" color="gray" style={{ display: 'block' }}>
             A curated palette of colors found in nature. Click any swatch to reveal its photograph.
-          </Text>
+          </Typography.Text>
         </div>
 
         <div
@@ -1908,12 +1922,15 @@ function ColorPaletteStory() {
                       flexShrink: 0,
                     }}
                   />
-                  <Text size="2" weight="medium" style={{ color: 'white' }}>
+                  <Typography.Text size="2" weight="medium" style={{ color: 'white' }}>
                     {color?.name}
-                  </Text>
-                  <Text size="2" style={{ color: 'rgba(255,255,255,0.5)', fontVariantNumeric: 'tabular-nums' }}>
+                  </Typography.Text>
+                  <Typography.Text
+                    size="2"
+                    style={{ color: 'rgba(255,255,255,0.5)', fontVariantNumeric: 'tabular-nums' }}
+                  >
                     {current} / {total}
-                  </Text>
+                  </Typography.Text>
                 </div>
               );
             }}
@@ -1958,10 +1975,10 @@ function DesignFileInspectorStory() {
           }}
         >
           <div>
-            <Heading size="6">Design System — App Screens</Heading>
-            <Text size="2" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
+            <Typography.Heading size="6">Design System — App Screens</Typography.Heading>
+            <Typography.Text size="2" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
               {designScreens.length} screens across {screenCategories.length} categories
-            </Text>
+            </Typography.Text>
           </div>
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             {screenCategories.map((cat) => (
@@ -1985,18 +2002,18 @@ function DesignFileInspectorStory() {
         <div style={{ position: 'absolute', top: 'var(--space-4)', left: 'var(--space-4)', zIndex: 1 }}>
           <Lightbox.Counter>
             {({ current, total }) => (
-              <Text size="2" style={{ color: 'rgba(255,255,255,0.7)', fontVariantNumeric: 'tabular-nums' }}>
+              <Typography.Text size="2" style={{ color: 'rgba(255,255,255,0.7)', fontVariantNumeric: 'tabular-nums' }}>
                 {current} / {total}
-              </Text>
+              </Typography.Text>
             )}
           </Lightbox.Counter>
         </div>
 
-        <ScrollGallery.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)} orientation="vertical">
+        <Carousel.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)} orientation="vertical">
           <div style={{ display: 'flex', flex: 1, minHeight: 0, width: '100%' }}>
             {/* Main vertical scroll area */}
             <Lightbox.ItemGroup
-              render={<ScrollGallery.Viewport aria-label="Design screens" />}
+              render={<Carousel.Viewport aria-label="Design screens" />}
               preload={designScreens.length}
               style={{
                 flex: 1,
@@ -2013,7 +2030,7 @@ function DesignFileInspectorStory() {
                   key={screen.id}
                   index={i}
                   caption={screen.caption}
-                  render={<ScrollGallery.Item />}
+                  render={<Carousel.Item />}
                   style={{
                     position: 'relative',
                     inset: 'auto',
@@ -2039,7 +2056,7 @@ function DesignFileInspectorStory() {
             </Lightbox.ItemGroup>
 
             {/* Right sidebar: vertical thumbnails */}
-            <ScrollGallery.ScrollMarkerGroup
+            <Carousel.ScrollMarkerGroup
               aria-label="Screen thumbnails"
               style={{
                 display: 'flex',
@@ -2054,7 +2071,7 @@ function DesignFileInspectorStory() {
               }}
             >
               {designScreens.map((screen, i) => (
-                <ScrollGallery.ScrollMarker
+                <Carousel.ScrollMarker
                   key={screen.id}
                   index={i}
                   render={(props, state) => (
@@ -2084,13 +2101,13 @@ function DesignFileInspectorStory() {
                   )}
                 />
               ))}
-            </ScrollGallery.ScrollMarkerGroup>
+            </Carousel.ScrollMarkerGroup>
           </div>
 
           <div style={{ padding: 'var(--space-2) var(--space-5)', textAlign: 'center' }}>
-            <Lightbox.Caption render={<Text size="2" color="gray" />} />
+            <Lightbox.Caption render={<Typography.Text size="2" color="gray" />} />
           </div>
-        </ScrollGallery.Root>
+        </Carousel.Root>
       </Lightbox.Content>
     </Lightbox.Root>
   );
@@ -2225,12 +2242,12 @@ function FilmCard({ film, index }: { film: (typeof films)[number]; index: number
         </div>
       </div>
       <div style={{ padding: '10px 2px 0' }}>
-        <Text size="2" weight="medium" style={{ display: 'block', lineHeight: 1.3 }}>
+        <Typography.Text size="2" weight="medium" style={{ display: 'block', lineHeight: 1.3 }}>
           {film.title}
-        </Text>
-        <Text size="1" color="gray">
+        </Typography.Text>
+        <Typography.Text size="1" color="gray">
           {film.year} · {film.genre}
-        </Text>
+        </Typography.Text>
       </div>
     </Lightbox.Trigger>
   );
@@ -2274,15 +2291,20 @@ function FilmTrailersStory() {
   return (
     <div style={{ maxWidth: 720, margin: '0 auto' }}>
       <div style={{ padding: 'var(--space-5) 0 var(--space-4)' }}>
-        <Text size="1" weight="medium" color="gray" style={{ textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+        <Typography.Text
+          size="1"
+          weight="medium"
+          color="gray"
+          style={{ textTransform: 'uppercase', letterSpacing: '0.08em' }}
+        >
           Now Streaming
-        </Text>
-        <Heading size="6" style={{ marginTop: 4 }}>
+        </Typography.Text>
+        <Typography.Heading size="6" style={{ marginTop: 4 }}>
           Short Film Festival
-        </Heading>
-        <Text size="2" color="gray" style={{ marginTop: 8, display: 'block', maxWidth: 480 }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginTop: 8, display: 'block', maxWidth: 480 }}>
           A curated collection of award-winning open-source short films. Click any poster to watch the trailer.
-        </Text>
+        </Typography.Text>
       </div>
 
       <style>{`
@@ -2368,11 +2390,11 @@ function FilmTrailersStory() {
           </Lightbox.ItemGroup>
 
           <div style={{ padding: 'var(--space-3) var(--space-5)', textAlign: 'center' }}>
-            <Lightbox.Caption render={<Text size="2" color="gray" />} />
+            <Lightbox.Caption render={<Typography.Text size="2" color="gray" />} />
           </div>
 
           <div style={{ paddingBottom: 'var(--space-4)' }}>
-            <Lightbox.Counter render={<Text size="1" color="gray" />} />
+            <Lightbox.Counter render={<Typography.Text size="1" color="gray" />} />
           </div>
         </Lightbox.Content>
       </Lightbox.Root>
@@ -2534,15 +2556,15 @@ function ProfileCard({ member }: { member: (typeof teamMembers)[number] }) {
         />
 
         <div style={{ marginTop: 'var(--space-3)' }}>
-          <Heading size="4">{member.name}</Heading>
-          <Text size="2" color="gray" style={{ display: 'block', marginTop: 2 }}>
+          <Typography.Heading size="4">{member.name}</Typography.Heading>
+          <Typography.Text size="2" color="gray" style={{ display: 'block', marginTop: 2 }}>
             {member.role}
-          </Text>
+          </Typography.Text>
         </div>
 
-        <Text size="2" style={{ display: 'block', marginTop: 'var(--space-3)', lineHeight: 1.6 }}>
+        <Typography.Text size="2" style={{ display: 'block', marginTop: 'var(--space-3)', lineHeight: 1.6 }}>
           {member.bio}
-        </Text>
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-3)', flexWrap: 'wrap' }}>
           {member.tags.map((tag) => (
@@ -2557,12 +2579,12 @@ function ProfileCard({ member }: { member: (typeof teamMembers)[number] }) {
         <div style={{ display: 'flex', justifyContent: 'space-around', textAlign: 'center' }}>
           {Object.entries(member.stats).map(([label, value]) => (
             <div key={label}>
-              <Text size="4" weight="bold" style={{ display: 'block' }}>
+              <Typography.Text size="4" weight="bold" style={{ display: 'block' }}>
                 {value}
-              </Text>
-              <Text size="1" color="gray" style={{ textTransform: 'capitalize' }}>
+              </Typography.Text>
+              <Typography.Text size="1" color="gray" style={{ textTransform: 'capitalize' }}>
                 {label}
-              </Text>
+              </Typography.Text>
             </div>
           ))}
         </div>
@@ -2572,15 +2594,15 @@ function ProfileCard({ member }: { member: (typeof teamMembers)[number] }) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
             <Globe size={16} style={{ color: 'var(--gray-alpha-800)' }} />
-            <Text size="2" color="gray">
+            <Typography.Text size="2" color="gray">
               {member.location}
-            </Text>
+            </Typography.Text>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
             <Mail size={16} style={{ color: 'var(--gray-alpha-800)' }} />
-            <Text size="2" color="gray">
+            <Typography.Text size="2" color="gray">
               {member.email}
-            </Text>
+            </Typography.Text>
           </div>
         </div>
       </div>
@@ -2592,15 +2614,20 @@ function TeamDirectoryStory() {
   return (
     <div style={{ maxWidth: 640, margin: '0 auto' }}>
       <div style={{ padding: 'var(--space-5) 0 var(--space-4)' }}>
-        <Text size="1" weight="medium" color="gray" style={{ textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+        <Typography.Text
+          size="1"
+          weight="medium"
+          color="gray"
+          style={{ textTransform: 'uppercase', letterSpacing: '0.08em' }}
+        >
           About Us
-        </Text>
-        <Heading size="6" style={{ marginTop: 4 }}>
+        </Typography.Text>
+        <Typography.Heading size="6" style={{ marginTop: 4 }}>
           Meet the Team
-        </Heading>
-        <Text size="2" color="gray" style={{ marginTop: 8, display: 'block', maxWidth: 440 }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginTop: 8, display: 'block', maxWidth: 440 }}>
           The people behind Acme Dev Tools. Click anyone to learn more about them.
-        </Text>
+        </Typography.Text>
       </div>
 
       <Lightbox.Root viewTransition>
@@ -2654,12 +2681,12 @@ function TeamDirectoryStory() {
                 />
               </div>
               <div style={{ minWidth: 0 }}>
-                <Text size="2" weight="medium" style={{ display: 'block', lineHeight: 1.3 }}>
+                <Typography.Text size="2" weight="medium" style={{ display: 'block', lineHeight: 1.3 }}>
                   {member.name}
-                </Text>
-                <Text size="1" color="gray">
+                </Typography.Text>
+                <Typography.Text size="1" color="gray">
                   {member.role}
-                </Text>
+                </Typography.Text>
               </div>
             </Lightbox.Trigger>
           ))}
@@ -2722,7 +2749,7 @@ function TeamDirectoryStory() {
           </Lightbox.ItemGroup>
 
           <div style={{ paddingBottom: 'var(--space-4)' }}>
-            <Lightbox.Counter render={<Text size="1" color="gray" />} />
+            <Lightbox.Counter render={<Typography.Text size="1" color="gray" />} />
           </div>
         </Lightbox.Content>
       </Lightbox.Root>
@@ -2765,7 +2792,7 @@ function LifecycleCallbacksStory() {
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Heading size="4">Click an image</Heading>
+          <Typography.Heading size="4">Click an image</Typography.Heading>
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             {images.slice(0, 3).map((img, i) => (
               <Lightbox.Trigger key={img.id} index={i} crossfade style={triggerStyle}>
@@ -2813,26 +2840,26 @@ function LifecycleCallbacksStory() {
           overflowY: 'auto',
         }}
       >
-        <Text size="2" weight="medium" style={{ display: 'block', marginBottom: 'var(--space-2)' }}>
+        <Typography.Text size="2" weight="medium" style={{ display: 'block', marginBottom: 'var(--space-2)' }}>
           Event log
-        </Text>
+        </Typography.Text>
         {logs.length === 0 && (
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             No events yet. Open and close the lightbox.
-          </Text>
+          </Typography.Text>
         )}
         {logs.map((log) => (
           <div key={log.id} style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'baseline' }}>
-            <Text
+            <Typography.Text
               size="1"
               color="gray"
               style={{ minWidth: 48, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}
             >
               +{log.time}ms
-            </Text>
-            <Text size="1" style={{ color: log.type === 'change' ? 'var(--blue-900)' : 'var(--green-900)' }}>
+            </Typography.Text>
+            <Typography.Text size="1" style={{ color: log.type === 'change' ? 'var(--blue-900)' : 'var(--green-900)' }}>
               {log.label}
-            </Text>
+            </Typography.Text>
           </div>
         ))}
       </div>
@@ -2984,7 +3011,7 @@ function WithZoomStory() {
 // Scroll Gallery with Zoom
 // ---------------------------------------------------------------------------
 
-function ScrollGalleryWithZoomStory() {
+function CarouselWithZoomStory() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
 
@@ -3008,9 +3035,9 @@ function ScrollGalleryWithZoomStory() {
             }
           `}</style>
 
-        <ScrollGallery.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)} scrollBehavior="instant">
+        <Carousel.Root value={activeIndex} onValueChange={(v) => setActiveIndex(v)} scrollBehavior="instant">
           <Lightbox.ItemGroup
-            render={<ScrollGallery.Viewport aria-label="Full-size images" />}
+            render={<Carousel.Viewport aria-label="Full-size images" />}
             preload={images.length}
             style={{
               height: '100%',
@@ -3025,7 +3052,7 @@ function ScrollGalleryWithZoomStory() {
                 key={img.id}
                 index={i}
                 caption={img.caption}
-                render={<ScrollGallery.Item />}
+                render={<Carousel.Item />}
                 style={{
                   position: 'relative',
                   inset: 'auto',
@@ -3088,12 +3115,12 @@ function ScrollGalleryWithZoomStory() {
           >
             <Lightbox.Caption style={{ pointerEvents: 'auto', marginBottom: 'var(--space-2)' }} />
 
-            <ScrollGallery.ScrollMarkerGroup
+            <Carousel.ScrollMarkerGroup
               aria-label="Photo thumbnails"
               style={{ display: 'flex', gap: 'var(--space-2)', justifyContent: 'center', pointerEvents: 'auto' }}
             >
               {images.map((img, i) => (
-                <ScrollGallery.ScrollMarker
+                <Carousel.ScrollMarker
                   key={img.id}
                   index={i}
                   render={(props, state) => (
@@ -3121,9 +3148,9 @@ function ScrollGalleryWithZoomStory() {
                   )}
                 />
               ))}
-            </ScrollGallery.ScrollMarkerGroup>
+            </Carousel.ScrollMarkerGroup>
           </div>
-        </ScrollGallery.Root>
+        </Carousel.Root>
       </Lightbox.Content>
     </Lightbox.Root>
   );
@@ -3219,42 +3246,57 @@ function MorphToSettingStory() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)', maxWidth: 720, margin: '0 auto' }}>
       <div>
-        <Heading size="4" style={{ marginBottom: 'var(--space-2)' }}>
+        <Typography.Heading size="4" style={{ marginBottom: 'var(--space-2)' }}>
           morphTo=&quot;active&quot;
-        </Heading>
-        <Text size="2" color="gray" render={<p />} style={{ marginBottom: 'var(--space-4)', lineHeight: 1.6 }}>
+        </Typography.Heading>
+        <Typography.Text
+          size="2"
+          color="gray"
+          render={<p />}
+          style={{ marginBottom: 'var(--space-4)', lineHeight: 1.6 }}
+        >
           Default behavior. On close the lightbox morphs back to the trigger that matches the current active index. All
           five images have triggers, so every item has a target. Navigate to any image and close — the morph always
           lands on the matching trigger.
-        </Text>
+        </Typography.Text>
         <MorphToDemo morphTo="active" />
       </div>
 
       <Separator size="4" />
 
       <div>
-        <Heading size="4" style={{ marginBottom: 'var(--space-2)' }}>
+        <Typography.Heading size="4" style={{ marginBottom: 'var(--space-2)' }}>
           morphTo=&quot;origin&quot;
-        </Heading>
-        <Text size="2" color="gray" render={<p />} style={{ marginBottom: 'var(--space-4)', lineHeight: 1.6 }}>
+        </Typography.Heading>
+        <Typography.Text
+          size="2"
+          color="gray"
+          render={<p />}
+          style={{ marginBottom: 'var(--space-4)', lineHeight: 1.6 }}
+        >
           Always morph back to the trigger that originally opened the lightbox, regardless of which item is active when
           closing. Useful when there is only one trigger (e.g. a message attachment stack) — no matter how far you
           navigate, the close animation always returns to the opening trigger.
-        </Text>
+        </Typography.Text>
         <MorphToDemo morphTo="origin" triggerCount={1} crossfadeTriggers="all" />
       </div>
 
       <Separator size="4" />
 
       <div>
-        <Heading size="4" style={{ marginBottom: 'var(--space-2)' }}>
+        <Typography.Heading size="4" style={{ marginBottom: 'var(--space-2)' }}>
           morphTo=&quot;closest&quot;
-        </Heading>
-        <Text size="2" color="gray" render={<p />} style={{ marginBottom: 'var(--space-4)', lineHeight: 1.6 }}>
+        </Typography.Heading>
+        <Typography.Text
+          size="2"
+          color="gray"
+          render={<p />}
+          style={{ marginBottom: 'var(--space-4)', lineHeight: 1.6 }}
+        >
           Morph to the trigger at the active index if it exists; otherwise fall back to the nearest registered trigger.
           Below, only the first 3 of 5 images have visible triggers. Navigate to image 4 or 5 and close — the morph
           falls back to trigger 3 (the closest). Great for grids with a &quot;+N more&quot; overlay.
-        </Text>
+        </Typography.Text>
         <MorphToDemo morphTo="closest" triggerCount={3} crossfadeTriggers="last" />
       </div>
     </div>
@@ -3313,9 +3355,9 @@ function TextMessageStory() {
           }}
         >
           {/* Timestamp */}
-          <Text size="1" color="gray" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <Typography.Text size="1" color="gray" style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             Today at 11:11 AM
-          </Text>
+          </Typography.Text>
 
           {/* Chat bubble */}
           <div
@@ -3327,9 +3369,9 @@ function TextMessageStory() {
               borderBottomRightRadius: 4,
             }}
           >
-            <Text size="3" weight="medium" style={{ color: 'inherit' }}>
+            <Typography.Text size="3" weight="medium" style={{ color: 'inherit' }}>
               some imgs
-            </Text>
+            </Typography.Text>
           </div>
 
           {/* Single trigger wrapping the entire stack — morphs to/from origin */}
@@ -3397,9 +3439,9 @@ function TextMessageStory() {
                 fill="var(--gray-50)"
               />
             </svg>
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               {messageImages.length} attachments
-            </Text>
+            </Typography.Text>
           </div>
         </div>
 
@@ -3524,7 +3566,7 @@ export default {
   'Team Directory': TeamDirectoryStory,
   'Lifecycle Callbacks': LifecycleCallbacksStory,
   'With Zoom': WithZoomStory,
-  'Scroll Gallery with Zoom': ScrollGalleryWithZoomStory,
+  'Scroll Gallery with Zoom': CarouselWithZoomStory,
   'morphTo Setting': MorphToSettingStory,
   'Text Message': TextMessageStory,
   'Perfect Morph': PerfectMorphStory,

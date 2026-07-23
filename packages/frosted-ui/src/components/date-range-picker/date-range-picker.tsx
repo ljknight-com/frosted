@@ -8,7 +8,7 @@ import React, { useRef } from 'react';
 import { Popover } from '../';
 import { GetPropDefTypes } from '../../helpers';
 import { CalendarIcon } from '../../icons';
-import { MappedDateValue, RangeCalendar } from '../calendar';
+import { Calendar, type MappedDateValue } from '../calendar';
 import { DateField } from '../date-field';
 import { datePickerPropDefs } from '../date-picker/date-picker.props';
 import { IconButton } from '../icon-button';
@@ -29,7 +29,7 @@ interface DateRangePickerProps<T extends DateValue> extends AriaDateRangePickerP
 }
 
 /**
- * Two `DateField`s (start and end) combined with a calendar button that opens a `RangeCalendar` in a
+ * Two `DateField`s (start and end) combined with a calendar button that opens a `Calendar.Range` in a
  * popover. Built on React Aria, so it accepts its date range picker props (`value`, `onChange`,
  * `minValue`, ...) using `@internationalized/date` values.
  *
@@ -85,7 +85,7 @@ export function DateRangePicker<T extends DateValue>(props: DateRangePickerProps
           </IconButton>
         </Popover.Trigger>
         <Popover.Content variant="translucent" align="center">
-          <RangeCalendar {...calendarProps} />
+          <Calendar.Range {...calendarProps} />
         </Popover.Content>
       </Popover.Root>
     </div>

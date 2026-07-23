@@ -1,7 +1,7 @@
 import { DateValue, getLocalTimeZone, isWeekend, parseDate, today } from '@internationalized/date';
 import { useLocale } from '@react-aria/i18n';
 import React from 'react';
-import { RangeCalendar } from '.';
+import { Calendar } from '.';
 
 export default {
   Default() {
@@ -15,7 +15,7 @@ export default {
     };
     return (
       <div>
-        <RangeCalendar {...args} minValue={parseDate('1900-02-03')} />
+        <Calendar.Range {...args} minValue={parseDate('1900-02-03')} />
       </div>
     );
   },
@@ -31,7 +31,7 @@ export default {
     };
     return (
       <div>
-        <RangeCalendar {...args} isDisabled />
+        <Calendar.Range {...args} isDisabled />
       </div>
     );
   },
@@ -59,7 +59,7 @@ export default {
 
     return (
       <div style={{ width: 300 }}>
-        <RangeCalendar {...args} minValue={today(getLocalTimeZone())} isDateUnavailable={isDateUnavailable} />
+        <Calendar.Range {...args} minValue={today(getLocalTimeZone())} isDateUnavailable={isDateUnavailable} />
       </div>
     );
   },

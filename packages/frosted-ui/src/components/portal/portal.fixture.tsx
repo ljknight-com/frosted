@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Theme } from '../../theme';
 import { Button } from '../button';
 import { Card } from '../card';
-import { Heading } from '../heading';
-import { Text } from '../text';
+import { Heading } from '../typography/heading';
+import { Text } from '../typography/text';
 import { Portal } from './portal';
 
 export default {

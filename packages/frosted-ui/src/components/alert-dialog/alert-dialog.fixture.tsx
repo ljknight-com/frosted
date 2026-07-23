@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AlertDialog, Button, Code, Inset, Table, Text, TextField, alertDialogContentPropDefs } from '..';
+import { AlertDialog, Button, Input, Inset, Table, Typography, alertDialogContentPropDefs } from '..';
 
 const detachedHandle = AlertDialog.createHandle();
 
@@ -158,10 +158,10 @@ export default {
     const args = { size: alertDialogContentPropDefs.size.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-6)' }}>
-        <Text>
-          Use the <Code>Inset</Code> component to align content flush with the sides of the dialog (bypassing its
-          padding).
-        </Text>
+        <Typography.Text>
+          Use the <Typography.Code>Inset</Typography.Code> component to align content flush with the sides of the dialog
+          (bypassing its padding).
+        </Typography.Text>
         <div>
           <AlertDialog.Root>
             <AlertDialog.Trigger>
@@ -224,10 +224,11 @@ export default {
     const args = { size: alertDialogContentPropDefs.size.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Base UI provides a single <Code>Close</Code> component instead of separate <Code>Action</Code> and{' '}
-          <Code>Cancel</Code>. Both close the dialog - use styling to differentiate.
-        </Text>
+        <Typography.Text>
+          Base UI provides a single <Typography.Code>Close</Typography.Code> component instead of separate{' '}
+          <Typography.Code>Action</Typography.Code> and <Typography.Code>Cancel</Typography.Code>. Both close the dialog
+          - use styling to differentiate.
+        </Typography.Text>
         <AlertDialog.Root>
           <AlertDialog.Trigger>
             <Button variant="classic" color="red">
@@ -266,10 +267,10 @@ export default {
     const args = { size: alertDialogContentPropDefs.size.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>AlertDialog.createHandle()</Code> to control a dialog from a trigger located outside the{' '}
-          <Code>AlertDialog.Root</Code>.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>AlertDialog.createHandle()</Typography.Code> to control a dialog from a trigger located
+          outside the <Typography.Code>AlertDialog.Root</Typography.Code>.
+        </Typography.Text>
 
         <AlertDialog.Trigger handle={detachedHandle}>
           <Button color="red" variant="classic">
@@ -317,10 +318,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Multiple triggers can control the same dialog. Each trigger can pass a different <Code>payload</Code>. The
-          payload type is inferred from the handle - TypeScript will catch type errors.
-        </Text>
+        <Typography.Text>
+          Multiple triggers can control the same dialog. Each trigger can pass a different{' '}
+          <Typography.Code>payload</Typography.Code>. The payload type is inferred from the handle - TypeScript will
+          catch type errors.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           {/* TypeScript will catch payload type errors because handle infers the type */}
@@ -403,9 +405,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>open</Code> and <Code>onOpenChange</Code> for fully controlled mode.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>open</Typography.Code> and <Typography.Code>onOpenChange</Typography.Code> for fully
+          controlled mode.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Button onClick={() => handleAction('save')} variant="soft">
@@ -463,9 +466,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>actionsRef</Code> to close the dialog programmatically after an async operation.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>actionsRef</Typography.Code> to close the dialog programmatically after an async
+          operation.
+        </Typography.Text>
 
         <AlertDialog.Root actionsRef={actionsRef}>
           <AlertDialog.Trigger>
@@ -507,10 +511,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>initialFocus</Code> to control which element receives focus when the dialog opens. For destructive
-          actions, focus the cancel button to prevent accidental confirmation.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>initialFocus</Typography.Code> to control which element receives focus when the dialog
+          opens. For destructive actions, focus the cancel button to prevent accidental confirmation.
+        </Typography.Text>
 
         <AlertDialog.Root>
           <AlertDialog.Trigger>
@@ -554,9 +558,9 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>finalFocus</Code> to control where focus returns when the dialog closes.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>finalFocus</Typography.Code> to control where focus returns when the dialog closes.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
           <AlertDialog.Root>
@@ -591,7 +595,7 @@ export default {
               </div>
             </AlertDialog.Content>
           </AlertDialog.Root>
-          <TextField.Input ref={inputRef} placeholder="Type something..." style={{ width: 200 }} />
+          <Input.Control ref={inputRef} placeholder="Type something..." style={{ width: 200 }} />
         </div>
       </div>
     );
@@ -614,10 +618,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Compare <Code>onOpenChange</Code> (fires immediately) vs <Code>onOpenChangeComplete</Code> (fires after
-          animations).
-        </Text>
+        <Typography.Text>
+          Compare <Typography.Code>onOpenChange</Typography.Code> (fires immediately) vs{' '}
+          <Typography.Code>onOpenChangeComplete</Typography.Code> (fires after animations).
+        </Typography.Text>
 
         <AlertDialog.Root
           onOpenChange={(open) => addLog(`onOpenChange: ${open ? 'opening' : 'closing'}`)}
@@ -664,13 +668,13 @@ export default {
             width: 400,
           }}
         >
-          <Text size="1" weight="medium" style={{ marginBottom: 8, display: 'block' }}>
+          <Typography.Text size="1" weight="medium" style={{ marginBottom: 8, display: 'block' }}>
             Event Log:
-          </Text>
+          </Typography.Text>
           {logs.length === 0 ? (
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               Open/close the dialog to see events...
-            </Text>
+            </Typography.Text>
           ) : (
             logs.map((log, i) => (
               <div key={i} style={{ color: log.includes('Complete') ? 'var(--accent-900)' : 'var(--gray-900)' }}>

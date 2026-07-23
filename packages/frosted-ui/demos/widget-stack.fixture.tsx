@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, Text, WidgetStack } from '@aussieljk/frosted';
+import { IconButton, Typography, WidgetStack } from '@aussieljk/frosted';
 
 const itemClass = 'grid size-full place-items-center';
 
@@ -14,9 +14,9 @@ export default function WidgetStackDemo() {
         <WidgetStack.Stack className="h-40 w-80">
           <WidgetStack.Item>
             <div className={`${itemClass} bg-linear-to-b from-blue-700 to-blue-400 text-blue-700-contrast`}>
-              <Text weight="bold" size="5">
+              <Typography.Text weight="bold" size="5">
                 Sunny, 24°
-              </Text>
+              </Typography.Text>
             </div>
           </WidgetStack.Item>
           <WidgetStack.Item>
@@ -24,9 +24,9 @@ export default function WidgetStackDemo() {
           </WidgetStack.Item>
           <WidgetStack.Item>
             <div className={`${itemClass} bg-gray-50`}>
-              <Text weight="medium" size="3">
+              <Typography.Text weight="medium" size="3">
                 Swipe or use the arrows
-              </Text>
+              </Typography.Text>
             </div>
           </WidgetStack.Item>
         </WidgetStack.Stack>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dialog, Text, TextField } from '@aussieljk/frosted';
+import { Button, Dialog, Input, Typography } from '@aussieljk/frosted';
 
 export default function DialogDemo() {
   return (
@@ -13,12 +13,12 @@ export default function DialogDemo() {
         <Dialog.Description>Make changes to your profile.</Dialog.Description>
 
         <label>
-          <Text render={<div />} size="2" weight="bold" className="mb-1">
+          <Typography.Text render={<div />} size="2" weight="bold" className="mb-1">
             Name
-          </Text>
-          <TextField.Root>
-            <TextField.Input defaultValue="Freja Johnsen" placeholder="Enter your full name" />
-          </TextField.Root>
+          </Typography.Text>
+          <Input.Root>
+            <Input.Control defaultValue="Freja Johnsen" placeholder="Enter your full name" />
+          </Input.Root>
         </label>
 
         <div className="mt-4 flex justify-end gap-3">

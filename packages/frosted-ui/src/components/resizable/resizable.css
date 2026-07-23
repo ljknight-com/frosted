@@ -1,0 +1,76 @@
+.fui-ResizableRoot {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &[data-direction='horizontal'] {
+    flex-direction: row;
+  }
+  &[data-direction='vertical'] {
+    flex-direction: column;
+  }
+}
+
+.fui-ResizablePanel {
+  flex-grow: 0;
+  flex-shrink: 1;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+
+.fui-ResizableHandle {
+  position: relative;
+  flex: 0 0 auto;
+  background-color: var(--gray-alpha-300);
+  touch-action: none;
+
+  &[data-direction='horizontal'] {
+    width: 1px;
+    cursor: col-resize;
+  }
+  &[data-direction='vertical'] {
+    height: 1px;
+    cursor: row-resize;
+  }
+
+  /* Widen the hit target well beyond the visible hairline. */
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline: -3px;
+  }
+  &[data-direction='vertical']::after {
+    inset-inline: 0;
+    inset-block: -3px;
+  }
+
+  &:where(:hover) {
+    background-color: var(--accent-700);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-root);
+    outline-offset: 1px;
+  }
+}
+
+.fui-ResizableHandleGrip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border-radius: var(--radius-1);
+  background-color: var(--gray-alpha-400);
+
+  .fui-ResizableHandle[data-direction='horizontal'] & {
+    width: 3px;
+    height: var(--space-5);
+  }
+  .fui-ResizableHandle[data-direction='vertical'] & {
+    width: var(--space-5);
+    height: 3px;
+  }
+}

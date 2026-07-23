@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button, Checkbox, Popover, TextArea } from '@aussieljk/frosted';
+import { Avatar, Button, Checkbox, Popover, Textarea } from '@aussieljk/frosted';
 
 export default function PopoverDemo() {
   return (
@@ -11,7 +11,7 @@ export default function PopoverDemo() {
         <div className="flex gap-3">
           <Avatar size="2" fallback="A" />
           <div className="grow">
-            <TextArea placeholder="Write a comment…" className="h-20" />
+            <Textarea placeholder="Write a comment…" className="h-20" />
             <div className="mt-3 flex items-center justify-between gap-3">
               <Checkbox size="2">Send to group</Checkbox>
               <Popover.Close>

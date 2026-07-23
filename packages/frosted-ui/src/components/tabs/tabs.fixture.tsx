@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Tabs, Text, TextArea, TextField, tabsListPropDefs } from '..';
+import { Input, Tabs, Textarea, Typography, tabsListPropDefs } from '..';
 
 export default {
   // TODO: Tabs content jumping in size due to font-weight change
@@ -20,15 +20,15 @@ export default {
           </Tabs.List>
 
           <Tabs.Content value="account" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Make changes to your account.</Text>
+            <Typography.Text size="2">Make changes to your account.</Typography.Text>
           </Tabs.Content>
 
           <Tabs.Content value="documents" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Access and update your documents.</Text>
+            <Typography.Text size="2">Access and update your documents.</Typography.Text>
           </Tabs.Content>
 
           <Tabs.Content value="settings" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Edit your profile or update contact information.</Text>
+            <Typography.Text size="2">Edit your profile or update contact information.</Typography.Text>
           </Tabs.Content>
         </Tabs.Root>
       </div>
@@ -49,13 +49,13 @@ export default {
             <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="account" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Size 1.</Text>
+            <Typography.Text size="2">Size 1.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="documents" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Documents.</Text>
+            <Typography.Text size="2">Documents.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="settings" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Settings.</Text>
+            <Typography.Text size="2">Settings.</Typography.Text>
           </Tabs.Content>
         </Tabs.Root>
 
@@ -66,13 +66,13 @@ export default {
             <Tabs.Trigger value="tab3">Reports</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="tab1" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Size 2.</Text>
+            <Typography.Text size="2">Size 2.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="tab2" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Analytics.</Text>
+            <Typography.Text size="2">Analytics.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="tab3" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Reports.</Text>
+            <Typography.Text size="2">Reports.</Typography.Text>
           </Tabs.Content>
         </Tabs.Root>
       </div>
@@ -93,13 +93,13 @@ export default {
             <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="account" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Indigo accent.</Text>
+            <Typography.Text size="2">Indigo accent.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="documents" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Documents.</Text>
+            <Typography.Text size="2">Documents.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="settings" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Settings.</Text>
+            <Typography.Text size="2">Settings.</Typography.Text>
           </Tabs.Content>
         </Tabs.Root>
 
@@ -110,13 +110,13 @@ export default {
             <Tabs.Trigger value="tab3">Reports</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="tab1" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Cyan accent.</Text>
+            <Typography.Text size="2">Cyan accent.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="tab2" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Analytics.</Text>
+            <Typography.Text size="2">Analytics.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="tab3" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Reports.</Text>
+            <Typography.Text size="2">Reports.</Typography.Text>
           </Tabs.Content>
         </Tabs.Root>
 
@@ -126,10 +126,10 @@ export default {
             <Tabs.Trigger value="two">Two</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="one" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Crimson accent.</Text>
+            <Typography.Text size="2">Crimson accent.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="two" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Two.</Text>
+            <Typography.Text size="2">Two.</Typography.Text>
           </Tabs.Content>
         </Tabs.Root>
       </div>
@@ -150,13 +150,13 @@ export default {
             <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="account" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Default indicator (accent-10).</Text>
+            <Typography.Text size="2">Default indicator (accent-10).</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="documents" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Documents.</Text>
+            <Typography.Text size="2">Documents.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="settings" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Settings.</Text>
+            <Typography.Text size="2">Settings.</Typography.Text>
           </Tabs.Content>
         </Tabs.Root>
 
@@ -167,13 +167,13 @@ export default {
             <Tabs.Trigger value="tab3">Reports</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="tab1" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">High contrast indicator (accent-12).</Text>
+            <Typography.Text size="2">High contrast indicator (accent-12).</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="tab2" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Analytics.</Text>
+            <Typography.Text size="2">Analytics.</Typography.Text>
           </Tabs.Content>
           <Tabs.Content value="tab3" style={{ padding: '12px 16px 8px 16px' }}>
-            <Text size="2">Reports.</Text>
+            <Typography.Text size="2">Reports.</Typography.Text>
           </Tabs.Content>
         </Tabs.Root>
       </div>
@@ -188,16 +188,17 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 600 }}>
-        <Text>
-          The <Code>activateOnFocus</Code> prop controls whether tabs are activated immediately when focused via
-          keyboard navigation, or only when explicitly clicked/pressed. Try using <Code>Tab</Code> to focus the tabs,
-          then <Code>Arrow</Code> keys to navigate.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>activateOnFocus</Typography.Code> prop controls whether tabs are activated immediately
+          when focused via keyboard navigation, or only when explicitly clicked/pressed. Try using{' '}
+          <Typography.Code>Tab</Typography.Code> to focus the tabs, then <Typography.Code>Arrow</Typography.Code> keys
+          to navigate.
+        </Typography.Text>
 
         <div>
-          <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             activateOnFocus={'{true}'}
-          </Text>
+          </Typography.Text>
           <Tabs.Root defaultValue="tab1">
             <Tabs.List {...args} activateOnFocus>
               <Tabs.Trigger value="tab1">Overview</Tabs.Trigger>
@@ -206,22 +207,28 @@ export default {
             </Tabs.List>
             <div style={{ padding: '12px 16px 8px 16px' }}>
               <Tabs.Content value="tab1">
-                <Text size="2">Overview content — Tab activates immediately on arrow key navigation.</Text>
+                <Typography.Text size="2">
+                  Overview content — Tab activates immediately on arrow key navigation.
+                </Typography.Text>
               </Tabs.Content>
               <Tabs.Content value="tab2">
-                <Text size="2">Analytics content — Tab activates immediately on arrow key navigation.</Text>
+                <Typography.Text size="2">
+                  Analytics content — Tab activates immediately on arrow key navigation.
+                </Typography.Text>
               </Tabs.Content>
               <Tabs.Content value="tab3">
-                <Text size="2">Reports content — Tab activates immediately on arrow key navigation.</Text>
+                <Typography.Text size="2">
+                  Reports content — Tab activates immediately on arrow key navigation.
+                </Typography.Text>
               </Tabs.Content>
             </div>
           </Tabs.Root>
         </div>
 
         <div>
-          <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             activateOnFocus={'{false}'} (default)
-          </Text>
+          </Typography.Text>
           <Tabs.Root defaultValue="tab1">
             <Tabs.List {...args} activateOnFocus={false}>
               <Tabs.Trigger value="tab1">Overview</Tabs.Trigger>
@@ -230,22 +237,29 @@ export default {
             </Tabs.List>
             <div style={{ padding: '12px 16px 8px 16px' }}>
               <Tabs.Content value="tab1">
-                <Text size="2">Overview content — Must press Enter/Space to activate after focusing.</Text>
+                <Typography.Text size="2">
+                  Overview content — Must press Enter/Space to activate after focusing.
+                </Typography.Text>
               </Tabs.Content>
               <Tabs.Content value="tab2">
-                <Text size="2">Analytics content — Must press Enter/Space to activate after focusing.</Text>
+                <Typography.Text size="2">
+                  Analytics content — Must press Enter/Space to activate after focusing.
+                </Typography.Text>
               </Tabs.Content>
               <Tabs.Content value="tab3">
-                <Text size="2">Reports content — Must press Enter/Space to activate after focusing.</Text>
+                <Typography.Text size="2">
+                  Reports content — Must press Enter/Space to activate after focusing.
+                </Typography.Text>
               </Tabs.Content>
             </div>
           </Tabs.Root>
         </div>
 
-        <Text size="1" color="gray">
-          Use <Code>activateOnFocus={'{true}'}</Code> for a more fluid experience. The default (<Code>false</Code>)
-          follows WAI-ARIA best practices, requiring explicit activation which is better for accessibility.
-        </Text>
+        <Typography.Text size="1" color="gray">
+          Use <Typography.Code>activateOnFocus={'{true}'}</Typography.Code> for a more fluid experience. The default (
+          <Typography.Code>false</Typography.Code>) follows WAI-ARIA best practices, requiring explicit activation which
+          is better for accessibility.
+        </Typography.Text>
       </div>
     );
   },
@@ -262,14 +276,15 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          The <Code>keepMounted</Code> prop on <Code>Tabs.Content</Code> keeps tab panels in the DOM even when hidden.
-          This preserves component state like form inputs, scroll position, and avoids re-mounting expensive components.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>keepMounted</Typography.Code> prop on <Typography.Code>Tabs.Content</Typography.Code>{' '}
+          keeps tab panels in the DOM even when hidden. This preserves component state like form inputs, scroll
+          position, and avoids re-mounting expensive components.
+        </Typography.Text>
 
-        <Text size="2" weight="medium">
+        <Typography.Text size="2" weight="medium">
           With keepMounted={'{true}'} — Form state is preserved
-        </Text>
+        </Typography.Text>
         <Tabs.Root defaultValue="profile">
           <Tabs.List {...args}>
             <Tabs.Trigger value="profile">Profile</Tabs.Trigger>
@@ -285,26 +300,26 @@ export default {
           >
             <Tabs.Content value="profile" keepMounted>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-                <Text render={<label />} size="2">
+                <Typography.Text render={<label />} size="2">
                   Name
-                </Text>
-                <TextField.Input
+                </Typography.Text>
+                <Input.Control
                   size="3"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your name"
                 />
-                <Text size="1" color="gray">
+                <Typography.Text size="1" color="gray">
                   Type something, switch tabs, then come back — your input is preserved!
-                </Text>
+                </Typography.Text>
               </div>
             </Tabs.Content>
             <Tabs.Content value="contact" keepMounted>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-                <Text render={<label />} size="2">
+                <Typography.Text render={<label />} size="2">
                   Email
-                </Text>
-                <TextField.Input
+                </Typography.Text>
+                <Input.Control
                   size="3"
                   type="email"
                   value={email}
@@ -315,10 +330,10 @@ export default {
             </Tabs.Content>
             <Tabs.Content value="about" keepMounted>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-                <Text render={<label />} size="2">
+                <Typography.Text render={<label />} size="2">
                   Bio
-                </Text>
-                <TextArea
+                </Typography.Text>
+                <Textarea
                   size="3"
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
@@ -330,11 +345,11 @@ export default {
           </div>
         </Tabs.Root>
 
-        <Text size="1" color="gray">
-          Use <Code>keepMounted</Code> on <Code>Tabs.Content</Code> for multi-step forms, preserving video/audio
-          playback state, or panels with expensive initialization. Without it, panels unmount when hidden and lose their
-          state.
-        </Text>
+        <Typography.Text size="1" color="gray">
+          Use <Typography.Code>keepMounted</Typography.Code> on <Typography.Code>Tabs.Content</Typography.Code> for
+          multi-step forms, preserving video/audio playback state, or panels with expensive initialization. Without it,
+          panels unmount when hidden and lose their state.
+        </Typography.Text>
       </div>
     );
   },

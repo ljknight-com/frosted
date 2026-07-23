@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, Text, WidgetStack, widgetStackRootPropDefs } from '..';
+import { IconButton, Typography, WidgetStack, widgetStackRootPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 export default {
@@ -35,12 +35,12 @@ export default {
                   gap: 'var(--space-1)',
                 }}
               >
-                <Text weight="bold" size="5">
+                <Typography.Text weight="bold" size="5">
                   Wrocław
-                </Text>
-                <Text weight="light" size="9">
+                </Typography.Text>
+                <Typography.Text weight="light" size="9">
                   24
-                </Text>
+                </Typography.Text>
               </div>
               <div
                 style={{
@@ -51,12 +51,12 @@ export default {
                   gap: 'var(--space-1)',
                 }}
               >
-                <Text weight="medium" size="3">
+                <Typography.Text weight="medium" size="3">
                   Sunny
-                </Text>
-                <Text weight="medium" size="3">
+                </Typography.Text>
+                <Typography.Text weight="medium" size="3">
                   H:73 L:55
-                </Text>
+                </Typography.Text>
               </div>
             </div>
           </WidgetStack.Item>
@@ -93,12 +93,12 @@ export default {
                   background: 'var(--gray-50)',
                 }}
               >
-                <Text weight="medium" size="4" trim="start">
+                <Typography.Text weight="medium" size="4" trim="start">
                   Travis S.
-                </Text>
-                <Text weight="medium" size="2" color="gray">
+                </Typography.Text>
+                <Typography.Text weight="medium" size="2" color="gray">
                   4am in Toronto
-                </Text>
+                </Typography.Text>
                 <IconButton
                   variant="soft"
                   style={{
@@ -176,12 +176,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="bold" size="5">
+                  <Typography.Text weight="bold" size="5">
                     Wrocław
-                  </Text>
-                  <Text weight="light" size="9">
+                  </Typography.Text>
+                  <Typography.Text weight="light" size="9">
                     24
-                  </Text>
+                  </Typography.Text>
                 </div>
                 <div
                   style={{
@@ -192,12 +192,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="medium" size="3">
+                  <Typography.Text weight="medium" size="3">
                     Sunny
-                  </Text>
-                  <Text weight="medium" size="3">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="3">
                     H:73 L:55
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </WidgetStack.Item>
@@ -234,12 +234,12 @@ export default {
                     background: 'var(--gray-50)',
                   }}
                 >
-                  <Text weight="medium" size="4" trim="start">
+                  <Typography.Text weight="medium" size="4" trim="start">
                     Travis S.
-                  </Text>
-                  <Text weight="medium" size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="2" color="gray">
                     4am in Toronto
-                  </Text>
+                  </Typography.Text>
                   <IconButton
                     variant="soft"
                     style={{
@@ -288,12 +288,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="bold" size="5">
+                  <Typography.Text weight="bold" size="5">
                     Wrocław
-                  </Text>
-                  <Text weight="light" size="9">
+                  </Typography.Text>
+                  <Typography.Text weight="light" size="9">
                     24
-                  </Text>
+                  </Typography.Text>
                 </div>
                 <div
                   style={{
@@ -304,12 +304,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="medium" size="3">
+                  <Typography.Text weight="medium" size="3">
                     Sunny
-                  </Text>
-                  <Text weight="medium" size="3">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="3">
                     H:73 L:55
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </WidgetStack.Item>
@@ -346,12 +346,12 @@ export default {
                     background: 'var(--gray-50)',
                   }}
                 >
-                  <Text weight="medium" size="4" trim="start">
+                  <Typography.Text weight="medium" size="4" trim="start">
                     Travis S.
-                  </Text>
-                  <Text weight="medium" size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="2" color="gray">
                     4am in Toronto
-                  </Text>
+                  </Typography.Text>
                   <IconButton
                     variant="soft"
                     style={{
@@ -401,7 +401,9 @@ export default {
     const args = { orientation: widgetStackRootPropDefs.orientation.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
-        <Text>When single widget is inside, the scrolling and animations are blocked automatically.</Text>
+        <Typography.Text>
+          When single widget is inside, the scrolling and animations are blocked automatically.
+        </Typography.Text>
         <WidgetStack.Root {...args}>
           <WidgetStack.Stack
             style={{
@@ -431,12 +433,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="bold" size="5">
+                  <Typography.Text weight="bold" size="5">
                     Wrocław
-                  </Text>
-                  <Text weight="light" size="9">
+                  </Typography.Text>
+                  <Typography.Text weight="light" size="9">
                     24
-                  </Text>
+                  </Typography.Text>
                 </div>
                 <div
                   style={{
@@ -447,12 +449,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="medium" size="3">
+                  <Typography.Text weight="medium" size="3">
                     Sunny
-                  </Text>
-                  <Text weight="medium" size="3">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="3">
                     H:73 L:55
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </WidgetStack.Item>
@@ -499,12 +501,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="bold" size="5">
+                  <Typography.Text weight="bold" size="5">
                     Wrocław
-                  </Text>
-                  <Text weight="light" size="9">
+                  </Typography.Text>
+                  <Typography.Text weight="light" size="9">
                     24
-                  </Text>
+                  </Typography.Text>
                 </div>
                 <div
                   style={{
@@ -515,12 +517,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="medium" size="3">
+                  <Typography.Text weight="medium" size="3">
                     Sunny
-                  </Text>
-                  <Text weight="medium" size="3">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="3">
                     H:73 L:55
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </WidgetStack.Item>
@@ -557,12 +559,12 @@ export default {
                     background: 'var(--gray-50)',
                   }}
                 >
-                  <Text weight="medium" size="4" trim="start">
+                  <Typography.Text weight="medium" size="4" trim="start">
                     Travis S.
-                  </Text>
-                  <Text weight="medium" size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="2" color="gray">
                     4am in Toronto
-                  </Text>
+                  </Typography.Text>
                   <IconButton
                     variant="soft"
                     style={{
@@ -648,12 +650,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="bold" size="5">
+                  <Typography.Text weight="bold" size="5">
                     Wrocław
-                  </Text>
-                  <Text weight="light" size="9">
+                  </Typography.Text>
+                  <Typography.Text weight="light" size="9">
                     24
-                  </Text>
+                  </Typography.Text>
                 </div>
                 <div
                   style={{
@@ -664,12 +666,12 @@ export default {
                     gap: 'var(--space-1)',
                   }}
                 >
-                  <Text weight="medium" size="3">
+                  <Typography.Text weight="medium" size="3">
                     Sunny
-                  </Text>
-                  <Text weight="medium" size="3">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="3">
                     H:73 L:55
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </WidgetStack.Item>
@@ -706,12 +708,12 @@ export default {
                     background: 'var(--gray-50)',
                   }}
                 >
-                  <Text weight="medium" size="4" trim="start">
+                  <Typography.Text weight="medium" size="4" trim="start">
                     Travis S.
-                  </Text>
-                  <Text weight="medium" size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text weight="medium" size="2" color="gray">
                     4am in Toronto
-                  </Text>
+                  </Typography.Text>
                   <IconButton
                     variant="soft"
                     style={{

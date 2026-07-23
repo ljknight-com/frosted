@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Code, DataList, Slider, sliderPropDefs, Text } from '..';
+import { Button, DataTable, Slider, Typography, sliderPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 export default {
@@ -116,11 +116,12 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 400 }}>
-        <Text>
-          <Code>onValueChange</Code> fires continuously while dragging — ideal for live previews.
+        <Typography.Text>
+          <Typography.Code>onValueChange</Typography.Code> fires continuously while dragging — ideal for live previews.
           <br />
-          <Code>onValueCommitted</Code> fires only when dragging ends — ideal for saving or API calls.
-        </Text>
+          <Typography.Code>onValueCommitted</Typography.Code> fires only when dragging ends — ideal for saving or API
+          calls.
+        </Typography.Text>
 
         <div style={{ width: 300 }}>
           <Slider
@@ -137,24 +138,24 @@ export default {
           />
         </div>
 
-        <DataList.Root>
-          <DataList.Item>
-            <DataList.Label>Live Value</DataList.Label>
-            <DataList.Value>{liveValue}</DataList.Value>
-          </DataList.Item>
-          <DataList.Item>
-            <DataList.Label>onValueChange calls</DataList.Label>
-            <DataList.Value>{changeCount}</DataList.Value>
-          </DataList.Item>
-          <DataList.Item>
-            <DataList.Label>Committed Value</DataList.Label>
-            <DataList.Value>{committedValue}</DataList.Value>
-          </DataList.Item>
-          <DataList.Item>
-            <DataList.Label>onValueCommitted calls</DataList.Label>
-            <DataList.Value>{commitCount}</DataList.Value>
-          </DataList.Item>
-        </DataList.Root>
+        <DataTable.Root>
+          <DataTable.Item>
+            <DataTable.Label>Live Value</DataTable.Label>
+            <DataTable.Value>{liveValue}</DataTable.Value>
+          </DataTable.Item>
+          <DataTable.Item>
+            <DataTable.Label>onValueChange calls</DataTable.Label>
+            <DataTable.Value>{changeCount}</DataTable.Value>
+          </DataTable.Item>
+          <DataTable.Item>
+            <DataTable.Label>Committed Value</DataTable.Label>
+            <DataTable.Value>{committedValue}</DataTable.Value>
+          </DataTable.Item>
+          <DataTable.Item>
+            <DataTable.Label>onValueCommitted calls</DataTable.Label>
+            <DataTable.Value>{commitCount}</DataTable.Value>
+          </DataTable.Item>
+        </DataTable.Root>
 
         <div
           style={{
@@ -167,9 +168,9 @@ export default {
             transition: 'background 50ms',
           }}
         >
-          <Text style={{ color: 'white', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
+          <Typography.Text style={{ color: 'white', textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
             Live color preview (hue: {Math.round(liveValue * 3.6)}°)
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -194,16 +195,17 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', maxWidth: 400 }}>
-        <Text>
-          The <Code>minStepsBetweenValues</Code> prop ensures a minimum gap between thumbs in a range slider. Combined
-          with <Code>thumbCollisionBehavior="push"</Code>, when one thumb approaches another, it pushes it along rather
-          than stopping — creating a smooth, intuitive interaction while maintaining the minimum gap.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>minStepsBetweenValues</Typography.Code> prop ensures a minimum gap between thumbs in a
+          range slider. Combined with <Typography.Code>thumbCollisionBehavior="push"</Typography.Code>, when one thumb
+          approaches another, it pushes it along rather than stopping — creating a smooth, intuitive interaction while
+          maintaining the minimum gap.
+        </Typography.Text>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Price Range Filter (min $100 gap)
-          </Text>
+          </Typography.Text>
           <div style={{ width: '100%' }}>
             <Slider
               {...args}
@@ -216,15 +218,15 @@ export default {
               thumbCollisionBehavior="push"
             />
           </div>
-          <Text size="2" color="gray">
+          <Typography.Text size="2" color="gray">
             Selected: {formatPrice(priceRange[0])} – {formatPrice(priceRange[1])}
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Meeting Time Slot (min 2 hour duration)
-          </Text>
+          </Typography.Text>
           <div style={{ width: '100%' }}>
             <Slider
               {...args}
@@ -237,29 +239,29 @@ export default {
               thumbCollisionBehavior="push"
             />
           </div>
-          <Text size="2" color="gray">
+          <Typography.Text size="2" color="gray">
             Available: {formatTime(timeRange[0])} – {formatTime(timeRange[1])} ({timeRange[1] - timeRange[0]} hours)
-          </Text>
+          </Typography.Text>
         </div>
 
-        <DataList.Root size="1">
-          <DataList.Item>
-            <DataList.Label>thumbCollisionBehavior</DataList.Label>
-            <DataList.Value>"push" — thumbs push each other when colliding</DataList.Value>
-          </DataList.Item>
-          <DataList.Item>
-            <DataList.Label>Price minStepsBetweenValues</DataList.Label>
-            <DataList.Value>2 steps × $50 = $100 minimum gap</DataList.Value>
-          </DataList.Item>
-          <DataList.Item>
-            <DataList.Label>Time minStepsBetweenValues</DataList.Label>
-            <DataList.Value>2 steps × 1hr = 2 hour minimum</DataList.Value>
-          </DataList.Item>
-        </DataList.Root>
-        <Text size="1" color="gray">
-          Other collision behaviors: <Code>"swap"</Code> (thumbs swap places) and <Code>"none"</Code> (thumbs block each
-          other).
-        </Text>
+        <DataTable.Root size="1">
+          <DataTable.Item>
+            <DataTable.Label>thumbCollisionBehavior</DataTable.Label>
+            <DataTable.Value>"push" — thumbs push each other when colliding</DataTable.Value>
+          </DataTable.Item>
+          <DataTable.Item>
+            <DataTable.Label>Price minStepsBetweenValues</DataTable.Label>
+            <DataTable.Value>2 steps × $50 = $100 minimum gap</DataTable.Value>
+          </DataTable.Item>
+          <DataTable.Item>
+            <DataTable.Label>Time minStepsBetweenValues</DataTable.Label>
+            <DataTable.Value>2 steps × 1hr = 2 hour minimum</DataTable.Value>
+          </DataTable.Item>
+        </DataTable.Root>
+        <Typography.Text size="1" color="gray">
+          Other collision behaviors: <Typography.Code>"swap"</Typography.Code> (thumbs swap places) and{' '}
+          <Typography.Code>"none"</Typography.Code> (thumbs block each other).
+        </Typography.Text>
       </div>
     );
   },
@@ -302,11 +304,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 400 }}>
-        <Text>
-          The <Code>inputRef</Code> prop provides direct access to the hidden native{' '}
-          <Code>&lt;input type="range"&gt;</Code> element inside the thumb. This is useful for programmatic focus, form
-          validation, or integrating with third-party libraries.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>inputRef</Typography.Code> prop provides direct access to the hidden native{' '}
+          <Typography.Code>&lt;input type="range"&gt;</Typography.Code> element inside the thumb. This is useful for
+          programmatic focus, form validation, or integrating with third-party libraries.
+        </Typography.Text>
 
         <div style={{ width: 300 }}>
           <Slider {...args} inputRef={inputRef} defaultValue={[25]} min={0} max={100} step={5} />
@@ -324,7 +326,7 @@ export default {
           </Button>
         </div>
 
-        <Code style={{ padding: 'var(--space-2)', display: 'block' }}>{info}</Code>
+        <Typography.Code style={{ padding: 'var(--space-2)', display: 'block' }}>{info}</Typography.Code>
       </div>
     );
   },

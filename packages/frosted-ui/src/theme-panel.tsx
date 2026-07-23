@@ -2,10 +2,9 @@
 
 import {
   Button,
-  Heading,
   Kbd,
   ScrollArea,
-  Text,
+  Typography,
   Theme,
   Tooltip,
   dangerColors,
@@ -203,7 +202,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             </Tooltip>
           </div>
 
-          <Heading
+          <Typography.Heading
             size="5"
             trim="both"
             render={<h3 />}
@@ -212,9 +211,9 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             }}
           >
             Theme
-          </Heading>
+          </Typography.Heading>
 
-          <Text
+          <Typography.Text
             id="accent-color-title"
             render={<p />}
             size="2"
@@ -224,7 +223,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             }}
           >
             Accent color
-          </Text>
+          </Typography.Text>
 
           <div
             style={{
@@ -256,7 +255,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             ))}
           </div>
 
-          <Text
+          <Typography.Text
             render={<p />}
             id="gray-color-title"
             size="2"
@@ -269,7 +268,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             }}
           >
             Gray color
-          </Text>
+          </Typography.Text>
 
           <div
             style={{
@@ -316,7 +315,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
 
           {/* Semantic colors */}
 
-          <Text
+          <Typography.Text
             id="info-color-title"
             render={<p />}
             size="2"
@@ -326,7 +325,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             }}
           >
             Info color
-          </Text>
+          </Typography.Text>
 
           <div
             style={{
@@ -354,7 +353,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             ))}
           </div>
 
-          <Text
+          <Typography.Text
             id="success-color-title"
             render={<p />}
             size="2"
@@ -364,7 +363,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             }}
           >
             Success color
-          </Text>
+          </Typography.Text>
 
           <div
             style={{
@@ -392,7 +391,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             ))}
           </div>
 
-          <Text
+          <Typography.Text
             id="warning-color-title"
             render={<p />}
             size="2"
@@ -402,7 +401,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             }}
           >
             Warning color
-          </Text>
+          </Typography.Text>
 
           <div
             style={{
@@ -430,7 +429,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             ))}
           </div>
 
-          <Text
+          <Typography.Text
             id="danger-color-title"
             render={<p />}
             size="2"
@@ -440,7 +439,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             }}
           >
             Danger color
-          </Text>
+          </Typography.Text>
 
           <div
             style={{
@@ -467,7 +466,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
               </label>
             ))}
           </div>
-          <Text
+          <Typography.Text
             id="appearance-title"
             render={<p />}
             size="2"
@@ -477,7 +476,7 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
             }}
           >
             Appearance
-          </Text>
+          </Typography.Text>
 
           <div
             style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-2)', marginTop: 12 }}
@@ -538,9 +537,9 @@ const ThemePanelImpl = React.forwardRef<ThemePanelImplElement, ThemePanelImplPro
                       ></path>
                     </svg>
                   )}
-                  <Text size="1" weight="medium">
+                  <Typography.Text size="1" weight="medium">
                     {upperFirst(value)}
-                  </Text>
+                  </Typography.Text>
                 </div>
               </label>
             ))}

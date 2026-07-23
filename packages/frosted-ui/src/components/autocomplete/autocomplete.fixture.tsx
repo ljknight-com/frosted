@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import * as React from 'react';
 import { getColorForEmoji } from '../../helpers/emoji-colors';
-import { Button, Code, EmptyState, IconButton, Kbd, ScrollArea, Spinner, Text, TextField, toast } from '..';
+import { Button, Empty, IconButton, Input, Kbd, ScrollArea, Spinner, Typography, toast } from '..';
 import * as Autocomplete from './autocomplete';
 
 // Sample data
@@ -789,9 +789,9 @@ export default {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 500 }}>
         <div style={{ maxWidth: 300 }}>
           <Autocomplete.Root items={tags} itemToStringValue={(item) => (item as Tag).value}>
-            <TextField.Root>
-              <Autocomplete.Input render={<TextField.Input placeholder="Search tags..." />} />
-            </TextField.Root>
+            <Input.Root>
+              <Autocomplete.Input render={<Input.Control placeholder="Search tags..." />} />
+            </Input.Root>
             <Autocomplete.Content>
               <ScrollArea type="auto">
                 <Autocomplete.Empty>No tags found.</Autocomplete.Empty>
@@ -818,28 +818,28 @@ export default {
             borderLeft: '3px solid var(--accent-700)',
           }}
         >
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
             Usage Guidelines
-          </Text>
+          </Typography.Text>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <div>
-              <Text size="2" weight="medium" style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
+              <Typography.Text size="2" weight="medium" style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
                 Avoid when selection state is needed
-              </Text>
-              <Text size="2" color="gray">
+              </Typography.Text>
+              <Typography.Text size="2" color="gray">
                 Use Combobox instead of Autocomplete if the selection should be remembered and the input value cannot be
                 custom. Unlike Combobox, Autocomplete&apos;s input can contain free-form text, as its suggestions only
                 optionally autocomplete the text.
-              </Text>
+              </Typography.Text>
             </div>
             <div>
-              <Text size="2" weight="medium" style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
+              <Typography.Text size="2" weight="medium" style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
                 Can be used for filterable command pickers
-              </Text>
-              <Text size="2" color="gray">
+              </Typography.Text>
+              <Typography.Text size="2" color="gray">
                 The input can be used as a filter for command items that perform an action when clicked when rendered
                 inside the popup.
-              </Text>
+              </Typography.Text>
             </div>
           </div>
         </div>
@@ -852,9 +852,9 @@ export default {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 300 }}>
         {(['1', '2', '3', '4'] as const).map((size) => (
           <Autocomplete.Root key={size} items={countries}>
-            <TextField.Root size={size}>
-              <Autocomplete.Input render={<TextField.Input placeholder={`Size ${size}`} />} />
-            </TextField.Root>
+            <Input.Root size={size}>
+              <Autocomplete.Input render={<Input.Control placeholder={`Size ${size}`} />} />
+            </Input.Root>
             <Autocomplete.Content size={size === '4' ? '3' : (size as '1' | '2' | '3')}>
               <ScrollArea type="auto">
                 <Autocomplete.Empty>No results found.</Autocomplete.Empty>
@@ -874,28 +874,29 @@ export default {
   },
 
   'With Slot'() {
-    const textFieldRef = React.useRef<HTMLDivElement>(null);
+    const inputRef = React.useRef<HTMLDivElement>(null);
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 300 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             With Slot
-          </Text>
-          <Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-            Use <Code size="1">TextField.Slot</Code> for leading or trailing icons. When using slots, pass the{' '}
-            <Code size="1">anchor</Code> prop to <Code size="1">Autocomplete.Content</Code> to position the popup
-            against the entire <Code size="1">TextField.Root</Code> rather than just the input.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+            Use <Typography.Code size="1">Input.Slot</Typography.Code> for leading or trailing icons. When using slots,
+            pass the <Typography.Code size="1">anchor</Typography.Code> prop to{' '}
+            <Typography.Code size="1">Autocomplete.Content</Typography.Code> to position the popup against the entire{' '}
+            <Typography.Code size="1">Input.Root</Typography.Code> rather than just the input.
+          </Typography.Text>
         </div>
         <Autocomplete.Root items={countries}>
-          <TextField.Root ref={textFieldRef}>
-            <TextField.Slot>
+          <Input.Root ref={inputRef}>
+            <Input.Slot>
               <SearchIcon size={16} />
-            </TextField.Slot>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search countries..." />} />
-          </TextField.Root>
-          <Autocomplete.Content anchor={textFieldRef}>
+            </Input.Slot>
+            <Autocomplete.Input render={<Input.Control placeholder="Search countries..." />} />
+          </Input.Root>
+          <Autocomplete.Content anchor={inputRef}>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No results found.</Autocomplete.Empty>
               <Autocomplete.List>
@@ -915,22 +916,23 @@ export default {
   Grouped() {
     return (
       <div style={{ maxWidth: 350 }}>
-        <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+        <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
           Grouped
-        </Text>
-        <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-          Organize related options with <Code size="2">Autocomplete.Group</Code> and{' '}
-          <Code size="2">Autocomplete.GroupLabel</Code> to add section headings inside the popup.
-        </Text>
-        <Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-          Groups are represented by an array of objects with an <Code size="1">items</Code> property, which itself is an
-          array of individual items for each group. An extra property, such as <Code size="1">label</Code>, can be
-          provided for the heading text when rendering the group label.
-        </Text>
+        </Typography.Text>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          Organize related options with <Typography.Code size="2">Autocomplete.Group</Typography.Code> and{' '}
+          <Typography.Code size="2">Autocomplete.GroupLabel</Typography.Code> to add section headings inside the popup.
+        </Typography.Text>
+        <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          Groups are represented by an array of objects with an <Typography.Code size="1">items</Typography.Code>{' '}
+          property, which itself is an array of individual items for each group. An extra property, such as{' '}
+          <Typography.Code size="1">label</Typography.Code>, can be provided for the heading text when rendering the
+          group label.
+        </Typography.Text>
         <Autocomplete.Root items={produceGroups}>
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search produce..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Search produce..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto" style={{ maxHeight: 300 }}>
               <Autocomplete.Empty>No produce found.</Autocomplete.Empty>
@@ -959,16 +961,16 @@ export default {
   'Empty State'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', maxWidth: 300 }}>
-        <Text size="2" weight="bold">
+        <Typography.Text size="2" weight="bold">
           Empty State
-        </Text>
-        <Text size="1" color="gray">
+        </Typography.Text>
+        <Typography.Text size="1" color="gray">
           Type something that doesn&apos;t match any items to see the empty state.
-        </Text>
+        </Typography.Text>
         <Autocomplete.Root items={tags} itemToStringValue={(item) => (item as Tag).value}>
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Try typing 'xyz'..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Try typing 'xyz'..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto">
               <Autocomplete.Empty>
@@ -995,31 +997,32 @@ export default {
   },
 
   'With Clear Button'() {
-    const textFieldRef = React.useRef<HTMLDivElement>(null);
+    const inputRef = React.useRef<HTMLDivElement>(null);
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', maxWidth: 300 }}>
-        <Text size="2" weight="bold">
+        <Typography.Text size="2" weight="bold">
           With Clear Button
-        </Text>
-        <Text size="1" color="gray">
-          Use <Code size="1">Autocomplete.Clear</Code> to add a button that clears the input value.
-        </Text>
+        </Typography.Text>
+        <Typography.Text size="1" color="gray">
+          Use <Typography.Code size="1">Autocomplete.Clear</Typography.Code> to add a button that clears the input
+          value.
+        </Typography.Text>
         <Autocomplete.Root items={countries}>
-          <TextField.Root ref={textFieldRef}>
-            <TextField.Slot>
+          <Input.Root ref={inputRef}>
+            <Input.Slot>
               <SearchIcon size={16} />
-            </TextField.Slot>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search countries..." />} />
-            <TextField.Slot>
+            </Input.Slot>
+            <Autocomplete.Input render={<Input.Control placeholder="Search countries..." />} />
+            <Input.Slot>
               <Autocomplete.Clear>
                 <IconButton variant="ghost" color="gray" size="1">
                   <CircleX size={16} />
                 </IconButton>
               </Autocomplete.Clear>
-            </TextField.Slot>
-          </TextField.Root>
-          <Autocomplete.Content anchor={textFieldRef}>
+            </Input.Slot>
+          </Input.Root>
+          <Autocomplete.Content anchor={inputRef}>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No results found.</Autocomplete.Empty>
               <Autocomplete.List>
@@ -1042,12 +1045,12 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 300 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             Controlled Autocomplete
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             The selected value is controlled externally.
-          </Text>
+          </Typography.Text>
         </div>
 
         <Autocomplete.Root
@@ -1055,9 +1058,9 @@ export default {
           value={value}
           onValueChange={(newValue) => setValue(newValue as string | undefined)}
         >
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search countries..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Search countries..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No results found.</Autocomplete.Empty>
@@ -1079,9 +1082,9 @@ export default {
             borderRadius: 'var(--radius-2)',
           }}
         >
-          <Text size="1" color="gray">
-            Selected value: <Code size="1">{value ?? '(none)'}</Code>
-          </Text>
+          <Typography.Text size="1" color="gray">
+            Selected value: <Typography.Code size="1">{value ?? '(none)'}</Typography.Code>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -1090,19 +1093,19 @@ export default {
   'Colored Items'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', maxWidth: 300 }}>
-        <Text size="2" weight="bold">
+        <Typography.Text size="2" weight="bold">
           Colored Items
-        </Text>
-        <Text size="1" color="gray">
+        </Typography.Text>
+        <Typography.Text size="1" color="gray">
           Items can have individual accent colors.
-        </Text>
+        </Typography.Text>
         <Autocomplete.Root
           items={coloredTags}
           itemToStringValue={(item) => (item as (typeof coloredTags)[number]).value}
         >
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search tags..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Search tags..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No tags found.</Autocomplete.Empty>
@@ -1126,13 +1129,13 @@ export default {
   'Many Items'() {
     return (
       <div style={{ maxWidth: 300 }}>
-        <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+        <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
           {manyCountries.length} countries with scroll
-        </Text>
+        </Typography.Text>
         <Autocomplete.Root items={manyCountries}>
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search countries..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Search countries..." />} />
+          </Input.Root>
           <Autocomplete.Content style={{ maxHeight: 300 }}>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -1176,14 +1179,14 @@ export default {
     return (
       <div style={{ width: 300 }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <TextField.Root size="3" style={{ flex: 1 }}>
-            <TextField.Input
+          <Input.Root size="3" style={{ flex: 1 }}>
+            <Input.Control
               ref={textInputRef}
               placeholder="iMessage"
               value={textValue}
               onChange={(e) => setTextValue(e.target.value)}
             />
-          </TextField.Root>
+          </Input.Root>
 
           <Autocomplete.Root
             grid
@@ -1221,20 +1224,20 @@ export default {
               }}
             >
               <div style={{ padding: 8, borderBottom: '1px solid var(--color-stroke)' }}>
-                <TextField.Root size="3" variant="soft" color="gray">
-                  <TextField.Slot>
+                <Input.Root size="3" variant="soft" color="gray">
+                  <Input.Slot>
                     <SearchIcon size={16} />
-                  </TextField.Slot>
-                  <Autocomplete.Input render={<TextField.Input placeholder="Search emojis…" />} />
+                  </Input.Slot>
+                  <Autocomplete.Input render={<Input.Control placeholder="Search emojis…" />} />
 
-                  <TextField.Slot style={{ padding: 4 }}>
+                  <Input.Slot style={{ padding: 4 }}>
                     <Autocomplete.Clear>
                       <IconButton variant="ghost" color="gray" style={{ borderRadius: '50%' }}>
                         <CircleX size={16} />
                       </IconButton>
                     </Autocomplete.Clear>
-                  </TextField.Slot>
-                </TextField.Root>
+                  </Input.Slot>
+                </Input.Root>
               </div>
               <Autocomplete.Empty
                 style={{
@@ -1435,18 +1438,19 @@ export default {
       return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
-    const textFieldRootRef = React.useRef<HTMLDivElement>(null);
+    const inputRootRef = React.useRef<HTMLDivElement>(null);
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Command Picker
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
             A filterable command palette that performs actions when items are clicked. The input inside the popup
-            filters the available commands. Press <Code size="2">⌘K</Code> or click the button to open.
-          </Text>
+            filters the available commands. Press <Typography.Code size="2">⌘K</Typography.Code> or click the button to
+            open.
+          </Typography.Text>
         </div>
 
         <Autocomplete.Root
@@ -1472,29 +1476,29 @@ export default {
             }
           }}
         >
-          <TextField.Root
+          <Input.Root
             style={{
               width: 400,
             }}
             size="3"
             variant="soft"
             color="gray"
-            ref={textFieldRootRef}
+            ref={inputRootRef}
           >
-            <TextField.Slot>
+            <Input.Slot>
               <SearchIcon size={16} />
-            </TextField.Slot>
-            <Autocomplete.Input render={<TextField.Input placeholder="Type a command or search..." />} />
+            </Input.Slot>
+            <Autocomplete.Input render={<Input.Control placeholder="Type a command or search..." />} />
             {searchValue && (
-              <TextField.Slot style={{ paddingRight: 4 }}>
+              <Input.Slot style={{ paddingRight: 4 }}>
                 <Autocomplete.Clear>
                   <IconButton variant="ghost" color="gray" size="2" style={{ borderRadius: '50%' }}>
                     <CircleX size={16} />
                   </IconButton>
                 </Autocomplete.Clear>
-              </TextField.Slot>
+              </Input.Slot>
             )}
-          </TextField.Root>
+          </Input.Root>
           <Autocomplete.Content
             sideOffset={4}
             size="3"
@@ -1503,23 +1507,23 @@ export default {
               padding: 0,
               overflow: 'hidden',
             }}
-            anchor={textFieldRootRef}
+            anchor={inputRootRef}
           >
             <ScrollArea type="auto" style={{ maxHeight: 300 }}>
               <Autocomplete.Empty>
-                <EmptyState.Root>
-                  <EmptyState.Header>
-                    <EmptyState.Media>
+                <Empty.Root>
+                  <Empty.Header>
+                    <Empty.Media>
                       <Frown size={24} />
-                    </EmptyState.Media>
-                    <EmptyState.Title size="2" style={{ color: 'var(--gray-950)' }}>
+                    </Empty.Media>
+                    <Empty.Title size="2" style={{ color: 'var(--gray-950)' }}>
                       No matching commands found
-                    </EmptyState.Title>
-                    <EmptyState.Description size="1" style={{ marginTop: 4 }}>
+                    </Empty.Title>
+                    <Empty.Description size="1" style={{ marginTop: 4 }}>
                       Try searching for something else.
-                    </EmptyState.Description>
-                  </EmptyState.Header>
-                </EmptyState.Root>
+                    </Empty.Description>
+                  </Empty.Header>
+                </Empty.Root>
               </Autocomplete.Empty>
               <Autocomplete.List style={{ padding: 8 }}>
                 {(group) => {
@@ -1583,7 +1587,7 @@ export default {
                 }}
               </Autocomplete.List>
             </ScrollArea>
-            <Text
+            <Typography.Text
               render={<footer />}
               size="1"
               style={{
@@ -1611,7 +1615,7 @@ export default {
                 <Kbd size="1">esc</Kbd>
                 <span>to close</span>
               </span>
-            </Text>
+            </Typography.Text>
           </Autocomplete.Content>
         </Autocomplete.Root>
       </div>
@@ -1655,12 +1659,12 @@ export default {
 
     return (
       <div style={{ maxWidth: 400 }}>
-        <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+        <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
           Async Search
-        </Text>
-        <Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+        </Typography.Text>
+        <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
           Searches are performed asynchronously with a debounced input. Try searching for movies by name or year.
-        </Text>
+        </Typography.Text>
         <Autocomplete.Root
           mode="none"
           items={movies}
@@ -1668,9 +1672,9 @@ export default {
           value={inputValue}
           onValueChange={(value) => setInputValue(value as string)}
         >
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search movies by name or year..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Search movies by name or year..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto" style={{ maxHeight: 300 }}>
               {isLoading ? (
@@ -1684,9 +1688,9 @@ export default {
                   }}
                 >
                   <Spinner size="2" />
-                  <Text size="2" color="gray">
+                  <Typography.Text size="2" color="gray">
                     Searching...
-                  </Text>
+                  </Typography.Text>
                 </div>
               ) : hasSearched && movies.length === 0 ? (
                 <Autocomplete.Empty>No movies found.</Autocomplete.Empty>
@@ -1705,9 +1709,9 @@ export default {
                           }}
                         >
                           <span>{m.title}</span>
-                          <Text size="1" color="gray">
+                          <Typography.Text size="1" color="gray">
                             {m.year}
-                          </Text>
+                          </Typography.Text>
                         </div>
                       </Autocomplete.Item>
                     );
@@ -1725,26 +1729,27 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 400 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Inline Autocomplete
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
             Autofill the input with the highlighted item while navigating with arrow keys using the{' '}
-            <Code size="2">mode</Code> prop. Accepts <Code size="2">aria-autocomplete</Code> values{' '}
-            <Code size="2">list</Code>, <Code size="2">both</Code>, <Code size="2">inline</Code>, or{' '}
-            <Code size="2">none</Code>.
-          </Text>
+            <Typography.Code size="2">mode</Typography.Code> prop. Accepts{' '}
+            <Typography.Code size="2">aria-autocomplete</Typography.Code> values{' '}
+            <Typography.Code size="2">list</Typography.Code>, <Typography.Code size="2">both</Typography.Code>,{' '}
+            <Typography.Code size="2">inline</Typography.Code>, or <Typography.Code size="2">none</Typography.Code>.
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">mode="list"</Code> (default) — Shows matching suggestions in a list
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">mode="list"</Typography.Code> (default) — Shows matching suggestions in a list
+            </Typography.Text>
             <Autocomplete.Root items={programmingLanguages} mode="list">
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Search languages..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Search languages..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No languages found.</Autocomplete.Empty>
@@ -1761,13 +1766,14 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">mode="inline"</Code> — Autofills the input as you navigate with arrow keys
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">mode="inline"</Typography.Code> — Autofills the input as you navigate with arrow
+              keys
+            </Typography.Text>
             <Autocomplete.Root items={programmingLanguages} mode="inline">
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Search languages..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Search languages..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No languages found.</Autocomplete.Empty>
@@ -1784,13 +1790,13 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">mode="both"</Code> — Combines list filtering with inline completion
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">mode="both"</Typography.Code> — Combines list filtering with inline completion
+            </Typography.Text>
             <Autocomplete.Root items={programmingLanguages} mode="both">
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Search languages..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Search languages..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No languages found.</Autocomplete.Empty>
@@ -1807,13 +1813,14 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">mode="none"</Code> — No automatic filtering, useful for custom filtering logic
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">mode="none"</Typography.Code> — No automatic filtering, useful for custom
+              filtering logic
+            </Typography.Text>
             <Autocomplete.Root items={programmingLanguages} mode="none">
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Search languages..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Search languages..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No languages found.</Autocomplete.Empty>
@@ -1849,27 +1856,27 @@ export default {
 
     return (
       <div style={{ maxWidth: 400 }}>
-        <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+        <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
           Fuzzy Matching
-        </Text>
-        <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+        </Typography.Text>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
           Implement custom fuzzy matching to find items even when the query doesn&apos;t exactly match. Try typing{' '}
-          <Code size="2">btn</Code> to find <Code size="2">Button.tsx</Code>, or <Code size="2">pcfg</Code> to find
-          config files.
-        </Text>
-        <Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-          Use <Code size="1">mode="none"</Code> to disable built-in filtering and implement your own matching logic with
-          controlled <Code size="1">items</Code>.
-        </Text>
+          <Typography.Code size="2">btn</Typography.Code> to find <Typography.Code size="2">Button.tsx</Typography.Code>
+          , or <Typography.Code size="2">pcfg</Typography.Code> to find config files.
+        </Typography.Text>
+        <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          Use <Typography.Code size="1">mode="none"</Typography.Code> to disable built-in filtering and implement your
+          own matching logic with controlled <Typography.Code size="1">items</Typography.Code>.
+        </Typography.Text>
         <Autocomplete.Root
           items={filteredFiles}
           mode="none"
           value={query}
           onValueChange={(value) => setQuery(value as string)}
         >
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search files..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Search files..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto" style={{ maxHeight: 300 }}>
               <Autocomplete.Empty>No files found.</Autocomplete.Empty>
@@ -1912,25 +1919,25 @@ export default {
 
     return (
       <div style={{ maxWidth: 350 }}>
-        <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+        <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
           Limit Results
-        </Text>
-        <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+        </Typography.Text>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
           Improve performance with large datasets by limiting the number of displayed results. Use{' '}
-          <Code size="2">mode="none"</Code> and slice the filtered items array.
-        </Text>
-        <Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          <Typography.Code size="2">mode="none"</Typography.Code> and slice the filtered items array.
+        </Typography.Text>
+        <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
           This example limits results to {MAX_RESULTS} items from a list of {allCities.length} US cities.
-        </Text>
+        </Typography.Text>
         <Autocomplete.Root
           items={limitedCities}
           mode="none"
           value={query}
           onValueChange={(value) => setQuery(value as string)}
         >
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Search cities..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Search cities..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No cities found.</Autocomplete.Empty>
@@ -1942,7 +1949,7 @@ export default {
                 )}
               </Autocomplete.List>
               {hasMore && (
-                <Text
+                <Typography.Text
                   size="1"
                   color="gray"
                   style={{
@@ -1952,7 +1959,7 @@ export default {
                   }}
                 >
                   Showing {MAX_RESULTS} of {totalMatches} results
-                </Text>
+                </Typography.Text>
               )}
             </ScrollArea>
           </Autocomplete.Content>
@@ -1965,35 +1972,37 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 350 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Highlight
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-            Control how items are highlighted using <Code size="2">autoHighlight</Code>,{' '}
-            <Code size="2">keepHighlight</Code>, and <Code size="2">highlightItemOnHover</Code> props.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+            Control how items are highlighted using <Typography.Code size="2">autoHighlight</Typography.Code>,{' '}
+            <Typography.Code size="2">keepHighlight</Typography.Code>, and{' '}
+            <Typography.Code size="2">highlightItemOnHover</Typography.Code> props.
+          </Typography.Text>
         </div>
 
         {/* autoHighlight */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <div>
-            <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               autoHighlight
-            </Text>
-            <Text size="1" color="gray" style={{ display: 'block' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ display: 'block' }}>
               Automatically highlight the first matching item when the popup opens or when the filtered results change.
-              Allows users to quickly select the top result by pressing <Code size="1">Enter</Code>.
-            </Text>
+              Allows users to quickly select the top result by pressing{' '}
+              <Typography.Code size="1">Enter</Typography.Code>.
+            </Typography.Text>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <div>
-              <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-                <Code size="1">autoHighlight={'{false}'}</Code> (default)
-              </Text>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+                <Typography.Code size="1">autoHighlight={'{false}'}</Typography.Code> (default)
+              </Typography.Text>
               <Autocomplete.Root items={browsers} autoHighlight={false}>
-                <TextField.Root>
-                  <Autocomplete.Input render={<TextField.Input placeholder="No auto highlight..." />} />
-                </TextField.Root>
+                <Input.Root>
+                  <Autocomplete.Input render={<Input.Control placeholder="No auto highlight..." />} />
+                </Input.Root>
                 <Autocomplete.Content>
                   <ScrollArea type="auto">
                     <Autocomplete.Empty>No browsers found.</Autocomplete.Empty>
@@ -2009,13 +2018,13 @@ export default {
               </Autocomplete.Root>
             </div>
             <div>
-              <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-                <Code size="1">autoHighlight={'{true}'}</Code>
-              </Text>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+                <Typography.Code size="1">autoHighlight={'{true}'}</Typography.Code>
+              </Typography.Text>
               <Autocomplete.Root items={browsers} autoHighlight>
-                <TextField.Root>
-                  <Autocomplete.Input render={<TextField.Input placeholder="First item auto-highlighted..." />} />
-                </TextField.Root>
+                <Input.Root>
+                  <Autocomplete.Input render={<Input.Control placeholder="First item auto-highlighted..." />} />
+                </Input.Root>
                 <Autocomplete.Content>
                   <ScrollArea type="auto">
                     <Autocomplete.Empty>No browsers found.</Autocomplete.Empty>
@@ -2036,22 +2045,23 @@ export default {
         {/* keepHighlight */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <div>
-            <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               keepHighlight
-            </Text>
-            <Text size="1" color="gray" style={{ display: 'block' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ display: 'block' }}>
               Whether the highlighted item should be preserved when the pointer leaves the list.
-            </Text>
+            </Typography.Text>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <div>
-              <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-                <Code size="1">keepHighlight={'{false}'}</Code> (default) — Highlight clears on pointer leave
-              </Text>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+                <Typography.Code size="1">keepHighlight={'{false}'}</Typography.Code> (default) — Highlight clears on
+                pointer leave
+              </Typography.Text>
               <Autocomplete.Root items={browsers} keepHighlight={false}>
-                <TextField.Root>
-                  <Autocomplete.Input render={<TextField.Input placeholder="Hover then move away..." />} />
-                </TextField.Root>
+                <Input.Root>
+                  <Autocomplete.Input render={<Input.Control placeholder="Hover then move away..." />} />
+                </Input.Root>
                 <Autocomplete.Content>
                   <ScrollArea type="auto">
                     <Autocomplete.Empty>No browsers found.</Autocomplete.Empty>
@@ -2067,13 +2077,14 @@ export default {
               </Autocomplete.Root>
             </div>
             <div>
-              <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-                <Code size="1">keepHighlight={'{true}'}</Code> — Highlight preserved on pointer leave
-              </Text>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+                <Typography.Code size="1">keepHighlight={'{true}'}</Typography.Code> — Highlight preserved on pointer
+                leave
+              </Typography.Text>
               <Autocomplete.Root items={browsers} keepHighlight>
-                <TextField.Root>
-                  <Autocomplete.Input render={<TextField.Input placeholder="Hover then move away..." />} />
-                </TextField.Root>
+                <Input.Root>
+                  <Autocomplete.Input render={<Input.Control placeholder="Hover then move away..." />} />
+                </Input.Root>
                 <Autocomplete.Content>
                   <ScrollArea type="auto">
                     <Autocomplete.Empty>No browsers found.</Autocomplete.Empty>
@@ -2094,23 +2105,25 @@ export default {
         {/* highlightItemOnHover */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <div>
-            <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               highlightItemOnHover
-            </Text>
-            <Text size="1" color="gray" style={{ display: 'block' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ display: 'block' }}>
               Whether moving the pointer over items should highlight them. Disabling this allows CSS{' '}
-              <Code size="1">:hover</Code> to be differentiated from the <Code size="1">[data-highlighted]</Code> state.
-            </Text>
+              <Typography.Code size="1">:hover</Typography.Code> to be differentiated from the{' '}
+              <Typography.Code size="1">[data-highlighted]</Typography.Code> state.
+            </Typography.Text>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <div>
-              <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-                <Code size="1">highlightItemOnHover={'{true}'}</Code> (default) — Pointer highlights items
-              </Text>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+                <Typography.Code size="1">highlightItemOnHover={'{true}'}</Typography.Code> (default) — Pointer
+                highlights items
+              </Typography.Text>
               <Autocomplete.Root items={browsers} highlightItemOnHover>
-                <TextField.Root>
-                  <Autocomplete.Input render={<TextField.Input placeholder="Hover over items..." />} />
-                </TextField.Root>
+                <Input.Root>
+                  <Autocomplete.Input render={<Input.Control placeholder="Hover over items..." />} />
+                </Input.Root>
                 <Autocomplete.Content>
                   <ScrollArea type="auto">
                     <Autocomplete.Empty>No browsers found.</Autocomplete.Empty>
@@ -2126,13 +2139,13 @@ export default {
               </Autocomplete.Root>
             </div>
             <div>
-              <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-                <Code size="1">highlightItemOnHover={'{false}'}</Code> — Keyboard only highlight
-              </Text>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+                <Typography.Code size="1">highlightItemOnHover={'{false}'}</Typography.Code> — Keyboard only highlight
+              </Typography.Text>
               <Autocomplete.Root items={browsers} highlightItemOnHover={false}>
-                <TextField.Root>
-                  <Autocomplete.Input render={<TextField.Input placeholder="Use arrow keys to navigate..." />} />
-                </TextField.Root>
+                <Input.Root>
+                  <Autocomplete.Input render={<Input.Control placeholder="Use arrow keys to navigate..." />} />
+                </Input.Root>
                 <Autocomplete.Content>
                   <ScrollArea type="auto">
                     <Autocomplete.Empty>No browsers found.</Autocomplete.Empty>
@@ -2182,15 +2195,16 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 400 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             onItemHighlighted
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
             Callback fired when an item is highlighted or unhighlighted. Receives the highlighted item value (or{' '}
-            <Code size="2">undefined</Code> if no item is highlighted) and event details with a{' '}
-            <Code size="2">reason</Code> property describing why the highlight changed. Use{' '}
-            <Code size="2">Autocomplete.RootHighlightEventDetails</Code> to type the event details.
-          </Text>
+            <Typography.Code size="2">undefined</Typography.Code> if no item is highlighted) and event details with a{' '}
+            <Typography.Code size="2">reason</Typography.Code> property describing why the highlight changed. Use{' '}
+            <Typography.Code size="2">Autocomplete.RootHighlightEventDetails</Typography.Code> to type the event
+            details.
+          </Typography.Text>
         </div>
 
         <div
@@ -2200,27 +2214,28 @@ export default {
             borderRadius: 'var(--radius-2)',
           }}
         >
-          <Text size="1" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="1" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Highlight Reasons:
-          </Text>
+          </Typography.Text>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" color="gray">
-              <Code size="1">&apos;keyboard&apos;</Code> — The highlight changed due to keyboard navigation (arrow
-              keys).
-            </Text>
-            <Text size="1" color="gray">
-              <Code size="1">&apos;pointer&apos;</Code> — The highlight changed due to pointer hovering.
-            </Text>
-            <Text size="1" color="gray">
-              <Code size="1">&apos;none&apos;</Code> — The highlight changed programmatically.
-            </Text>
+            <Typography.Text size="1" color="gray">
+              <Typography.Code size="1">&apos;keyboard&apos;</Typography.Code> — The highlight changed due to keyboard
+              navigation (arrow keys).
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
+              <Typography.Code size="1">&apos;pointer&apos;</Typography.Code> — The highlight changed due to pointer
+              hovering.
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
+              <Typography.Code size="1">&apos;none&apos;</Typography.Code> — The highlight changed programmatically.
+            </Typography.Text>
           </div>
         </div>
 
         <div>
-          <Text size="1" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="1" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Event Log (last 10):
-          </Text>
+          </Typography.Text>
           <div
             style={{
               fontFamily: 'var(--code-font-family)',
@@ -2233,22 +2248,22 @@ export default {
             }}
           >
             {highlightLog.length === 0 ? (
-              <Text size="1" color="gray">
+              <Typography.Text size="1" color="gray">
                 Interact with the autocomplete to see events...
-              </Text>
+              </Typography.Text>
             ) : (
               highlightLog.map((log, i) => (
                 <div key={i} style={{ padding: 'var(--space-1) 0', borderBottom: '1px solid var(--gray-alpha-200)' }}>
-                  <Text size="1" color="gray">
+                  <Typography.Text size="1" color="gray">
                     {log.timestamp}
-                  </Text>{' '}
-                  <Code
+                  </Typography.Text>{' '}
+                  <Typography.Code
                     size="1"
                     color={log.reason === 'keyboard' ? 'blue' : log.reason === 'pointer' ? 'green' : 'gray'}
                   >
                     {log.reason}
-                  </Code>{' '}
-                  <Text size="1">{log.value ?? '(none)'}</Text>
+                  </Typography.Code>{' '}
+                  <Typography.Text size="1">{log.value ?? '(none)'}</Typography.Text>
                 </div>
               ))
             )}
@@ -2256,9 +2271,9 @@ export default {
         </div>
 
         <Autocomplete.Root items={browsers} onItemHighlighted={handleItemHighlighted}>
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Try keyboard and mouse navigation..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Try keyboard and mouse navigation..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No browsers found.</Autocomplete.Empty>
@@ -2295,34 +2310,35 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 350 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Custom Filter
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-            Control filtering behavior using the <Code size="2">filter</Code> prop for custom matching logic, or the{' '}
-            <Code size="2">filteredItems</Code> prop for full external control.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+            Control filtering behavior using the <Typography.Code size="2">filter</Typography.Code> prop for custom
+            matching logic, or the <Typography.Code size="2">filteredItems</Typography.Code> prop for full external
+            control.
+          </Typography.Text>
         </div>
 
         {/* filter prop */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <div>
-            <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               filter
-            </Text>
-            <Text size="1" color="gray" style={{ display: 'block' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ display: 'block' }}>
               Custom filter function used to match items against the input query. Receives the item value, query string,
-              and optional <Code size="1">itemToString</Code> function.
-            </Text>
+              and optional <Typography.Code size="1">itemToString</Typography.Code> function.
+            </Typography.Text>
           </div>
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               Starts-with filter (only matches items starting with the query)
-            </Text>
+            </Typography.Text>
             <Autocomplete.Root items={fruits} filter={startsWithFilter}>
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Try typing 'ap' or 'ba'..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Try typing 'ap' or 'ba'..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No fruits found.</Autocomplete.Empty>
@@ -2342,27 +2358,29 @@ export default {
         {/* filteredItems prop */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <div>
-            <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               filteredItems
-            </Text>
-            <Text size="1" color="gray" style={{ display: 'block' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ display: 'block' }}>
               Pre-filtered items to display in the list. When provided, the list uses these items instead of filtering
-              internally. Use with <Code size="1">useFilter()</Code> hook for full control over filtering logic.
-            </Text>
+              internally. Use with <Typography.Code size="1">useFilter()</Typography.Code> hook for full control over
+              filtering logic.
+            </Typography.Text>
           </div>
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              External filtering with <Code size="1">filteredItems</Code> and <Code size="1">useFilter()</Code>
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              External filtering with <Typography.Code size="1">filteredItems</Typography.Code> and{' '}
+              <Typography.Code size="1">useFilter()</Typography.Code>
+            </Typography.Text>
             <Autocomplete.Root
               items={fruits}
               filteredItems={filteredFruits}
               value={query}
               onValueChange={(value) => setQuery(value as string)}
             >
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Search fruits..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Search fruits..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No fruits found.</Autocomplete.Empty>
@@ -2376,9 +2394,13 @@ export default {
                 </ScrollArea>
               </Autocomplete.Content>
             </Autocomplete.Root>
-            <Text size="1" color="gray" style={{ marginTop: 'var(--space-2)', display: 'block', fontStyle: 'italic' }}>
+            <Typography.Text
+              size="1"
+              color="gray"
+              style={{ marginTop: 'var(--space-2)', display: 'block', fontStyle: 'italic' }}
+            >
               Showing {filteredFruits.length} of {fruits.length} fruits
-            </Text>
+            </Typography.Text>
           </div>
         </div>
       </div>
@@ -2389,23 +2411,25 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 350 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Modal
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-            The <Code size="2">modal</Code> prop determines if the popup enters a modal state when open.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+            The <Typography.Code size="2">modal</Typography.Code> prop determines if the popup enters a modal state when
+            open.
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">modal={'{false}'}</Code> (default) — Allows interaction with the rest of the document
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">modal={'{false}'}</Typography.Code> (default) — Allows interaction with the rest
+              of the document
+            </Typography.Text>
             <Autocomplete.Root items={countries} modal={false}>
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Non-modal autocomplete..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Non-modal autocomplete..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2422,13 +2446,14 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">modal={'{true}'}</Code> — Locks page scroll and disables outside interactions
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">modal={'{true}'}</Typography.Code> — Locks page scroll and disables outside
+              interactions
+            </Typography.Text>
             <Autocomplete.Root items={countries} modal>
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Modal autocomplete..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Modal autocomplete..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2444,9 +2469,9 @@ export default {
             </Autocomplete.Root>
           </div>
 
-          <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
+          <Typography.Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
             Try scrolling the page or clicking outside while each popup is open to see the difference.
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -2456,23 +2481,24 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 350 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             openOnInputClick
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
             Whether the popup opens when clicking the input.
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">openOnInputClick={'{true}'}</Code> (default) — Popup opens on input click
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">openOnInputClick={'{true}'}</Typography.Code> (default) — Popup opens on input
+              click
+            </Typography.Text>
             <Autocomplete.Root items={countries} openOnInputClick>
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Click to open..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Click to open..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2489,13 +2515,13 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">openOnInputClick={'{false}'}</Code> — Popup only opens when typing
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">openOnInputClick={'{false}'}</Typography.Code> — Popup only opens when typing
+            </Typography.Text>
             <Autocomplete.Root items={countries} openOnInputClick={false}>
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Type to open..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Type to open..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2511,9 +2537,9 @@ export default {
             </Autocomplete.Root>
           </div>
 
-          <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
+          <Typography.Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
             Click on each input to see the difference. When disabled, the popup only opens when you start typing.
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -2532,29 +2558,30 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 350 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             submitOnItemClick
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
             Whether clicking an item should submit the autocomplete&apos;s owning form. By default, clicking an item via
             a pointer or Enter key does not submit the owning form. Useful when the autocomplete is used as a
             single-field form search input.
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">submitOnItemClick={'{false}'}</Code> (default) — Selecting an item does not submit the form
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">submitOnItemClick={'{false}'}</Typography.Code> (default) — Selecting an item
+              does not submit the form
+            </Typography.Text>
             <form onSubmit={handleSubmit}>
               <Autocomplete.Root items={countries} submitOnItemClick={false}>
-                <TextField.Root>
+                <Input.Root>
                   <Autocomplete.Input
                     name="search"
-                    render={<TextField.Input placeholder="Select an item (won't submit)..." />}
+                    render={<Input.Control placeholder="Select an item (won't submit)..." />}
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Autocomplete.Content>
                   <ScrollArea type="auto">
                     <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2572,17 +2599,18 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">submitOnItemClick={'{true}'}</Code> — Selecting an item submits the form
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">submitOnItemClick={'{true}'}</Typography.Code> — Selecting an item submits the
+              form
+            </Typography.Text>
             <form onSubmit={handleSubmit}>
               <Autocomplete.Root items={countries} submitOnItemClick>
-                <TextField.Root>
+                <Input.Root>
                   <Autocomplete.Input
                     name="search"
-                    render={<TextField.Input placeholder="Select an item (will submit)..." />}
+                    render={<Input.Control placeholder="Select an item (will submit)..." />}
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Autocomplete.Content>
                   <ScrollArea type="auto">
                     <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2607,15 +2635,15 @@ export default {
                 borderRadius: 'var(--radius-2)',
               }}
             >
-              <Text size="2" color="green">
-                Form submitted with value: <Code size="2">{submittedValue || '(empty)'}</Code>
-              </Text>
+              <Typography.Text size="2" color="green">
+                Form submitted with value: <Typography.Code size="2">{submittedValue || '(empty)'}</Typography.Code>
+              </Typography.Text>
             </div>
           )}
 
-          <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
+          <Typography.Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
             Select an item from each autocomplete. The second one will trigger the form submission indicator above.
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -2625,23 +2653,23 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 350 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             disabled
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
             Whether the component should ignore user interaction.
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">disabled={'{false}'}</Code> (default) — Component is interactive
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">disabled={'{false}'}</Typography.Code> (default) — Component is interactive
+            </Typography.Text>
             <Autocomplete.Root items={countries} disabled={false}>
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Interactive autocomplete..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Interactive autocomplete..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2658,13 +2686,13 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
-              <Code size="1">disabled={'{true}'}</Code> — Component ignores user interaction
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Code size="1">disabled={'{true}'}</Typography.Code> — Component ignores user interaction
+            </Typography.Text>
             <Autocomplete.Root items={countries} disabled>
-              <TextField.Root>
-                <Autocomplete.Input render={<TextField.Input placeholder="Disabled autocomplete..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input render={<Input.Control placeholder="Disabled autocomplete..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto">
                   <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2680,9 +2708,9 @@ export default {
             </Autocomplete.Root>
           </div>
 
-          <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
+          <Typography.Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
             Try clicking or typing in each input. The disabled autocomplete will not respond to any interaction.
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -2717,19 +2745,19 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 350 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             inputRef
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
             A ref to the hidden input element. Useful for programmatic access to the input, such as focusing or reading
             form data.
-          </Text>
+          </Typography.Text>
         </div>
 
         <Autocomplete.Root items={countries} inputRef={inputRef}>
-          <TextField.Root>
-            <Autocomplete.Input name="country" render={<TextField.Input placeholder="Search countries..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input name="country" render={<Input.Control placeholder="Search countries..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2768,10 +2796,10 @@ export default {
           </div>
         )}
 
-        <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
+        <Typography.Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
           Use the buttons above to interact with the input via the ref. Type something first, then click &quot;Show
           Input Info&quot; to see the current input state.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -2792,12 +2820,13 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 400 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             actionsRef
-          </Text>
-          <Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-            A ref to imperative actions. Use <Code size="2">Autocomplete.Actions</Code> to type the ref.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+            A ref to imperative actions. Use <Typography.Code size="2">Autocomplete.Actions</Typography.Code> to type
+            the ref.
+          </Typography.Text>
         </div>
 
         <div
@@ -2807,15 +2836,15 @@ export default {
             borderRadius: 'var(--radius-2)',
           }}
         >
-          <Text size="1" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="1" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Available Actions:
-          </Text>
+          </Typography.Text>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" color="gray">
-              <Code size="1">unmount()</Code> — Manually unmount the autocomplete popup. Useful when the autocomplete's
-              animation is controlled by an external library, allowing you to wait for the exit animation to complete
-              before unmounting.
-            </Text>
+            <Typography.Text size="1" color="gray">
+              <Typography.Code size="1">unmount()</Typography.Code> — Manually unmount the autocomplete popup. Useful
+              when the autocomplete's animation is controlled by an external library, allowing you to wait for the exit
+              animation to complete before unmounting.
+            </Typography.Text>
           </div>
         </div>
 
@@ -2826,9 +2855,9 @@ export default {
           onOpenChange={setIsOpen}
           onValueChange={handleSelect}
         >
-          <TextField.Root>
-            <Autocomplete.Input render={<TextField.Input placeholder="Select a country..." />} />
-          </TextField.Root>
+          <Input.Root>
+            <Autocomplete.Input render={<Input.Control placeholder="Select a country..." />} />
+          </Input.Root>
           <Autocomplete.Content>
             <ScrollArea type="auto">
               <Autocomplete.Empty>No countries found.</Autocomplete.Empty>
@@ -2851,19 +2880,19 @@ export default {
               borderRadius: 'var(--radius-2)',
             }}
           >
-            <Text size="2" color="green">
-              Selected: <Code size="2">{selectedCountry}</Code>
-            </Text>
-            <Text size="1" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
+            <Typography.Text size="2" color="green">
+              Selected: <Typography.Code size="2">{selectedCountry}</Typography.Code>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
               The popup will unmount after 1 second via actionsRef.unmount()
-            </Text>
+            </Typography.Text>
           </div>
         )}
 
-        <Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
+        <Typography.Text size="1" color="gray" style={{ fontStyle: 'italic' }}>
           Select a country to see the actionsRef in action. The popup will be programmatically unmounted after a 1
           second delay.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -2872,16 +2901,16 @@ export default {
     return (
       <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', maxWidth: 260 }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             Default (looping)
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Arrow keys wrap around by default — past the last item loops back to the first, and vice versa.
-          </Text>
+          </Typography.Text>
           <Autocomplete.Root items={countries}>
-            <TextField.Root>
-              <Autocomplete.Input render={<TextField.Input placeholder="Search countries..." />} />
-            </TextField.Root>
+            <Input.Root>
+              <Autocomplete.Input render={<Input.Control placeholder="Search countries..." />} />
+            </Input.Root>
             <Autocomplete.Content>
               <ScrollArea type="auto" style={{ maxHeight: 200 }}>
                 <Autocomplete.List>
@@ -2894,22 +2923,22 @@ export default {
               </ScrollArea>
             </Autocomplete.Content>
           </Autocomplete.Root>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>Vietnam → ↓ → Argentina (loops to top)</em>
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', maxWidth: 260 }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             loopFocus={'{false}'}
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Arrow keys stop at the first and last item. Press ↓ on the last item — nothing happens.
-          </Text>
+          </Typography.Text>
           <Autocomplete.Root items={countries} loopFocus={false}>
-            <TextField.Root>
-              <Autocomplete.Input render={<TextField.Input placeholder="Search countries..." />} />
-            </TextField.Root>
+            <Input.Root>
+              <Autocomplete.Input render={<Input.Control placeholder="Search countries..." />} />
+            </Input.Root>
             <Autocomplete.Content>
               <ScrollArea type="auto" style={{ maxHeight: 200 }}>
                 <Autocomplete.List>
@@ -2922,9 +2951,9 @@ export default {
               </ScrollArea>
             </Autocomplete.Content>
           </Autocomplete.Root>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>Vietnam → ↓ → stays on Vietnam</em>
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -2952,30 +2981,31 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 400 }}>
         <div>
-          <Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="bold" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Form with Custom ID
-          </Text>
-          <Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
-            Demonstrates how to use the Autocomplete in a form with a custom <Code size="1">id</Code> on the input and a{' '}
-            <Code size="1">name</Code> attribute for form submission.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-3)', display: 'block' }}>
+            Demonstrates how to use the Autocomplete in a form with a custom{' '}
+            <Typography.Code size="1">id</Typography.Code> on the input and a{' '}
+            <Typography.Code size="1">name</Typography.Code> attribute for form submission.
+          </Typography.Text>
         </div>
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
             <label htmlFor="country-input">
-              <Text size="2" weight="medium">
+              <Typography.Text size="2" weight="medium">
                 Country
-              </Text>
+              </Typography.Text>
             </label>
             <Autocomplete.Root
               name="country"
               items={countries}
               itemToStringValue={(item) => (item as (typeof countries)[0]).label}
             >
-              <TextField.Root>
-                <Autocomplete.Input id="country-input" render={<TextField.Input placeholder="Select a country..." />} />
-              </TextField.Root>
+              <Input.Root>
+                <Autocomplete.Input id="country-input" render={<Input.Control placeholder="Select a country..." />} />
+              </Input.Root>
               <Autocomplete.Content>
                 <ScrollArea type="auto" style={{ maxHeight: 200 }}>
                   <Autocomplete.List>
@@ -2988,10 +3018,10 @@ export default {
                 </ScrollArea>
               </Autocomplete.Content>
             </Autocomplete.Root>
-            <Text size="1" color="gray">
-              The input has <Code size="1">id="country-input"</Code> and the root has{' '}
-              <Code size="1">name="country"</Code>
-            </Text>
+            <Typography.Text size="1" color="gray">
+              The input has <Typography.Code size="1">id="country-input"</Typography.Code> and the root has{' '}
+              <Typography.Code size="1">name="country"</Typography.Code>
+            </Typography.Text>
           </div>
 
           <Button type="submit" variant="solid">
@@ -3007,12 +3037,12 @@ export default {
               borderRadius: 'var(--radius-2)',
             }}
           >
-            <Text size="2" weight="medium" color="green">
+            <Typography.Text size="2" weight="medium" color="green">
               Form submitted!
-            </Text>
-            <Text size="1" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
-              Country: <Code size="1">{formData.country || '(empty)'}</Code>
-            </Text>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
+              Country: <Typography.Code size="1">{formData.country || '(empty)'}</Typography.Code>
+            </Typography.Text>
           </div>
         )}
 
@@ -3023,20 +3053,20 @@ export default {
             borderRadius: 'var(--radius-2)',
           }}
         >
-          <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             Key props for form usage:
-          </Text>
+          </Typography.Text>
           <ul style={{ margin: 0, paddingLeft: 'var(--space-4)', fontSize: 'var(--font-size-1)' }}>
             <li>
-              <Code size="1">id</Code> on <Code size="1">Autocomplete.Input</Code> - Sets the input's id for label
-              association
+              <Typography.Code size="1">id</Typography.Code> on{' '}
+              <Typography.Code size="1">Autocomplete.Input</Typography.Code> - Sets the input's id for label association
             </li>
             <li>
-              <Code size="1">name</Code> on <Code size="1">Autocomplete.Root</Code> - Identifies the field in form
-              submission
+              <Typography.Code size="1">name</Typography.Code> on{' '}
+              <Typography.Code size="1">Autocomplete.Root</Typography.Code> - Identifies the field in form submission
             </li>
             <li>
-              <Code size="1">itemToStringValue</Code> - Converts item to string for form value
+              <Typography.Code size="1">itemToStringValue</Typography.Code> - Converts item to string for form value
             </li>
           </ul>
         </div>

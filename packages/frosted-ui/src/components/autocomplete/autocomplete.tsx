@@ -43,7 +43,7 @@ interface AutocompleteRootProps extends React.ComponentProps<typeof Autocomplete
  * @example
  * ```tsx
  * <Autocomplete.Root items={['Apple', 'Banana', 'Cherry']}>
- *   <Autocomplete.Input render={<TextField.Root placeholder="Search fruit..." />} />
+ *   <Autocomplete.Input render={<Input.Root placeholder="Search fruit..." />} />
  *   <Autocomplete.Content>
  *     <Autocomplete.Empty>No results</Autocomplete.Empty>
  *     <Autocomplete.List>
@@ -64,7 +64,7 @@ AutocompleteRoot.displayName = 'AutocompleteRoot';
 
 interface AutocompleteInputProps extends React.ComponentProps<typeof AutocompletePrimitive.Input> {}
 
-/** The text input that drives the autocomplete. Compose it with a styled field via `render`, e.g. `TextField.Root`. */
+/** The text input that drives the autocomplete. Compose it with a styled field via `render`, e.g. `Input.Root`. */
 const AutocompleteInput = React.forwardRef<HTMLInputElement, AutocompleteInputProps>((props, forwardedRef) => {
   return <AutocompletePrimitive.Input {...props} ref={forwardedRef} />;
 });

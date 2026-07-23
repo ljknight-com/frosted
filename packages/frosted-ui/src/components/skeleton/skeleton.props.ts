@@ -1,7 +1,7 @@
 import type { PropDef } from '../../helpers';
 import { colorProp, highContrastProp } from '../../helpers';
 import { avatarPropDefs } from '../avatar/avatar.props';
-import { textPropDefs } from '../text/text.props';
+import { textPropDefs } from '../typography/text.props';
 
 const skeletonAvatarPropDefs = {
   /**

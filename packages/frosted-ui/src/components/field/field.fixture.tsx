@@ -2,16 +2,15 @@ import { Check as CheckIcon, X } from 'lucide-react';
 
 import * as React from 'react';
 import {
+  Alert,
   Autocomplete,
   Button,
-  Callout,
   Checkbox,
-  Code,
   Combobox,
   Field,
   Fieldset,
   Form,
-  Heading,
+  Input,
   Link,
   NumberField,
   RadioGroup,
@@ -21,8 +20,7 @@ import {
   Slider,
   Spinner,
   Switch,
-  Text,
-  TextField,
+  Typography,
 } from '..';
 
 const fieldsetCountryItems = [
@@ -147,9 +145,9 @@ export default {
         <Field.Root name="username">
           <Field.Label>Username</Field.Label>
           <Field.Description>Must be at least 3 characters</Field.Description>
-          <TextField.Root>
-            <TextField.Input placeholder="johndoe" required minLength={3} />
-          </TextField.Root>
+          <Input.Root>
+            <Input.Control placeholder="johndoe" required minLength={3} />
+          </Input.Root>
           <Field.Error match="valueMissing">Username is required</Field.Error>
           <Field.Error match="tooShort">Username must be at least 3 characters</Field.Error>
         </Field.Root>
@@ -160,27 +158,27 @@ export default {
   'With Fieldset'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', width: 360 }}>
-        <Text size="2">
-          The Fieldset component groups related fields together using a native <Code>{'<fieldset>'}</Code> element. This
-          provides semantic structure to forms and improves accessibility by associating a legend with a group of
-          related controls.
-        </Text>
+        <Typography.Text size="2">
+          The Fieldset component groups related fields together using a native{' '}
+          <Typography.Code>{'<fieldset>'}</Typography.Code> element. This provides semantic structure to forms and
+          improves accessibility by associating a legend with a group of related controls.
+        </Typography.Text>
 
         <Fieldset.Root>
           <Fieldset.Legend>Billing Details</Fieldset.Legend>
 
           <Field.Root name="company">
             <Field.Label>Company</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="Acme Inc." />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="Acme Inc." />
+            </Input.Root>
           </Field.Root>
 
           <Field.Root name="taxId">
             <Field.Label>Tax ID</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="XX-XXXXXXX" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="XX-XXXXXXX" />
+            </Input.Root>
             <Field.Description>Your company's tax identification number</Field.Description>
           </Field.Root>
         </Fieldset.Root>
@@ -190,25 +188,25 @@ export default {
 
           <Field.Root name="street">
             <Field.Label>Street address</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="123 Main St" required />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="123 Main St" required />
+            </Input.Root>
             <Field.Error match="valueMissing">Street address is required</Field.Error>
           </Field.Root>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <Field.Root name="city">
               <Field.Label>City</Field.Label>
-              <TextField.Root>
-                <TextField.Input placeholder="San Francisco" required />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control placeholder="San Francisco" required />
+              </Input.Root>
             </Field.Root>
 
             <Field.Root name="zipCode">
               <Field.Label>ZIP code</Field.Label>
-              <TextField.Root>
-                <TextField.Input placeholder="94102" required />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control placeholder="94102" required />
+              </Input.Root>
             </Field.Root>
           </div>
 
@@ -263,13 +261,14 @@ export default {
 
     return (
       <div style={{ width: 400 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Fieldset Disabled
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          Use <Code>{'disabled'}</Code> on <Code>{'<Fieldset.Root>'}</Code> to disable an entire group of fields at
-          once. This is useful for conditional sections like billing addresses that can be skipped.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          Use <Typography.Code>{'disabled'}</Typography.Code> on <Typography.Code>{'<Fieldset.Root>'}</Typography.Code>{' '}
+          to disable an entire group of fields at once. This is useful for conditional sections like billing addresses
+          that can be skipped.
+        </Typography.Text>
 
         <Form onSubmit={handleSubmit}>
           {/* Shipping Address */}
@@ -278,41 +277,41 @@ export default {
 
             <Field.Root name="shippingStreet">
               <Field.Label>Street address</Field.Label>
-              <TextField.Root>
-                <TextField.Input
+              <Input.Root>
+                <Input.Control
                   placeholder="123 Main St"
                   value={shippingAddress.street}
                   onChange={(e) => setShippingAddress((prev) => ({ ...prev, street: e.target.value }))}
                   required
                 />
-              </TextField.Root>
+              </Input.Root>
               <Field.Error match="valueMissing">Street address is required</Field.Error>
             </Field.Root>
 
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 12 }}>
               <Field.Root name="shippingCity">
                 <Field.Label>City</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     placeholder="San Francisco"
                     value={shippingAddress.city}
                     onChange={(e) => setShippingAddress((prev) => ({ ...prev, city: e.target.value }))}
                     required
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Field.Error match="valueMissing">Required</Field.Error>
               </Field.Root>
 
               <Field.Root name="shippingZip">
                 <Field.Label>ZIP</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     placeholder="94102"
                     value={shippingAddress.zip}
                     onChange={(e) => setShippingAddress((prev) => ({ ...prev, zip: e.target.value }))}
                     required
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Field.Error match="valueMissing">Required</Field.Error>
               </Field.Root>
             </div>
@@ -358,41 +357,41 @@ export default {
 
             <Field.Root name="billingStreet">
               <Field.Label>Street address</Field.Label>
-              <TextField.Root>
-                <TextField.Input
+              <Input.Root>
+                <Input.Control
                   placeholder="123 Main St"
                   value={displayedBilling.street}
                   onChange={(e) => setBillingAddress((prev) => ({ ...prev, street: e.target.value }))}
                   required={!sameAsShipping}
                 />
-              </TextField.Root>
+              </Input.Root>
               {!sameAsShipping && <Field.Error match="valueMissing">Street address is required</Field.Error>}
             </Field.Root>
 
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 12 }}>
               <Field.Root name="billingCity">
                 <Field.Label>City</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     placeholder="San Francisco"
                     value={displayedBilling.city}
                     onChange={(e) => setBillingAddress((prev) => ({ ...prev, city: e.target.value }))}
                     required={!sameAsShipping}
                   />
-                </TextField.Root>
+                </Input.Root>
                 {!sameAsShipping && <Field.Error match="valueMissing">Required</Field.Error>}
               </Field.Root>
 
               <Field.Root name="billingZip">
                 <Field.Label>ZIP</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     placeholder="94102"
                     value={displayedBilling.zip}
                     onChange={(e) => setBillingAddress((prev) => ({ ...prev, zip: e.target.value }))}
                     required={!sameAsShipping}
                   />
-                </TextField.Root>
+                </Input.Root>
                 {!sameAsShipping && <Field.Error match="valueMissing">Required</Field.Error>}
               </Field.Root>
             </div>
@@ -422,27 +421,27 @@ export default {
         </Form>
 
         {submitted && (
-          <Callout.Root color="success" style={{ marginTop: 16 }}>
-            <Callout.Title>
+          <Alert.Root color="success" style={{ marginTop: 16 }}>
+            <Alert.Title>
               Order submitted!
               <pre style={{ marginTop: 8, fontSize: 11, whiteSpace: 'pre-wrap' }}>
                 {JSON.stringify(submitted, null, 2)}
               </pre>
-            </Callout.Title>
-          </Callout.Root>
+            </Alert.Title>
+          </Alert.Root>
         )}
       </div>
     );
   },
 
-  'With TextField'() {
+  'With Input'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', width: 320 }}>
         <Field.Root name="email">
           <Field.Label>Email</Field.Label>
-          <TextField.Root>
-            <TextField.Input type="email" placeholder="you@example.com" required />
-          </TextField.Root>
+          <Input.Root>
+            <Input.Control type="email" placeholder="you@example.com" required />
+          </Input.Root>
           <Field.Error match="valueMissing">Email is required</Field.Error>
           <Field.Error match="typeMismatch">Please enter a valid email address</Field.Error>
         </Field.Root>
@@ -450,9 +449,9 @@ export default {
         <Field.Root name="password">
           <Field.Label>Password</Field.Label>
           <Field.Description>Must be at least 8 characters</Field.Description>
-          <TextField.Root>
-            <TextField.Input type="password" placeholder="min. 8 characters" required minLength={8} />
-          </TextField.Root>
+          <Input.Root>
+            <Input.Control type="password" placeholder="min. 8 characters" required minLength={8} />
+          </Input.Root>
           <Field.Error match="valueMissing">Password is required</Field.Error>
           <Field.Error match="tooShort">Password must be at least 8 characters</Field.Error>
         </Field.Root>
@@ -503,13 +502,14 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Slider with Validation
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
           Range sliders can be validated using controlled state. Check the range difference, bounds, or any custom
-          criteria and display errors using <Code>{'<Field.Error>'}</Code> with <Code>{'match={true}'}</Code>.
-        </Text>
+          criteria and display errors using <Typography.Code>{'<Field.Error>'}</Typography.Code> with{' '}
+          <Typography.Code>{'match={true}'}</Typography.Code>.
+        </Typography.Text>
 
         <Field.Root name="priceRange" invalid={!!error}>
           <Field.Label>Price Range</Field.Label>
@@ -522,9 +522,9 @@ export default {
           {error && <Field.Error match={true}>{error}</Field.Error>}
         </Field.Root>
 
-        <Text size="1" color="gray" style={{ marginTop: 16, display: 'block' }}>
+        <Typography.Text size="1" color="gray" style={{ marginTop: 16, display: 'block' }}>
           Try narrowing the range below ${minRange} to see the validation error.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -552,12 +552,12 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Budget Allocation
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
           Single-value sliders can also be validated. This example enforces minimum and maximum budget constraints.
-        </Text>
+        </Typography.Text>
 
         <Form onSubmit={handleSubmit}>
           <Field.Root name="budget" invalid={!!error}>
@@ -584,9 +584,9 @@ export default {
         </Form>
 
         {submitted && (
-          <Callout.Root color="success" style={{ marginTop: 16 }}>
-            <Callout.Title>Budget set to ${budget.toLocaleString()}/month</Callout.Title>
-          </Callout.Root>
+          <Alert.Root color="success" style={{ marginTop: 16 }}>
+            <Alert.Title>Budget set to ${budget.toLocaleString()}/month</Alert.Title>
+          </Alert.Root>
         )}
       </div>
     );
@@ -615,18 +615,18 @@ export default {
 
     return (
       <div style={{ width: 400 }}>
-        <Heading size="3" style={{ marginBottom: 4 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 4 }}>
           Developer Profile
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
           Single-select and multi-select comboboxes integrated with Field validation.
-        </Text>
+        </Typography.Text>
 
         <Form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
           <Field.Root name="displayName">
             <Field.Label>Display name</Field.Label>
-            <TextField.Root size="2">
-              <TextField.Input
+            <Input.Root size="2">
+              <Input.Control
                 placeholder="Jane Doe"
                 required
                 value={name}
@@ -635,7 +635,7 @@ export default {
                   setSubmitted(null);
                 }}
               />
-            </TextField.Root>
+            </Input.Root>
             <Field.Error match="valueMissing">Display name is required</Field.Error>
           </Field.Root>
 
@@ -715,8 +715,8 @@ export default {
         </Form>
 
         {submitted && (
-          <Callout.Root color="success" style={{ marginTop: 16 }}>
-            <Callout.Title>
+          <Alert.Root color="success" style={{ marginTop: 16 }}>
+            <Alert.Title>
               Profile saved!
               <pre
                 style={{
@@ -730,8 +730,8 @@ export default {
               >
                 {JSON.stringify(submitted, null, 2)}
               </pre>
-            </Callout.Title>
-          </Callout.Root>
+            </Alert.Title>
+          </Alert.Root>
         )}
       </div>
     );
@@ -744,19 +744,19 @@ export default {
           <Autocomplete.Root items={containerImages} mode="both" itemToStringValue={(item) => (item as Image).url}>
             <Field.Label>Container image</Field.Label>
             <Field.Description>Enter a registry URL with optional tags</Field.Description>
-            <TextField.Root>
-              <Autocomplete.Input render={<TextField.Input placeholder="e.g. docker.io/library/node:latest" />} />
-            </TextField.Root>
+            <Input.Root>
+              <Autocomplete.Input render={<Input.Control placeholder="e.g. docker.io/library/node:latest" />} />
+            </Input.Root>
             <Autocomplete.Content size="3">
               <ScrollArea type="auto" style={{ maxHeight: 200 }}>
                 <Autocomplete.List>
                   {(image: Image) => (
                     <Autocomplete.Item key={image.url} value={image} style={{ height: 'auto', padding: '8px 12px' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        <Text size="2">{image.name}</Text>
-                        <Text size="1" color="gray" style={{ fontFamily: 'monospace' }}>
+                        <Typography.Text size="2">{image.name}</Typography.Text>
+                        <Typography.Text size="1" color="gray" style={{ fontFamily: 'monospace' }}>
                           {image.url}
-                        </Text>
+                        </Typography.Text>
                       </div>
                     </Autocomplete.Item>
                   )}
@@ -882,9 +882,9 @@ export default {
         <Field.Root name="volume">
           <Field.Label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             CPU allocation
-            <Text size="2" color="gray">
+            <Typography.Text size="2" color="gray">
               {value}%
-            </Text>
+            </Typography.Text>
           </Field.Label>
           <Field.Description>Allocate CPU resources for your application</Field.Description>
 
@@ -949,7 +949,7 @@ export default {
     const showError = username.length > 0 && (!allRulesPass || isAvailable === false);
 
     const RuleItem = ({ passed, children }: { passed: boolean; children: React.ReactNode }) => (
-      <Text
+      <Typography.Text
         render={<div />}
         size="1"
         color={passed ? 'success' : 'gray'}
@@ -957,50 +957,50 @@ export default {
       >
         {passed ? <CheckIcon size={12} /> : <X size={12} />}
         {children}
-      </Text>
+      </Typography.Text>
     );
 
     return (
       <div style={{ width: 360 }}>
         <div style={{ marginBottom: 'var(--space-4)' }}>
-          <Text size="3" weight="bold">
+          <Typography.Text size="3" weight="bold">
             Choose your username
-          </Text>
-          <Text size="2" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
+          </Typography.Text>
+          <Typography.Text size="2" color="gray" style={{ display: 'block', marginTop: 'var(--space-1)' }}>
             This will be your unique identifier on the platform
-          </Text>
+          </Typography.Text>
         </div>
 
         <Field.Root name="username">
           <Field.Label>Username</Field.Label>
 
           <div style={{ position: 'relative' }}>
-            <TextField.Root color={showError ? 'danger' : isValid ? 'success' : undefined}>
-              <TextField.Slot style={{ paddingLeft: 12 }}>
-                <Text size="2" color="gray">
+            <Input.Root color={showError ? 'danger' : isValid ? 'success' : undefined}>
+              <Input.Slot style={{ paddingLeft: 12 }}>
+                <Typography.Text size="2" color="gray">
                   yoursite.com/
-                </Text>
-              </TextField.Slot>
-              <TextField.Input
+                </Typography.Text>
+              </Input.Slot>
+              <Input.Control
                 value={username}
                 onChange={handleChange}
                 placeholder="your_username"
                 style={{ paddingLeft: 0 }}
               />
-              <TextField.Slot style={{ paddingRight: 12 }}>
+              <Input.Slot style={{ paddingRight: 12 }}>
                 {isChecking && <Spinner size="1" />}
                 {!isChecking && isValid && (
-                  <Text color="success">
+                  <Typography.Text color="success">
                     <CheckIcon size={12} />
-                  </Text>
+                  </Typography.Text>
                 )}
                 {!isChecking && showError && (
-                  <Text color="danger">
+                  <Typography.Text color="danger">
                     <X size={12} />
-                  </Text>
+                  </Typography.Text>
                 )}
-              </TextField.Slot>
-            </TextField.Root>
+              </Input.Slot>
+            </Input.Root>
           </div>
 
           {/* Validation Rules */}
@@ -1020,26 +1020,26 @@ export default {
 
           {/* Availability Status */}
           {allRulesPass && username.length >= 3 && (
-            <Callout.Root color={isChecking ? 'gray' : isAvailable ? 'success' : 'danger'} style={{ marginTop: 12 }}>
-              <Callout.Icon>
+            <Alert.Root color={isChecking ? 'gray' : isAvailable ? 'success' : 'danger'} style={{ marginTop: 12 }}>
+              <Alert.Icon>
                 {isChecking ? <Spinner size="1" /> : isAvailable ? <CheckIcon size={12} /> : <X size={12} />}
-              </Callout.Icon>
-              <Callout.Title>
+              </Alert.Icon>
+              <Alert.Title>
                 {isChecking
                   ? 'Checking availability...'
                   : isAvailable
                     ? 'Username is available!'
                     : 'Username is already taken'}
-              </Callout.Title>
-            </Callout.Root>
+              </Alert.Title>
+            </Alert.Root>
           )}
 
           {/* Suggestions when taken */}
           {isAvailable === false && (
             <div style={{ marginTop: 'var(--space-2)' }}>
-              <Text size="1" color="gray">
+              <Typography.Text size="1" color="gray">
                 Try one of these:
-              </Text>
+              </Typography.Text>
               <div style={{ display: 'flex', gap: 'var(--space-2)', marginTop: 'var(--space-1)', flexWrap: 'wrap' }}>
                 {[`${username}_dev`, `${username}123`, `the_${username}`].map((suggestion) => (
                   <Button
@@ -1085,9 +1085,9 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', width: 400 }}>
-        <Text size="4" weight="bold">
+        <Typography.Text size="4" weight="bold">
           Create Account
-        </Text>
+        </Typography.Text>
 
         <Form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
           <Fieldset.Root>
@@ -1095,17 +1095,17 @@ export default {
 
             <Field.Root name="fullName">
               <Field.Label>Full name</Field.Label>
-              <TextField.Root size="3">
-                <TextField.Input placeholder="John Doe" required />
-              </TextField.Root>
+              <Input.Root size="3">
+                <Input.Control placeholder="John Doe" required />
+              </Input.Root>
               <Field.Error match="valueMissing">Full name is required</Field.Error>
             </Field.Root>
 
             <Field.Root name="email">
               <Field.Label>Email</Field.Label>
-              <TextField.Root size="3">
-                <TextField.Input type="email" placeholder="you@example.com" required />
-              </TextField.Root>
+              <Input.Root size="3">
+                <Input.Control type="email" placeholder="you@example.com" required />
+              </Input.Root>
               <Field.Error match="valueMissing">Email is required</Field.Error>
               <Field.Error match="typeMismatch">Please enter a valid email</Field.Error>
             </Field.Root>
@@ -1160,11 +1160,11 @@ export default {
         </Form>
 
         {formData && (
-          <Callout.Root color="success">
-            <Callout.Icon>
+          <Alert.Root color="success">
+            <Alert.Icon>
               <CheckIcon size={12} />
-            </Callout.Icon>
-            <Callout.Title>
+            </Alert.Icon>
+            <Alert.Title>
               Form submitted successfully!
               <pre
                 style={{
@@ -1178,8 +1178,8 @@ export default {
               >
                 {JSON.stringify(formData, null, 2)}
               </pre>
-            </Callout.Title>
-          </Callout.Root>
+            </Alert.Title>
+          </Alert.Root>
         )}
       </div>
     );
@@ -1188,32 +1188,33 @@ export default {
   'Field Custom Validation'() {
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Custom Validation
-        </Heading>
-        <Text size="2" style={{ marginBottom: 12, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" style={{ marginBottom: 12, display: 'block' }}>
           You can add custom validation logic by passing a synchronous or asynchronous validation function to the{' '}
-          <Code>validate</Code> prop, which runs after native validations have passed.
-        </Text>
-        <Text size="2" style={{ marginBottom: 12, display: 'block' }}>
-          Use the <Code>validationMode</Code> prop to configure when validation is performed:
-        </Text>
+          <Typography.Code>validate</Typography.Code> prop, which runs after native validations have passed.
+        </Typography.Text>
+        <Typography.Text size="2" style={{ marginBottom: 12, display: 'block' }}>
+          Use the <Typography.Code>validationMode</Typography.Code> prop to configure when validation is performed:
+        </Typography.Text>
         <ul style={{ margin: 0, marginBottom: 12, paddingLeft: 20 }}>
-          <Text size="2" render={<li />} style={{ marginBottom: 4 }}>
-            1. <Code>onSubmit</Code> (default) validates all fields when the containing <Code>{'<Form>'}</Code> is
-            submitted, afterwards invalid fields revalidate when their value changes.
-          </Text>
-          <Text size="2" render={<li />} style={{ marginBottom: 4 }}>
-            2. <Code>onBlur</Code> validates the field when focus moves away.
-          </Text>
-          <Text size="2" render={<li />}>
-            3. <Code>onChange</Code> validates the field when the value changes.
-          </Text>
+          <Typography.Text size="2" render={<li />} style={{ marginBottom: 4 }}>
+            1. <Typography.Code>onSubmit</Typography.Code> (default) validates all fields when the containing{' '}
+            <Typography.Code>{'<Form>'}</Typography.Code> is submitted, afterwards invalid fields revalidate when their
+            value changes.
+          </Typography.Text>
+          <Typography.Text size="2" render={<li />} style={{ marginBottom: 4 }}>
+            2. <Typography.Code>onBlur</Typography.Code> validates the field when focus moves away.
+          </Typography.Text>
+          <Typography.Text size="2" render={<li />}>
+            3. <Typography.Code>onChange</Typography.Code> validates the field when the value changes.
+          </Typography.Text>
         </ul>
-        <Text size="2" style={{ marginBottom: 16, display: 'block' }}>
-          <Code>validationDebounceTime</Code> can be used to debounce the function in use cases such as asynchronous
-          requests or text fields that validate <Code>onChange</Code>.
-        </Text>
+        <Typography.Text size="2" style={{ marginBottom: 16, display: 'block' }}>
+          <Typography.Code>validationDebounceTime</Typography.Code> can be used to debounce the function in use cases
+          such as asynchronous requests or text fields that validate <Typography.Code>onChange</Typography.Code>.
+        </Typography.Text>
 
         <Field.Root
           name="username"
@@ -1235,9 +1236,9 @@ export default {
           }}
         >
           <Field.Label>Username</Field.Label>
-          <TextField.Root>
-            <TextField.Input required minLength={3} placeholder="alice" />
-          </TextField.Root>
+          <Input.Root>
+            <Input.Control required minLength={3} placeholder="alice" />
+          </Input.Root>
           <Field.Description>Try "admin", "root", or "system" to see validation errors</Field.Description>
           <Field.Error match="valueMissing">Username is required</Field.Error>
           <Field.Error match="tooShort">Username must be at least 3 characters</Field.Error>
@@ -1250,25 +1251,25 @@ export default {
   Validity() {
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Validity
-        </Heading>
-        <Text size="2" style={{ marginBottom: 16, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" style={{ marginBottom: 16, display: 'block' }}>
           Used to display a custom message based on the field's validity. Requires children to be a function that
           accepts field validity state as an argument.
-        </Text>
+        </Typography.Text>
 
         <Field.Root name="password" validationMode="onChange">
           <Field.Label>Password</Field.Label>
-          <TextField.Root>
-            <TextField.Input
+          <Input.Root>
+            <Input.Control
               type="password"
               placeholder="Aa1..."
               required
               minLength={8}
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             />
-          </TextField.Root>
+          </Input.Root>
           <Field.Validity>
             {(state) => {
               const value = (state.value as string) || '';
@@ -1287,18 +1288,18 @@ export default {
                     gap: 4,
                   }}
                 >
-                  <Text size="2" render={<li />} color={hasMinLength ? 'success' : 'danger'}>
+                  <Typography.Text size="2" render={<li />} color={hasMinLength ? 'success' : 'danger'}>
                     {hasMinLength ? '✓' : '✗'} At least 8 characters
-                  </Text>
-                  <Text size="2" render={<li />} color={hasUppercase ? 'success' : 'danger'}>
+                  </Typography.Text>
+                  <Typography.Text size="2" render={<li />} color={hasUppercase ? 'success' : 'danger'}>
                     {hasUppercase ? '✓' : '✗'} One uppercase letter
-                  </Text>
-                  <Text size="2" render={<li />} color={hasLowercase ? 'success' : 'danger'}>
+                  </Typography.Text>
+                  <Typography.Text size="2" render={<li />} color={hasLowercase ? 'success' : 'danger'}>
                     {hasLowercase ? '✓' : '✗'} One lowercase letter
-                  </Text>
-                  <Text size="2" render={<li />} color={hasNumber ? 'success' : 'danger'}>
+                  </Typography.Text>
+                  <Typography.Text size="2" render={<li />} color={hasNumber ? 'success' : 'danger'}>
                     {hasNumber ? '✓' : '✗'} One number
-                  </Text>
+                  </Typography.Text>
                 </ul>
               );
             }}
@@ -1313,9 +1314,9 @@ export default {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', width: 320 }}>
         <Field.Root name="readonlyField">
           <Field.Label>Account ID (read-only)</Field.Label>
-          <TextField.Root size="3" variant="soft" color="gray">
-            <TextField.Input defaultValue="ACC-123456" disabled />
-          </TextField.Root>
+          <Input.Root size="3" variant="soft" color="gray">
+            <Input.Control defaultValue="ACC-123456" disabled />
+          </Input.Root>
           <Field.Description>This field cannot be modified</Field.Description>
         </Field.Root>
 
@@ -1340,32 +1341,34 @@ export default {
   'All Validity States'() {
     return (
       <div style={{ width: 480 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           ValidityState Reference
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
           The{' '}
           <Link href="https://developer.mozilla.org/en-US/docs/Web/API/ValidityState" target="_blank">
             ValidityState
           </Link>{' '}
-          interface represents the validity states that an element can be in. Use the <Code>match</Code> prop on{' '}
-          <Code>{'<Field.Error>'}</Code> to display errors for specific validity states.
-        </Text>
+          interface represents the validity states that an element can be in. Use the{' '}
+          <Typography.Code>match</Typography.Code> prop on <Typography.Code>{'<Field.Error>'}</Typography.Code> to
+          display errors for specific validity states.
+        </Typography.Text>
 
         <Form>
           {/* valueMissing */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>valueMissing</Code>
+              <Typography.Code>valueMissing</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              Returns <Code>true</Code> if the element has a <Code>required</Code> attribute, but no value.
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              Returns <Typography.Code>true</Typography.Code> if the element has a{' '}
+              <Typography.Code>required</Typography.Code> attribute, but no value.
+            </Typography.Text>
             <Field.Root name="valueMissing">
               <Field.Label>Required Field</Field.Label>
-              <TextField.Root>
-                <TextField.Input required placeholder="This field is required" />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control required placeholder="This field is required" />
+              </Input.Root>
               <Field.Error match="valueMissing">This field is required</Field.Error>
             </Field.Root>
           </Fieldset.Root>
@@ -1375,25 +1378,26 @@ export default {
           {/* typeMismatch */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>typeMismatch</Code>
+              <Typography.Code>typeMismatch</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              Returns <Code>true</Code> if the value is not in the required syntax (when <Code>type</Code> is{' '}
-              <Code>email</Code> or <Code>url</Code>).
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              Returns <Typography.Code>true</Typography.Code> if the value is not in the required syntax (when{' '}
+              <Typography.Code>type</Typography.Code> is <Typography.Code>email</Typography.Code> or{' '}
+              <Typography.Code>url</Typography.Code>).
+            </Typography.Text>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <Field.Root name="typeMismatchEmail">
                 <Field.Label>Email</Field.Label>
-                <TextField.Root>
-                  <TextField.Input type="email" placeholder="user@example.com" defaultValue="not-an-email" />
-                </TextField.Root>
+                <Input.Root>
+                  <Input.Control type="email" placeholder="user@example.com" defaultValue="not-an-email" />
+                </Input.Root>
                 <Field.Error match="typeMismatch">Please enter a valid email address</Field.Error>
               </Field.Root>
               <Field.Root name="typeMismatchUrl">
                 <Field.Label>URL</Field.Label>
-                <TextField.Root>
-                  <TextField.Input type="url" placeholder="https://example.com" defaultValue="not-a-url" />
-                </TextField.Root>
+                <Input.Root>
+                  <Input.Control type="url" placeholder="https://example.com" defaultValue="not-a-url" />
+                </Input.Root>
                 <Field.Error match="typeMismatch">Please enter a valid URL</Field.Error>
               </Field.Root>
             </div>
@@ -1404,17 +1408,17 @@ export default {
           {/* tooShort */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>tooShort</Code>
+              <Typography.Code>tooShort</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              Returns <Code>true</Code> if the value fails to meet the specified <Code>minLength</Code>. Type 1-2
-              characters and submit to see the error.
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              Returns <Typography.Code>true</Typography.Code> if the value fails to meet the specified{' '}
+              <Typography.Code>minLength</Typography.Code>. Type 1-2 characters and submit to see the error.
+            </Typography.Text>
             <Field.Root name="tooShort">
               <Field.Label>Username (min 3 characters)</Field.Label>
-              <TextField.Root>
-                <TextField.Input minLength={3} required placeholder="alice" />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control minLength={3} required placeholder="alice" />
+              </Input.Root>
               <Field.Error match="tooShort">Username must be at least 3 characters</Field.Error>
               <Field.Error match="valueMissing">Username is required</Field.Error>
             </Field.Root>
@@ -1425,17 +1429,18 @@ export default {
           {/* tooLong */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>tooLong</Code>
+              <Typography.Code>tooLong</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              Returns <Code>true</Code> if the value exceeds the specified <Code>maxLength</Code>. Note: Browsers
-              typically prevent typing beyond <Code>maxLength</Code>, so this state is rarely triggered in practice.
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              Returns <Typography.Code>true</Typography.Code> if the value exceeds the specified{' '}
+              <Typography.Code>maxLength</Typography.Code>. Note: Browsers typically prevent typing beyond{' '}
+              <Typography.Code>maxLength</Typography.Code>, so this state is rarely triggered in practice.
+            </Typography.Text>
             <Field.Root name="tooLong">
               <Field.Label>Comment (max 20 characters)</Field.Label>
-              <TextField.Root>
-                <TextField.Input maxLength={20} placeholder="Short comment" />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control maxLength={20} placeholder="Short comment" />
+              </Input.Root>
               <Field.Description>
                 Browsers prevent typing beyond maxLength, so this error rarely appears
               </Field.Description>
@@ -1448,21 +1453,18 @@ export default {
           {/* patternMismatch */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>patternMismatch</Code>
+              <Typography.Code>patternMismatch</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              Returns <Code>true</Code> if the value does not match the specified <Code>pattern</Code> regex.
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              Returns <Typography.Code>true</Typography.Code> if the value does not match the specified{' '}
+              <Typography.Code>pattern</Typography.Code> regex.
+            </Typography.Text>
             <Field.Root name="patternMismatch">
               <Field.Label>Phone Number</Field.Label>
               <Field.Description>Format: 123-456-7890</Field.Description>
-              <TextField.Root>
-                <TextField.Input
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                  placeholder="123-456-7890"
-                  defaultValue="invalid"
-                />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" defaultValue="invalid" />
+              </Input.Root>
               <Field.Error match="patternMismatch">Please use the format: 123-456-7890</Field.Error>
             </Field.Root>
           </Fieldset.Root>
@@ -1472,15 +1474,15 @@ export default {
           {/* rangeUnderflow / rangeOverflow */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>rangeUnderflow</Code> / <Code>rangeOverflow</Code>
+              <Typography.Code>rangeUnderflow</Typography.Code> / <Typography.Code>rangeOverflow</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              <Code>rangeUnderflow</Code>: Returns <Code>true</Code> if the value is less than the <Code>min</Code>{' '}
-              attribute.
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              <Typography.Code>rangeUnderflow</Typography.Code>: Returns <Typography.Code>true</Typography.Code> if the
+              value is less than the <Typography.Code>min</Typography.Code> attribute.
               <br />
-              <Code>rangeOverflow</Code>: Returns <Code>true</Code> if the value is greater than the <Code>max</Code>{' '}
-              attribute.
-            </Text>
+              <Typography.Code>rangeOverflow</Typography.Code>: Returns <Typography.Code>true</Typography.Code> if the
+              value is greater than the <Typography.Code>max</Typography.Code> attribute.
+            </Typography.Text>
             <Field.Root name="rangeValidation">
               <Field.Label>Quantity (1-100)</Field.Label>
               <NumberField.Root min={1} max={100} defaultValue={150}>
@@ -1496,12 +1498,12 @@ export default {
           {/* stepMismatch */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>stepMismatch</Code>
+              <Typography.Code>stepMismatch</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              Returns <Code>true</Code> if the value does not fit the rules determined by the <Code>step</Code>{' '}
-              attribute (not evenly divisible by the step value).
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              Returns <Typography.Code>true</Typography.Code> if the value does not fit the rules determined by the{' '}
+              <Typography.Code>step</Typography.Code> attribute (not evenly divisible by the step value).
+            </Typography.Text>
             <Field.Root name="stepMismatch">
               <Field.Label>Price (increments of $0.50)</Field.Label>
               <NumberField.Root step={0.5} min={0} defaultValue={1.25}>
@@ -1516,17 +1518,18 @@ export default {
           {/* badInput */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>badInput</Code>
+              <Typography.Code>badInput</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              Returns <Code>true</Code> if the user has provided input that the browser is unable to convert. This
-              commonly occurs with date, time, or number inputs when partial or malformed values are entered.
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              Returns <Typography.Code>true</Typography.Code> if the user has provided input that the browser is unable
+              to convert. This commonly occurs with date, time, or number inputs when partial or malformed values are
+              entered.
+            </Typography.Text>
             <Field.Root name="badInput">
               <Field.Label>Event Date</Field.Label>
-              <TextField.Root>
-                <TextField.Input type="date" />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control type="date" />
+              </Input.Root>
               <Field.Description>
                 Enter an incomplete date (e.g., clear part of the date) to trigger badInput
               </Field.Description>
@@ -1539,12 +1542,13 @@ export default {
           {/* customError - using Field's validate prop */}
           <Fieldset.Root>
             <Fieldset.Legend>
-              <Code>customError</Code>
+              <Typography.Code>customError</Typography.Code>
             </Fieldset.Legend>
-            <Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
-              Returns <Code>true</Code> when the element's custom validity message has been set to a non-empty string.
-              Use the <Code>validate</Code> prop on <Code>{'<Field.Root>'}</Code> to set custom validation.
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 8, display: 'block' }}>
+              Returns <Typography.Code>true</Typography.Code> when the element's custom validity message has been set to
+              a non-empty string. Use the <Typography.Code>validate</Typography.Code> prop on{' '}
+              <Typography.Code>{'<Field.Root>'}</Typography.Code> to set custom validation.
+            </Typography.Text>
             <Field.Root
               name="customError"
               validate={(value) => {
@@ -1556,9 +1560,9 @@ export default {
               }}
             >
               <Field.Label>Security Question Answer</Field.Label>
-              <TextField.Root>
-                <TextField.Input placeholder="e.g. my first pet's name" />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control placeholder="e.g. my first pet's name" />
+              </Input.Root>
               <Field.Description>Try typing "password" to trigger custom validation</Field.Description>
               <Field.Error />
             </Field.Root>
@@ -1567,12 +1571,12 @@ export default {
           <Separator size="4" />
 
           {/* Submit to test all */}
-          <Callout.Root color="info">
-            <Callout.Title>
-              Submit the form to see validation errors. Each field demonstrates a different <Code>ValidityState</Code>{' '}
-              property.
-            </Callout.Title>
-          </Callout.Root>
+          <Alert.Root color="info">
+            <Alert.Title>
+              Submit the form to see validation errors. Each field demonstrates a different{' '}
+              <Typography.Code>ValidityState</Typography.Code> property.
+            </Alert.Title>
+          </Alert.Root>
 
           <Button type="submit" style={{ width: '100%' }}>
             Validate All Fields

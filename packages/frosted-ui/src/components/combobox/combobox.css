@@ -31,7 +31,7 @@
 }
 
 /* ============================================================================
- * Combobox Input – trigger & clear buttons inside TextField.Slot
+ * Combobox Input – trigger & clear buttons inside Input.Slot
  * ============================================================================ */
 
 .fui-ComboboxTriggerButton,
@@ -77,7 +77,7 @@
       width: 8px;
       height: 8px;
     }
-    & > .fui-TextFieldSlot:last-child {
+    & > .fui-InputSlot:last-child {
       padding-right: var(--space-2);
     }
   }
@@ -86,7 +86,7 @@
       width: 10px;
       height: 10px;
     }
-    & > .fui-TextFieldSlot:last-child {
+    & > .fui-InputSlot:last-child {
       padding-right: var(--space-3);
     }
   }
@@ -95,7 +95,7 @@
       width: 12px;
       height: 12px;
     }
-    & > .fui-TextFieldSlot:last-child {
+    & > .fui-InputSlot:last-child {
       padding-right: var(--space-4);
     }
   }
@@ -104,7 +104,7 @@
       width: 14px;
       height: 14px;
     }
-    & > .fui-TextFieldSlot:last-child {
+    & > .fui-InputSlot:last-child {
       padding-right: var(--space-4);
     }
   }
@@ -385,11 +385,11 @@
 
   flex: 1;
   min-width: 0;
-  min-height: var(--text-field-input-height);
+  min-height: var(--input-input-height);
 
   padding: var(--padding);
   gap: var(--padding);
-  --item-height: calc(var(--text-field-input-height) - 2 * var(--padding));
+  --item-height: calc(var(--input-input-height) - 2 * var(--padding));
 }
 
 .fui-ComboboxChipsInput {
@@ -415,7 +415,7 @@
   max-width: 100%;
   box-sizing: border-box;
   height: var(--item-height);
-  border-radius: calc(var(--text-field-border-radius) - var(--padding) + 1px);
+  border-radius: calc(var(--input-border-radius) - var(--padding) + 1px);
 
   &:focus-visible {
     outline: 2px solid var(--color-focus-root);

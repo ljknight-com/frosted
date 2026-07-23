@@ -3,7 +3,7 @@
 import { Field as FieldPrimitive } from '@base-ui/react/field';
 import classNames from 'classnames';
 import * as React from 'react';
-import { Text, type TextProps } from '../text/text';
+import { Text, type TextProps } from '../typography/text';
 
 // ============================================================================
 // Types

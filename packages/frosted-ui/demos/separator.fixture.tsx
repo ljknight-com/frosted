@@ -1,9 +1,9 @@
 import React from 'react';
-import { Separator, Text } from '@aussieljk/frosted';
+import { Separator, Typography } from '@aussieljk/frosted';
 
 export default function SeparatorDemo() {
   return (
-    <Text size="2">
+    <Typography.Text size="2">
       Tools for building high-quality, accessible UI.
       <Separator size="4" className="my-3" />
       <div className="flex items-center gap-3">
@@ -15,6 +15,6 @@ export default function SeparatorDemo() {
         <Separator orientation="vertical" />
         Colors
       </div>
-    </Text>
+    </Typography.Text>
   );
 }

@@ -1,5 +1,5 @@
 import type { PropDef } from '../../helpers';
-import { textPropDefs } from '../text/text.props';
+import { textPropDefs } from '../typography/text.props';
 
 const underline = ['auto', 'hover', 'always'] as const;
 

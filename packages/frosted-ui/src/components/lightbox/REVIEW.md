@@ -249,7 +249,7 @@ The active index API uses `value` / `defaultValue` / `onValueChange`. This is ge
 
 An alternative: `activeIndex` / `defaultActiveIndex` / `onActiveIndexChange`.
 
-**Trade-off**: `value` is more idiomatic for compound component libraries; `activeIndex` is more self-documenting. No change recommended for consistency with the existing ScrollGallery API, but worth noting.
+**Trade-off**: `value` is more idiomatic for compound component libraries; `activeIndex` is more self-documenting. No change recommended for consistency with the existing Carousel API, but worth noting.
 
 ---
 

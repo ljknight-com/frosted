@@ -1,0 +1,179 @@
+.fui-SidebarProvider {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  --sidebar-width: 16rem;
+  --sidebar-width-icon: 3rem;
+}
+
+.fui-SidebarRoot {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--sidebar-width);
+  transition: width 200ms ease, margin 200ms ease;
+
+  &[data-side='end'] {
+    order: 1;
+  }
+
+  /* Offcanvas: slide the whole column out of the flow. */
+  &[data-collapsible='offcanvas'][data-state='collapsed'] {
+    width: 0;
+  }
+
+  /* Icon: shrink to a rail that still shows the leading icons. */
+  &[data-collapsible='icon'][data-state='collapsed'] {
+    width: var(--sidebar-width-icon);
+
+    /* Keep the leading icon, drop the label that follows it. */
+    & .fui-SidebarGroupLabel,
+    & .fui-SidebarMenuButton > :not(:first-child) {
+      display: none;
+    }
+    & .fui-SidebarMenuButton {
+      justify-content: center;
+    }
+  }
+}
+
+.fui-SidebarInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--gray-50);
+  border-inline-end: 1px solid var(--gray-alpha-200);
+
+  .fui-SidebarRoot[data-side='end'] & {
+    border-inline-end: none;
+    border-inline-start: 1px solid var(--gray-alpha-200);
+  }
+
+  .fui-SidebarRoot[data-variant='floating'] & {
+    margin: var(--space-2);
+    height: auto;
+    border: 1px solid var(--gray-alpha-200);
+    border-radius: var(--radius-4);
+  }
+
+  .fui-SidebarRoot[data-variant='inset'] & {
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.fui-SidebarRootMobile {
+  width: var(--sidebar-width);
+  padding: 0;
+}
+
+.fui-SidebarHeader,
+.fui-SidebarFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  flex-shrink: 0;
+}
+
+.fui-SidebarContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-2);
+}
+
+.fui-SidebarGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.fui-SidebarGroupLabel {
+  padding-inline: var(--space-2);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-alpha-900);
+  white-space: nowrap;
+}
+
+.fui-SidebarMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fui-SidebarMenuButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  height: var(--space-6);
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-2);
+  font-size: var(--font-size-2);
+  color: var(--gray-alpha-900);
+  text-align: start;
+  text-decoration: none;
+  cursor: default;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:where(:hover) {
+    background-color: var(--gray-alpha-100);
+    color: var(--gray-950);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-root);
+    outline-offset: -1px;
+  }
+
+  &[data-active] {
+    background-color: var(--accent-alpha-200);
+    color: var(--accent-950);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.fui-SidebarRail {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: -2px;
+  width: 4px;
+  cursor: col-resize;
+  background-color: transparent;
+  transition: background-color 120ms ease;
+
+  &:where(:hover) {
+    background-color: var(--accent-alpha-300);
+  }
+
+  .fui-SidebarRoot[data-side='end'] & {
+    inset-inline-end: auto;
+    inset-inline-start: -2px;
+  }
+}
+
+.fui-SidebarInset {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fui-SidebarRoot,
+  .fui-SidebarRail {
+    transition: none;
+  }
+}

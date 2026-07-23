@@ -1,6 +1,6 @@
 import { DollarSign, Percent } from 'lucide-react';
 import React from 'react';
-import { Button, Code, Field, Form, NumberField, Text, TextField, numberFieldPropDefs } from '..';
+import { Button, Field, Form, Input, NumberField, Typography, numberFieldPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 export default {
@@ -51,18 +51,18 @@ export default {
     return (
       <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Surface
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} variant="surface" defaultValue={100}>
             <NumberField.Input />
           </NumberField.Root>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Soft
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} variant="soft" defaultValue={100}>
             <NumberField.Input />
           </NumberField.Root>
@@ -81,59 +81,59 @@ export default {
     return (
       <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Trailing (default)
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Buttons in row on right
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} buttonLayout="trailing" defaultValue={50}>
             <NumberField.Input />
           </NumberField.Root>
-          <TextField.Input
+          <Input.Control
             size={args.size}
             variant={args.variant}
             color={args.color}
             disabled={args.disabled}
-            placeholder="TextField"
+            placeholder="Input"
           />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Split
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Buttons on either side
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} buttonLayout="split" defaultValue={50}>
             <NumberField.Input />
           </NumberField.Root>
-          <TextField.Input
+          <Input.Control
             size={args.size}
             variant={args.variant}
             color={args.color}
             disabled={args.disabled}
-            placeholder="TextField"
+            placeholder="Input"
           />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             None
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             No buttons
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} buttonLayout="none" defaultValue={50}>
             <NumberField.Input />
           </NumberField.Root>
-          <TextField.Input
+          <Input.Control
             size={args.size}
             variant={args.variant}
             color={args.color}
             disabled={args.disabled}
-            placeholder="TextField"
+            placeholder="Input"
           />
         </div>
       </div>
@@ -150,20 +150,20 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', maxWidth: 300 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             Slot
-          </Text>
-          <Text size="1" color="gray">
-            Use <Code size="1">NumberField.Slot</Code> to add icons or other content inside the input area. Works with
-            all button layouts.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
+            Use <Typography.Code size="1">NumberField.Slot</Typography.Code> to add icons or other content inside the
+            input area. Works with all button layouts.
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               Leading slot (currency)
-            </Text>
+            </Typography.Text>
             <NumberField.Root {...args} defaultValue={99.99} step={0.01} format={{ minimumFractionDigits: 2 }}>
               <NumberField.Slot>
                 <DollarSign size={16} />
@@ -173,9 +173,9 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               Trailing slot (unit)
-            </Text>
+            </Typography.Text>
             <NumberField.Root {...args} defaultValue={75}>
               <NumberField.Input />
               <NumberField.Slot>kg</NumberField.Slot>
@@ -183,9 +183,9 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               Both slots
-            </Text>
+            </Typography.Text>
             <NumberField.Root {...args} defaultValue={50} min={0} max={100}>
               <NumberField.Slot>
                 <Percent size={16} />
@@ -196,9 +196,9 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               With split button layout
-            </Text>
+            </Typography.Text>
             <NumberField.Root {...args} defaultValue={5} buttonLayout="split">
               <NumberField.Slot>Qty</NumberField.Slot>
               <NumberField.Input />
@@ -206,9 +206,9 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               Without buttons
-            </Text>
+            </Typography.Text>
             <NumberField.Root {...args} defaultValue={42} buttonLayout="none">
               <NumberField.Slot>#</NumberField.Slot>
               <NumberField.Input />
@@ -216,9 +216,9 @@ export default {
           </div>
 
           <div>
-            <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+            <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
               Colored slot
-            </Text>
+            </Typography.Text>
             <NumberField.Root {...args} defaultValue={100} color="green">
               <NumberField.Slot color="green">
                 <DollarSign size={16} />
@@ -264,9 +264,9 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', alignItems: 'flex-start' }}>
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           Value constrained between 0 and 100
-        </Text>
+        </Typography.Text>
         <NumberField.Root {...args} defaultValue={50} min={0} max={100}>
           <NumberField.Input />
         </NumberField.Root>
@@ -284,13 +284,13 @@ export default {
     return (
       <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', maxWidth: 260 }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             Default (clamped)
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Typing a value outside the range and blurring <strong>silently clamps</strong> it. Try typing "10" and
             pressing Tab.
-          </Text>
+          </Typography.Text>
           <Form>
             <Field.Root name="age-clamped" validationMode="onBlur">
               <Field.Label>Applicant age</Field.Label>
@@ -302,19 +302,21 @@ export default {
               <Field.Error match="rangeOverflow">Must be 65 or under</Field.Error>
             </Field.Root>
           </Form>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>10 → blur → 18 (clamped, errors never fire)</em>
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', maxWidth: 260 }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             allowOutOfRange
-          </Text>
-          <Text size="1" color="gray">
-            The typed value is <strong>preserved on blur</strong>, letting native <Code size="1">rangeUnderflow</Code> /{' '}
-            <Code size="1">rangeOverflow</Code> validation fire. Buttons and arrow keys still clamp.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
+            The typed value is <strong>preserved on blur</strong>, letting native{' '}
+            <Typography.Code size="1">rangeUnderflow</Typography.Code> /{' '}
+            <Typography.Code size="1">rangeOverflow</Typography.Code> validation fire. Buttons and arrow keys still
+            clamp.
+          </Typography.Text>
           <Form>
             <Field.Root name="age-unclamped" validationMode="onBlur">
               <Field.Label>Applicant age</Field.Label>
@@ -326,9 +328,9 @@ export default {
               <Field.Error match="rangeOverflow">Must be 65 or under</Field.Error>
             </Field.Root>
           </Form>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>Type "10" and blur — Field.Error appears.</em>
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -344,72 +346,73 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', maxWidth: 400 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             step
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Base increment amount. Use buttons or arrow keys (↑↓).
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} defaultValue={0} step={5}>
             <NumberField.Input placeholder="step={5}" />
           </NumberField.Root>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             smallStep + largeStep
-          </Text>
-          <Text size="1" color="gray">
-            Hold <Code size="1">Alt/Option</Code> for small steps, <Code size="1">Shift</Code> for large steps.
-          </Text>
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
+            Hold <Typography.Code size="1">Alt/Option</Typography.Code> for small steps,{' '}
+            <Typography.Code size="1">Shift</Typography.Code> for large steps.
+          </Typography.Text>
           <NumberField.Root {...args} defaultValue={50} step={1} smallStep={0.1} largeStep={10}>
             <NumberField.Input placeholder="step=1, smallStep=0.1, largeStep=10" />
           </NumberField.Root>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>Normal: ±1 · Alt/Option: ±0.1 · Shift: ±10</em>
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             snapOnStep
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Controls snapping behavior when using buttons or arrow keys. Type "7", then press ↑ to see the difference.
-          </Text>
+          </Typography.Text>
           <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
             <div style={{ flex: 1 }}>
-              <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
                 snapOnStep={'{false}'} (default)
-              </Text>
+              </Typography.Text>
               <NumberField.Root {...args} defaultValue={7} step={5} snapOnStep={false}>
                 <NumberField.Input />
               </NumberField.Root>
-              <Text size="1" color="gray">
+              <Typography.Text size="1" color="gray">
                 <em>7 → ↑ → 12 (adds step)</em>
-              </Text>
+              </Typography.Text>
             </div>
             <div style={{ flex: 1 }}>
-              <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
                 snapOnStep={'{true}'}
-              </Text>
+              </Typography.Text>
               <NumberField.Root {...args} defaultValue={7} step={5} snapOnStep>
                 <NumberField.Input />
               </NumberField.Root>
-              <Text size="1" color="gray">
+              <Typography.Text size="1" color="gray">
                 <em>7 → ↑ → 10 (snaps to step)</em>
-              </Text>
+              </Typography.Text>
             </div>
           </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             Decimal precision (step=0.01)
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Use small step values for currency or precise decimal inputs.
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} defaultValue={9.99} step={0.01}>
             <NumberField.Input />
           </NumberField.Root>
@@ -428,12 +431,12 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', maxWidth: 500 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             format
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Uses{' '}
-            <Code size="1">
+            <Typography.Code size="1">
               <a
                 href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat"
                 target="_blank"
@@ -442,16 +445,16 @@ export default {
               >
                 Intl.NumberFormatOptions
               </a>
-            </Code>{' '}
+            </Typography.Code>{' '}
             to format the displayed value. The actual numeric value remains unchanged.
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Currency
-            </Text>
+            </Typography.Text>
             <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
               <NumberField.Root
                 {...args}
@@ -481,12 +484,13 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Percentage
-            </Text>
-            <Text size="1" color="gray">
-              Value 0.75 displays as 75%. Use <Code size="1">step={'{0.01}'}</Code> for 1% increments.
-            </Text>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
+              Value 0.75 displays as 75%. Use <Typography.Code size="1">step={'{0.01}'}</Typography.Code> for 1%
+              increments.
+            </Typography.Text>
             <NumberField.Root
               {...args}
               defaultValue={0.75}
@@ -499,9 +503,9 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Units
-            </Text>
+            </Typography.Text>
             <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
               <NumberField.Root {...args} defaultValue={75} format={{ style: 'unit', unit: 'kilogram' }}>
                 <NumberField.Input />
@@ -516,14 +520,14 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Decimal precision
-            </Text>
+            </Typography.Text>
             <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
               <div>
-                <Text size="1" color="gray" style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
+                <Typography.Text size="1" color="gray" style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
                   2 decimals
-                </Text>
+                </Typography.Text>
                 <NumberField.Root
                   {...args}
                   defaultValue={3.14159}
@@ -533,9 +537,9 @@ export default {
                 </NumberField.Root>
               </div>
               <div>
-                <Text size="1" color="gray" style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
+                <Typography.Text size="1" color="gray" style={{ display: 'block', marginBottom: 'var(--space-1)' }}>
                   No decimals
-                </Text>
+                </Typography.Text>
                 <NumberField.Root
                   {...args}
                   defaultValue={1234}
@@ -548,12 +552,12 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Compact notation
-            </Text>
-            <Text size="1" color="gray">
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
               Large numbers displayed as "1.2M" or "5K".
-            </Text>
+            </Typography.Text>
             <NumberField.Root
               {...args}
               defaultValue={1234567}
@@ -617,36 +621,36 @@ export default {
     return (
       <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', maxWidth: 280 }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             Disabled
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Use when the field is completely unavailable. The input <strong>cannot be focused</strong> via keyboard (Tab
             skips it). Screen readers announce it as disabled. Value is <strong>not submitted</strong> with the form.
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} defaultValue={100} disabled>
             <NumberField.Input />
           </NumberField.Root>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>Try pressing Tab — the input will be skipped.</em>
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', maxWidth: 280 }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             ReadOnly
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Use when you want to display a value that cannot be changed, but should remain{' '}
             <strong>focusable and selectable</strong>. Users can Tab to it, copy the value, and screen readers can
             announce it. Value <strong>is submitted</strong> with the form.
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} defaultValue={100} readOnly>
             <NumberField.Input />
           </NumberField.Root>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>Try pressing Tab — the input can be focused.</em>
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -667,7 +671,7 @@ export default {
           <NumberField.Input />
         </NumberField.Root>
 
-        <Code size="2">value: {value === null ? 'null' : value}</Code>
+        <Typography.Code size="2">value: {value === null ? 'null' : value}</Typography.Code>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Button size="1" variant="soft" onClick={() => setValue(0)}>
@@ -727,18 +731,18 @@ export default {
           <NumberField.Input />
         </NumberField.Root>
 
-        <Text size="1" color="gray">
+        <Typography.Text size="1" color="gray">
           Try typing, using arrow keys (↑↓), clicking buttons, or blurring the input to see when each callback fires.
-        </Text>
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', flex: 1 }}>
-            <Text size="2" weight="bold" color="blue">
+            <Typography.Text size="2" weight="bold" color="blue">
               onValueChange
-            </Text>
-            <Text size="1" color="gray">
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
               Fires on <strong>every</strong> value change. Use for real-time updates like live previews.
-            </Text>
+            </Typography.Text>
             <div
               style={{
                 fontFamily: 'monospace',
@@ -762,12 +766,12 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', flex: 1 }}>
-            <Text size="2" weight="bold" color="green">
+            <Typography.Text size="2" weight="bold" color="green">
               onValueCommitted
-            </Text>
-            <Text size="1" color="gray">
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
               Fires on <strong>blur</strong>, arrow keys (↑↓), or button clicks. Use for API calls.
-            </Text>
+            </Typography.Text>
             <div
               style={{
                 fontFamily: 'monospace',
@@ -833,15 +837,15 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 450 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             Two ways to access the input
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             <strong>NumberField.Input ref</strong> — Access the visible input for focus, selection, etc.
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             <strong>NumberField.Root inputRef</strong> — Access the hidden form input (for form libraries).
-          </Text>
+          </Typography.Text>
         </div>
 
         <NumberField.Root {...args} defaultValue={1234.56} inputRef={hiddenInputRef}>
@@ -867,17 +871,17 @@ export default {
             borderRadius: 'var(--radius-2)',
           }}
         >
-          <Text size="2" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
+          <Typography.Text size="2" weight="medium" style={{ marginBottom: 'var(--space-2)', display: 'block' }}>
             When to use each:
-          </Text>
-          <Text size="1" color="gray" render={<ul style={{ margin: 0, paddingLeft: 'var(--space-4)' }} />}>
+          </Typography.Text>
+          <Typography.Text size="1" color="gray" render={<ul style={{ margin: 0, paddingLeft: 'var(--space-4)' }} />}>
             <li>
               <strong>Visible input ref:</strong> Focus on modal open, select all for editing, custom keyboard shortcuts
             </li>
             <li>
               <strong>Hidden input ref:</strong> Form library integration, accessing the raw numeric value
             </li>
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -904,18 +908,18 @@ export default {
         style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', alignItems: 'flex-start' }}
       >
         <div>
-          <Text render={<label htmlFor="quantity" />} size="2" weight="medium">
+          <Typography.Text render={<label htmlFor="quantity" />} size="2" weight="medium">
             Quantity
-          </Text>
+          </Typography.Text>
           <NumberField.Root {...args} id="quantity" name="quantity" defaultValue={1} min={1} max={99}>
             <NumberField.Input />
           </NumberField.Root>
         </div>
 
         <div>
-          <Text render={<label htmlFor="price" />} size="2" weight="medium">
+          <Typography.Text render={<label htmlFor="price" />} size="2" weight="medium">
             Price
-          </Text>
+          </Typography.Text>
           <NumberField.Root
             {...args}
             id="price"
@@ -933,9 +937,9 @@ export default {
         </Button>
 
         {formData && (
-          <Code size="2" style={{ whiteSpace: 'pre' }}>
+          <Typography.Code size="2" style={{ whiteSpace: 'pre' }}>
             {JSON.stringify(Object.fromEntries(formData.entries()), null, 2)}
-          </Code>
+          </Typography.Code>
         )}
       </form>
     );

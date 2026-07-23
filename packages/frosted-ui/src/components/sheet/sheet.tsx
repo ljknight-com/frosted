@@ -4,8 +4,8 @@ import { Drawer as DrawerPrimitive } from '@base-ui/react/drawer';
 import classNames from 'classnames';
 import * as React from 'react';
 import { Theme } from '../../theme';
-import { Heading } from '../heading';
-import { Text, type TextProps } from '../text';
+import { Heading } from '../typography/heading';
+import { Text, type TextProps } from '../typography/text';
 
 type PrimitiveRootProps = React.ComponentProps<typeof DrawerPrimitive.Root>;
 

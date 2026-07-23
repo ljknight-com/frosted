@@ -4,26 +4,24 @@ import * as React from 'react';
 import { Controller, useForm as useReactHookForm } from 'react-hook-form';
 import { z } from 'zod';
 import {
+  Alert,
   AlertDialog,
   Button,
-  Callout,
   Card,
   Checkbox,
-  Code,
   Field,
   Fieldset,
   Form,
   FormErrors,
   FormValues,
-  Heading,
+  Input,
   Link,
   Progress,
   Select,
   Separator,
   Spinner,
   Switch,
-  Text,
-  TextField,
+  Typography,
 } from '..';
 
 const countryItems = [
@@ -143,14 +141,15 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Getting Started
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          A minimal form using <Code>{'<Form>'}</Code>, <Code>{'<Field.Root>'}</Code>, and <Code>{'<TextField>'}</Code>.
-          Add validation with HTML attributes like <Code>required</Code> and display errors with{' '}
-          <Code>{'<Field.Error>'}</Code>.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          A minimal form using <Typography.Code>{'<Form>'}</Typography.Code>,{' '}
+          <Typography.Code>{'<Field.Root>'}</Typography.Code>, and <Typography.Code>{'<Input>'}</Typography.Code>. Add
+          validation with HTML attributes like <Typography.Code>required</Typography.Code> and display errors with{' '}
+          <Typography.Code>{'<Field.Error>'}</Typography.Code>.
+        </Typography.Text>
 
         <Form
           onSubmit={async (e) => {
@@ -163,18 +162,18 @@ export default {
         >
           <Field.Root name="email">
             <Field.Label>Email</Field.Label>
-            <TextField.Root size="3" variant="soft" color="gray">
-              <TextField.Input type="email" required placeholder="you@example.com" />
-            </TextField.Root>
+            <Input.Root size="3" variant="soft" color="gray">
+              <Input.Control type="email" required placeholder="you@example.com" />
+            </Input.Root>
             <Field.Error match="valueMissing">Email is required</Field.Error>
             <Field.Error match="typeMismatch">Please enter a valid email</Field.Error>
           </Field.Root>
 
           <Field.Root name="message">
             <Field.Label>Message</Field.Label>
-            <TextField.Root size="3" variant="soft" color="gray">
-              <TextField.Input required placeholder="How can we help?" />
-            </TextField.Root>
+            <Input.Root size="3" variant="soft" color="gray">
+              <Input.Control required placeholder="How can we help?" />
+            </Input.Root>
             <Field.Description>We'll get back to you within 24 hours</Field.Description>
             <Field.Error match="valueMissing">Message is required</Field.Error>
           </Field.Root>
@@ -185,9 +184,9 @@ export default {
         </Form>
 
         {submitted && (
-          <Callout.Root color="success" style={{ marginTop: 16 }}>
-            <Callout.Title>Message sent successfully!</Callout.Title>
-          </Callout.Root>
+          <Alert.Root color="success" style={{ marginTop: 16 }}>
+            <Alert.Title>Message sent successfully!</Alert.Title>
+          </Alert.Root>
         )}
       </div>
     );
@@ -196,20 +195,22 @@ export default {
   'Constraint Validation'() {
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Constraint Validation
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          Form components support native HTML validation attributes for many validation rules: <Code>required</Code>,{' '}
-          <Code>minLength</Code>, <Code>maxLength</Code>, <Code>pattern</Code>, and <Code>step</Code>.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          Form components support native HTML validation attributes for many validation rules:{' '}
+          <Typography.Code>required</Typography.Code>, <Typography.Code>minLength</Typography.Code>,{' '}
+          <Typography.Code>maxLength</Typography.Code>, <Typography.Code>pattern</Typography.Code>, and{' '}
+          <Typography.Code>step</Typography.Code>.
+        </Typography.Text>
 
         <Form>
           <Field.Root name="username">
             <Field.Label>Username</Field.Label>
-            <TextField.Root>
-              <TextField.Input required minLength={3} maxLength={20} placeholder="3-20 characters" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control required minLength={3} maxLength={20} placeholder="3-20 characters" />
+            </Input.Root>
             <Field.Error match="valueMissing">Username is required</Field.Error>
             <Field.Error match="tooShort">Username must be at least 3 characters</Field.Error>
             <Field.Error match="tooLong">Username must be at most 20 characters</Field.Error>
@@ -217,18 +218,18 @@ export default {
 
           <Field.Root name="email">
             <Field.Label>Email</Field.Label>
-            <TextField.Root>
-              <TextField.Input type="email" required placeholder="user@example.com" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control type="email" required placeholder="user@example.com" />
+            </Input.Root>
             <Field.Error match="valueMissing">Email is required</Field.Error>
             <Field.Error match="typeMismatch">Please enter a valid email address</Field.Error>
           </Field.Root>
 
           <Field.Root name="website">
             <Field.Label>Website</Field.Label>
-            <TextField.Root>
-              <TextField.Input type="url" required pattern="https?://.*" placeholder="https://example.com" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control type="url" required pattern="https?://.*" placeholder="https://example.com" />
+            </Input.Root>
             <Field.Error match="valueMissing">Website URL is required</Field.Error>
             <Field.Error match="typeMismatch">Please enter a valid URL</Field.Error>
             <Field.Error match="patternMismatch">URL must start with http:// or https://</Field.Error>
@@ -254,14 +255,15 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Required Controls
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          Non-text controls like <Code>{'<Select>'}</Code>, <Code>{'<Checkbox>'}</Code>, and <Code>{'<Switch>'}</Code>{' '}
-          support the <Code>required</Code> and <Code>name</Code> props for native form validation. Use{' '}
-          <Code>{'match="valueMissing"'}</Code> to show validation errors.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          Non-text controls like <Typography.Code>{'<Select>'}</Typography.Code>,{' '}
+          <Typography.Code>{'<Checkbox>'}</Typography.Code>, and <Typography.Code>{'<Switch>'}</Typography.Code> support
+          the <Typography.Code>required</Typography.Code> and <Typography.Code>name</Typography.Code> props for native
+          form validation. Use <Typography.Code>{'match="valueMissing"'}</Typography.Code> to show validation errors.
+        </Typography.Text>
 
         <Form onSubmit={handleSubmit}>
           {/* Required Select */}
@@ -309,9 +311,9 @@ export default {
         </Form>
 
         {submitted && (
-          <Callout.Root color="success" style={{ marginTop: 16 }}>
-            <Callout.Title>Form submitted successfully!</Callout.Title>
-          </Callout.Root>
+          <Alert.Root color="success" style={{ marginTop: 16 }}>
+            <Alert.Title>Form submitted successfully!</Alert.Title>
+          </Alert.Root>
         )}
       </div>
     );
@@ -320,22 +322,23 @@ export default {
   'Displaying Errors'() {
     return (
       <div style={{ width: 360 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Displaying Errors
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          Use <Code>{'<Field.Error>'}</Code> without children to automatically display the browser's native error
-          message. Use the <Code>match</Code> prop to customize messages based on the validity state.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          Use <Typography.Code>{'<Field.Error>'}</Typography.Code> without children to automatically display the
+          browser's native error message. Use the <Typography.Code>match</Typography.Code> prop to customize messages
+          based on the validity state.
+        </Typography.Text>
 
         <Form>
           <Field.Root name="autoMessage">
             <Field.Label>Auto Message (native)</Field.Label>
-            <TextField.Root>
-              <TextField.Input type="email" required placeholder="you@example.com" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control type="email" required placeholder="you@example.com" />
+            </Input.Root>
             <Field.Description>
-              Uses <Code>{'<Field.Error />'}</Code> without children
+              Uses <Typography.Code>{'<Field.Error />'}</Typography.Code> without children
             </Field.Description>
             <Field.Error />
           </Field.Root>
@@ -344,11 +347,11 @@ export default {
 
           <Field.Root name="customMessages">
             <Field.Label>Custom Messages</Field.Label>
-            <TextField.Root>
-              <TextField.Input required minLength={5} placeholder="hello" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control required minLength={5} placeholder="hello" />
+            </Input.Root>
             <Field.Description>
-              Uses <Code>match</Code> prop for specific validity states
+              Uses <Typography.Code>match</Typography.Code> prop for specific validity states
             </Field.Description>
             <Field.Error match="valueMissing">This field cannot be empty</Field.Error>
             <Field.Error match="tooShort">Please enter at least 5 characters</Field.Error>
@@ -358,11 +361,11 @@ export default {
 
           <Field.Root name="alwaysShow">
             <Field.Label>Always Show Error</Field.Label>
-            <TextField.Root>
-              <TextField.Input required placeholder="abc123" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control required placeholder="abc123" />
+            </Input.Root>
             <Field.Description>
-              Uses <Code>{'match={true}'}</Code> to always show when invalid
+              Uses <Typography.Code>{'match={true}'}</Typography.Code> to always show when invalid
             </Field.Description>
             <Field.Error match={true}>This field is invalid</Field.Error>
           </Field.Root>
@@ -385,13 +388,14 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Form Reset
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          Use a ref to access the native form element and call <Code>reset()</Code> to clear all fields. The native
-          reset restores inputs to their <Code>defaultValue</Code> (empty if not set).
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          Use a ref to access the native form element and call <Typography.Code>reset()</Typography.Code> to clear all
+          fields. The native reset restores inputs to their <Typography.Code>defaultValue</Typography.Code> (empty if
+          not set).
+        </Typography.Text>
 
         <Form
           ref={formRef}
@@ -404,23 +408,23 @@ export default {
         >
           <Field.Root name="firstName">
             <Field.Label>First Name</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="Jane" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="Jane" />
+            </Input.Root>
           </Field.Root>
 
           <Field.Root name="lastName">
             <Field.Label>Last Name</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="Smith" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="Smith" />
+            </Input.Root>
           </Field.Root>
 
           <Field.Root name="email">
             <Field.Label>Email</Field.Label>
-            <TextField.Root>
-              <TextField.Input type="email" placeholder="jane@example.com" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control type="email" placeholder="jane@example.com" />
+            </Input.Root>
           </Field.Root>
 
           <div style={{ display: 'flex', gap: 8 }}>
@@ -446,14 +450,14 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Submit form values as a JavaScript object
-        </Heading>
-        <Text size="2" style={{ marginBottom: 16, display: 'block' }}>
-          You can use <Code>onFormSubmit</Code> instead of the native <Code>onSubmit</Code> to access form values as a
-          JavaScript object. This is useful when you need to transform the values before submission, or integrate with
-          3rd party APIs.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" style={{ marginBottom: 16, display: 'block' }}>
+          You can use <Typography.Code>onFormSubmit</Typography.Code> instead of the native{' '}
+          <Typography.Code>onSubmit</Typography.Code> to access form values as a JavaScript object. This is useful when
+          you need to transform the values before submission, or integrate with 3rd party APIs.
+        </Typography.Text>
         <Form
           onFormSubmit={async (formValues) => {
             setLoading(true);
@@ -465,15 +469,15 @@ export default {
         >
           <Field.Root name="name">
             <Field.Label>Name</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="Jane Smith" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="Jane Smith" />
+            </Input.Root>
           </Field.Root>
           <Field.Root name="age">
             <Field.Label>Age</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="25" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="25" />
+            </Input.Root>
           </Field.Root>
           <Button type="submit" loading={loading}>
             Submit
@@ -493,13 +497,14 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Server-side Validation
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          You can pass errors returned by server-side validation to the <Code>errors</Code> prop, which will be merged
-          into the client-side field state for display. Once a field's value changes, the error will be cleared.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          You can pass errors returned by server-side validation to the <Typography.Code>errors</Typography.Code> prop,
+          which will be merged into the client-side field state for display. Once a field's value changes, the error
+          will be cleared.
+        </Typography.Text>
         <Form
           errors={errors}
           onSubmit={async (event) => {
@@ -519,9 +524,9 @@ export default {
         >
           <Field.Root name="promoCode">
             <Field.Label>Promo Code</Field.Label>
-            <TextField.Root>
-              <TextField.Input required placeholder="SAVE20" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control required placeholder="SAVE20" />
+            </Input.Root>
             <Field.Description>Try "EXPIRED" or "INVALID" to see server errors</Field.Description>
             <Field.Error />
           </Field.Root>
@@ -530,9 +535,9 @@ export default {
           </Button>
         </Form>
         {result && (
-          <Text size="2" color="success" style={{ marginTop: 16, display: 'block' }}>
+          <Typography.Text size="2" color="success" style={{ marginTop: 16, display: 'block' }}>
             {result}
-          </Text>
+          </Typography.Text>
         )}
       </div>
     );
@@ -546,13 +551,13 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Conditional Fields
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
           Show or hide fields based on user selections. Use controlled state to track selections and conditionally
           render fields.
-        </Text>
+        </Typography.Text>
 
         <Form
           onFormSubmit={async (formValues) => {
@@ -586,17 +591,17 @@ export default {
             <>
               <Field.Root name="companyName">
                 <Field.Label>Company Name</Field.Label>
-                <TextField.Root>
-                  <TextField.Input required placeholder="Acme Inc." />
-                </TextField.Root>
+                <Input.Root>
+                  <Input.Control required placeholder="Acme Inc." />
+                </Input.Root>
                 <Field.Error match="valueMissing">Company name is required for business accounts</Field.Error>
               </Field.Root>
 
               <Field.Root name="taxId">
                 <Field.Label>Tax ID</Field.Label>
-                <TextField.Root>
-                  <TextField.Input placeholder="XX-XXXXXXX" />
-                </TextField.Root>
+                <Input.Root>
+                  <Input.Control placeholder="XX-XXXXXXX" />
+                </Input.Root>
                 <Field.Description>Optional for billing purposes</Field.Description>
               </Field.Root>
             </>
@@ -627,9 +632,9 @@ export default {
           {contactMethod === 'email' && (
             <Field.Root name="email">
               <Field.Label>Email Address</Field.Label>
-              <TextField.Root>
-                <TextField.Input type="email" required placeholder="you@example.com" />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control type="email" required placeholder="you@example.com" />
+              </Input.Root>
               <Field.Error match="valueMissing">Email is required</Field.Error>
               <Field.Error match="typeMismatch">Please enter a valid email</Field.Error>
             </Field.Root>
@@ -638,9 +643,9 @@ export default {
           {contactMethod === 'phone' && (
             <Field.Root name="phone">
               <Field.Label>Phone Number</Field.Label>
-              <TextField.Root>
-                <TextField.Input type="tel" required placeholder="+1 (555) 000-0000" />
-              </TextField.Root>
+              <Input.Root>
+                <Input.Control type="tel" required placeholder="+1 (555) 000-0000" />
+              </Input.Root>
               <Field.Error match="valueMissing">Phone number is required</Field.Error>
             </Field.Root>
           )}
@@ -649,25 +654,25 @@ export default {
             <>
               <Field.Root name="address">
                 <Field.Label>Street Address</Field.Label>
-                <TextField.Root>
-                  <TextField.Input required placeholder="123 Main St" />
-                </TextField.Root>
+                <Input.Root>
+                  <Input.Control required placeholder="123 Main St" />
+                </Input.Root>
                 <Field.Error match="valueMissing">Address is required</Field.Error>
               </Field.Root>
 
               <div style={{ display: 'flex', gap: 8 }}>
                 <Field.Root name="city" style={{ flex: 1 }}>
                   <Field.Label>City</Field.Label>
-                  <TextField.Root>
-                    <TextField.Input required placeholder="San Francisco" />
-                  </TextField.Root>
+                  <Input.Root>
+                    <Input.Control required placeholder="San Francisco" />
+                  </Input.Root>
                 </Field.Root>
 
                 <Field.Root name="zip" style={{ width: 100 }}>
                   <Field.Label>ZIP</Field.Label>
-                  <TextField.Root>
-                    <TextField.Input required placeholder="12345" />
-                  </TextField.Root>
+                  <Input.Root>
+                    <Input.Control required placeholder="12345" />
+                  </Input.Root>
                 </Field.Root>
               </div>
             </>
@@ -712,13 +717,13 @@ export default {
 
     return (
       <div style={{ width: 400 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Dynamic Form Fields
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
           Add and remove form fields dynamically. Store field data in an array and render fields using{' '}
-          <Code>map()</Code>. Use unique IDs as keys for proper React reconciliation.
-        </Text>
+          <Typography.Code>map()</Typography.Code>. Use unique IDs as keys for proper React reconciliation.
+        </Typography.Text>
 
         <Form onSubmit={handleSubmit}>
           {members.map((member, index) => (
@@ -739,26 +744,26 @@ export default {
                   )}
                 </div>
                 <Field.Root name={`member-${member.id}-name`}>
-                  <TextField.Root size="2">
-                    <TextField.Input
+                  <Input.Root size="2">
+                    <Input.Control
                       placeholder="Name"
                       value={member.name}
                       onChange={(e) => updateMember(member.id, 'name', e.target.value)}
                       required
                     />
-                  </TextField.Root>
+                  </Input.Root>
                   <Field.Error match="valueMissing">Name is required</Field.Error>
                 </Field.Root>
                 <Field.Root name={`member-${member.id}-email`}>
-                  <TextField.Root size="2">
-                    <TextField.Input
+                  <Input.Root size="2">
+                    <Input.Control
                       type="email"
                       placeholder="Email"
                       value={member.email}
                       onChange={(e) => updateMember(member.id, 'email', e.target.value)}
                       required
                     />
-                  </TextField.Root>
+                  </Input.Root>
                   <Field.Error match="valueMissing">Email is required</Field.Error>
                   <Field.Error match="typeMismatch">Please enter a valid email</Field.Error>
                 </Field.Root>
@@ -830,18 +835,18 @@ export default {
 
     return (
       <div style={{ width: 360 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Dirty State Warning
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
           Track form changes to warn users before they lose unsaved work. Compare current values against saved values to
-          determine the <Code>dirty</Code> state.
-        </Text>
+          determine the <Typography.Code>dirty</Typography.Code> state.
+        </Typography.Text>
 
         {/* Status indicator - only show after first edit or save */}
         {(isDirty || hasSaved) && (
-          <Callout.Root color={isDirty ? 'warning' : 'success'} style={{ marginBottom: 16 }}>
-            <Callout.Icon>
+          <Alert.Root color={isDirty ? 'warning' : 'success'} style={{ marginBottom: 16 }}>
+            <Alert.Icon>
               <div
                 style={{
                   width: 8,
@@ -850,9 +855,9 @@ export default {
                   backgroundColor: 'currentColor',
                 }}
               />
-            </Callout.Icon>
-            <Callout.Title>{isDirty ? 'Unsaved changes' : 'All changes saved'}</Callout.Title>
-          </Callout.Root>
+            </Alert.Icon>
+            <Alert.Title>{isDirty ? 'Unsaved changes' : 'All changes saved'}</Alert.Title>
+          </Alert.Root>
         )}
 
         <Form
@@ -863,24 +868,24 @@ export default {
         >
           <Field.Root name="title">
             <Field.Label>Title</Field.Label>
-            <TextField.Root>
-              <TextField.Input
+            <Input.Root>
+              <Input.Control
                 placeholder="My document"
                 value={formData.title}
                 onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
               />
-            </TextField.Root>
+            </Input.Root>
           </Field.Root>
 
           <Field.Root name="content">
             <Field.Label>Content</Field.Label>
-            <TextField.Root>
-              <TextField.Input
+            <Input.Root>
+              <Input.Control
                 placeholder="Start writing..."
                 value={formData.content}
                 onChange={(e) => setFormData((prev) => ({ ...prev, content: e.target.value }))}
               />
-            </TextField.Root>
+            </Input.Root>
           </Field.Root>
 
           <div style={{ display: 'flex', gap: 8 }}>
@@ -896,9 +901,9 @@ export default {
         <Separator size="4" style={{ marginTop: 24, marginBottom: 16 }} />
 
         {/* Simulated navigation */}
-        <Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
           Try navigating away with unsaved changes:
-        </Text>
+        </Typography.Text>
         <div style={{ display: 'flex', gap: 8 }}>
           <Button variant="soft" size="1" onClick={() => handleNavigateAway(() => alert('Navigated to Dashboard'))}>
             Dashboard
@@ -981,20 +986,20 @@ export default {
 
     return (
       <div style={{ width: 360 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Auto-save Form
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          Automatically save form data after the user stops typing. Use <Code>setTimeout</Code> to debounce saves and
-          prevent excessive API calls.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          Automatically save form data after the user stops typing. Use <Typography.Code>setTimeout</Typography.Code> to
+          debounce saves and prevent excessive API calls.
+        </Typography.Text>
 
         {/* Save status indicator */}
-        <Callout.Root
+        <Alert.Root
           color={saveStatus === 'saving' ? 'info' : saveStatus === 'saved' ? 'success' : 'gray'}
           style={{ marginBottom: 16 }}
         >
-          <Callout.Icon>
+          <Alert.Icon>
             {saveStatus === 'saving' ? (
               <Spinner />
             ) : (
@@ -1007,36 +1012,36 @@ export default {
                 }}
               />
             )}
-          </Callout.Icon>
-          <Callout.Title>
+          </Alert.Icon>
+          <Alert.Title>
             {saveStatus === 'saving' && 'Saving...'}
             {saveStatus === 'saved' && 'All changes saved'}
             {saveStatus === 'idle' &&
               (lastSaved ? `Last saved ${lastSaved.toLocaleTimeString()}` : 'Start typing to auto-save')}
-          </Callout.Title>
-        </Callout.Root>
+          </Alert.Title>
+        </Alert.Root>
 
         <Form>
           <Field.Root name="title">
             <Field.Label>Title</Field.Label>
-            <TextField.Root>
-              <TextField.Input
+            <Input.Root>
+              <Input.Control
                 placeholder="Project name"
                 value={formData.title}
                 onChange={(e) => handleChange('title', e.target.value)}
               />
-            </TextField.Root>
+            </Input.Root>
           </Field.Root>
 
           <Field.Root name="description">
             <Field.Label>Description</Field.Label>
-            <TextField.Root>
-              <TextField.Input
+            <Input.Root>
+              <Input.Control
                 placeholder="What is this project about?"
                 value={formData.description}
                 onChange={(e) => handleChange('description', e.target.value)}
               />
-            </TextField.Root>
+            </Input.Root>
             <Field.Description>Changes are saved automatically after you stop typing</Field.Description>
           </Field.Root>
         </Form>
@@ -1092,12 +1097,12 @@ export default {
     if (submitted) {
       return (
         <div style={{ width: 360, textAlign: 'center' }}>
-          <Heading size="3" style={{ marginBottom: 8 }}>
+          <Typography.Heading size="3" style={{ marginBottom: 8 }}>
             Success!
-          </Heading>
-          <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          </Typography.Heading>
+          <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
             Your account has been created successfully.
-          </Text>
+          </Typography.Text>
           <pre style={{ fontSize: 12, color: 'var(--gray-900)', textAlign: 'left' }}>
             {JSON.stringify(formData, null, 2)}
           </pre>
@@ -1117,23 +1122,23 @@ export default {
 
     return (
       <div style={{ width: 360 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Multi-step Wizard Form
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          Break complex forms into multiple steps. Use <Code>{'<Progress>'}</Code> to show completion status and manage
-          form state across steps.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          Break complex forms into multiple steps. Use <Typography.Code>{'<Progress>'}</Typography.Code> to show
+          completion status and manage form state across steps.
+        </Typography.Text>
 
         {/* Progress indicator */}
         <div style={{ marginBottom: 24 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-            <Text size="2" weight="medium">
+            <Typography.Text size="2" weight="medium">
               Step {currentStep + 1} of {WIZARD_STEPS.length}: {WIZARD_STEPS[currentStep]}
-            </Text>
-            <Text size="2" color="gray">
+            </Typography.Text>
+            <Typography.Text size="2" color="gray">
               {Math.round(progress)}%
-            </Text>
+            </Typography.Text>
           </div>
           <Progress value={progress} max={100} />
         </div>
@@ -1153,23 +1158,23 @@ export default {
             <>
               <Field.Root name="email">
                 <Field.Label>Email</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     type="email"
                     required
                     placeholder="you@example.com"
                     value={formData.email}
                     onChange={(e) => updateField('email', e.target.value)}
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Field.Error match="valueMissing">Email is required</Field.Error>
                 <Field.Error match="typeMismatch">Please enter a valid email</Field.Error>
               </Field.Root>
 
               <Field.Root name="password">
                 <Field.Label>Password</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     type="password"
                     required
                     minLength={8}
@@ -1177,7 +1182,7 @@ export default {
                     value={formData.password}
                     onChange={(e) => updateField('password', e.target.value)}
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Field.Error match="valueMissing">Password is required</Field.Error>
                 <Field.Error match="tooShort">Password must be at least 8 characters</Field.Error>
               </Field.Root>
@@ -1189,28 +1194,28 @@ export default {
             <>
               <Field.Root name="fullName">
                 <Field.Label>Full Name</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     required
                     placeholder="John Doe"
                     value={formData.fullName}
                     onChange={(e) => updateField('fullName', e.target.value)}
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Field.Error match="valueMissing">Full name is required</Field.Error>
               </Field.Root>
 
               <Field.Root name="username">
                 <Field.Label>Username</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     required
                     minLength={3}
                     placeholder="johndoe"
                     value={formData.username}
                     onChange={(e) => updateField('username', e.target.value)}
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Field.Error match="valueMissing">Username is required</Field.Error>
                 <Field.Error match="tooShort">Username must be at least 3 characters</Field.Error>
               </Field.Root>
@@ -1229,42 +1234,42 @@ export default {
                 gap: 12,
               }}
             >
-              <Heading size="2">Review Your Information</Heading>
+              <Typography.Heading size="2">Review Your Information</Typography.Heading>
 
               <div>
-                <Text size="2" color="gray">
+                <Typography.Text size="2" color="gray">
                   Email
-                </Text>
-                <Text size="2" weight="medium" style={{ display: 'block' }}>
+                </Typography.Text>
+                <Typography.Text size="2" weight="medium" style={{ display: 'block' }}>
                   {formData.email}
-                </Text>
+                </Typography.Text>
               </div>
 
               <div>
-                <Text size="2" color="gray">
+                <Typography.Text size="2" color="gray">
                   Password
-                </Text>
-                <Text size="2" weight="medium" style={{ display: 'block' }}>
+                </Typography.Text>
+                <Typography.Text size="2" weight="medium" style={{ display: 'block' }}>
                   {'•'.repeat(formData.password.length)}
-                </Text>
+                </Typography.Text>
               </div>
 
               <div>
-                <Text size="2" color="gray">
+                <Typography.Text size="2" color="gray">
                   Full Name
-                </Text>
-                <Text size="2" weight="medium" style={{ display: 'block' }}>
+                </Typography.Text>
+                <Typography.Text size="2" weight="medium" style={{ display: 'block' }}>
                   {formData.fullName}
-                </Text>
+                </Typography.Text>
               </div>
 
               <div>
-                <Text size="2" color="gray">
+                <Typography.Text size="2" color="gray">
                   Username
-                </Text>
-                <Text size="2" weight="medium" style={{ display: 'block' }}>
+                </Typography.Text>
+                <Typography.Text size="2" weight="medium" style={{ display: 'block' }}>
                   @{formData.username}
-                </Text>
+                </Typography.Text>
               </div>
             </div>
           )}
@@ -1297,14 +1302,14 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Using with Zod
-        </Heading>
-        <Text size="2" style={{ marginBottom: 16, display: 'block' }}>
-          When parsing the schema using <Code>schema.safeParse()</Code>, the{' '}
-          <Code>result.error.flatten().fieldErrors</Code> data can be used to map the errors to each field's{' '}
-          <Code>name</Code>.
-        </Text>
+        </Typography.Heading>
+        <Typography.Text size="2" style={{ marginBottom: 16, display: 'block' }}>
+          When parsing the schema using <Typography.Code>schema.safeParse()</Typography.Code>, the{' '}
+          <Typography.Code>result.error.flatten().fieldErrors</Typography.Code> data can be used to map the errors to
+          each field's <Typography.Code>name</Typography.Code>.
+        </Typography.Text>
         <Form
           errors={errors}
           onFormSubmit={async (formValues) => {
@@ -1320,16 +1325,16 @@ export default {
         >
           <Field.Root name="name">
             <Field.Label>Name</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="Jane Smith" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="Jane Smith" />
+            </Input.Root>
             <Field.Error />
           </Field.Root>
           <Field.Root name="age">
             <Field.Label>Age</Field.Label>
-            <TextField.Root>
-              <TextField.Input placeholder="25" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control placeholder="25" />
+            </Input.Root>
             <Field.Error />
           </Field.Root>
           <Button type="submit" loading={loading}>
@@ -1351,11 +1356,11 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           Submit with a Server Function
-        </Heading>
-        <Text size="2" style={{ marginBottom: 16, display: 'block' }}>
-          Forms using <Code>useActionState</Code> can be submitted with a{' '}
+        </Typography.Heading>
+        <Typography.Text size="2" style={{ marginBottom: 16, display: 'block' }}>
+          Forms using <Typography.Code>useActionState</Typography.Code> can be submitted with a{' '}
           <Link
             href="https://react.dev/reference/react-dom/components/form#handle-form-submission-with-a-server-function"
             target="_blank"
@@ -1363,14 +1368,14 @@ export default {
           >
             Server Function
           </Link>{' '}
-          instead of <Code>onSubmit</Code>.
-        </Text>
+          instead of <Typography.Code>onSubmit</Typography.Code>.
+        </Typography.Text>
         <Form errors={state.serverErrors} action={formAction}>
           <Field.Root name="username">
             <Field.Label>Username</Field.Label>
-            <TextField.Root>
-              <TextField.Input required defaultValue="admin" placeholder="e.g. alice132" />
-            </TextField.Root>
+            <Input.Root>
+              <Input.Control required defaultValue="admin" placeholder="e.g. alice132" />
+            </Input.Root>
             <Field.Error />
           </Field.Root>
           <Button type="submit" loading={loading}>
@@ -1404,20 +1409,22 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           React Hook Form Integration
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
           You can integrate Field components with{' '}
           <Link href="https://react-hook-form.com" target="_blank" underline="always">
             React Hook Form
           </Link>{' '}
-          using the <Code>Controller</Code> component.
-        </Text>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
-          The <Code>Controller</Code> wraps your input and provides <Code>field</Code> props (like <Code>onChange</Code>
-          , <Code>onBlur</Code>, <Code>value</Code>) that connect it to the form state.
-        </Text>
+          using the <Typography.Code>Controller</Typography.Code> component.
+        </Typography.Text>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          The <Typography.Code>Controller</Typography.Code> wraps your input and provides{' '}
+          <Typography.Code>field</Typography.Code> props (like <Typography.Code>onChange</Typography.Code>,{' '}
+          <Typography.Code>onBlur</Typography.Code>, <Typography.Code>value</Typography.Code>) that connect it to the
+          form state.
+        </Typography.Text>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -1430,9 +1437,9 @@ export default {
             render={({ field }) => (
               <Field.Root name={field.name} invalid={!!errors.firstName}>
                 <Field.Label>First Name</Field.Label>
-                <TextField.Root>
-                  <TextField.Input placeholder="Enter first name" {...field} />
-                </TextField.Root>
+                <Input.Root>
+                  <Input.Control placeholder="Enter first name" {...field} />
+                </Input.Root>
                 {errors.firstName && <Field.Error match={true}>{errors.firstName.message}</Field.Error>}
               </Field.Root>
             )}
@@ -1445,9 +1452,9 @@ export default {
             render={({ field }) => (
               <Field.Root name={field.name} invalid={!!errors.lastName}>
                 <Field.Label>Last Name</Field.Label>
-                <TextField.Root>
-                  <TextField.Input placeholder="Smith" {...field} />
-                </TextField.Root>
+                <Input.Root>
+                  <Input.Control placeholder="Smith" {...field} />
+                </Input.Root>
                 {errors.lastName && <Field.Error match={true}>{errors.lastName.message}</Field.Error>}
               </Field.Root>
             )}
@@ -1466,9 +1473,9 @@ export default {
             render={({ field }) => (
               <Field.Root name={field.name} invalid={!!errors.email}>
                 <Field.Label>Email</Field.Label>
-                <TextField.Root>
-                  <TextField.Input type="email" placeholder="user@example.com" {...field} />
-                </TextField.Root>
+                <Input.Root>
+                  <Input.Control type="email" placeholder="user@example.com" {...field} />
+                </Input.Root>
                 {errors.email && <Field.Error match={true}>{errors.email.message}</Field.Error>}
               </Field.Root>
             )}
@@ -1503,20 +1510,20 @@ export default {
 
     return (
       <div style={{ width: 320 }}>
-        <Heading size="3" style={{ marginBottom: 8 }}>
+        <Typography.Heading size="3" style={{ marginBottom: 8 }}>
           TanStack Form Integration
-        </Heading>
-        <Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
+        </Typography.Heading>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 12, display: 'block' }}>
           You can integrate Field components with{' '}
           <Link href="https://tanstack.com/form" target="_blank" underline="always">
             TanStack Form
           </Link>{' '}
-          using the <Code>form.Field</Code> component.
-        </Text>
-        <Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
+          using the <Typography.Code>form.Field</Typography.Code> component.
+        </Typography.Text>
+        <Typography.Text size="2" color="gray" style={{ marginBottom: 16, display: 'block' }}>
           TanStack Form provides fine-grained reactivity and supports async validation out of the box. Use{' '}
-          <Code>field.state.meta</Code> to access validation errors.
-        </Text>
+          <Typography.Code>field.state.meta</Typography.Code> to access validation errors.
+        </Typography.Text>
 
         <form
           onSubmit={(e) => {
@@ -1539,14 +1546,14 @@ export default {
             {(field) => (
               <Field.Root name={field.name} invalid={field.state.meta.errors.length > 0}>
                 <Field.Label>Username</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     placeholder="johndoe"
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
                   />
-                </TextField.Root>
+                </Input.Root>
                 {field.state.meta.errors.length > 0 && (
                   <Field.Error match={true}>{field.state.meta.errors[0]}</Field.Error>
                 )}
@@ -1566,14 +1573,14 @@ export default {
             {(field) => (
               <Field.Root name={field.name} invalid={field.state.meta.errors.length > 0}>
                 <Field.Label>Bio</Field.Label>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     placeholder="Developer from NYC"
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
                   />
-                </TextField.Root>
+                </Input.Root>
                 <Field.Description>Max 100 characters</Field.Description>
                 {field.state.meta.errors.length > 0 && (
                   <Field.Error match={true}>{field.state.meta.errors[0]}</Field.Error>

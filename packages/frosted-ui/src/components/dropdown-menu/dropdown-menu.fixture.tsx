@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Code, DropdownMenu, dropdownMenuContentPropDefs, Text } from '..';
+import { Button, DropdownMenu, Typography, dropdownMenuContentPropDefs } from '..';
 
 const itemGroups = {
   library: [
@@ -246,16 +246,16 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 540, textAlign: 'center' }}>
+        <Typography.Text render={<div />} style={{ maxWidth: 540, textAlign: 'center' }}>
           A menu can be opened by a trigger that lives either inside or outside the{' '}
-          <Code>&lt;DropdownMenu.Root&gt;</Code>. When the trigger and menu content need to live in different parts of
-          the tree, create a handle with <Code>DropdownMenu.createHandle()</Code> and pass it to both the trigger and
-          the root.
-        </Text>
-        <Text render={<div />} size="2" color="gray" style={{ maxWidth: 540, textAlign: 'center' }}>
+          <Typography.Code>&lt;DropdownMenu.Root&gt;</Typography.Code>. When the trigger and menu content need to live
+          in different parts of the tree, create a handle with{' '}
+          <Typography.Code>DropdownMenu.createHandle()</Typography.Code> and pass it to both the trigger and the root.
+        </Typography.Text>
+        <Typography.Text render={<div />} size="2" color="gray" style={{ maxWidth: 540, textAlign: 'center' }}>
           Note: Only top-level menus can have detached triggers. Submenus must have their triggers defined within the
           SubmenuRoot part.
-        </Text>
+        </Typography.Text>
 
         {/* Trigger is outside the Root */}
         <DropdownMenu.Trigger handle={menuHandle}>
@@ -282,15 +282,16 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 540, textAlign: 'center' }}>
+        <Typography.Text render={<div />} style={{ maxWidth: 540, textAlign: 'center' }}>
           One menu can be opened by several triggers. You can either render multiple{' '}
-          <Code>&lt;DropdownMenu.Trigger&gt;</Code> components inside the same <Code>&lt;DropdownMenu.Root&gt;</Code>,
-          or attach several detached triggers to the same handle.
-        </Text>
+          <Typography.Code>&lt;DropdownMenu.Trigger&gt;</Typography.Code> components inside the same{' '}
+          <Typography.Code>&lt;DropdownMenu.Root&gt;</Typography.Code>, or attach several detached triggers to the same
+          handle.
+        </Typography.Text>
 
-        <Text render={<div />} size="2" weight="bold" style={{ marginTop: 'var(--space-2)' }}>
+        <Typography.Text render={<div />} size="2" weight="bold" style={{ marginTop: 'var(--space-2)' }}>
           Multiple triggers inside Root:
-        </Text>
+        </Typography.Text>
         <DropdownMenu.Root>
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <DropdownMenu.Trigger>
@@ -310,9 +311,9 @@ export default {
           </DropdownMenu.Content>
         </DropdownMenu.Root>
 
-        <Text render={<div />} size="2" weight="bold" style={{ marginTop: 'var(--space-4)' }}>
+        <Typography.Text render={<div />} size="2" weight="bold" style={{ marginTop: 'var(--space-4)' }}>
           Detached triggers with shared handle:
-        </Text>
+        </Typography.Text>
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <DropdownMenu.Trigger handle={menuHandle}>
             <Button variant="surface">Detached A</Button>
@@ -351,11 +352,13 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 600, textAlign: 'center' }}>
-          Control a menu's open state externally with the <Code>open</Code> and <Code>onOpenChange</Code> props. When
-          more than one trigger can open the menu, track the active trigger with <Code>triggerId</Code> on{' '}
-          <Code>&lt;DropdownMenu.Root&gt;</Code> and matching <Code>id</Code> props on each trigger.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 600, textAlign: 'center' }}>
+          Control a menu's open state externally with the <Typography.Code>open</Typography.Code> and{' '}
+          <Typography.Code>onOpenChange</Typography.Code> props. When more than one trigger can open the menu, track the
+          active trigger with <Typography.Code>triggerId</Typography.Code> on{' '}
+          <Typography.Code>&lt;DropdownMenu.Root&gt;</Typography.Code> and matching{' '}
+          <Typography.Code>id</Typography.Code> props on each trigger.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <DropdownMenu.Trigger handle={menuHandle} id="menu-trigger-library" payload="library">
@@ -401,9 +404,10 @@ export default {
     const args = {};
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Control where the menu appears relative to the trigger using <Code>side</Code> and <Code>align</Code> props.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Control where the menu appears relative to the trigger using <Typography.Code>side</Typography.Code> and{' '}
+          <Typography.Code>align</Typography.Code> props.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <DropdownMenu.Root>
@@ -482,10 +486,10 @@ export default {
     const args = {};
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Fine-tune menu positioning with <Code>sideOffset</Code> (distance from trigger) and <Code>alignOffset</Code>{' '}
-          (shift along the alignment axis).
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Fine-tune menu positioning with <Typography.Code>sideOffset</Typography.Code> (distance from trigger) and{' '}
+          <Typography.Code>alignOffset</Typography.Code> (shift along the alignment axis).
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <DropdownMenu.Root>
@@ -568,10 +572,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
           Stress test with many adjacent submenus. The menu contains 50 submenus, each with 12 nested submenus, each
           containing 8 items.
-        </Text>
+        </Typography.Text>
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>

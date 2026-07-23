@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, Fieldset, TextField } from '@aussieljk/frosted';
+import { Field, Fieldset, Input } from '@aussieljk/frosted';
 
 export default function FieldsetDemo() {
   return (
@@ -8,16 +8,16 @@ export default function FieldsetDemo() {
 
       <Field.Root name="company">
         <Field.Label>Company</Field.Label>
-        <TextField.Root>
-          <TextField.Input placeholder="Acme Inc." />
-        </TextField.Root>
+        <Input.Root>
+          <Input.Control placeholder="Acme Inc." />
+        </Input.Root>
       </Field.Root>
 
       <Field.Root name="taxId">
         <Field.Label>Tax ID</Field.Label>
-        <TextField.Root>
-          <TextField.Input placeholder="XX-XXXXXXX" />
-        </TextField.Root>
+        <Input.Root>
+          <Input.Control placeholder="XX-XXXXXXX" />
+        </Input.Root>
         <Field.Description>Your company's tax identification number</Field.Description>
       </Field.Root>
     </Fieldset.Root>

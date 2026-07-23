@@ -1,0 +1,81 @@
+/* ============================================================================
+ * Root - centered flex container
+ * ============================================================================ */
+
+.fui-EmptyRoot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  padding: 24px;
+  text-align: center;
+  text-wrap: balance;
+  border-radius: 16px;
+  --max-content-width: 400px;
+}
+
+/* ============================================================================
+ * Header - title and description container
+ * ============================================================================ */
+
+.fui-EmptyHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: var(--max-content-width);
+}
+
+/* ============================================================================
+ * Media - icon/image container
+ * ============================================================================ */
+
+.fui-EmptyMedia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+
+  /* Soft variant - accent background with rounded corners */
+  &:where(.fui-variant-soft) {
+    width: 64px;
+    height: 64px;
+    background: var(--accent-alpha-100);
+    color: var(--accent-900);
+    border-radius: 20px;
+    /* In case where emoji or text like initials is inserted instead of an icon */
+    font-size: 32px;
+  }
+
+  &:where([data-accent-color='gray']) {
+    color: var(--accent-950);
+  }
+}
+
+/* ============================================================================
+ * Title / Description spacing
+ * ============================================================================ */
+
+.fui-EmptyDescription:where(.fui-EmptyTitle + .fui-EmptyDescription) {
+  margin-top: 10px;
+}
+
+/* ============================================================================
+ * Actions - actions container
+ * ============================================================================ */
+
+.fui-EmptyActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  max-width: var(--max-content-width);
+  text-wrap: balance;
+}

@@ -3,7 +3,7 @@
 import { Fieldset as FieldsetPrimitive } from '@base-ui/react/fieldset';
 import classNames from 'classnames';
 import * as React from 'react';
-import { Text, type TextProps } from '../text/text';
+import { Text, type TextProps } from '../typography/text';
 
 // ============================================================================
 // Root

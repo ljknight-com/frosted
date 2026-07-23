@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Code, FilterChip, filterChipPropDefs, Text } from '..';
+import { Button, FilterChip, Typography, filterChipPropDefs } from '..';
 
 const ExampleIcon = ({ size }: { size: number }) => (
   <svg width={size} height={size} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,15 +92,15 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 400 }}>
-        <Text>
-          The <Code>readOnly</Code> prop prevents users from toggling a filter chip while still showing its current
-          state. Unlike <Code>disabled</Code>, read-only chips remain focusable and their values are submitted with
-          forms.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>readOnly</Typography.Code> prop prevents users from toggling a filter chip while still
+          showing its current state. Unlike <Typography.Code>disabled</Typography.Code>, read-only chips remain
+          focusable and their values are submitted with forms.
+        </Typography.Text>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Applied Filters (from saved search)
-          </Text>
+          </Typography.Text>
           <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
             <FilterChip {...args} checked={activeFilters.inStock} readOnly>
               In Stock
@@ -146,10 +146,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 400 }}>
-        <Text>
-          The <Code>inputRef</Code> prop provides direct access to the hidden native <Code>&lt;input&gt;</Code> element.
-          This is useful for programmatic focus, form validation, or integrating with third-party libraries.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>inputRef</Typography.Code> prop provides direct access to the hidden native{' '}
+          <Typography.Code>&lt;input&gt;</Typography.Code> element. This is useful for programmatic focus, form
+          validation, or integrating with third-party libraries.
+        </Typography.Text>
         <FilterChip {...args} inputRef={inputRef} name="featured" defaultChecked>
           <ExampleIcon size={16} />
           Featured Items
@@ -165,7 +166,7 @@ export default {
             Toggle via Ref
           </Button>
         </div>
-        <Code style={{ padding: 'var(--space-2)', display: 'block' }}>{info}</Code>
+        <Typography.Code style={{ padding: 'var(--space-2)', display: 'block' }}>{info}</Typography.Code>
       </div>
     );
   },
@@ -181,14 +182,15 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          Use <Code>value</Code> and <Code>uncheckedValue</Code> props to customize what gets submitted with the form.
-          By default, checked chips submit <Code>"on"</Code> and unchecked chips submit nothing.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>value</Typography.Code> and <Typography.Code>uncheckedValue</Typography.Code> props to
+          customize what gets submitted with the form. By default, checked chips submit{' '}
+          <Typography.Code>"on"</Typography.Code> and unchecked chips submit nothing.
+        </Typography.Text>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Product Filters
-          </Text>
+          </Typography.Text>
           <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
             <FilterChip {...args} name="availability" defaultChecked value="in-stock" uncheckedValue="all">
               In Stock
@@ -205,12 +207,14 @@ export default {
           </Button>
         </form>
         <div>
-          <Text size="2" weight="medium">
+          <Typography.Text size="2" weight="medium">
             Form Data:
-          </Text>
-          <Code style={{ display: 'block', marginTop: 'var(--space-2)', whiteSpace: 'pre', padding: 'var(--space-2)' }}>
+          </Typography.Text>
+          <Typography.Code
+            style={{ display: 'block', marginTop: 'var(--space-2)', whiteSpace: 'pre', padding: 'var(--space-2)' }}
+          >
             {JSON.stringify(formData, null, 2)}
-          </Code>
+          </Typography.Code>
         </div>
       </div>
     );

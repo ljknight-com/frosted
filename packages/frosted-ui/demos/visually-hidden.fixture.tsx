@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, IconProvider, Icons, Text, VisuallyHidden } from '@aussieljk/frosted';
+import { IconButton, IconProvider, Icons, Typography, VisuallyHidden } from '@aussieljk/frosted';
 import { lucideAdapter } from '@aussieljk/frosted/icons/lucide';
 
 export default function VisuallyHiddenDemo() {
@@ -10,9 +10,9 @@ export default function VisuallyHiddenDemo() {
           <VisuallyHidden>Settings</VisuallyHidden>
           <Icons.Settings />
         </IconButton>
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           Screen readers announce this button as &quot;Settings&quot;.
-        </Text>
+        </Typography.Text>
       </div>
     </IconProvider>
   );

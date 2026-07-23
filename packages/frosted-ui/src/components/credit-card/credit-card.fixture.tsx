@@ -1,7 +1,7 @@
 import creditCardType from 'credit-card-type';
 
 import React, { useState } from 'react';
-import { Button, Callout, CreditCard, Form, SegmentedControlRadioGroup, Text } from '..';
+import { Alert, Button, CreditCard, Form, ToggleGroupRadioGroup, Typography } from '..';
 import { Theme } from '../../theme';
 import './credit-card.css';
 
@@ -485,14 +485,14 @@ function FormIntegration() {
       </Form>
 
       {submitted && (
-        <Callout.Root color="success" style={{ marginTop: 12 }}>
-          <Callout.Title>Card saved successfully!</Callout.Title>
-        </Callout.Root>
+        <Alert.Root color="success" style={{ marginTop: 12 }}>
+          <Alert.Title>Card saved successfully!</Alert.Title>
+        </Alert.Root>
       )}
 
-      <Text size="1" color="gray" style={{ display: 'block', marginTop: 12 }}>
+      <Typography.Text size="1" color="gray" style={{ display: 'block', marginTop: 12 }}>
         Submit with empty fields to see validation errors.
-      </Text>
+      </Typography.Text>
     </div>
   );
 }
@@ -549,11 +549,11 @@ function Colors() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 32, alignItems: 'center' }}>
-      <SegmentedControlRadioGroup.Root value={inputState} onValueChange={(v) => setInputState(v as InputState)}>
-        <SegmentedControlRadioGroup.Item value="default">Default</SegmentedControlRadioGroup.Item>
-        <SegmentedControlRadioGroup.Item value="disabled">Disabled</SegmentedControlRadioGroup.Item>
-        <SegmentedControlRadioGroup.Item value="readonly">Read-only</SegmentedControlRadioGroup.Item>
-      </SegmentedControlRadioGroup.Root>
+      <ToggleGroupRadioGroup.Root value={inputState} onValueChange={(v) => setInputState(v as InputState)}>
+        <ToggleGroupRadioGroup.Item value="default">Default</ToggleGroupRadioGroup.Item>
+        <ToggleGroupRadioGroup.Item value="disabled">Disabled</ToggleGroupRadioGroup.Item>
+        <ToggleGroupRadioGroup.Item value="readonly">Read-only</ToggleGroupRadioGroup.Item>
+      </ToggleGroupRadioGroup.Root>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
@@ -569,9 +569,9 @@ function Colors() {
               <ColoredBack state={inputState} />
             </CreditCard.Content>
           </CreditCard.Root>
-          <Text size="2" color="gray" weight="medium" style={{ minWidth: 60 }}>
+          <Typography.Text size="2" color="gray" weight="medium" style={{ minWidth: 60 }}>
             default
-          </Text>
+          </Typography.Text>
         </div>
         {colors.map((color) => (
           <div key={color} style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
@@ -587,9 +587,9 @@ function Colors() {
                 <ColoredBack state={inputState} />
               </CreditCard.Content>
             </CreditCard.Root>
-            <Text size="2" color="gray" weight="medium" style={{ minWidth: 60 }}>
+            <Typography.Text size="2" color="gray" weight="medium" style={{ minWidth: 60 }}>
               {color}
-            </Text>
+            </Typography.Text>
           </div>
         ))}
       </div>
@@ -680,11 +680,11 @@ function CardBrands() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 32, alignItems: 'center' }}>
-      <SegmentedControlRadioGroup.Root value={inputState} onValueChange={(v) => setInputState(v as InputState)}>
-        <SegmentedControlRadioGroup.Item value="default">Default</SegmentedControlRadioGroup.Item>
-        <SegmentedControlRadioGroup.Item value="disabled">Disabled</SegmentedControlRadioGroup.Item>
-        <SegmentedControlRadioGroup.Item value="readonly">Read-only</SegmentedControlRadioGroup.Item>
-      </SegmentedControlRadioGroup.Root>
+      <ToggleGroupRadioGroup.Root value={inputState} onValueChange={(v) => setInputState(v as InputState)}>
+        <ToggleGroupRadioGroup.Item value="default">Default</ToggleGroupRadioGroup.Item>
+        <ToggleGroupRadioGroup.Item value="disabled">Disabled</ToggleGroupRadioGroup.Item>
+        <ToggleGroupRadioGroup.Item value="readonly">Read-only</ToggleGroupRadioGroup.Item>
+      </ToggleGroupRadioGroup.Root>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
         {cardBrands.map(({ brandKey, number, cvv, color }) => (
@@ -736,9 +736,9 @@ function CardBrands() {
                 </CreditCard.Back>
               </CreditCard.Content>
             </CreditCard.Root>
-            <Text size="2" color="gray" weight="medium" style={{ minWidth: 120 }}>
+            <Typography.Text size="2" color="gray" weight="medium" style={{ minWidth: 120 }}>
               {creditCardType.getTypeInfo(brandKey).niceType}
-            </Text>
+            </Typography.Text>
           </div>
         ))}
       </div>
@@ -751,9 +751,9 @@ function DetectedProvider() {
   return (
     <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
       <CreditCard.BrandLogo style={{ height: '1em', opacity: cardNiceType ? 1 : 0.4 }} />
-      <Text size="1" color={cardNiceType ? 'blue' : 'gray'} weight="medium">
+      <Typography.Text size="1" color={cardNiceType ? 'blue' : 'gray'} weight="medium">
         {cardNiceType ?? 'Unknown'}
-      </Text>
+      </Typography.Text>
     </span>
   );
 }
@@ -791,9 +791,9 @@ function ProviderDetection() {
         </CreditCard.Content>
       </CreditCard.Root>
 
-      <Text size="1" color="gray">
+      <Typography.Text size="1" color="gray">
         Type a card number to detect the provider. Try: 4242... (Visa), 5425... (Mastercard), 3782... (Amex)
-      </Text>
+      </Typography.Text>
     </div>
   );
 }
@@ -814,7 +814,7 @@ function CustomFields() {
             </CreditCard.FrontHeader>
             <CreditCard.Field>
               <CreditCard.FieldLabel>Cardholder name</CreditCard.FieldLabel>
-              <CreditCard.TextField placeholder="John Doe" autoComplete="cc-name" />
+              <CreditCard.Input placeholder="John Doe" autoComplete="cc-name" />
             </CreditCard.Field>
             <CreditCard.FrontFooter>
               <CreditCard.Title>My card</CreditCard.Title>
@@ -846,9 +846,9 @@ function CustomFields() {
         <CreditCard.Trigger render={<Button variant="soft" size="2" />}>Flip card</CreditCard.Trigger>
       </CreditCard.Root>
 
-      <Text size="1" color="gray">
-        Uses CreditCard.TextField directly to add a custom &ldquo;Cardholder name&rdquo; field on the front face.
-      </Text>
+      <Typography.Text size="1" color="gray">
+        Uses CreditCard.Input directly to add a custom &ldquo;Cardholder name&rdquo; field on the front face.
+      </Typography.Text>
     </div>
   );
 }

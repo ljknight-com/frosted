@@ -1,18 +1,6 @@
 import React from 'react';
 
-import {
-  Avatar,
-  Button,
-  Code,
-  DataList,
-  Heading,
-  HoverCard,
-  Inset,
-  Link,
-  Strong,
-  Text,
-  hoverCardContentPropDefs,
-} from '..';
+import { Avatar, Button, DataTable, HoverCard, Inset, Link, Typography, hoverCardContentPropDefs } from '..';
 
 interface UserPayload {
   name: string;
@@ -57,7 +45,7 @@ export default {
       variant: hoverCardContentPropDefs.variant.default,
     };
     return (
-      <Text>
+      <Typography.Text>
         Follow{' '}
         <HoverCard.Root>
           <HoverCard.Trigger>
@@ -69,22 +57,22 @@ export default {
             <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
               <Avatar size="3" fallback="AF" />
               <div>
-                <Heading size="3" render={<h3 />}>
+                <Typography.Heading size="3" render={<h3 />}>
                   @aussieljk/frosted
-                </Heading>
-                <Text render={<div />} size="2" color="gray">
+                </Typography.Heading>
+                <Typography.Text render={<div />} size="2" color="gray">
                   aussieljk
-                </Text>
+                </Typography.Text>
 
-                <Text render={<div />} size="2" style={{ maxWidth: 300, marginTop: 'var(--space-3)' }}>
+                <Typography.Text render={<div />} size="2" style={{ maxWidth: 300, marginTop: 'var(--space-3)' }}>
                   React components library built on top of Base UI primitives.
-                </Text>
+                </Typography.Text>
               </div>
             </div>
           </HoverCard.Content>
         </HoverCard.Root>{' '}
         for updates.
-      </Text>
+      </Typography.Text>
     );
   },
 
@@ -99,10 +87,10 @@ export default {
             <Link href="#">Size one</Link>
           </HoverCard.Trigger>
           <HoverCard.Content {...args} size="1">
-            <Text render={<div />} size="1" style={{ maxWidth: 325 }}>
-              <Strong>Typography</Strong> is the art and technique of arranging type to make written language legible,
-              readable and appealing when displayed.
-            </Text>
+            <Typography.Text render={<div />} size="1" style={{ maxWidth: 325 }}>
+              <Typography.Strong>Typography</Typography.Strong> is the art and technique of arranging type to make
+              written language legible, readable and appealing when displayed.
+            </Typography.Text>
           </HoverCard.Content>
         </HoverCard.Root>
 
@@ -111,10 +99,10 @@ export default {
             <Link href="#">Size two</Link>
           </HoverCard.Trigger>
           <HoverCard.Content {...args} size="2">
-            <Text render={<div />} size="2" style={{ maxWidth: 350 }}>
-              <Strong>Typography</Strong> is the art and technique of arranging type to make written language legible,
-              readable and appealing when displayed.
-            </Text>
+            <Typography.Text render={<div />} size="2" style={{ maxWidth: 350 }}>
+              <Typography.Strong>Typography</Typography.Strong> is the art and technique of arranging type to make
+              written language legible, readable and appealing when displayed.
+            </Typography.Text>
           </HoverCard.Content>
         </HoverCard.Root>
 
@@ -123,10 +111,10 @@ export default {
             <Link href="#">Size three</Link>
           </HoverCard.Trigger>
           <HoverCard.Content {...args} size="3">
-            <Text render={<div />} size="3" style={{ maxWidth: 400 }}>
-              <Strong>Typography</Strong> is the art and technique of arranging type to make written language legible,
-              readable and appealing when displayed.
-            </Text>
+            <Typography.Text render={<div />} size="3" style={{ maxWidth: 400 }}>
+              <Typography.Strong>Typography</Typography.Strong> is the art and technique of arranging type to make
+              written language legible, readable and appealing when displayed.
+            </Typography.Text>
           </HoverCard.Content>
         </HoverCard.Root>
       </div>
@@ -139,7 +127,7 @@ export default {
       variant: hoverCardContentPropDefs.variant.default,
     };
     return (
-      <Text>
+      <Typography.Text>
         Technology revolutionized{' '}
         <HoverCard.Root>
           <HoverCard.Trigger>
@@ -162,16 +150,16 @@ export default {
                 />
               </Inset>
 
-              <Text size="2" style={{ maxWidth: 250 }} render={<p />}>
-                <Strong>Typography</Strong> is the art and technique of arranging type to make written language legible,
-                readable and appealing when displayed. The arrangement of type involves selecting typefaces, point
-                sizes, line lengths, line-spacing (leading), and letter-spacing (tracking)…
-              </Text>
+              <Typography.Text size="2" style={{ maxWidth: 250 }} render={<p />}>
+                <Typography.Strong>Typography</Typography.Strong> is the art and technique of arranging type to make
+                written language legible, readable and appealing when displayed. The arrangement of type involves
+                selecting typefaces, point sizes, line lengths, line-spacing (leading), and letter-spacing (tracking)…
+              </Typography.Text>
             </div>
           </HoverCard.Content>
         </HoverCard.Root>{' '}
         in the latter twentieth century.
-      </Text>
+      </Typography.Text>
     );
   },
 
@@ -182,10 +170,11 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          The <Code>delay</Code> and <Code>closeDelay</Code> props on <Code>HoverCard.Trigger</Code> control how long to
-          wait before opening/closing the hover card. This is useful for preventing accidental triggers.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>delay</Typography.Code> and <Typography.Code>closeDelay</Typography.Code> props on{' '}
+          <Typography.Code>HoverCard.Trigger</Typography.Code> control how long to wait before opening/closing the hover
+          card. This is useful for preventing accidental triggers.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
           <HoverCard.Root>
@@ -193,7 +182,7 @@ export default {
               <Link href="#">Instant (0ms)</Link>
             </HoverCard.Trigger>
             <HoverCard.Content {...args}>
-              <Text size="2">Opens and closes instantly with no delay.</Text>
+              <Typography.Text size="2">Opens and closes instantly with no delay.</Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>
 
@@ -202,7 +191,7 @@ export default {
               <Link href="#">Default (200/150ms)</Link>
             </HoverCard.Trigger>
             <HoverCard.Content {...args}>
-              <Text size="2">Uses the default delays: 200ms open, 150ms close.</Text>
+              <Typography.Text size="2">Uses the default delays: 200ms open, 150ms close.</Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>
 
@@ -211,7 +200,7 @@ export default {
               <Link href="#">Slow (600/300ms)</Link>
             </HoverCard.Trigger>
             <HoverCard.Content {...args}>
-              <Text size="2">Slower delays for more deliberate interactions.</Text>
+              <Typography.Text size="2">Slower delays for more deliberate interactions.</Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>
         </div>
@@ -229,24 +218,25 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          Use <Code>open</Code> and <Code>onOpenChange</Code> props on <Code>HoverCard.Root</Code> for controlled mode.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>open</Typography.Code> and <Typography.Code>onOpenChange</Typography.Code> props on{' '}
+          <Typography.Code>HoverCard.Root</Typography.Code> for controlled mode.
+        </Typography.Text>
 
-        <DataList.Root>
-          <DataList.Item>
-            <DataList.Label>Open state</DataList.Label>
-            <DataList.Value>
-              <Code>{String(open)}</Code>
-            </DataList.Value>
-          </DataList.Item>
-          <DataList.Item>
-            <DataList.Label>Hover count</DataList.Label>
-            <DataList.Value>
-              <Code>{hoverCount}</Code>
-            </DataList.Value>
-          </DataList.Item>
-        </DataList.Root>
+        <DataTable.Root>
+          <DataTable.Item>
+            <DataTable.Label>Open state</DataTable.Label>
+            <DataTable.Value>
+              <Typography.Code>{String(open)}</Typography.Code>
+            </DataTable.Value>
+          </DataTable.Item>
+          <DataTable.Item>
+            <DataTable.Label>Hover count</DataTable.Label>
+            <DataTable.Value>
+              <Typography.Code>{hoverCount}</Typography.Code>
+            </DataTable.Value>
+          </DataTable.Item>
+        </DataTable.Root>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
           <Button variant="soft" size="1" onClick={() => setOpen(!open)}>
@@ -257,7 +247,7 @@ export default {
           </Button>
         </div>
 
-        <Text>
+        <Typography.Text>
           Hover over{' '}
           <HoverCard.Root
             open={open}
@@ -270,11 +260,13 @@ export default {
               <Link href="#">this link</Link>
             </HoverCard.Trigger>
             <HoverCard.Content {...args}>
-              <Text size="2">This is a controlled hover card. You've hovered {hoverCount} times.</Text>
+              <Typography.Text size="2">
+                This is a controlled hover card. You've hovered {hoverCount} times.
+              </Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>{' '}
           to see the hover card.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -286,9 +278,10 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 600 }}>
-        <Text>
-          Use <Code>side</Code> and <Code>alignment</Code> props to control positioning.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>side</Typography.Code> and <Typography.Code>alignment</Typography.Code> props to control
+          positioning.
+        </Typography.Text>
 
         <div
           style={{
@@ -306,7 +299,7 @@ export default {
                 <Link href="#">Top</Link>
               </HoverCard.Trigger>
               <HoverCard.Content {...args} side="top" align="center">
-                <Text size="2">Positioned on top, centered</Text>
+                <Typography.Text size="2">Positioned on top, centered</Typography.Text>
               </HoverCard.Content>
             </HoverCard.Root>
           </div>
@@ -319,7 +312,7 @@ export default {
                 <Link href="#">Left</Link>
               </HoverCard.Trigger>
               <HoverCard.Content {...args} side="left" align="center">
-                <Text size="2">Positioned on left, centered</Text>
+                <Typography.Text size="2">Positioned on left, centered</Typography.Text>
               </HoverCard.Content>
             </HoverCard.Root>
           </div>
@@ -330,7 +323,7 @@ export default {
                 <Link href="#">Right</Link>
               </HoverCard.Trigger>
               <HoverCard.Content {...args} side="right" align="center">
-                <Text size="2">Positioned on right, centered</Text>
+                <Typography.Text size="2">Positioned on right, centered</Typography.Text>
               </HoverCard.Content>
             </HoverCard.Root>
           </div>
@@ -343,16 +336,17 @@ export default {
                 <Link href="#">Bottom</Link>
               </HoverCard.Trigger>
               <HoverCard.Content {...args} side="bottom" align="center">
-                <Text size="2">Positioned on bottom, centered</Text>
+                <Typography.Text size="2">Positioned on bottom, centered</Typography.Text>
               </HoverCard.Content>
             </HoverCard.Root>
           </div>
           <div />
         </div>
 
-        <Text size="2" color="gray">
-          Alignment options: <Code>start</Code>, <Code>center</Code>, <Code>end</Code>
-        </Text>
+        <Typography.Text size="2" color="gray">
+          Alignment options: <Typography.Code>start</Typography.Code>, <Typography.Code>center</Typography.Code>,{' '}
+          <Typography.Code>end</Typography.Code>
+        </Typography.Text>
       </div>
     );
   },
@@ -364,11 +358,11 @@ export default {
     } as const;
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
+        <Typography.Text>
           A common use case is showing user profiles on hover. This provides quick context without navigating away.
-        </Text>
+        </Typography.Text>
 
-        <Text>
+        <Typography.Text>
           The project is built on{' '}
           <HoverCard.Root>
             <HoverCard.Trigger>
@@ -383,29 +377,29 @@ export default {
                   shape="square"
                 />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-                  <Heading size="3" render={<h3 />}>
+                  <Typography.Heading size="3" render={<h3 />}>
                     Base UI
-                  </Heading>
-                  <Text render={<div />} size="2" color="gray">
+                  </Typography.Heading>
+                  <Typography.Text render={<div />} size="2" color="gray">
                     @base-ui-components
-                  </Text>
-                  <Text render={<div />} size="2" style={{ marginTop: 'var(--space-2)', maxWidth: 280 }}>
+                  </Typography.Text>
+                  <Typography.Text render={<div />} size="2" style={{ marginTop: 'var(--space-2)', maxWidth: 280 }}>
                     Unstyled UI components for building accessible web apps and design systems.
-                  </Text>
+                  </Typography.Text>
                   <div style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
-                    <Text size="2" color="gray">
-                      <Strong>127</Strong> repos
-                    </Text>
-                    <Text size="2" color="gray">
-                      <Strong>42</Strong> members
-                    </Text>
+                    <Typography.Text size="2" color="gray">
+                      <Typography.Strong>127</Typography.Strong> repos
+                    </Typography.Text>
+                    <Typography.Text size="2" color="gray">
+                      <Typography.Strong>42</Typography.Strong> members
+                    </Typography.Text>
                   </div>
                 </div>
               </div>
             </HoverCard.Content>
           </HoverCard.Root>{' '}
           and is open source.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -417,11 +411,11 @@ export default {
     } as const;
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
+        <Typography.Text>
           HoverCard is perfect for showing link previews, giving users a glimpse of what they'll see before clicking.
-        </Text>
+        </Typography.Text>
 
-        <Text>
+        <Typography.Text>
           The principles of good{' '}
           <HoverCard.Root>
             <HoverCard.Trigger>
@@ -444,21 +438,21 @@ export default {
                 />
               </Inset>
               <div style={{ maxWidth: 300 }}>
-                <Text size="2" weight="medium" render={<div />}>
+                <Typography.Text size="2" weight="medium" render={<div />}>
                   Typography - Wikipedia
-                </Text>
-                <Text size="1" color="gray" render={<div />} style={{ marginTop: 'var(--space-1)' }}>
+                </Typography.Text>
+                <Typography.Text size="1" color="gray" render={<div />} style={{ marginTop: 'var(--space-1)' }}>
                   en.wikipedia.org
-                </Text>
-                <Text size="2" render={<div />} style={{ marginTop: 'var(--space-2)' }}>
+                </Typography.Text>
+                <Typography.Text size="2" render={<div />} style={{ marginTop: 'var(--space-2)' }}>
                   Typography is the art and science of arranging type to make written language clear, visually
                   appealing, and effective in communication.
-                </Text>
+                </Typography.Text>
               </div>
             </HoverCard.Content>
           </HoverCard.Root>{' '}
           remain into the digital age.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -477,12 +471,13 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          <Code>onOpenChange</Code> fires immediately, while <Code>onOpenChangeComplete</Code> fires after animations
-          complete. Useful for cleanup actions that should wait for exit animations.
-        </Text>
+        <Typography.Text>
+          <Typography.Code>onOpenChange</Typography.Code> fires immediately, while{' '}
+          <Typography.Code>onOpenChangeComplete</Typography.Code> fires after animations complete. Useful for cleanup
+          actions that should wait for exit animations.
+        </Typography.Text>
 
-        <Text>
+        <Typography.Text>
           Hover over{' '}
           <HoverCard.Root
             onOpenChange={(open) => addEvent(`onOpenChange: ${open}`)}
@@ -492,11 +487,11 @@ export default {
               <Link href="#">this link</Link>
             </HoverCard.Trigger>
             <HoverCard.Content {...args}>
-              <Text size="2">Watch the event log to see the timing difference.</Text>
+              <Typography.Text size="2">Watch the event log to see the timing difference.</Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>{' '}
           to see the events.
-        </Text>
+        </Typography.Text>
 
         <div
           style={{
@@ -508,13 +503,18 @@ export default {
             minHeight: 100,
           }}
         >
-          <Text size="1" color="gray" weight="medium" style={{ display: 'block', marginBottom: 'var(--space-2)' }}>
+          <Typography.Text
+            size="1"
+            color="gray"
+            weight="medium"
+            style={{ display: 'block', marginBottom: 'var(--space-2)' }}
+          >
             Event Log:
-          </Text>
+          </Typography.Text>
           {events.length === 0 ? (
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               Hover to generate events...
-            </Text>
+            </Typography.Text>
           ) : (
             events.map((event, i) => (
               <div key={i} style={{ color: 'var(--gray-900)' }}>
@@ -536,10 +536,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          Use the <Code>anchor</Code> prop on <Code>HoverCard.Content</Code> to position relative to a different
-          element.
-        </Text>
+        <Typography.Text>
+          Use the <Typography.Code>anchor</Typography.Code> prop on <Typography.Code>HoverCard.Content</Typography.Code>{' '}
+          to position relative to a different element.
+        </Typography.Text>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
           <div style={{ display: 'flex' }} ref={avatarRef}>
@@ -555,23 +555,23 @@ export default {
             <HoverCard.Content {...args} anchor={avatarRef}>
               <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
                 <div>
-                  <Text size="2" weight="medium" render={<div />}>
+                  <Typography.Text size="2" weight="medium" render={<div />}>
                     John Doe
-                  </Text>
-                  <Text size="2" color="gray" render={<div />}>
+                  </Typography.Text>
+                  <Typography.Text size="2" color="gray" render={<div />}>
                     Software Engineer
-                  </Text>
-                  <Text size="2" render={<div />} style={{ marginTop: 'var(--space-2)', maxWidth: 200 }}>
+                  </Typography.Text>
+                  <Typography.Text size="2" render={<div />} style={{ marginTop: 'var(--space-2)', maxWidth: 200 }}>
                     Building great user experiences with React and TypeScript.
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </HoverCard.Content>
           </HoverCard.Root>
 
-          <Text size="2" color="gray">
+          <Typography.Text size="2" color="gray">
             ← Hover the link, card appears near avatar
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -584,10 +584,10 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          The trigger can be any element. Use the <Code>render</Code> pattern to wrap buttons or other interactive
-          elements.
-        </Text>
+        <Typography.Text>
+          The trigger can be any element. Use the <Typography.Code>render</Typography.Code> pattern to wrap buttons or
+          other interactive elements.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
           <HoverCard.Root>
@@ -595,7 +595,7 @@ export default {
               <Button variant="soft">Hover me</Button>
             </HoverCard.Trigger>
             <HoverCard.Content {...args}>
-              <Text size="2">This hover card is triggered by a button instead of a link.</Text>
+              <Typography.Text size="2">This hover card is triggered by a button instead of a link.</Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>
 
@@ -606,12 +606,12 @@ export default {
             <HoverCard.Content {...args}>
               <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
                 <div>
-                  <Text size="2" weight="medium" render={<div />}>
+                  <Typography.Text size="2" weight="medium" render={<div />}>
                     Alice Brown
-                  </Text>
-                  <Text size="2" color="gray" render={<div />}>
+                  </Typography.Text>
+                  <Typography.Text size="2" color="gray" render={<div />}>
                     Product Designer
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </HoverCard.Content>
@@ -630,10 +630,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 600 }}>
-        <Text>
-          The <Code>collisionBoundary</Code> prop constrains the hover card to stay within a specific element instead of
-          the viewport.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>collisionBoundary</Typography.Code> prop constrains the hover card to stay within a
+          specific element instead of the viewport.
+        </Typography.Text>
 
         <div
           ref={setBoundary}
@@ -648,17 +648,21 @@ export default {
             position: 'relative',
           }}
         >
-          <Text size="1" color="gray" style={{ position: 'absolute', top: 'var(--space-2)', left: 'var(--space-2)' }}>
+          <Typography.Text
+            size="1"
+            color="gray"
+            style={{ position: 'absolute', top: 'var(--space-2)', left: 'var(--space-2)' }}
+          >
             Collision boundary
-          </Text>
+          </Typography.Text>
           <HoverCard.Root>
             <HoverCard.Trigger>
               <Link href="#">Hover me</Link>
             </HoverCard.Trigger>
             <HoverCard.Content {...args} collisionBoundary={boundary ?? undefined} side="bottom">
-              <Text size="2" style={{ maxWidth: 250 }}>
+              <Typography.Text size="2" style={{ maxWidth: 250 }}>
                 This hover card is constrained to stay within the dashed boundary, not the viewport.
-              </Text>
+              </Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>
         </div>
@@ -675,25 +679,26 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 600 }}>
-        <Text>
-          The <Code>collisionAvoidance</Code> prop controls how the hover card avoids collisions. It accepts an object
-          with <Code>side</Code> and <Code>align</Code> properties.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>collisionAvoidance</Typography.Code> prop controls how the hover card avoids collisions.
+          It accepts an object with <Typography.Code>side</Typography.Code> and <Typography.Code>align</Typography.Code>{' '}
+          properties.
+        </Typography.Text>
         <ul style={{ margin: 0, paddingLeft: 'var(--space-4)' }}>
           <li>
-            <Text size="2">
-              <Code>side: 'flip'</Code> (default) - Flips to opposite side if not enough space
-            </Text>
+            <Typography.Text size="2">
+              <Typography.Code>side: 'flip'</Typography.Code> (default) - Flips to opposite side if not enough space
+            </Typography.Text>
           </li>
           <li>
-            <Text size="2">
-              <Code>side: 'none'</Code> - No side collision avoidance
-            </Text>
+            <Typography.Text size="2">
+              <Typography.Code>side: 'none'</Typography.Code> - No side collision avoidance
+            </Typography.Text>
           </li>
           <li>
-            <Text size="2">
-              <Code>align: 'flip' | 'shift' | 'none'</Code> - Controls alignment axis behavior
-            </Text>
+            <Typography.Text size="2">
+              <Typography.Code>align: 'flip' | 'shift' | 'none'</Typography.Code> - Controls alignment axis behavior
+            </Typography.Text>
           </li>
         </ul>
 
@@ -719,9 +724,9 @@ export default {
                 collisionAvoidance={{ side: 'flip' }}
                 collisionBoundary={boundary ?? undefined}
               >
-                <Text size="2" style={{ maxWidth: 200 }}>
+                <Typography.Text size="2" style={{ maxWidth: 200 }}>
                   This will flip to bottom if there's not enough space on top.
-                </Text>
+                </Typography.Text>
               </HoverCard.Content>
             </HoverCard.Root>
 
@@ -735,9 +740,9 @@ export default {
                 collisionAvoidance={{ side: 'flip', align: 'shift' }}
                 collisionBoundary={boundary ?? undefined}
               >
-                <Text size="2" style={{ maxWidth: 200 }}>
+                <Typography.Text size="2" style={{ maxWidth: 200 }}>
                   Flips side, shifts alignment to stay in view.
-                </Text>
+                </Typography.Text>
               </HoverCard.Content>
             </HoverCard.Root>
 
@@ -751,18 +756,18 @@ export default {
                 collisionAvoidance={{ side: 'none', align: 'none' }}
                 collisionBoundary={boundary ?? undefined}
               >
-                <Text size="2" style={{ maxWidth: 200 }}>
+                <Typography.Text size="2" style={{ maxWidth: 200 }}>
                   This won't avoid collisions at all.
-                </Text>
+                </Typography.Text>
               </HoverCard.Content>
             </HoverCard.Root>
           </div>
           <div style={{ height: 400 }} />
         </div>
 
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           Scroll the box above so triggers are near the top edge to see flip vs none behavior.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -774,20 +779,21 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 600 }}>
-        <Text>
-          The <Code>sticky</Code> prop controls whether the hover card repositions to stay in the viewport when the
-          anchor scrolls toward the edge.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>sticky</Typography.Code> prop controls whether the hover card repositions to stay in the
+          viewport when the anchor scrolls toward the edge.
+        </Typography.Text>
         <ul style={{ margin: 0, paddingLeft: 'var(--space-4)' }}>
           <li>
-            <Text size="2">
-              <Code>sticky=false</Code> (default) - The popup hides when anchor scrolls out of viewport
-            </Text>
+            <Typography.Text size="2">
+              <Typography.Code>sticky=false</Typography.Code> (default) - The popup hides when anchor scrolls out of
+              viewport
+            </Typography.Text>
           </li>
           <li>
-            <Text size="2">
-              <Code>sticky=true</Code> - The popup stays at viewport edge as anchor scrolls away
-            </Text>
+            <Typography.Text size="2">
+              <Typography.Code>sticky=true</Typography.Code> - The popup stays at viewport edge as anchor scrolls away
+            </Typography.Text>
           </li>
         </ul>
 
@@ -797,9 +803,9 @@ export default {
               <Link href="#">sticky=false</Link>
             </HoverCard.Trigger>
             <HoverCard.Content {...args} sticky={false} side="top">
-              <Text size="2" style={{ maxWidth: 200 }}>
+              <Typography.Text size="2" style={{ maxWidth: 200 }}>
                 Scroll the page down - this hover card will disappear when the anchor leaves the viewport.
-              </Text>
+              </Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>
 
@@ -808,17 +814,17 @@ export default {
               <Link href="#">sticky=true</Link>
             </HoverCard.Trigger>
             <HoverCard.Content {...args} sticky={true} side="top">
-              <Text size="2" style={{ maxWidth: 200 }}>
+              <Typography.Text size="2" style={{ maxWidth: 200 }}>
                 Scroll the page down - this hover card will stick to the viewport edge.
-              </Text>
+              </Typography.Text>
             </HoverCard.Content>
           </HoverCard.Root>
         </div>
 
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           Open a hover card, then scroll the page (not a container) to see the difference. Works best when this story is
           near the top of the viewport.
-        </Text>
+        </Typography.Text>
 
         {/* Spacer to enable page scrolling */}
         <div style={{ height: 800 }} />
@@ -835,11 +841,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text>
-          The <Code>disableAnchorTracking</Code> prop controls whether the hover card repositions when the anchor
-          element moves due to layout changes (not scrolling). This is useful for performance optimization or when you
-          want the hover card to stay in its original position.
-        </Text>
+        <Typography.Text>
+          The <Typography.Code>disableAnchorTracking</Typography.Code> prop controls whether the hover card repositions
+          when the anchor element moves due to layout changes (not scrolling). This is useful for performance
+          optimization or when you want the hover card to stay in its original position.
+        </Typography.Text>
 
         <Button size="1" onClick={() => setPosition((p) => (p === 0 ? 80 : 0))}>
           Move anchors
@@ -847,12 +853,12 @@ export default {
 
         <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               Default (tracking enabled)
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Hover card follows when anchor moves
-            </Text>
+            </Typography.Text>
             <div
               style={{
                 width: 220,
@@ -877,19 +883,19 @@ export default {
                   </Link>
                 </HoverCard.Trigger>
                 <HoverCard.Content {...args} side="bottom">
-                  <Text size="2">Follows anchor movement</Text>
+                  <Typography.Text size="2">Follows anchor movement</Typography.Text>
                 </HoverCard.Content>
               </HoverCard.Root>
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="1" weight="medium">
+            <Typography.Text size="1" weight="medium">
               disableAnchorTracking=true
-            </Text>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Hover card stays in original position
-            </Text>
+            </Typography.Text>
             <div
               style={{
                 width: 220,
@@ -914,17 +920,17 @@ export default {
                   </Link>
                 </HoverCard.Trigger>
                 <HoverCard.Content {...args} disableAnchorTracking side="bottom">
-                  <Text size="2">Stays in place</Text>
+                  <Typography.Text size="2">Stays in place</Typography.Text>
                 </HoverCard.Content>
               </HoverCard.Root>
             </div>
           </div>
         </div>
 
-        <Text size="1" color="gray">
+        <Typography.Text size="1" color="gray">
           Click the button above to move the anchor elements. The left hover card will follow, while the right one stays
           fixed at its original position.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },
@@ -938,12 +944,13 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 500 }}>
-        <Text>
-          A single hover card can be opened by multiple triggers using <Code>HoverCard.createHandle()</Code>. Each
-          trigger can pass a unique <Code>payload</Code> to render different content in the same card.
-        </Text>
+        <Typography.Text>
+          A single hover card can be opened by multiple triggers using{' '}
+          <Typography.Code>HoverCard.createHandle()</Typography.Code>. Each trigger can pass a unique{' '}
+          <Typography.Code>payload</Typography.Code> to render different content in the same card.
+        </Typography.Text>
 
-        <Text>
+        <Typography.Text>
           Check out{' '}
           <HoverCard.Trigger handle={handle} payload={users.github}>
             <Link href="https://github.com/github">GitHub</Link>
@@ -957,7 +964,7 @@ export default {
             <Link href="https://github.com/base-ui-components">Base UI</Link>
           </HoverCard.Trigger>{' '}
           on GitHub.
-        </Text>
+        </Typography.Text>
 
         <HoverCard.Root handle={handle}>
           {({ payload }) => (
@@ -966,22 +973,22 @@ export default {
                 <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
                   <Avatar size="4" src={payload.avatar} fallback={payload.name[0]} shape="square" />
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-                    <Heading size="3" render={<h3 />}>
+                    <Typography.Heading size="3" render={<h3 />}>
                       {payload.name}
-                    </Heading>
-                    <Text render={<div />} size="2" color="gray">
+                    </Typography.Heading>
+                    <Typography.Text render={<div />} size="2" color="gray">
                       {payload.username}
-                    </Text>
-                    <Text render={<div />} size="2" style={{ marginTop: 'var(--space-2)', maxWidth: 280 }}>
+                    </Typography.Text>
+                    <Typography.Text render={<div />} size="2" style={{ marginTop: 'var(--space-2)', maxWidth: 280 }}>
                       {payload.bio}
-                    </Text>
+                    </Typography.Text>
                     <div style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
-                      <Text size="2" color="gray">
-                        <Strong>{payload.repos}</Strong> repos
-                      </Text>
-                      <Text size="2" color="gray">
-                        <Strong>{payload.followers.toLocaleString()}</Strong> followers
-                      </Text>
+                      <Typography.Text size="2" color="gray">
+                        <Typography.Strong>{payload.repos}</Typography.Strong> repos
+                      </Typography.Text>
+                      <Typography.Text size="2" color="gray">
+                        <Typography.Strong>{payload.followers.toLocaleString()}</Typography.Strong> followers
+                      </Typography.Text>
                     </div>
                   </div>
                 </div>

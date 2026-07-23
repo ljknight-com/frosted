@@ -1,0 +1,7 @@
+.fui-InputGroupText {
+  display: inline-flex;
+  align-items: center;
+  color: var(--gray-alpha-900);
+  white-space: nowrap;
+  user-select: none;
+}

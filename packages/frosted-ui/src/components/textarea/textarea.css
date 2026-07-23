@@ -1,0 +1,230 @@
+.fui-TextareaRoot {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+}
+
+.fui-TextareaInput {
+  appearance: none;
+  padding: 0;
+  border-radius: inherit;
+  background-color: transparent;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  resize: none;
+
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 100%;
+  flex-grow: 1;
+  z-index: 1;
+
+  /* Clip text to inner shadow */
+  border: var(--textarea-border-width) solid transparent;
+  padding: var(--textarea-padding-y) var(--textarea-padding-x);
+
+  &:where(:focus) {
+    outline: 2px solid var(--color-focus-root);
+    outline-offset: -1px;
+  }
+
+  /* scrollbar */
+  & {
+    /* Arrow mouse cursor over the scrollbar */
+    cursor: auto;
+    scrollbar-width: thin;
+  }
+  &::-webkit-scrollbar {
+    /* Native scrollbars are hidden globally (scrollbars.css); re-enable it here */
+    display: block;
+    width: var(--space-3);
+    height: var(--space-3);
+  }
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    background-clip: content-box;
+    border: var(--space-1) solid transparent;
+    border-radius: var(--space-3);
+  }
+  &::-webkit-scrollbar-track {
+    background-color: var(--gray-alpha-100);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--gray-alpha-600);
+  }
+  @media (hover: hover) {
+    :where(&:not(:disabled))::-webkit-scrollbar-thumb:hover {
+      background-color: var(--gray-alpha-700);
+    }
+  }
+}
+
+.fui-TextareaChrome {
+  position: absolute;
+  border-radius: inherit;
+  z-index: 0;
+  inset: 0;
+}
+
+/***************************************************************************************************
+ *                                                                                                 *
+ * SIZES                                                                                           *
+ *                                                                                                 *
+ ***************************************************************************************************/
+
+.fui-TextareaRoot {
+  &:where(.fui-r-size-1) {
+    min-height: var(--space-8);
+    border-radius: 6px;
+
+    & :where(.fui-TextareaInput) {
+      --textarea-padding-y: calc(var(--space-1) - var(--textarea-border-width));
+      --textarea-padding-x: calc(var(--space-1) * 1.5 - var(--textarea-border-width));
+      font-size: var(--font-size-1);
+      line-height: var(--line-height-1);
+      letter-spacing: var(--letter-spacing-1);
+    }
+  }
+  &:where(.fui-r-size-2) {
+    min-height: var(--space-9);
+    border-radius: 8px;
+
+    & :where(.fui-TextareaInput) {
+      --textarea-padding-y: calc(var(--space-1) * 1.5 - var(--textarea-border-width));
+      --textarea-padding-x: calc(var(--space-2) - var(--textarea-border-width));
+      font-size: var(--font-size-2);
+      line-height: var(--line-height-2);
+      letter-spacing: var(--letter-spacing-2);
+    }
+  }
+  &:where(.fui-r-size-3) {
+    min-height: 80px;
+    border-radius: 10px;
+
+    & :where(.fui-TextareaInput) {
+      --textarea-padding-y: calc(var(--space-2) - var(--textarea-border-width));
+      --textarea-padding-x: calc(var(--space-3) - var(--textarea-border-width));
+      font-size: var(--font-size-3);
+      line-height: var(--line-height-3);
+      letter-spacing: var(--letter-spacing-3);
+    }
+  }
+  &:where(.fui-r-size-4) {
+    min-height: 96px;
+    border-radius: 14px;
+
+    & :where(.fui-TextareaInput) {
+      --textarea-padding-y: calc(var(--space-3) - var(--textarea-border-width));
+      --textarea-padding-x: calc(var(--space-4) - var(--textarea-border-width));
+      font-size: var(--font-size-4);
+      line-height: var(--line-height-4);
+      letter-spacing: var(--letter-spacing-4);
+    }
+  }
+}
+
+/***************************************************************************************************
+ *                                                                                                 *
+ * VARIANTS                                                                                        *
+ *                                                                                                 *
+ ***************************************************************************************************/
+
+/* surface */
+.fui-TextareaRoot:where(.fui-variant-surface) {
+  & :where(.fui-TextareaInput) {
+    --textarea-border-width: 1px;
+    color: var(--gray-950);
+
+    & + :where(.fui-TextareaChrome) {
+      box-shadow:
+        inset 0 0 0 1px var(--gray-alpha-300),
+        0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+      background-color: var(--color-surface);
+
+      /* Blend inner shadow with page background */
+      padding: 1px;
+      background-clip: content-box;
+    }
+    &::placeholder {
+      color: var(--gray-alpha-800);
+      /* Firefox */
+      opacity: 1;
+    }
+    &:where(:autofill, [data-com-onepassword-filled]) {
+      /* Reliably removes native autofill colors */
+      background-clip: text;
+      -webkit-text-fill-color: var(--gray-950);
+      & + :where(.fui-TextareaChrome) {
+        background-color: var(--accent-alpha-200);
+      }
+    }
+    &:where(:disabled, :read-only) {
+      & + :where(.fui-TextareaChrome) {
+        /* Blend with grey */
+        background-image: linear-gradient(var(--gray-alpha-100), var(--gray-alpha-100));
+      }
+    }
+  }
+}
+
+/* soft */
+.fui-TextareaRoot:where(.fui-variant-soft) {
+  & :where(.fui-TextareaInput) {
+    --textarea-border-width: 0px;
+    color: var(--accent-950);
+
+    & + :where(.fui-TextareaChrome) {
+      background-color: var(--accent-alpha-100);
+    }
+    &::selection {
+      /* Use gray selection when component color is gray */
+      background-color: var(--accent-alpha-300);
+    }
+    &::placeholder {
+      color: var(--accent-950);
+      opacity: 0.65;
+    }
+    &:where(:autofill, [data-com-onepassword-filled]) {
+      /* Reliably removes native autofill colors */
+      background-clip: text;
+      -webkit-text-fill-color: var(--accent-950);
+      & + :where(.fui-TextareaChrome) {
+        background-color: var(--accent-alpha-300);
+      }
+    }
+    &:where(:focus) {
+      /* Use gray outline when component color is gray */
+      outline-color: var(--accent-600);
+    }
+    &:where(:disabled, :read-only) {
+      & + :where(.fui-TextareaChrome) {
+        background-color: var(--gray-alpha-200);
+      }
+    }
+  }
+}
+
+/* all disabled and read-only textareas */
+.fui-TextareaInput {
+  &:where(:disabled, :read-only) {
+    cursor: text;
+    color: var(--gray-alpha-900);
+    /* Safari */
+    -webkit-text-fill-color: var(--gray-alpha-900);
+    &:where(:focus) {
+      outline: 2px solid var(--gray-600);
+    }
+    &::placeholder {
+      opacity: 0.5;
+    }
+    &:where(:placeholder-shown) {
+      cursor: default;
+    }
+    &::selection {
+      background-color: var(--gray-alpha-300);
+    }
+  }
+}

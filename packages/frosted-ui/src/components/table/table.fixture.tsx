@@ -16,14 +16,13 @@ import {
   Badge,
   Button,
   Checkbox,
-  Code,
   DropdownMenu,
   IconButton,
+  Input,
   ScrollArea,
   Select,
   Table,
-  Text,
-  TextField,
+  Typography,
   tableRootPropDefs,
 } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
@@ -171,7 +170,7 @@ const columns: ColumnDef<Payment>[] = [
         currency: 'USD',
       }).format(amount);
 
-      return <Text color="green">{formatted}</Text>;
+      return <Typography.Text color="green">{formatted}</Typography.Text>;
     },
   },
   {
@@ -263,7 +262,7 @@ const TanstackTableExample = (props: React.ComponentProps<typeof Table.Root>) =>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', width: 580 }}>
       <div style={{ display: 'flex', gap: 'var(--space-4)', width: '100%' }}>
         <div style={{ width: '100%' }}>
-          <TextField.Input
+          <Input.Control
             placeholder="Filter emails..."
             value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
             onChange={(event) => table.getColumn('email')?.setFilterValue(event.target.value)}
@@ -334,10 +333,10 @@ const TanstackTableExample = (props: React.ComponentProps<typeof Table.Root>) =>
         </Table.Table>
         <Table.BottomBar>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Text color="gray" size="2">
+            <Typography.Text color="gray" size="2">
               {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s)
               selected.
-            </Text>
+            </Typography.Text>
             <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
               <Button variant="surface" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
                 Previous
@@ -552,10 +551,10 @@ export default {
           alignItems: 'center',
         }}
       >
-        <Text style={{ maxWidth: 700 }}>
-          The <Code>{'<TableFooter />'}</Code> component is usually used as summary of the columns, e.g., a sum of the
-          given numbers in a column.
-        </Text>
+        <Typography.Text style={{ maxWidth: 700 }}>
+          The <Typography.Code>{'<TableFooter />'}</Typography.Code> component is usually used as summary of the
+          columns, e.g., a sum of the given numbers in a column.
+        </Typography.Text>
         <div style={{ display: 'flex', flexDirection: 'row', gap: 'var(--space-8)' }}>
           <div>
             <Table.Root {...args} variant="ghost">
@@ -587,7 +586,7 @@ export default {
                   <Table.Row>
                     <Table.RowHeaderCell>Total</Table.RowHeaderCell>
                     <Table.Cell>
-                      <Text color="green">$93</Text>
+                      <Typography.Text color="green">$93</Typography.Text>
                     </Table.Cell>
                   </Table.Row>
                 </Table.Footer>
@@ -624,7 +623,7 @@ export default {
                   <Table.Row>
                     <Table.RowHeaderCell>Total</Table.RowHeaderCell>
                     <Table.Cell>
-                      <Text color="green">$93</Text>
+                      <Typography.Text color="green">$93</Typography.Text>
                     </Table.Cell>
                   </Table.Row>
                 </Table.Footer>
@@ -689,19 +688,19 @@ export default {
                   <Table.Row>
                     <Table.RowHeaderCell colSpan={3}>Total</Table.RowHeaderCell>
                     <Table.Cell>
-                      <Text color="green">$93</Text>
+                      <Typography.Text color="green">$93</Typography.Text>
                     </Table.Cell>
                     <Table.Cell>
-                      <Text color="red">$19.25</Text>
+                      <Typography.Text color="red">$19.25</Typography.Text>
                     </Table.Cell>
                   </Table.Row>
                 </Table.Footer>
               </Table.Table>
             </ScrollArea>
             <Table.BottomBar>
-              <Text size="1" color="gray" align="center">
+              <Typography.Text size="1" color="gray" align="center">
                 Birthday party shopping list.
-              </Text>
+              </Typography.Text>
             </Table.BottomBar>
           </Table.Root>
         </div>
@@ -754,19 +753,19 @@ export default {
                   <Table.Row>
                     <Table.RowHeaderCell colSpan={3}>Total</Table.RowHeaderCell>
                     <Table.Cell>
-                      <Text color="green">$93</Text>
+                      <Typography.Text color="green">$93</Typography.Text>
                     </Table.Cell>
                     <Table.Cell>
-                      <Text color="red">$19.25</Text>
+                      <Typography.Text color="red">$19.25</Typography.Text>
                     </Table.Cell>
                   </Table.Row>
                 </Table.Footer>
               </Table.Table>
             </ScrollArea>
             <Table.BottomBar>
-              <Text size="1" color="gray" align="center">
+              <Typography.Text size="1" color="gray" align="center">
                 Birthday party shopping list.
-              </Text>
+              </Typography.Text>
             </Table.BottomBar>
           </Table.Root>
         </div>

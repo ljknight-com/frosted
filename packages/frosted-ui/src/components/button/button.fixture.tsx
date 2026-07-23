@@ -1,7 +1,7 @@
 import { Download as DownloadIcon } from 'lucide-react';
 import React from 'react';
 import { useFixtureInput } from 'react-cosmos/client';
-import { Button, Code, Spinner, Text, buttonPropDefs } from '..';
+import { Button, Spinner, Typography, buttonPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 const ExampleIcon = () => (
@@ -131,9 +131,9 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', maxWidth: 650 }}>
-        <Text>
-          Buttons have their own <Code>loading</Code> prop that automatically composes a spinner.
-        </Text>
+        <Typography.Text>
+          Buttons have their own <Typography.Code>loading</Typography.Code> prop that automatically composes a spinner.
+        </Typography.Text>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
           <Button {...args} variant="classic" />
           <Button {...args} variant="solid" />
@@ -141,10 +141,11 @@ export default {
           <Button {...args} variant="surface" />
           <Button {...args} variant="ghost" />
         </div>
-        <Text>
-          If you have an icon inside the button, you can use the button`s <Code>disabled</Code> state and wrap the icon
-          in a standalone <Code>{`<Spinner>`}</Code> to achieve a more sophisticated design.
-        </Text>
+        <Typography.Text>
+          If you have an icon inside the button, you can use the button`s <Typography.Code>disabled</Typography.Code>{' '}
+          state and wrap the icon in a standalone <Typography.Code>{`<Spinner>`}</Typography.Code> to achieve a more
+          sophisticated design.
+        </Typography.Text>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
           <Button {...args} loading={false} variant="classic">
             <Spinner loading={false}>
@@ -214,11 +215,11 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 550 }}>
-        <Text>
-          Use the <Code>render</Code> prop to render the button as a different element, such as an anchor tag for
-          navigation links or a span for non-interactive styling.
-        </Text>
-        <Text weight="bold">As a link:</Text>
+        <Typography.Text>
+          Use the <Typography.Code>render</Typography.Code> prop to render the button as a different element, such as an
+          anchor tag for navigation links or a span for non-interactive styling.
+        </Typography.Text>
+        <Typography.Text weight="bold">As a link:</Typography.Text>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
           <Button {...args} render={<a href="https://example.com" target="_blank" rel="noopener noreferrer" />}>
             Visit Example
@@ -238,7 +239,7 @@ export default {
             Ghost Link
           </Button>
         </div>
-        <Text weight="bold">As a span:</Text>
+        <Typography.Text weight="bold">As a span:</Typography.Text>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
           <Button {...args} render={<span />}>
             Span Button

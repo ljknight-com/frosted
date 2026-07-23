@@ -1,0 +1,28 @@
+.fui-BreadcrumbRoot {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+.fui-BreadcrumbItem {
+  margin-left: -8px;
+  margin-right: -8px;
+  font-weight: var(--font-weight-medium);
+}
+.fui-BreadcrumbItem:not(:hover) {
+  color: var(--accent-alpha-800);
+}
+
+.fui-BreadcrumbItem:last-child,
+.fui-BreadcrumbRoot .fui-BreadcrumbLastItem {
+  color: var(--accent-alpha-950);
+  font-weight: var(--font-weight-medium);
+}
+
+.fui-BreadcrumbRoot {
+  user-select: none;
+}
+
+.fui-BreadcrumbSeparator {
+  color: var(--accent-alpha-600);
+}

@@ -44,5 +44,5 @@ OverlayComponent.displayName = 'Overlay';
 
 const Overlay = Object.assign(OverlayComponent, { Content: OverlayContent });
 
-export { Overlay, OverlayContent };
-export type { OverlayContentProps, OverlayProps };
+export { Overlay as Root, OverlayContent as Content };
+export type { OverlayProps as RootProps, OverlayContentProps as ContentProps };

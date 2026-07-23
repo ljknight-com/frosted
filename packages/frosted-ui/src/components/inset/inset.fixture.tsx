@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Inset, Text } from '..';
+import { Card, Inset, Typography } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 export default function InsetFixture() {
@@ -9,7 +9,9 @@ export default function InsetFixture() {
       <Inset {...props}>
         <div style={{ height: 96, background: 'var(--accent-alpha-200)' }} />
       </Inset>
-      <Text size="2">The tinted area bleeds to the card&apos;s edges; this text keeps the normal padding.</Text>
+      <Typography.Text size="2">
+        The tinted area bleeds to the card&apos;s edges; this text keeps the normal padding.
+      </Typography.Text>
     </Card>
   );
 }

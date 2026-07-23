@@ -1,0 +1,97 @@
+.fui-CommandRoot {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-3);
+  background-color: var(--color-panel-solid);
+  color: var(--gray-950);
+}
+
+.fui-CommandInputWrapper {
+  display: flex;
+  align-items: center;
+  padding-inline: var(--space-3);
+  border-bottom: 1px solid var(--gray-alpha-200);
+}
+
+.fui-CommandInput {
+  width: 100%;
+  height: var(--space-8);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: var(--font-size-3);
+  color: var(--gray-950);
+
+  &::placeholder {
+    color: var(--gray-alpha-700);
+  }
+}
+
+.fui-CommandList {
+  max-height: 320px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-1);
+}
+
+.fui-CommandEmpty {
+  padding: var(--space-5) var(--space-3);
+  text-align: center;
+  font-size: var(--font-size-2);
+  color: var(--gray-alpha-900);
+}
+
+.fui-CommandGroup {
+  padding-block: var(--space-1);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.fui-CommandGroupHeading {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-alpha-900);
+}
+
+.fui-CommandItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-2);
+  border-radius: var(--radius-2);
+  font-size: var(--font-size-2);
+  color: var(--gray-950);
+  cursor: default;
+  user-select: none;
+
+  &[data-active] {
+    background-color: var(--accent-alpha-200);
+  }
+
+  &[data-disabled] {
+    color: var(--gray-alpha-500);
+    pointer-events: none;
+  }
+}
+
+.fui-CommandSeparator {
+  height: 1px;
+  margin: var(--space-1) calc(var(--space-2) * -1);
+  background-color: var(--gray-alpha-200);
+}
+
+.fui-CommandShortcut {
+  margin-inline-start: auto;
+  font-size: var(--font-size-1);
+  letter-spacing: 0.05em;
+  color: var(--gray-alpha-900);
+}
+
+.fui-CommandDialogContent {
+  padding: 0;
+  overflow: hidden;
+}

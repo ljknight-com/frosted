@@ -79,5 +79,5 @@ GridComponent.displayName = 'Grid';
 
 const Grid = Object.assign(GridComponent, { Row: GridRow });
 
-export { Grid, GridRow };
-export type { GridProps, GridRowProps };
+export { Grid as Root, GridRow as Row };
+export type { GridProps as RootProps, GridRowProps as RowProps };

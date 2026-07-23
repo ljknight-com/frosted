@@ -55,7 +55,7 @@ export default {
             </Button>
           </Popover.Trigger>
           <Popover.Content variant="translucent" align="center" style={{ width: 'unset' }}>
-            <Calendar
+            <Calendar.Root
               minValue={parseDate('2020-01-03')}
               defaultValue={date}
               maxValue={parseDate('2020-03-03')}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Sheet, Text, TextField } from '@aussieljk/frosted';
+import { Button, Input, Sheet, Typography } from '@aussieljk/frosted';
 
 export default function SheetDemo() {
   return (
@@ -15,10 +15,10 @@ export default function SheetDemo() {
         </Sheet.Header>
         <Sheet.Body>
           <label>
-            <Text render={<div />} size="2" weight="bold" className="mb-1">
+            <Typography.Text render={<div />} size="2" weight="bold" className="mb-1">
               Name
-            </Text>
-            <TextField.Input defaultValue="Freja Johnsen" placeholder="Enter your full name" />
+            </Typography.Text>
+            <Input.Control defaultValue="Freja Johnsen" placeholder="Enter your full name" />
           </label>
 
           <div className="mt-4 flex justify-end gap-3">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Code, Heading, IconButton, ScrollArea, Text, TextField, scrollAreaPropDefs } from '..';
+import { Button, IconButton, Input, ScrollArea, Typography, scrollAreaPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 // Icons for the chat demo
@@ -21,29 +21,29 @@ export default {
     return (
       <ScrollArea style={{ height: 180, maxWidth: 500 }} {...args}>
         <div style={{ padding: '8px 8px 54px 8px' }}>
-          <Heading size="4" style={{ marginBottom: 8 }} trim="start">
+          <Typography.Heading size="4" style={{ marginBottom: 8 }} trim="start">
             Principles of the typographic craft
-          </Heading>
+          </Typography.Heading>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-            <Text render={<p />}>
+            <Typography.Text render={<p />}>
               Three fundamental aspects of typography are legibility, readability, and aesthetics. Although in a
               non-technical sense "legible" and "readable" are often used synonymously, typographically they are
               separate but related concepts.
-            </Text>
+            </Typography.Text>
 
-            <Text render={<p />}>
+            <Typography.Text render={<p />}>
               Legibility describes how easily individual characters can be distinguished from one another. It is
               described by Walter Tracy as "the quality of being decipherable and recognisable". For instance, if a "b"
               and an "h", or a "3" and an "8", are difficult to distinguish at small sizes, this is a problem of
               legibility.
-            </Text>
+            </Typography.Text>
 
-            <Text render={<p />}>
+            <Typography.Text render={<p />}>
               Typographers are concerned with legibility insofar as it is their job to select the correct font to use.
               Brush Script is an example of a font containing many characters that might be difficult to distinguish.
               The selection of cases influences the legibility of typography because using only uppercase letters
               (all-caps) reduces legibility.
-            </Text>
+            </Typography.Text>
           </div>
         </div>
       </ScrollArea>
@@ -54,18 +54,19 @@ export default {
     const args = { size: scrollAreaPropDefs.size.default };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          The <Code>type</Code> prop controls scrollbar visibility, similar to macOS scrollbar preferences.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          The <Typography.Code>type</Typography.Code> prop controls scrollbar visibility, similar to macOS scrollbar
+          preferences.
+        </Typography.Text>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--space-4)' }}>
           <div>
-            <Text size="2" weight="bold" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
+            <Typography.Text size="2" weight="bold" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
               type="hover" (default)
-            </Text>
-            <Text size="1" color="gray" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
               Visible on hover or scroll
-            </Text>
+            </Typography.Text>
             <ScrollArea
               {...args}
               type="hover"
@@ -73,20 +74,20 @@ export default {
               style={{ height: 80, width: 200, background: 'var(--gray-alpha-100)' }}
             >
               <div style={{ padding: 'var(--space-2)' }}>
-                <Text size="2">
+                <Typography.Text size="2">
                   Hover over this area or scroll to see the scrollbar appear. It fades out when you stop interacting.
-                </Text>
+                </Typography.Text>
               </div>
             </ScrollArea>
           </div>
 
           <div>
-            <Text size="2" weight="bold" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
+            <Typography.Text size="2" weight="bold" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
               type="scroll"
-            </Text>
-            <Text size="1" color="gray" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
               Visible only while scrolling
-            </Text>
+            </Typography.Text>
             <ScrollArea
               {...args}
               type="scroll"
@@ -94,21 +95,21 @@ export default {
               style={{ height: 80, width: 200, background: 'var(--gray-alpha-100)' }}
             >
               <div style={{ padding: 'var(--space-2)' }}>
-                <Text size="2">
+                <Typography.Text size="2">
                   The scrollbar only appears while you are actively scrolling. Try scrolling with your mouse wheel or
                   trackpad.
-                </Text>
+                </Typography.Text>
               </div>
             </ScrollArea>
           </div>
 
           <div>
-            <Text size="2" weight="bold" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
+            <Typography.Text size="2" weight="bold" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
               type="auto"
-            </Text>
-            <Text size="1" color="gray" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
               Visible when content overflows
-            </Text>
+            </Typography.Text>
             <ScrollArea
               {...args}
               type="auto"
@@ -116,20 +117,20 @@ export default {
               style={{ height: 80, width: 200, background: 'var(--gray-alpha-100)' }}
             >
               <div style={{ padding: 'var(--space-2)' }}>
-                <Text size="2">
+                <Typography.Text size="2">
                   The scrollbar is always visible as long as the content overflows the container. No interaction needed.
-                </Text>
+                </Typography.Text>
               </div>
             </ScrollArea>
           </div>
 
           <div>
-            <Text size="2" weight="bold" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
+            <Typography.Text size="2" weight="bold" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
               type="always"
-            </Text>
-            <Text size="1" color="gray" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
+            </Typography.Text>
+            <Typography.Text size="1" color="gray" render={<div />} style={{ marginBottom: 'var(--space-2)' }}>
               Always visible
-            </Text>
+            </Typography.Text>
             <ScrollArea
               {...args}
               type="always"
@@ -137,7 +138,9 @@ export default {
               style={{ height: 280, width: 200, background: 'var(--gray-alpha-100)' }}
             >
               <div style={{ padding: 'var(--space-2)' }}>
-                <Text size="2">The scrollbar is always visible, even if the content doesn't overflow.</Text>
+                <Typography.Text size="2">
+                  The scrollbar is always visible, even if the content doesn't overflow.
+                </Typography.Text>
               </div>
             </ScrollArea>
           </div>
@@ -179,35 +182,35 @@ export default {
               paddingRight: 'var(--space-8)',
             }}
           >
-            <Text size="2" trim="both">
+            <Typography.Text size="2" trim="both">
               Three fundamental aspects of typography are legibility, readability, and aesthetics. Although in a
               non-technical sense "legible" and "readable" are often used synonymously, typographically they are
               separate but related concepts.
-            </Text>
+            </Typography.Text>
 
-            <Text size="2" trim="both">
+            <Typography.Text size="2" trim="both">
               Legibility describes how easily individual characters can be distinguished from one another. It is
               described by Walter Tracy as "the quality of being decipherable and recognisable". For instance, if a "b"
               and an "h", or a "3" and an "8", are difficult to distinguish at small sizes, this is a problem of
               legibility.
-            </Text>
+            </Typography.Text>
           </div>
         </ScrollArea>
 
         <ScrollArea {...args} type="always" scrollbars="horizontal" style={{ height: 150 }}>
           <div style={{ display: 'flex', gap: 'var(--space-4)', padding: 'var(--space-2)', width: 700 }}>
-            <Text size="2" trim="both">
+            <Typography.Text size="2" trim="both">
               Three fundamental aspects of typography are legibility, readability, and aesthetics. Although in a
               non-technical sense "legible" and "readable" are often used synonymously, typographically they are
               separate but related concepts.
-            </Text>
+            </Typography.Text>
 
-            <Text size="2" trim="both">
+            <Typography.Text size="2" trim="both">
               Legibility describes how easily individual characters can be distinguished from one another. It is
               described by Walter Tracy as "the quality of being decipherable and recognisable". For instance, if a "b"
               and an "h", or a "3" and an "8", are difficult to distinguish at small sizes, this is a problem of
               legibility.
-            </Text>
+            </Typography.Text>
           </div>
         </ScrollArea>
       </div>
@@ -219,7 +222,7 @@ export default {
     return (
       <ScrollArea {...args} type="always" scrollbars="both" style={{ width: 300, height: 200 }}>
         <div style={{ width: 600, padding: 'var(--space-3)' }}>
-          <Text render={<div />} size="2">
+          <Typography.Text render={<div />} size="2">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
               <p>
                 This scroll area has both horizontal and vertical scrollbars. The content is wider than the container
@@ -234,7 +237,7 @@ export default {
                 available in its particular region and reflects local traditions and cultural practices.
               </p>
             </div>
-          </Text>
+          </Typography.Text>
         </div>
       </ScrollArea>
     );
@@ -312,10 +315,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
-          Use <Code>ref</Code> to programmatically control scroll position. This chat demo shows scroll-to-bottom
-          functionality.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+          Use <Typography.Code>ref</Typography.Code> to programmatically control scroll position. This chat demo shows
+          scroll-to-bottom functionality.
+        </Typography.Text>
 
         <div
           style={{
@@ -337,7 +340,7 @@ export default {
               background: 'var(--gray-50)',
             }}
           >
-            <Text weight="medium">Chat Demo</Text>
+            <Typography.Text weight="medium">Chat Demo</Typography.Text>
           </div>
 
           {/* Messages area */}
@@ -369,8 +372,8 @@ export default {
                         color: message.sender === 'me' ? 'var(--accent-700-contrast)' : 'inherit',
                       }}
                     >
-                      <Text size="2">{message.text}</Text>
-                      <Text
+                      <Typography.Text size="2">{message.text}</Typography.Text>
+                      <Typography.Text
                         size="1"
                         style={{
                           display: 'block',
@@ -379,7 +382,7 @@ export default {
                         }}
                       >
                         {message.time}
-                      </Text>
+                      </Typography.Text>
                     </div>
                   </div>
                 ))}
@@ -414,14 +417,14 @@ export default {
               flexShrink: 0,
             }}
           >
-            <TextField.Root variant="soft" color="gray" style={{ flex: 1 }} size="3">
-              <TextField.Input
+            <Input.Root variant="soft" color="gray" style={{ flex: 1 }} size="3">
+              <Input.Control
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                 placeholder="Type a message..."
               />
-            </TextField.Root>
+            </Input.Root>
             <IconButton size="3" variant="solid" onClick={sendMessage}>
               <SendIcon />
             </IconButton>

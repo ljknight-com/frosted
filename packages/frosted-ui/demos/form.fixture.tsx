@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Field, Form, TextField } from '@aussieljk/frosted';
+import { Button, Field, Form, Input } from '@aussieljk/frosted';
 
 export default function FormDemo() {
   const [submitted, setSubmitted] = React.useState(false);
@@ -14,9 +14,9 @@ export default function FormDemo() {
     >
       <Field.Root name="email">
         <Field.Label>Email</Field.Label>
-        <TextField.Root>
-          <TextField.Input type="email" placeholder="you@example.com" required />
-        </TextField.Root>
+        <Input.Root>
+          <Input.Control type="email" placeholder="you@example.com" required />
+        </Input.Root>
         <Field.Error match="valueMissing">Email is required</Field.Error>
         <Field.Error match="typeMismatch">Please enter a valid email</Field.Error>
       </Field.Root>

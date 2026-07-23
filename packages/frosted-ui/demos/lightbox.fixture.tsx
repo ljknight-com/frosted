@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, IconProvider, Icons, Lightbox, Text } from '@aussieljk/frosted';
+import { IconButton, IconProvider, Icons, Lightbox, Typography } from '@aussieljk/frosted';
 import { lucideAdapter } from '@aussieljk/frosted/icons/lucide';
 
 const images = [
@@ -56,9 +56,9 @@ export default function LightboxDemo() {
             </Lightbox.Previous>
             <Lightbox.Counter>
               {({ current, total }) => (
-                <Text size="2" className="min-w-12 text-center text-white/70">
+                <Typography.Text size="2" className="min-w-12 text-center text-white/70">
                   {current} / {total}
-                </Text>
+                </Typography.Text>
               )}
             </Lightbox.Counter>
             <Lightbox.Next aria-label="Next" render={navButton}>

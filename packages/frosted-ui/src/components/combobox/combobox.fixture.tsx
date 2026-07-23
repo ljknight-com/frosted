@@ -1,6 +1,6 @@
 import { ChevronDown, Search as SearchIcon } from 'lucide-react';
 import * as React from 'react';
-import { Avatar, Button, Callout, Dialog, Field, Form, ScrollArea, Spinner, Text, TextField } from '..';
+import { Alert, Avatar, Button, Dialog, Field, Form, Input, ScrollArea, Spinner, Typography } from '..';
 import * as Combobox from './combobox';
 
 const fruits = [
@@ -359,9 +359,9 @@ export default {
         <div style={{ width: 300, display: 'flex', flexDirection: 'column', gap: 16 }}>
           {(['1', '2', '3', '4'] as const).map((size) => (
             <div key={size}>
-              <Text size="1" color="gray" style={{ marginBottom: 4, display: 'block' }}>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 4, display: 'block' }}>
                 Size {size}
-              </Text>
+              </Typography.Text>
               <DefaultDemo size={size} variant="surface" />
             </div>
           ))}
@@ -369,9 +369,9 @@ export default {
         <div style={{ width: 300, display: 'flex', flexDirection: 'column', gap: 16 }}>
           {(['1', '2', '3', '4'] as const).map((size) => (
             <div key={size}>
-              <Text size="1" color="gray" style={{ marginBottom: 4, display: 'block' }}>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 4, display: 'block' }}>
                 Size {size}
-              </Text>
+              </Typography.Text>
               <DefaultDemo size={size} variant="soft" />
             </div>
           ))}
@@ -386,9 +386,9 @@ export default {
         <div style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}>
           {(['1', '2', '3', '4'] as const).map((size) => (
             <div key={size}>
-              <Text size="1" color="gray" style={{ marginBottom: 4, display: 'block' }}>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 4, display: 'block' }}>
                 Size {size}
-              </Text>
+              </Typography.Text>
               <MultipleDemo size={size} variant="surface" />
             </div>
           ))}
@@ -396,9 +396,9 @@ export default {
         <div style={{ width: 400, display: 'flex', flexDirection: 'column', gap: 16 }}>
           {(['1', '2', '3', '4'] as const).map((size) => (
             <div key={size}>
-              <Text size="1" color="gray" style={{ marginBottom: 4, display: 'block' }}>
+              <Typography.Text size="1" color="gray" style={{ marginBottom: 4, display: 'block' }}>
                 Size {size}
-              </Text>
+              </Typography.Text>
               <MultipleDemo size={size} variant="soft" />
             </div>
           ))}
@@ -540,9 +540,9 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: 340 }}>
         <div>
-          <Text size="2" weight="medium" style={{ marginBottom: 4, display: 'block' }}>
+          <Typography.Text size="2" weight="medium" style={{ marginBottom: 4, display: 'block' }}>
             Disabled (single)
-          </Text>
+          </Typography.Text>
           <Combobox.Root items={fruits} defaultValue="Apple" disabled size="2">
             <Combobox.InputRoot showClear showTrigger>
               <Combobox.Input placeholder="Choose a fruit..." />
@@ -552,9 +552,9 @@ export default {
         </div>
 
         <div>
-          <Text size="2" weight="medium" style={{ marginBottom: 4, display: 'block' }}>
+          <Typography.Text size="2" weight="medium" style={{ marginBottom: 4, display: 'block' }}>
             Disabled (multiple)
-          </Text>
+          </Typography.Text>
           <Combobox.Root items={fruits} defaultValue={['Apple', 'Mango']} multiple disabled size="2">
             <Combobox.Chips>
               <Combobox.Value>
@@ -573,9 +573,9 @@ export default {
         </div>
 
         <div>
-          <Text size="2" weight="medium" style={{ marginBottom: 4, display: 'block' }}>
+          <Typography.Text size="2" weight="medium" style={{ marginBottom: 4, display: 'block' }}>
             Read Only (single)
-          </Text>
+          </Typography.Text>
           <Combobox.Root items={fruits} defaultValue="Mango" readOnly size="2">
             <Combobox.InputRoot showClear showTrigger>
               <Combobox.Input placeholder="Choose a fruit..." />
@@ -585,9 +585,9 @@ export default {
         </div>
 
         <div>
-          <Text size="2" weight="medium" style={{ marginBottom: 4, display: 'block' }}>
+          <Typography.Text size="2" weight="medium" style={{ marginBottom: 4, display: 'block' }}>
             Read Only (multiple)
-          </Text>
+          </Typography.Text>
           <Combobox.Root items={fruits} defaultValue={['Grape', 'Strawberry']} multiple readOnly size="2">
             <Combobox.Chips>
               <Combobox.Value>
@@ -611,9 +611,9 @@ export default {
   'Auto Highlight'() {
     return (
       <div style={{ width: 300 }}>
-        <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+        <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
           First matching item is highlighted as you type.
-        </Text>
+        </Typography.Text>
         <Combobox.Root items={fruits} autoHighlight size="2">
           <Combobox.InputRoot>
             <Combobox.Input placeholder="Start typing..." />
@@ -671,11 +671,11 @@ export default {
           </Button>
         </Form>
         {submitted && (
-          <Callout.Root style={{ marginTop: 12 }}>
-            <Callout.Title>
+          <Alert.Root style={{ marginTop: 12 }}>
+            <Alert.Title>
               Submitted: <strong>{JSON.stringify(submitted)}</strong>
-            </Callout.Title>
-          </Callout.Root>
+            </Alert.Title>
+          </Alert.Root>
         )}
       </div>
     );
@@ -684,9 +684,9 @@ export default {
   'Many Items'() {
     return (
       <div style={{ width: 300 }}>
-        <Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
+        <Typography.Text size="1" color="gray" style={{ marginBottom: 'var(--space-1)', display: 'block' }}>
           {manyCountries.length} countries with scroll
-        </Text>
+        </Typography.Text>
         <Combobox.Root items={manyCountries} size="2">
           <Combobox.InputRoot>
             <Combobox.Input placeholder="Search countries..." />
@@ -708,7 +708,7 @@ export default {
     );
   },
 
-  EmptyState() {
+  Empty() {
     return (
       <div style={{ width: 300 }}>
         <Combobox.Root items={fruits} size="2">
@@ -832,12 +832,12 @@ export default {
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                           <Avatar src={user.avatar} fallback={user.name} size="2" />
                           <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <Text size="2" weight="medium">
+                            <Typography.Text size="2" weight="medium">
                               {user.name}
-                            </Text>
-                            <Text size="1" color="gray">
+                            </Typography.Text>
+                            <Typography.Text size="1" color="gray">
                               @{user.login}
-                            </Text>
+                            </Typography.Text>
                           </div>
                         </div>
                       </Combobox.Item>
@@ -898,7 +898,7 @@ export default {
                       <Combobox.Chip key={user.login} style={{ borderRadius: 999, paddingLeft: 4 }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                           <Avatar src={user.avatar} fallback={user.name} size="0" style={{ height: 20, width: 20 }} />
-                          <Text weight="medium">{user.name}</Text>
+                          <Typography.Text weight="medium">{user.name}</Typography.Text>
                         </span>
                       </Combobox.Chip>
                     ))}
@@ -932,12 +932,12 @@ export default {
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                           <Avatar src={user.avatar} fallback={user.name} size="2" />
                           <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <Text size="2" weight="medium">
+                            <Typography.Text size="2" weight="medium">
                               {user.name}
-                            </Text>
-                            <Text size="1" color="gray">
+                            </Typography.Text>
+                            <Typography.Text size="1" color="gray">
                               @{user.login}
-                            </Text>
+                            </Typography.Text>
                           </div>
                         </div>
                       </Combobox.Item>
@@ -956,12 +956,12 @@ export default {
     return (
       <div style={{ display: 'flex', gap: 'var(--space-6)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', maxWidth: 260 }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             Default (looping)
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Arrow keys wrap around by default — past the last item loops back to the first, and vice versa.
-          </Text>
+          </Typography.Text>
           <Combobox.Root items={fruits} size="2">
             <Combobox.InputRoot>
               <Combobox.Input placeholder="Choose a fruit..." />
@@ -979,18 +979,18 @@ export default {
               </ScrollArea>
             </Combobox.Content>
           </Combobox.Root>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>Watermelon → ↓ → Apple (loops to top)</em>
-          </Text>
+          </Typography.Text>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', maxWidth: 260 }}>
-          <Text size="2" weight="bold">
+          <Typography.Text size="2" weight="bold">
             loopFocus={'{false}'}
-          </Text>
-          <Text size="1" color="gray">
+          </Typography.Text>
+          <Typography.Text size="1" color="gray">
             Arrow keys stop at the first and last item. Press ↓ on the last item — nothing happens.
-          </Text>
+          </Typography.Text>
           <Combobox.Root items={fruits} size="2" loopFocus={false}>
             <Combobox.InputRoot>
               <Combobox.Input placeholder="Choose a fruit..." />
@@ -1008,9 +1008,9 @@ export default {
               </ScrollArea>
             </Combobox.Content>
           </Combobox.Root>
-          <Text size="1" color="gray">
+          <Typography.Text size="1" color="gray">
             <em>Watermelon → ↓ → stays on Watermelon</em>
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -1128,7 +1128,7 @@ export default {
                     const label = item as LabelItem;
                     return label.creatable ? (
                       <Combobox.Item key={label.id} value={label}>
-                        <Text weight="medium">Create &ldquo;{label.creatable}&rdquo;</Text>
+                        <Typography.Text weight="medium">Create &ldquo;{label.creatable}&rdquo;</Typography.Text>
                       </Combobox.Item>
                     ) : (
                       <Combobox.Item key={label.id} value={label}>
@@ -1153,14 +1153,14 @@ export default {
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 16 }}>
-                <TextField.Root>
-                  <TextField.Input
+                <Input.Root>
+                  <Input.Control
                     ref={createInputRef}
                     placeholder="Label name"
                     defaultValue={pendingQueryRef.current}
                     autoFocus
                   />
-                </TextField.Root>
+                </Input.Root>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
                   <Dialog.Close>
                     <Button variant="soft" color="gray">

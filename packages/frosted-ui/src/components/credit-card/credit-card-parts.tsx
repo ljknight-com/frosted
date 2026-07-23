@@ -12,7 +12,7 @@ import creditCardType from 'credit-card-type';
 import type { CreditCardType as CreditCardTypeInfo, CreditCardTypeCardBrandId } from 'credit-card-type/dist/types';
 
 import { useIsomorphicLayoutEffect } from '../../helpers/use-isomorphic-layout-effect';
-import { Text, type TextProps } from '../text/text';
+import { Text, type TextProps } from '../typography/text';
 import { useCreditCardContext } from './credit-card-context';
 
 // ---------------------------------------------------------------------------
@@ -506,7 +506,7 @@ const CreditCardFieldError = React.forwardRef<HTMLDivElement, CreditCardFieldErr
 CreditCardFieldError.displayName = 'CreditCardFieldError';
 
 // ---------------------------------------------------------------------------
-// TextField — base input primitive for card fields
+// Input — base input primitive for card fields
 // ---------------------------------------------------------------------------
 
 interface CreditCardTextFieldProps extends Omit<React.ComponentProps<typeof BaseInput>, 'className'> {

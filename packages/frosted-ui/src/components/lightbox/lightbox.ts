@@ -7,7 +7,7 @@
  * Key design decisions:
  *
  * - **Swap-based rendering**: Only the active item (plus `preload` adjacent
- *   items) is rendered in the DOM. Unlike ScrollGallery which uses native
+ *   items) is rendered in the DOM. Unlike Carousel which uses native
  *   scroll, this keeps memory usage low for large image collections.
  *
  * - **Multiple triggers**: Each Trigger accepts an `index` prop, so a grid

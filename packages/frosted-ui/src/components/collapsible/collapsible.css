@@ -1,0 +1,39 @@
+.fui-CollapsibleTrigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: default;
+  border-radius: var(--radius-2);
+  color: var(--gray-alpha-900);
+  font-size: var(--font-size-2);
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-root);
+    outline-offset: 2px;
+  }
+
+  &[data-disabled] {
+    color: var(--gray-alpha-500);
+  }
+}
+
+.fui-CollapsibleContent {
+  overflow: hidden;
+  height: var(--collapsible-panel-height);
+  transition: height 250ms ease-out;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    height: 0;
+  }
+}
+
+.fui-CollapsibleContentInner {
+  padding-block: var(--space-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fui-CollapsibleContent {
+    transition: none;
+  }
+}

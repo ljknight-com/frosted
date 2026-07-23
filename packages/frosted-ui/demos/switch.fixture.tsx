@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Text } from '@aussieljk/frosted';
+import { Switch, Typography } from '@aussieljk/frosted';
 
 export default function SwitchDemo() {
   return (
@@ -7,10 +7,10 @@ export default function SwitchDemo() {
       <Switch size="1" defaultChecked />
       <Switch size="2" defaultChecked />
       <Switch size="3" defaultChecked />
-      <Text render={<label />} size="2" className="flex items-center gap-2">
+      <Typography.Text render={<label />} size="2" className="flex items-center gap-2">
         <Switch color="orange" defaultChecked />
         Notifications
-      </Text>
+      </Typography.Text>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Code, IconButton, Kbd, Text, Tooltip, type TooltipActions } from '..';
+import { Button, IconButton, Kbd, Tooltip, Typography, type TooltipActions } from '..';
 
 const ExampleIcon = ({ size }: { size: number }) => (
   <svg width={size} height={size} viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,10 +45,10 @@ export default {
   'With Provider (Group Delay)'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
-          Wrap tooltips in <Code>Tooltip.Provider</Code> for shared delay behavior. After hovering one tooltip,
-          subsequent tooltips in the group open instantly.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+          Wrap tooltips in <Typography.Code>Tooltip.Provider</Typography.Code> for shared delay behavior. After hovering
+          one tooltip, subsequent tooltips in the group open instantly.
+        </Typography.Text>
 
         <Tooltip.Provider>
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
@@ -78,9 +78,10 @@ export default {
   Positioning() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
-          Use <Code>side</Code> and <Code>align</Code> props to control tooltip positioning.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+          Use <Typography.Code>side</Typography.Code> and <Typography.Code>align</Typography.Code> props to control
+          tooltip positioning.
+        </Typography.Text>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--space-2)' }}>
           <Tooltip content="Top Start" side="top" align="start">
@@ -134,9 +135,10 @@ export default {
   'Custom Delay'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
-          Customize open and close delays with <Code>delay</Code> and <Code>closeDelay</Code> props.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+          Customize open and close delays with <Typography.Code>delay</Typography.Code> and{' '}
+          <Typography.Code>closeDelay</Typography.Code> props.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
           <Tooltip content="Instant open" delay={0}>
@@ -159,10 +161,10 @@ export default {
   'Disable Hoverable Popup'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
           By default, tooltips stay open when the cursor moves to the tooltip content. Set{' '}
-          <Code>disableHoverablePopup=true</Code> to disable this behavior.
-        </Text>
+          <Typography.Code>disableHoverablePopup=true</Typography.Code> to disable this behavior.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
           <Tooltip content="You can hover over me!" disableHoverablePopup={false} delay={0}>
@@ -182,11 +184,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 460, textAlign: 'center' }}>
-          By default, tooltips dismiss when their trigger is clicked. Set <Code>closeOnClick={'{false}'}</Code> to keep
-          the tooltip visible after the click — useful when the tooltip describes an action that does not navigate or
-          remove the trigger from the layout.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 460, textAlign: 'center' }}>
+          By default, tooltips dismiss when their trigger is clicked. Set{' '}
+          <Typography.Code>closeOnClick={'{false}'}</Typography.Code> to keep the tooltip visible after the click —
+          useful when the tooltip describes an action that does not navigate or remove the trigger from the layout.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
           <Tooltip content="Closes after click (default)" delay={0}>
@@ -207,9 +209,10 @@ export default {
   Disabled() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 460, textAlign: 'center' }}>
-          Set <Code>disabled={'{true}'}</Code> to prevent the tooltip from opening regardless of trigger interactions.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 460, textAlign: 'center' }}>
+          Set <Typography.Code>disabled={'{true}'}</Typography.Code> to prevent the tooltip from opening regardless of
+          trigger interactions.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
           <Tooltip content="This tooltip is always visible" delay={0}>
@@ -228,9 +231,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
-          Control tooltip visibility programmatically with <Code>open</Code> and <Code>onOpenChange</Code> props.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+          Control tooltip visibility programmatically with <Typography.Code>open</Typography.Code> and{' '}
+          <Typography.Code>onOpenChange</Typography.Code> props.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
           <Button variant="soft" onClick={() => setOpen((prev) => !prev)}>
@@ -250,9 +254,9 @@ export default {
   'Side Offset'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
-          Adjust the distance from the trigger with <Code>sideOffset</Code>.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+          Adjust the distance from the trigger with <Typography.Code>sideOffset</Typography.Code>.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
           <Tooltip content="Close to trigger" sideOffset={0}>
@@ -272,10 +276,10 @@ export default {
   'Track Cursor Axis'() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
-          Make the tooltip follow your cursor with <Code>trackCursorAxis</Code>. Move your mouse over the buttons to see
-          the effect.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+          Make the tooltip follow your cursor with <Typography.Code>trackCursorAxis</Typography.Code>. Move your mouse
+          over the buttons to see the effect.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
           <Tooltip content="I stay in place" trackCursorAxis="none" delay={0}>
@@ -324,10 +328,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 450, textAlign: 'center' }}>
-          <Code>onOpenChange</Code> fires immediately when the tooltip starts opening/closing.{' '}
-          <Code>onOpenChangeComplete</Code> fires after animations finish.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 450, textAlign: 'center' }}>
+          <Typography.Code>onOpenChange</Typography.Code> fires immediately when the tooltip starts opening/closing.{' '}
+          <Typography.Code>onOpenChangeComplete</Typography.Code> fires after animations finish.
+        </Typography.Text>
 
         <Tooltip
           content="Hover me!"
@@ -350,9 +354,9 @@ export default {
           }}
         >
           {events.length === 0 ? (
-            <Text color="gray" size="1">
+            <Typography.Text color="gray" size="1">
               Hover the button to see events...
-            </Text>
+            </Typography.Text>
           ) : (
             events.map((entry, i) => (
               <div key={i} style={{ opacity: 0.5 + (i / events.length) * 0.5, marginBottom: 2 }}>
@@ -371,10 +375,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
-          Use <Code>actionsRef</Code> to imperatively control the tooltip. The <Code>close()</Code> method closes the
-          tooltip programmatically.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 400, textAlign: 'center' }}>
+          Use <Typography.Code>actionsRef</Typography.Code> to imperatively control the tooltip. The{' '}
+          <Typography.Code>close()</Typography.Code> method closes the tooltip programmatically.
+        </Typography.Text>
 
         <Tooltip
           content="This tooltip can be closed programmatically"
@@ -386,9 +390,9 @@ export default {
           <Button variant="soft">Hover me</Button>
         </Tooltip>
 
-        <Text size="2" color="gray">
+        <Typography.Text size="2" color="gray">
           Press <Kbd>Esc</Kbd> to close. Tooltip is {isOpen ? 'open' : 'closed'}.
-        </Text>
+        </Typography.Text>
       </div>
     );
   },

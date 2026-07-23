@@ -128,7 +128,7 @@ type RangeCalendarProps = Omit<RangeCalendarStateOptions, 'locale' | 'createCale
  *
  * @example
  * ```tsx
- * <RangeCalendar value={range} onChange={setRange} />
+ * <Calendar.Range value={range} onChange={setRange} />
  * ```
  */
 function RangeCalendar({ className, ...props }: RangeCalendarProps) {
@@ -451,5 +451,5 @@ const CalendaChevronLeftIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export { Calendar, RangeCalendar };
-export type { CalendarProps, RangeCalendarProps };
+export { Calendar as Root, RangeCalendar as Range };
+export type { CalendarProps as RootProps, RangeCalendarProps as RangeProps };

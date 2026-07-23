@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Text } from '..';
+import { Grid, Typography } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 const Cell = ({ children }: { children: React.ReactNode }) => (
@@ -20,19 +20,19 @@ const Cell = ({ children }: { children: React.ReactNode }) => (
 export default function GridFixture() {
   const props = useComponentControls('Grid', { horizontalSpacing: 8, verticalSpacing: 8 });
   return (
-    <Grid {...props}>
-      <Grid.Row>
+    <Grid.Root {...props}>
+      <Grid.Root.Row>
         <Cell>1</Cell>
         <Cell>2</Cell>
         <Cell>3</Cell>
-      </Grid.Row>
-      <Grid.Row>
+      </Grid.Root.Row>
+      <Grid.Root.Row>
         <Cell>4</Cell>
         <Cell>5</Cell>
-      </Grid.Row>
-      <Text size="2" color="gray">
+      </Grid.Root.Row>
+      <Typography.Text size="2" color="gray">
         Spans every column
-      </Text>
-    </Grid>
+      </Typography.Text>
+    </Grid.Root>
   );
 }

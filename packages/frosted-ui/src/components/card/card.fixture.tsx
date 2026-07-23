@@ -1,17 +1,17 @@
 import React from 'react';
-import { Avatar, Card, Code, Text } from '..';
+import { Avatar, Card, Typography } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 const CardContentExample = () => (
   <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
     <Avatar size="3" fallback="IM" color="indigo" />
     <div>
-      <Text render={<div />} size="2" weight="bold">
+      <Typography.Text render={<div />} size="2" weight="bold">
         Ilya Miskov
-      </Text>
-      <Text render={<div />} size="2" color="gray">
+      </Typography.Text>
+      <Typography.Text render={<div />} size="2" color="gray">
         I love how we have the freedom to explore skeuomorphism
-      </Text>
+      </Typography.Text>
     </div>
   </div>
 );
@@ -34,12 +34,12 @@ export default {
           <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
             <Avatar size="3" fallback="T" color="indigo" />
             <div>
-              <Text render={<div />} size="2" weight="bold">
+              <Typography.Text render={<div />} size="2" weight="bold">
                 Teodros Girmay
-              </Text>
-              <Text render={<div />} size="2" color="gray">
+              </Typography.Text>
+              <Typography.Text render={<div />} size="2" color="gray">
                 Engineering
-              </Text>
+              </Typography.Text>
             </div>
           </div>
         </Card>
@@ -48,12 +48,12 @@ export default {
           <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
             <Avatar size="4" fallback="T" color="indigo" />
             <div>
-              <Text render={<div />} weight="bold">
+              <Typography.Text render={<div />} weight="bold">
                 Teodros Girmay
-              </Text>
-              <Text render={<div />} color="gray">
+              </Typography.Text>
+              <Typography.Text render={<div />} color="gray">
                 Engineering
-              </Text>
+              </Typography.Text>
             </div>
           </div>
         </Card>
@@ -62,12 +62,12 @@ export default {
           <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
             <Avatar size="5" fallback="T" color="indigo" />
             <div>
-              <Text render={<div />} size="4" weight="bold">
+              <Typography.Text render={<div />} size="4" weight="bold">
                 Teodros Girmay
-              </Text>
-              <Text render={<div />} size="4" color="gray">
+              </Typography.Text>
+              <Typography.Text render={<div />} size="4" color="gray">
                 Engineering
-              </Text>
+              </Typography.Text>
             </div>
           </div>
         </Card>
@@ -76,12 +76,12 @@ export default {
           <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
             <Avatar size="5" fallback="T" color="indigo" />
             <div>
-              <Text render={<div />} size="4" weight="bold">
+              <Typography.Text render={<div />} size="4" weight="bold">
                 Teodros Girmay
-              </Text>
-              <Text render={<div />} size="4" color="gray">
+              </Typography.Text>
+              <Typography.Text render={<div />} size="4" color="gray">
                 Engineering
-              </Text>
+              </Typography.Text>
             </div>
           </div>
         </Card>
@@ -90,12 +90,12 @@ export default {
           <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
             <Avatar size="5" fallback="T" color="indigo" />
             <div>
-              <Text render={<div />} size="4" weight="bold">
+              <Typography.Text render={<div />} size="4" weight="bold">
                 Teodros Girmay
-              </Text>
-              <Text render={<div />} size="4" color="gray">
+              </Typography.Text>
+              <Typography.Text render={<div />} size="4" color="gray">
                 Engineering
-              </Text>
+              </Typography.Text>
             </div>
           </div>
         </Card>
@@ -140,9 +140,9 @@ export default {
         />
 
         <div style={{ padding: 'var( --card-padding)' }}>
-          <Text render={<p />} size="3">
+          <Typography.Text render={<p />} size="3">
             This is a really nice image description.
-          </Text>
+          </Typography.Text>
         </div>
       </Card>
     );
@@ -153,10 +153,10 @@ export default {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
         <div>
-          <Text>
-            Use the <Code>render</Code> prop to render the card as a link or a button. This prop adds styles for the
-            interactive states, like hover and focus.
-          </Text>
+          <Typography.Text>
+            Use the <Typography.Code>render</Typography.Code> prop to render the card as a link or a button. This prop
+            adds styles for the interactive states, like hover and focus.
+          </Typography.Text>
         </div>
         <div>
           <Card {...args} render={<a href="#" />} style={{ maxWidth: 350 }}>

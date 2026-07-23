@@ -4,7 +4,7 @@ import {
   Button,
   Card,
   Skeleton,
-  Text,
+  Typography,
   skeletonAvatarPropDefs,
   skeletonRectPropDefs,
   skeletonTextPropDefs,
@@ -380,15 +380,15 @@ export default {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
             {show ? (
               <>
-                <Text highContrast={args.highContrast} size="6">
+                <Typography.Text highContrast={args.highContrast} size="6">
                   Artur
-                </Text>
-                <Text highContrast={args.highContrast} size="2">
+                </Typography.Text>
+                <Typography.Text highContrast={args.highContrast} size="2">
                   Design Engineer
-                </Text>
-                <Text highContrast={args.highContrast} size="2">
+                </Typography.Text>
+                <Typography.Text highContrast={args.highContrast} size="2">
                   Professional button polisher.
-                </Text>
+                </Typography.Text>
               </>
             ) : (
               <>
@@ -473,15 +473,15 @@ export default {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
             {show ? (
               <>
-                <Text color={args.color} highContrast={args.highContrast} size="6">
+                <Typography.Text color={args.color} highContrast={args.highContrast} size="6">
                   Artur
-                </Text>
-                <Text color={args.color} highContrast={args.highContrast} size="2">
+                </Typography.Text>
+                <Typography.Text color={args.color} highContrast={args.highContrast} size="2">
                   Design Engineer
-                </Text>
-                <Text color={args.color} highContrast={args.highContrast} size="2">
+                </Typography.Text>
+                <Typography.Text color={args.color} highContrast={args.highContrast} size="2">
                   Professional button polisher.
-                </Text>
+                </Typography.Text>
               </>
             ) : (
               <>

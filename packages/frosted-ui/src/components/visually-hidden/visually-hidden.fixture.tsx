@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '../button';
 import { IconButton } from '../icon-button';
-import { Text } from '../text';
+import { Text } from '../typography/text';
 import { VisuallyHidden } from './visually-hidden';
 
 export default {

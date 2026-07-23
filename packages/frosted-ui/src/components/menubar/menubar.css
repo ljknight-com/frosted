@@ -1,0 +1,36 @@
+.fui-MenubarRoot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-3);
+  background-color: var(--color-panel-solid);
+  box-shadow: 0 0 0 1px var(--gray-alpha-300) inset;
+}
+
+.fui-MenubarTrigger {
+  display: inline-flex;
+  align-items: center;
+  height: var(--space-6);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-2);
+  font-size: var(--font-size-2);
+  color: var(--gray-alpha-900);
+  cursor: default;
+  user-select: none;
+  white-space: nowrap;
+
+  &:where(:hover) {
+    background-color: var(--gray-alpha-100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-root);
+    outline-offset: -1px;
+  }
+
+  &[data-popup-open] {
+    background-color: var(--gray-alpha-200);
+    color: var(--gray-950);
+  }
+}

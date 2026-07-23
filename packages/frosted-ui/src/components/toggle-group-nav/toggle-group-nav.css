@@ -1,0 +1,6 @@
+@import '../base-toggle-group-list/base-toggle-group-list.css';
+
+.fui-ToggleGroupNavItem {
+  display: flex;
+  flex: 1;
+}

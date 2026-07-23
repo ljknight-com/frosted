@@ -1,0 +1,10 @@
+@import '../base-toggle-group-list/base-toggle-group-list.css';
+
+.fui-ToggleGroupContent {
+  position: relative;
+  outline: 0;
+}
+
+.fui-ToggleGroupContent:where(:focus-visible) {
+  outline: 2px solid var(--color-focus-root);
+}

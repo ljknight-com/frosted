@@ -10,7 +10,7 @@ export default {
     };
     return (
       <div>
-        <Calendar
+        <Calendar.Root
           {...args}
           minValue={parseDate('1900-02-03')}
           defaultValue={parseDate('2020-02-03')}
@@ -26,7 +26,7 @@ export default {
     };
     return (
       <div>
-        <Calendar
+        <Calendar.Root
           {...args}
           isDisabled
           defaultValue={parseDate('2020-02-03')}
@@ -54,7 +54,7 @@ export default {
 
     return (
       <div style={{ width: 300 }}>
-        <Calendar
+        <Calendar.Root
           {...args}
           aria-label="Appointment date"
           minValue={today(getLocalTimeZone())}

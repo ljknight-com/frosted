@@ -5,15 +5,14 @@ import {
   Badge,
   Button,
   Checkbox,
-  Code,
   DropdownMenu,
+  Input,
   Inset,
   ScrollArea,
   Sheet,
   Table,
-  Text,
-  TextArea,
-  TextField,
+  Textarea,
+  Typography,
 } from '..';
 
 export default {
@@ -33,16 +32,16 @@ export default {
           <Sheet.Body>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
                   Name
-                </Text>
-                <TextField.Input size="3" defaultValue="Freja Johnsen" placeholder="Enter your full name" />
+                </Typography.Text>
+                <Input.Control size="3" defaultValue="Freja Johnsen" placeholder="Enter your full name" />
               </label>
               <label>
-                <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
                   Email
-                </Text>
-                <TextField.Input size="3" defaultValue="freja@example.com" placeholder="Enter your email" />
+                </Typography.Text>
+                <Input.Control size="3" defaultValue="freja@example.com" placeholder="Enter your email" />
               </label>
             </div>
 
@@ -246,7 +245,7 @@ export default {
                 borderBottom: '1px solid var(--gray-alpha-200)',
               }}
             >
-              <Text render={<p />} size="2" style={{ marginBottom: 'var(--space-4)' }}>
+              <Typography.Text render={<p />} size="2" style={{ marginBottom: 'var(--space-4)' }}>
                 Make changes to your profile. Make changes to your profile. Make changes to your profile. Make changes
                 to your profile. Make changes to your profile. Make changes to your profile. Make changes to your
                 profile. Make changes to your profile. Make changes to your profile. Make changes to your profile. Make
@@ -267,8 +266,8 @@ export default {
                 profile. Make changes to your profile. Make changes to your profile. Make changes to your profile. Make
                 changes to your profile. Make changes to your profile. Make changes to your profile. Make changes to
                 your profile. Make changes to your profile. Make changes to your profile. Make changes
-              </Text>
-              <Text render={<p />} size="2" style={{ marginBottom: 'var(--space-4)' }}>
+              </Typography.Text>
+              <Typography.Text render={<p />} size="2" style={{ marginBottom: 'var(--space-4)' }}>
                 Make changes to your profile. Make changes to your profile. Make changes to your profile. Make changes
                 to your profile. Make changes to your profile. Make changes to your profile. Make changes to your
                 profile. Make changes to your profile. Make changes to your profile. Make changes to your profile. Make
@@ -289,8 +288,8 @@ export default {
                 profile. Make changes to your profile. Make changes to your profile. Make changes to your profile. Make
                 changes to your profile. Make changes to your profile. Make changes to your profile. Make changes to
                 your profile. Make changes to your profile. Make changes to your profile. Make changes
-              </Text>
-              <Text render={<p />} size="2" style={{ marginBottom: 'var(--space-4)' }}>
+              </Typography.Text>
+              <Typography.Text render={<p />} size="2" style={{ marginBottom: 'var(--space-4)' }}>
                 Make changes to your profile. Make changes to your profile. Make changes to your profile. Make changes
                 to your profile. Make changes to your profile. Make changes to your profile. Make changes to your
                 profile. Make changes to your profile. Make changes to your profile. Make changes to your profile. Make
@@ -311,7 +310,7 @@ export default {
                 profile. Make changes to your profile. Make changes to your profile. Make changes to your profile. Make
                 changes to your profile. Make changes to your profile. Make changes to your profile. Make changes to
                 your profile. Make changes to your profile. Make changes to your profile. Make changes
-              </Text>
+              </Typography.Text>
             </Inset>
           </Sheet.Body>
         </Sheet.Content>
@@ -358,10 +357,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>initialFocus</Code> to control which element receives focus when the sheet opens. Note: requires{' '}
-          <Code>autoFocus=&#123;true&#125;</Code> on the Root.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>initialFocus</Typography.Code> to control which element receives focus when the sheet
+          opens. Note: requires <Typography.Code>autoFocus=&#123;true&#125;</Typography.Code> on the Root.
+        </Typography.Text>
 
         <Sheet.Root autoFocus>
           <Sheet.Trigger>
@@ -375,16 +374,16 @@ export default {
             <Sheet.Body>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                 <label>
-                  <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                  <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
                     Name
-                  </Text>
-                  <TextField.Input size="3" placeholder="Enter item name" />
+                  </Typography.Text>
+                  <Input.Control size="3" placeholder="Enter item name" />
                 </label>
                 <label>
-                  <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                  <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
                     Description
-                  </Text>
-                  <TextField.Input ref={descriptionInputRef} size="3" placeholder="Enter description" />
+                  </Typography.Text>
+                  <Input.Control ref={descriptionInputRef} size="3" placeholder="Enter description" />
                 </label>
               </div>
 
@@ -418,10 +417,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>finalFocus</Code> to control where focus returns when the sheet closes. Note: requires{' '}
-          <Code>autoFocus=&#123;true&#125;</Code> on the Root.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>finalFocus</Typography.Code> to control where focus returns when the sheet closes. Note:
+          requires <Typography.Code>autoFocus=&#123;true&#125;</Typography.Code> on the Root.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
           <Sheet.Root autoFocus>
@@ -468,10 +467,10 @@ export default {
     const args = {};
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text style={{ maxWidth: 500, textAlign: 'center' }}>
-          Use <Code>finalFocus=&#123;false&#125;</Code> to prevent focus from returning to the trigger when the sheet
-          closes. This is useful when you want to avoid scrolling back to the trigger element.
-        </Text>
+        <Typography.Text style={{ maxWidth: 500, textAlign: 'center' }}>
+          Use <Typography.Code>finalFocus=&#123;false&#125;</Typography.Code> to prevent focus from returning to the
+          trigger when the sheet closes. This is useful when you want to avoid scrolling back to the trigger element.
+        </Typography.Text>
 
         <Sheet.Root autoFocus>
           <Sheet.Trigger>
@@ -522,9 +521,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>open</Code> and <Code>onOpenChange</Code> for fully controlled mode with form state.
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>open</Typography.Code> and <Typography.Code>onOpenChange</Typography.Code> for fully
+          controlled mode with form state.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <Button onClick={() => setOpen(true)}>Open Sheet Programmatically</Button>
@@ -544,10 +544,10 @@ export default {
             <Sheet.Body>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                 <label>
-                  <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                  <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
                     Name
-                  </Text>
-                  <TextField.Input
+                  </Typography.Text>
+                  <Input.Control
                     size="3"
                     value={formData.name}
                     onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
@@ -555,10 +555,10 @@ export default {
                   />
                 </label>
                 <label>
-                  <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                  <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
                     Email
-                  </Text>
-                  <TextField.Input
+                  </Typography.Text>
+                  <Input.Control
                     size="3"
                     value={formData.email}
                     onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
@@ -608,10 +608,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text>
-          Use <Code>onOpenChange</Code> (fires when state changes) and <Code>onAnimationEnd</Code> (fires after
-          animations complete).
-        </Text>
+        <Typography.Text>
+          Use <Typography.Code>onOpenChange</Typography.Code> (fires when state changes) and{' '}
+          <Typography.Code>onAnimationEnd</Typography.Code> (fires after animations complete).
+        </Typography.Text>
 
         <Sheet.Root
           onOpenChange={(open) => addLog(`onOpenChange: ${open ? 'opening' : 'closing'}`)}
@@ -658,13 +658,13 @@ export default {
             width: 400,
           }}
         >
-          <Text size="1" weight="medium" style={{ marginBottom: 8, display: 'block' }}>
+          <Typography.Text size="1" weight="medium" style={{ marginBottom: 8, display: 'block' }}>
             Event Log:
-          </Text>
+          </Typography.Text>
           {logs.length === 0 ? (
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               Open/close the sheet to see events...
-            </Text>
+            </Typography.Text>
           ) : (
             logs.map((log, i) => (
               <div key={i} style={{ color: log.includes('AnimationEnd') ? 'var(--accent-900)' : 'var(--gray-900)' }}>
@@ -699,11 +699,12 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text style={{ maxWidth: 500, textAlign: 'center' }}>
-          This demo shows how to use a nested <Code>AlertDialog</Code> inside a <Code>Sheet</Code> to confirm discarding
-          unsaved changes. Uses <Code>dismissible=&#123;false&#125;</Code> to prevent swipe/overlay close. Type
+        <Typography.Text style={{ maxWidth: 500, textAlign: 'center' }}>
+          This demo shows how to use a nested <Typography.Code>AlertDialog</Typography.Code> inside a{' '}
+          <Typography.Code>Sheet</Typography.Code> to confirm discarding unsaved changes. Uses{' '}
+          <Typography.Code>dismissible=&#123;false&#125;</Typography.Code> to prevent swipe/overlay close. Type
           something in the textarea, then try to cancel.
-        </Text>
+        </Typography.Text>
 
         <Sheet.Root dismissible={false} open={sheetOpen} onOpenChange={setSheetOpen}>
           <Sheet.Trigger>
@@ -724,7 +725,7 @@ export default {
                 }}
                 style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}
               >
-                <TextArea
+                <Textarea
                   placeholder="What's on your mind?"
                   value={textareaValue}
                   onChange={(event) => setTextareaValue(event.target.value)}
@@ -778,10 +779,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text style={{ maxWidth: 500, textAlign: 'center' }}>
-          Open a sheet from a dropdown menu using controlled state. The sheet is controlled via <Code>open</Code> and{' '}
-          <Code>onOpenChange</Code> props, and opened imperatively via <Code>onClick</Code> on the menu item.
-        </Text>
+        <Typography.Text style={{ maxWidth: 500, textAlign: 'center' }}>
+          Open a sheet from a dropdown menu using controlled state. The sheet is controlled via{' '}
+          <Typography.Code>open</Typography.Code> and <Typography.Code>onOpenChange</Typography.Code> props, and opened
+          imperatively via <Typography.Code>onClick</Typography.Code> on the menu item.
+        </Typography.Text>
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
@@ -808,16 +810,16 @@ export default {
             <Sheet.Body>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                 <label>
-                  <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                  <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
                     Name
-                  </Text>
-                  <TextField.Input size="3" defaultValue="My Project" placeholder="Enter name" />
+                  </Typography.Text>
+                  <Input.Control size="3" defaultValue="My Project" placeholder="Enter name" />
                 </label>
                 <label>
-                  <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                  <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
                     Description
-                  </Text>
-                  <TextArea defaultValue="A sample project description" placeholder="Enter description" />
+                  </Typography.Text>
+                  <Textarea defaultValue="A sample project description" placeholder="Enter description" />
                 </label>
               </div>
 
@@ -882,10 +884,11 @@ export default {
     const args = {};
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 540, textAlign: 'center' }}>
-          When wrapping a menu item with <Code>Sheet.Trigger</Code>, use <Code>closeOnClick=&#123;false&#125;</Code> to
-          prevent the menu from closing before the sheet opens.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 540, textAlign: 'center' }}>
+          When wrapping a menu item with <Typography.Code>Sheet.Trigger</Typography.Code>, use{' '}
+          <Typography.Code>closeOnClick=&#123;false&#125;</Typography.Code> to prevent the menu from closing before the
+          sheet opens.
+        </Typography.Text>
 
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
@@ -908,16 +911,26 @@ export default {
                 <Sheet.Body>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                     <label>
-                      <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                      <Typography.Text
+                        render={<div />}
+                        size="2"
+                        style={{ marginBottom: 'var(--space-1)' }}
+                        weight="bold"
+                      >
                         Name
-                      </Text>
-                      <TextField.Input size="3" defaultValue="My Project" placeholder="Enter name" />
+                      </Typography.Text>
+                      <Input.Control size="3" defaultValue="My Project" placeholder="Enter name" />
                     </label>
                     <label>
-                      <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-1)' }} weight="bold">
+                      <Typography.Text
+                        render={<div />}
+                        size="2"
+                        style={{ marginBottom: 'var(--space-1)' }}
+                        weight="bold"
+                      >
                         Description
-                      </Text>
-                      <TextField.Input size="3" defaultValue="A sample project" placeholder="Enter description" />
+                      </Typography.Text>
+                      <Input.Control size="3" defaultValue="A sample project" placeholder="Enter description" />
                     </label>
                   </div>
 

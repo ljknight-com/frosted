@@ -11,7 +11,7 @@
   }
 
   &:where(.fui-high-contrast),
-  :where(.fui-CalloutRoot:not(.fui-high-contrast)) &,
+  :where(.fui-AlertRoot:not(.fui-high-contrast)) &,
   :where(.fui-Text, .fui-Heading):where([data-accent-color]:not(.fui-high-contrast)) & {
     color: var(--accent-950);
   }
@@ -38,7 +38,7 @@
     }
 
     &:where(.fui-high-contrast),
-    :where(.fui-CalloutRoot) &,
+    :where(.fui-AlertRoot) &,
     :where(.fui-Text, .fui-Heading):where([data-accent-color]:not(.fui-high-contrast)) & {
       text-decoration-line: underline;
       text-decoration-color: var(--accent-alpha-950);

@@ -1,7 +1,7 @@
 import { useRender } from '@base-ui/react';
 import classNames from 'classnames';
 import * as React from 'react';
-import { Text } from '../text';
+import { Text } from '../typography/text';
 import { linkPropDefs } from './link.props';
 
 import type { GetPropDefTypes, PropsWithoutColor } from '../../helpers';

@@ -6,8 +6,8 @@ import * as React from 'react';
 
 import { ThickCheckIcon, XIcon } from '../../icons';
 import { Theme, useThemeContext } from '../../theme';
-import type { RootProps as TextFieldRootProps } from '../text-field/text-field';
-import { Input as TextFieldInput, Root as TextFieldRoot, Slot as TextFieldSlot } from '../text-field/text-field';
+import type { RootProps as InputRootProps } from '../input/input';
+import { Control as InputControl, Root as InputRoot, Slot as InputSlot } from '../input/input';
 import {
   comboboxChipPropDefs,
   comboboxContentPropDefs,
@@ -99,12 +99,12 @@ function ComboboxRoot<Value = unknown, Multiple extends boolean | undefined = fa
 ComboboxRoot.displayName = 'ComboboxRoot';
 
 // ============================================================================
-// InputRoot (renders TextField.Root + optional trigger/clear trailing slot)
+// InputRoot (renders Input.Root + optional trigger/clear trailing slot)
 // ============================================================================
 
 const ComboboxInputRootContext = React.createContext<boolean>(false);
 
-interface ComboboxInputRootProps extends TextFieldRootProps {
+interface ComboboxInputRootProps extends InputRootProps {
   /**
    * Whether to render the dropdown trigger icon. Defaults to `true` when outside
    * `Content`, and `false` when rendered inside `Content` (e.g., input-inside-popup pattern).
@@ -115,7 +115,7 @@ interface ComboboxInputRootProps extends TextFieldRootProps {
 }
 
 /**
- * Renders a `TextField.Root` with optional trigger/clear trailing slot.
+ * Renders an `Input.Root` with optional trigger/clear trailing slot.
  * Auto-registers as the popup anchor when rendered outside `Content`.
  * Inherits `size` from `Combobox.Root` context (overridable via prop).
  */
@@ -129,7 +129,7 @@ const ComboboxInputRoot = React.forwardRef<HTMLDivElement, ComboboxInputRootProp
     showTrigger = !isInsideContent,
     showClear = false,
     size = context.size,
-    ...textFieldRootProps
+    ...inputRootProps
   } = props;
 
   const mergedRef = React.useCallback(
@@ -142,15 +142,15 @@ const ComboboxInputRoot = React.forwardRef<HTMLDivElement, ComboboxInputRootProp
   );
 
   return (
-    <TextFieldRoot
+    <InputRoot
       ref={mergedRef}
       size={size}
-      {...textFieldRootProps}
+      {...inputRootProps}
       className={classNames('fui-ComboboxInputRoot', className)}
     >
       <ComboboxInputRootContext.Provider value={true}>{children}</ComboboxInputRootContext.Provider>
       {(showTrigger || showClear) && (
-        <TextFieldSlot>
+        <InputSlot>
           {showClear && (
             <ComboboxPrimitive.Clear className="fui-ComboboxClearButton" aria-label="Clear">
               <XIcon />
@@ -174,22 +174,22 @@ const ComboboxInputRoot = React.forwardRef<HTMLDivElement, ComboboxInputRootProp
               </svg>
             </ComboboxPrimitive.Trigger>
           )}
-        </TextFieldSlot>
+        </InputSlot>
       )}
-    </TextFieldRoot>
+    </InputRoot>
   );
 });
 ComboboxInputRoot.displayName = 'ComboboxInputRoot';
 
 // ============================================================================
-// InputSlot (re-export of TextFieldSlot for custom slots)
+// InputSlot (re-export of InputSlot for custom slots)
 // ============================================================================
 
-/** A `TextField.Slot` alias for placing custom leading/trailing content inside `Combobox.InputRoot`. */
-const ComboboxInputSlot = TextFieldSlot;
+/** A `Input.Slot` alias for placing custom leading/trailing content inside `Combobox.InputRoot`. */
+const ComboboxInputSlot = InputSlot;
 
 // ============================================================================
-// Input (renders ComboboxPrimitive.Input via TextFieldInput; auto-wraps in InputRoot)
+// Input (renders ComboboxPrimitive.Input via InputControl; auto-wraps in InputRoot)
 // ============================================================================
 
 interface ComboboxInputProps extends Omit<
@@ -212,7 +212,7 @@ const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputProps>((pr
     <ComboboxPrimitive.Input
       {...rest}
       ref={forwardedRef}
-      render={<TextFieldInput className={classNames('fui-ComboboxInput', className)} />}
+      render={<InputControl className={classNames('fui-ComboboxInput', className)} />}
     />
   );
 
@@ -221,7 +221,7 @@ const ComboboxInput = React.forwardRef<HTMLInputElement, ComboboxInputProps>((pr
 ComboboxInput.displayName = 'ComboboxInput';
 
 // ============================================================================
-// ChipsInput – renders TextField.Input internally for use inside Chips
+// ChipsInput – renders Input.Control internally for use inside Chips
 // ============================================================================
 
 interface ComboboxChipsInputProps extends Omit<React.ComponentProps<typeof ComboboxPrimitive.Input>, 'className'> {
@@ -235,7 +235,7 @@ const ComboboxChipsInput = React.forwardRef<HTMLInputElement, ComboboxChipsInput
     <ComboboxPrimitive.Input
       {...rest}
       ref={forwardedRef}
-      render={<TextFieldInput className={classNames('fui-ComboboxChipsInput', className)} />}
+      render={<InputControl className={classNames('fui-ComboboxChipsInput', className)} />}
     />
   );
 });
@@ -618,16 +618,16 @@ const ComboboxStatus = React.forwardRef<HTMLDivElement, ComboboxStatusProps>((pr
 ComboboxStatus.displayName = 'ComboboxStatus';
 
 // ============================================================================
-// Chips (renders TextField.Root internally, auto-registers as anchor)
+// Chips (renders Input.Root internally, auto-registers as anchor)
 // ============================================================================
 
-interface ComboboxChipsProps extends TextFieldRootProps {}
+interface ComboboxChipsProps extends InputRootProps {}
 
 /**
- * Container for multi-select chips. Renders a `TextField.Root` internally
+ * Container for multi-select chips. Renders an `Input.Root` internally
  * and auto-registers as the popup anchor for `Content` positioning.
  * Inherits `size` from `Combobox.Root` context (overridable via prop).
- * Accepts all `TextField.Root` props (`size`, `variant`, `color`, etc.).
+ * Accepts all `Input.Root` props (`size`, `variant`, `color`, etc.).
  */
 const ComboboxChips = React.forwardRef<HTMLDivElement, ComboboxChipsProps>((props, forwardedRef) => {
   const context = React.useContext(ComboboxContext);
@@ -642,19 +642,14 @@ const ComboboxChips = React.forwardRef<HTMLDivElement, ComboboxChipsProps>((prop
     [context.inputAnchorRef, forwardedRef],
   );
 
-  const textFieldRootProps: TextFieldRootProps = {
+  const inputRootProps: InputRootProps = {
     className: classNames('fui-ComboboxChips', className),
     size,
     variant,
     color,
     ...rest,
   };
-  return (
-    <ComboboxPrimitive.Chips
-      ref={mergedRef}
-      render={<TextFieldRoot {...textFieldRootProps}>{children}</TextFieldRoot>}
-    />
-  );
+  return <ComboboxPrimitive.Chips ref={mergedRef} render={<InputRoot {...inputRootProps}>{children}</InputRoot>} />;
 });
 ComboboxChips.displayName = 'ComboboxChips';
 

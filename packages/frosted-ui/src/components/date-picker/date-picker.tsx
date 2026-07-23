@@ -70,7 +70,7 @@ export function DatePicker<T extends DateValue>(props: DatePickerProps<T>) {
           </IconButton>
         </Popover.Trigger>
         <Popover.Content variant="translucent" align="center">
-          <Calendar {...calendarProps} />
+          <Calendar.Root {...calendarProps} />
         </Popover.Content>
       </Popover.Root>
     </div>

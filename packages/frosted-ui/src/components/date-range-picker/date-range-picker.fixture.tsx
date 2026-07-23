@@ -1,16 +1,7 @@
 import { DateValue, getLocalTimeZone, parseDate } from '@internationalized/date';
 import { useDateFormatter } from '@react-aria/i18n';
 import React from 'react';
-import {
-  Button,
-  DateField,
-  DateRangePicker,
-  Inset,
-  Popover,
-  RangeCalendar,
-  Separator,
-  dateRangePickerPropDefs,
-} from '..';
+import { Button, Calendar, DateField, DateRangePicker, Inset, Popover, Separator, dateRangePickerPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 const onChange = (date: { start: DateValue; end: DateValue } | null) =>
@@ -133,7 +124,7 @@ export default {
                   }}
                 />
               </div>
-              <RangeCalendar
+              <Calendar.Range
                 value={
                   calendarDate.start && calendarDate.end ? { start: calendarDate.start, end: calendarDate.end } : null
                 }

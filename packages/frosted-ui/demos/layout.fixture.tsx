@@ -1,12 +1,12 @@
 import React from 'react';
-import { Avatar, Badge, Button, Card, Heading, HStack, Spacer, Text, VStack, ZStack } from '@aussieljk/frosted';
+import { Avatar, Badge, Button, Card, HStack, Spacer, Typography, VStack, ZStack } from '@aussieljk/frosted';
 
 export default function LayoutDemo() {
   return (
     <Card size="3" className="w-85">
       <VStack spacing={16} alignment="leading">
         <HStack spacing={8} className="w-full">
-          <Heading size="4">Members</Heading>
+          <Typography.Heading size="4">Members</Typography.Heading>
           <Spacer />
           <Button size="1" variant="soft">
             Invite
@@ -21,12 +21,12 @@ export default function LayoutDemo() {
             </Badge>
           </ZStack>
           <VStack spacing={2} alignment="leading">
-            <Text size="2" weight="bold">
+            <Typography.Text size="2" weight="bold">
               Lucas Knight
-            </Text>
-            <Text size="1" color="gray">
+            </Typography.Text>
+            <Typography.Text size="1" color="gray">
               Online now
-            </Text>
+            </Typography.Text>
           </VStack>
         </HStack>
       </VStack>

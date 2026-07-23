@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Button, Card, Code, RadioButtonGroup, Text, Tooltip, radioGroupPropDefs } from '..';
+import { Avatar, Button, Card, RadioButtonGroup, Tooltip, Typography, radioGroupPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 type PlanType = 'starter' | 'pro' | 'enterprise';
@@ -28,7 +28,7 @@ export default {
               }}
             >
               <RadioButtonGroup.Icon style={{ marginLeft: -12 }} />
-              <Text>One</Text>
+              <Typography.Text>One</Typography.Text>
             </div>
           </RadioButtonGroup.Item>
           <RadioButtonGroup.Item value="2">
@@ -43,7 +43,7 @@ export default {
               }}
             >
               <RadioButtonGroup.Icon style={{ marginLeft: -12 }} />
-              <Text>Two</Text>
+              <Typography.Text>Two</Typography.Text>
             </div>
           </RadioButtonGroup.Item>
           <RadioButtonGroup.Item value="3">
@@ -58,7 +58,7 @@ export default {
               }}
             >
               <RadioButtonGroup.Icon style={{ marginLeft: -12 }} />
-              <Text>Three</Text>
+              <Typography.Text>Three</Typography.Text>
             </div>
           </RadioButtonGroup.Item>
         </div>
@@ -132,12 +132,12 @@ export default {
               <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
                 <Avatar size="3" fallback="AB" color="lime" />
                 <div>
-                  <Text render={<div />} size="2" weight="bold">
+                  <Typography.Text render={<div />} size="2" weight="bold">
                     Artur Bień
-                  </Text>
-                  <Text render={<div />} size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text render={<div />} size="2" color="gray">
                     UI engineer
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </Card>
@@ -147,12 +147,12 @@ export default {
               <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
                 <Avatar size="3" fallback="IM" color="sky" />
                 <div>
-                  <Text render={<div />} size="2" weight="bold">
+                  <Typography.Text render={<div />} size="2" weight="bold">
                     Ilya Miskov
-                  </Text>
-                  <Text render={<div />} size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text render={<div />} size="2" color="gray">
                     Designer
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </Card>
@@ -162,12 +162,12 @@ export default {
               <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
                 <Avatar size="3" fallback="SS" color="orange" />
                 <div>
-                  <Text render={<div />} size="2" weight="bold">
+                  <Typography.Text render={<div />} size="2" weight="bold">
                     Steven Schwartz
-                  </Text>
-                  <Text render={<div />} size="2" color="gray">
+                  </Typography.Text>
+                  <Typography.Text render={<div />} size="2" color="gray">
                     CEO
-                  </Text>
+                  </Typography.Text>
                 </div>
               </div>
             </Card>
@@ -233,17 +233,17 @@ export default {
         <div style={{ display: 'flex', gap: 'var(--space-2)', flexDirection: 'row' }}>
           <RadioButtonGroup.Item value="1">
             <Card size="2" variant="surface">
-              <Text>Option 1</Text>
+              <Typography.Text>Option 1</Typography.Text>
             </Card>
           </RadioButtonGroup.Item>
           <RadioButtonGroup.Item value="2">
             <Card size="2" variant="surface">
-              <Text>Option 2</Text>
+              <Typography.Text>Option 2</Typography.Text>
             </Card>
           </RadioButtonGroup.Item>
           <RadioButtonGroup.Item value="3">
             <Card size="2" variant="surface">
-              <Text>Option 3</Text>
+              <Typography.Text>Option 3</Typography.Text>
             </Card>
           </RadioButtonGroup.Item>
         </div>
@@ -258,17 +258,17 @@ export default {
         <div style={{ display: 'flex', gap: 'var(--space-2)', flexDirection: 'row' }}>
           <RadioButtonGroup.Item value="1">
             <Card size="2" variant="surface">
-              <Text>Option 1</Text>
+              <Typography.Text>Option 1</Typography.Text>
             </Card>
           </RadioButtonGroup.Item>
           <RadioButtonGroup.Item value="2" disabled>
             <Card size="2" variant="surface">
-              <Text color="gray">Option 2 (disabled)</Text>
+              <Typography.Text color="gray">Option 2 (disabled)</Typography.Text>
             </Card>
           </RadioButtonGroup.Item>
           <RadioButtonGroup.Item value="3">
             <Card size="2" variant="surface">
-              <Text>Option 3</Text>
+              <Typography.Text>Option 3</Typography.Text>
             </Card>
           </RadioButtonGroup.Item>
         </div>
@@ -286,40 +286,40 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text render={<div />} size="2">
-          Accept <Code>unknown</Code> and cast inside the handler. Use <Code>RadioButtonGroup.ChangeEventDetails</Code>{' '}
-          for the second parameter if needed.
-        </Text>
+        <Typography.Text render={<div />} size="2">
+          Accept <Typography.Code>unknown</Typography.Code> and cast inside the handler. Use{' '}
+          <Typography.Code>RadioButtonGroup.ChangeEventDetails</Typography.Code> for the second parameter if needed.
+        </Typography.Text>
 
         <RadioButtonGroup.Root {...args} value={selected} onValueChange={handleChange}>
           <div style={{ display: 'flex', gap: 'var(--space-2)', flexDirection: 'row' }}>
             <RadioButtonGroup.Item value="starter">
               <Card size="2" variant="surface" style={{ width: 140 }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-                  <Text weight="bold">Starter</Text>
-                  <Text size="1" color="gray">
+                  <Typography.Text weight="bold">Starter</Typography.Text>
+                  <Typography.Text size="1" color="gray">
                     Free forever
-                  </Text>
+                  </Typography.Text>
                 </div>
               </Card>
             </RadioButtonGroup.Item>
             <RadioButtonGroup.Item value="pro">
               <Card size="2" variant="surface" style={{ width: 140 }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-                  <Text weight="bold">Pro</Text>
-                  <Text size="1" color="gray">
+                  <Typography.Text weight="bold">Pro</Typography.Text>
+                  <Typography.Text size="1" color="gray">
                     $29/month
-                  </Text>
+                  </Typography.Text>
                 </div>
               </Card>
             </RadioButtonGroup.Item>
             <RadioButtonGroup.Item value="enterprise">
               <Card size="2" variant="surface" style={{ width: 140 }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-                  <Text weight="bold">Enterprise</Text>
-                  <Text size="1" color="gray">
+                  <Typography.Text weight="bold">Enterprise</Typography.Text>
+                  <Typography.Text size="1" color="gray">
                     $99/month
-                  </Text>
+                  </Typography.Text>
                 </div>
               </Card>
             </RadioButtonGroup.Item>
@@ -333,12 +333,12 @@ export default {
             borderRadius: 'var(--radius-2)',
           }}
         >
-          <Text render={<div />} size="2">
-            Selected: <Code>{selected}</Code>
-          </Text>
-          <Text render={<div />} size="2">
+          <Typography.Text render={<div />} size="2">
+            Selected: <Typography.Code>{selected}</Typography.Code>
+          </Typography.Text>
+          <Typography.Text render={<div />} size="2">
             Price: <strong>${planPrices[selected]}/mo</strong>
-          </Text>
+          </Typography.Text>
         </div>
       </div>
     );
@@ -378,26 +378,26 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text render={<div />} size="2">
-          The <Code>eventDetails</Code> parameter provides <Code>cancel()</Code> to prevent changes. Try selecting
-          Premium.
-        </Text>
+        <Typography.Text render={<div />} size="2">
+          The <Typography.Code>eventDetails</Typography.Code> parameter provides{' '}
+          <Typography.Code>cancel()</Typography.Code> to prevent changes. Try selecting Premium.
+        </Typography.Text>
 
         <RadioButtonGroup.Root {...args} value={selected} onValueChange={handleChange}>
           <div style={{ display: 'flex', gap: 'var(--space-2)', flexDirection: 'row' }}>
             <RadioButtonGroup.Item value="free">
               <Card size="2" variant="surface" style={{ width: 120 }}>
-                <Text weight="bold">Free</Text>
+                <Typography.Text weight="bold">Free</Typography.Text>
               </Card>
             </RadioButtonGroup.Item>
             <RadioButtonGroup.Item value="pro">
               <Card size="2" variant="surface" style={{ width: 120 }}>
-                <Text weight="bold">Pro</Text>
+                <Typography.Text weight="bold">Pro</Typography.Text>
               </Card>
             </RadioButtonGroup.Item>
             <RadioButtonGroup.Item value="premium">
               <Card size="2" variant="surface" style={{ width: 120 }}>
-                <Text weight="bold">Premium ⚠️</Text>
+                <Typography.Text weight="bold">Premium ⚠️</Typography.Text>
               </Card>
             </RadioButtonGroup.Item>
           </div>
@@ -410,20 +410,20 @@ export default {
             borderRadius: 'var(--radius-2)',
           }}
         >
-          <Text render={<div />} size="2" style={{ marginBottom: 'var(--space-2)' }}>
-            Current: <Code>{selected}</Code>
-          </Text>
+          <Typography.Text render={<div />} size="2" style={{ marginBottom: 'var(--space-2)' }}>
+            Current: <Typography.Code>{selected}</Typography.Code>
+          </Typography.Text>
           {lastEvent && (
             <>
-              <Text render={<div />} size="1" color="gray">
+              <Typography.Text render={<div />} size="1" color="gray">
                 Last event: {lastEvent.type}
-              </Text>
-              <Text render={<div />} size="1" color="gray">
+              </Typography.Text>
+              <Typography.Text render={<div />} size="1" color="gray">
                 Attempted value: {lastEvent.value}
-              </Text>
-              <Text render={<div />} size="1" color={lastEvent.wasCanceled ? 'red' : 'green'}>
+              </Typography.Text>
+              <Typography.Text render={<div />} size="1" color={lastEvent.wasCanceled ? 'red' : 'green'}>
                 {lastEvent.wasCanceled ? '✗ Change was canceled' : '✓ Change was applied'}
-              </Text>
+              </Typography.Text>
             </>
           )}
         </div>
@@ -462,25 +462,26 @@ export default {
         onReset={handleReset}
         style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}
       >
-        <Text render={<div />} size="2">
-          Use the <Code>name</Code> prop to include the RadioButtonGroup value in form submissions. Listen to the form's{' '}
-          <Code>onReset</Code> event to reset controlled state when using <Code>type="reset"</Code> buttons.
-        </Text>
+        <Typography.Text render={<div />} size="2">
+          Use the <Typography.Code>name</Typography.Code> prop to include the RadioButtonGroup value in form
+          submissions. Listen to the form's <Typography.Code>onReset</Typography.Code> event to reset controlled state
+          when using <Typography.Code>type="reset"</Typography.Code> buttons.
+        </Typography.Text>
 
         <div>
-          <Text render={<div />} size="2" weight="medium" style={{ marginBottom: 'var(--space-2)' }}>
+          <Typography.Text render={<div />} size="2" weight="medium" style={{ marginBottom: 'var(--space-2)' }}>
             Subscription Plan
-          </Text>
+          </Typography.Text>
           <RadioButtonGroup.Root {...args} name="plan" value={plan} onValueChange={(v) => setPlan(v as string)}>
             <div style={{ display: 'flex', gap: 'var(--space-2)', flexDirection: 'row' }}>
               <RadioButtonGroup.Item value="monthly">
                 <Card size="2" variant="surface">
-                  <Text>Monthly</Text>
+                  <Typography.Text>Monthly</Typography.Text>
                 </Card>
               </RadioButtonGroup.Item>
               <RadioButtonGroup.Item value="yearly">
                 <Card size="2" variant="surface">
-                  <Text>Yearly</Text>
+                  <Typography.Text>Yearly</Typography.Text>
                 </Card>
               </RadioButtonGroup.Item>
             </div>
@@ -488,9 +489,9 @@ export default {
         </div>
 
         <div>
-          <Text render={<div />} size="2" weight="medium" style={{ marginBottom: 'var(--space-2)' }}>
+          <Typography.Text render={<div />} size="2" weight="medium" style={{ marginBottom: 'var(--space-2)' }}>
             Payment Method
-          </Text>
+          </Typography.Text>
           <RadioButtonGroup.Root
             {...args}
             name="payment"
@@ -500,12 +501,12 @@ export default {
             <div style={{ display: 'flex', gap: 'var(--space-2)', flexDirection: 'row' }}>
               <RadioButtonGroup.Item value="card">
                 <Card size="2" variant="surface">
-                  <Text>Card</Text>
+                  <Typography.Text>Card</Typography.Text>
                 </Card>
               </RadioButtonGroup.Item>
               <RadioButtonGroup.Item value="paypal">
                 <Card size="2" variant="surface">
-                  <Text>PayPal</Text>
+                  <Typography.Text>PayPal</Typography.Text>
                 </Card>
               </RadioButtonGroup.Item>
             </div>
@@ -522,7 +523,7 @@ export default {
         </div>
 
         {formData && (
-          <Code
+          <Typography.Code
             style={{
               padding: 'var(--space-3)',
               background: 'var(--gray-100)',
@@ -532,7 +533,7 @@ export default {
             }}
           >
             {JSON.stringify(formData, null, 2)}
-          </Code>
+          </Typography.Code>
         )}
       </form>
     );
@@ -561,14 +562,15 @@ export default {
 
     return (
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text render={<div />} size="2">
-          Use <Code>inputRef</Code> for form validation. Try submitting without selecting an option.
-        </Text>
+        <Typography.Text render={<div />} size="2">
+          Use <Typography.Code>inputRef</Typography.Code> for form validation. Try submitting without selecting an
+          option.
+        </Typography.Text>
 
         <div>
-          <Text render={<div />} size="2" weight="medium" style={{ marginBottom: 'var(--space-2)' }}>
+          <Typography.Text render={<div />} size="2" weight="medium" style={{ marginBottom: 'var(--space-2)' }}>
             Select a Plan
-          </Text>
+          </Typography.Text>
           <RadioButtonGroup.Root
             {...args}
             name="plan"
@@ -579,25 +581,25 @@ export default {
             <div style={{ display: 'flex', gap: 'var(--space-2)', flexDirection: 'row' }}>
               <RadioButtonGroup.Item value="basic">
                 <Card size="2" variant="surface">
-                  <Text>Basic</Text>
+                  <Typography.Text>Basic</Typography.Text>
                 </Card>
               </RadioButtonGroup.Item>
               <RadioButtonGroup.Item value="pro">
                 <Card size="2" variant="surface">
-                  <Text>Pro</Text>
+                  <Typography.Text>Pro</Typography.Text>
                 </Card>
               </RadioButtonGroup.Item>
               <RadioButtonGroup.Item value="enterprise">
                 <Card size="2" variant="surface">
-                  <Text>Enterprise</Text>
+                  <Typography.Text>Enterprise</Typography.Text>
                 </Card>
               </RadioButtonGroup.Item>
             </div>
           </RadioButtonGroup.Root>
           {error && (
-            <Text render={<div />} size="1" color="red" style={{ marginTop: 'var(--space-2)' }}>
+            <Typography.Text render={<div />} size="1" color="red" style={{ marginTop: 'var(--space-2)' }}>
               {error}
-            </Text>
+            </Typography.Text>
           )}
         </div>
 
@@ -606,9 +608,9 @@ export default {
             Submit
           </Button>
           {submitted && (
-            <Text render={<span />} size="2" color="green">
+            <Typography.Text render={<span />} size="2" color="green">
               ✓ {submitted}
-            </Text>
+            </Typography.Text>
           )}
         </div>
       </form>
@@ -621,38 +623,40 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-        <Text render={<div />} size="2">
-          The component is generic — pass a string union type to get autocomplete on <Code>value</Code> props and
-          type-check <Code>onValueChange</Code>.
-        </Text>
+        <Typography.Text render={<div />} size="2">
+          The component is generic — pass a string union type to get autocomplete on{' '}
+          <Typography.Code>value</Typography.Code> props and type-check <Typography.Code>onValueChange</Typography.Code>
+          .
+        </Typography.Text>
 
         <RadioButtonGroup.Root<Plan> value={plan} onValueChange={setPlan}>
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <RadioButtonGroup.Item value="basic">
               <Card size="2" variant="surface">
-                <Text>Basic</Text>
+                <Typography.Text>Basic</Typography.Text>
               </Card>
             </RadioButtonGroup.Item>
             <RadioButtonGroup.Item value="pro">
               <Card size="2" variant="surface">
-                <Text>Pro</Text>
+                <Typography.Text>Pro</Typography.Text>
               </Card>
             </RadioButtonGroup.Item>
             <RadioButtonGroup.Item value="enterprise">
               <Card size="2" variant="surface">
-                <Text>Enterprise</Text>
+                <Typography.Text>Enterprise</Typography.Text>
               </Card>
             </RadioButtonGroup.Item>
           </div>
         </RadioButtonGroup.Root>
 
-        <Text size="2">
-          Selected: <Code>{plan}</Code>
-        </Text>
+        <Typography.Text size="2">
+          Selected: <Typography.Code>{plan}</Typography.Code>
+        </Typography.Text>
 
-        <Text size="1" color="gray">
-          Try changing a value to <Code>&quot;premum&quot;</Code> — TypeScript will catch the typo!
-        </Text>
+        <Typography.Text size="1" color="gray">
+          Try changing a value to <Typography.Code>&quot;premum&quot;</Typography.Code> — TypeScript will catch the
+          typo!
+        </Typography.Text>
       </div>
     );
   },

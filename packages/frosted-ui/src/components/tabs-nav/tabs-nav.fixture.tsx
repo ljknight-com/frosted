@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, TabsNav, tabsNavPropDefs, Text } from '..';
+import { TabsNav, Typography, tabsNavPropDefs } from '..';
 import { useComponentControls } from '../../../cosmos/controls';
 
 export default {
@@ -111,10 +111,10 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: 600 }}>
-        <Text>
-          Use the <Code>render</Code> prop to integrate with your framework&apos;s router for client-side navigation.
-          This is useful for frameworks like Next.js, React Router, or Remix.
-        </Text>
+        <Typography.Text>
+          Use the <Typography.Code>render</Typography.Code> prop to integrate with your framework&apos;s router for
+          client-side navigation. This is useful for frameworks like Next.js, React Router, or Remix.
+        </Typography.Text>
         <TabsNav.Root {...args}>
           <TabsNav.Link render={<a href="/account" />}>Account</TabsNav.Link>
           <TabsNav.Link render={<a href="/documents" />}>Documents</TabsNav.Link>
@@ -129,10 +129,10 @@ export default {
             Settings
           </TabsNav.Link>
         </TabsNav.Root>
-        <Text size="1" color="gray">
-          In a real app, replace <Code>{'<a />'}</Code> with your router&apos;s Link component, e.g.{' '}
-          <Code>{'<NextLink href="/account" />'}</Code> for Next.js.
-        </Text>
+        <Typography.Text size="1" color="gray">
+          In a real app, replace <Typography.Code>{'<a />'}</Typography.Code> with your router&apos;s Link component,
+          e.g. <Typography.Code>{'<NextLink href="/account" />'}</Typography.Code> for Next.js.
+        </Typography.Text>
       </div>
     );
   },

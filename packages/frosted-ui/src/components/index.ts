@@ -10,16 +10,11 @@ export * from './z-stack';
 
 // TYPOGRAPHY
 //------------------------------------------------------------------------------
-export * from './heading';
-export * from './text';
+export * from './typography';
 
 // FORMATTING
 //------------------------------------------------------------------------------
-export * from './code';
-export * from './em';
 export * from './kbd';
-export * from './quote';
-export * from './strong';
 
 // FORMS
 //------------------------------------------------------------------------------
@@ -43,10 +38,10 @@ export * from './select';
 export * from './shine';
 export * from './slider';
 export * from './switch';
-export * from './text-area';
-export * from './text-field';
+export * from './textarea';
+export * from './input';
 
-export * from './otp-field';
+export * from './input-otp';
 
 // OVERLAYS
 //------------------------------------------------------------------------------
@@ -60,8 +55,8 @@ export * from './hover-card';
 export * from './lightbox';
 export * from './popover';
 export * from './sheet';
-export * from './stacked-horizontal-bar-chart';
-export * from './toast';
+export * from './chart';
+export * from './sonner';
 export * from './tooltip';
 
 // COMPONENTS
@@ -70,23 +65,22 @@ export * from './avatar';
 export * from './avatar-group';
 export * from './avatar-stack';
 export * from './badge';
-export * from './blockquote';
-export * from './breadcrumbs';
+export * from './breadcrumb';
 export * from './button';
-export * from './callout';
+export * from './alert';
 export * from './card';
 export * from './credit-card';
-export * from './empty-state';
+export * from './empty';
 
 export * from './icon-button';
 export * from './link';
 export * from './scroll-area';
-export * from './segmented-control';
-export * from './segmented-control-nav';
-export * from './segmented-control-radio-group';
+export * from './toggle-group';
+export * from './toggle-group-nav';
+export * from './toggle-group-radio-group';
 export * from './skeleton';
 
-export * from './data-list';
+export * from './data-table';
 
 export * from './separator';
 
@@ -95,8 +89,20 @@ export * from './spinner';
 export * from './table';
 export * from './tabs';
 export * from './tabs-nav';
-export * from './scroll-gallery';
+export * from './carousel';
 export * from './widget-stack';
+export * from './collapsible';
+export * from './button-group';
+export * from './input-group';
+export * from './item';
+export * from './menubar';
+export * from './navigation-menu';
+export * from './pagination';
+export * from './command';
+export * from './sidebar';
+export * from './resizable';
+export * from './toggle';
+export * from './aspect-ratio';
 
 // UTILITIES
 //------------------------------------------------------------------------------

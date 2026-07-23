@@ -10,8 +10,8 @@
 @import './tokens/space.css';
 @import './tokens/typography.css';
 
-@import '../components/heading/heading.css';
-@import '../components/text/text.css';
+@import '../components/typography/heading.css';
+@import '../components/typography/text.css';
 /* dialog, alert dialog, drawer and sheet need to be imported AFTER text and heading to ensure proper heading and description styles */
 @import '../components/alert-dialog/alert-dialog.css';
 @import '../components/dialog/dialog.css';
@@ -26,19 +26,19 @@
 @import '../components/avatar-stack/avatar-stack.css';
 @import '../components/badge/badge.css';
 
-@import '../components/blockquote/blockquote.css';
-@import '../components/breadcrumbs/breadcrumbs.css';
+@import '../components/typography/blockquote.css';
+@import '../components/breadcrumb/breadcrumb.css';
 @import '../components/button/button.css';
 @import '../components/calendar/calendar.css';
-@import '../components/callout/callout.css';
+@import '../components/alert/alert.css';
 @import '../components/card/card.css';
 @import '../components/checkbox/checkbox.css';
-@import '../components/code/code.css';
+@import '../components/typography/code.css';
 @import '../components/context-menu/context-menu.css';
-@import '../components/data-list/data-list.css';
+@import '../components/data-table/data-table.css';
 @import '../components/dropdown-menu/dropdown-menu.css';
-@import '../components/em/em.css';
-@import '../components/empty-state/empty-state.css';
+@import '../components/typography/em.css';
+@import '../components/empty/empty.css';
 @import '../components/filter-chip/filter-chip.css';
 @import '../components/hover-card/hover-card.css';
 @import '../components/icon-button/icon-button.css';
@@ -49,34 +49,34 @@
 @import '../components/popover/popover.css';
 @import '../components/progress/progress.css';
 @import '../components/circular-progress/circular-progress.css';
-@import '../components/quote/quote.css';
+@import '../components/typography/quote.css';
 @import '../components/radio-group/radio-group.css';
 @import '../components/radio-button-group/radio-button-group.css';
 @import '../components/scroll-area/scroll-area.css';
-@import '../components/scroll-gallery/scroll-gallery.css';
-@import '../components/segmented-control/segmented-control.css';
-@import '../components/segmented-control-nav/segmented-control-nav.css';
-@import '../components/segmented-control-radio-group/segmented-control-radio-group.css';
+@import '../components/carousel/carousel.css';
+@import '../components/toggle-group/toggle-group.css';
+@import '../components/toggle-group-nav/toggle-group-nav.css';
+@import '../components/toggle-group-radio-group/toggle-group-radio-group.css';
 @import '../components/select/select.css';
 @import '../components/separator/separator.css';
 @import '../components/skeleton/skeleton.css';
 @import '../components/slider/slider.css';
 @import '../components/spinner/spinner.css';
-@import '../components/stacked-horizontal-bar-chart/stacked-horizontal-bar-chart.css';
-@import '../components/strong/strong.css';
+@import '../components/chart/chart.css';
+@import '../components/typography/strong.css';
 @import '../components/switch/switch.css';
 @import '../components/tabs/tabs.css';
 @import '../components/tabs-nav/tabs-nav.css';
 @import '../components/table/table.css';
-@import '../components/text-area/text-area.css';
-@import '../components/text-field/text-field.css';
+@import '../components/textarea/textarea.css';
+@import '../components/input/input.css';
 @import '../components/number-field/number-field.css';
-@import '../components/otp-field/otp-field.css';
+@import '../components/input-otp/input-otp.css';
 @import '../components/date-field/date-field.css';
 @import '../components/field/field.css';
 @import '../components/fieldset/fieldset.css';
 @import '../components/form/form.css';
-@import '../components/toast/toast.css';
+@import '../components/sonner/sonner.css';
 @import '../components/tooltip/tooltip.css';
 @import '../components/widget-stack/widget-stack.css';
 /*
@@ -103,3 +103,15 @@ because Autocomplete overrides base-menu content transitions.
 
 /* Lab */
 @import '../components/shine/shine.css';
+@import '../components/collapsible/collapsible.css';
+@import '../components/button-group/button-group.css';
+@import '../components/input-group/input-group.css';
+@import '../components/item/item.css';
+@import '../components/menubar/menubar.css';
+@import '../components/navigation-menu/navigation-menu.css';
+@import '../components/pagination/pagination.css';
+@import '../components/command/command.css';
+@import '../components/sidebar/sidebar.css';
+@import '../components/resizable/resizable.css';
+@import '../components/toggle/toggle.css';
+@import '../components/aspect-ratio/aspect-ratio.css';

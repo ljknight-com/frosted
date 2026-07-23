@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Select, selectTriggerPropDefs, Text } from '..';
+import { Select, Typography, selectTriggerPropDefs } from '..';
 import { InfoCircledIcon } from '../../icons';
 import { useComponentControls } from '../../../cosmos/controls';
 
@@ -279,17 +279,18 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-        <Text render={<div />} style={{ maxWidth: 700 }}>
-          By default, <Code>Select.Value</Code> displays the raw <Code>value</Code>, not the label text. Here are
-          different ways to show a formatted label in the trigger.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 700 }}>
+          By default, <Typography.Code>Select.Value</Typography.Code> displays the raw{' '}
+          <Typography.Code>value</Typography.Code>, not the label text. Here are different ways to show a formatted
+          label in the trigger.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
           {/* Default: Raw value */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="2" weight="bold">
+            <Typography.Text size="2" weight="bold">
               Default (raw value)
-            </Text>
+            </Typography.Text>
             <Select.Root defaultValue="roboto">
               <Select.Trigger {...args} style={{ width: 160 }} />
               <Select.Content alignItemWithTrigger={false}>
@@ -300,16 +301,16 @@ export default {
                 ))}
               </Select.Content>
             </Select.Root>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Shows "roboto" instead of "Roboto". This is the default Base UI behavior.
-            </Text>
+            </Typography.Text>
           </div>
 
           {/* With items prop for label lookup */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="2" weight="bold">
-              Using <Code>items</Code> prop
-            </Text>
+            <Typography.Text size="2" weight="bold">
+              Using <Typography.Code>items</Typography.Code> prop
+            </Typography.Text>
             <Select.Root defaultValue="roboto" items={fontItems}>
               <Select.Trigger {...args} style={{ width: 160 }} />
               <Select.Content alignItemWithTrigger={false}>
@@ -320,16 +321,17 @@ export default {
                 ))}
               </Select.Content>
             </Select.Root>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
-              Pass <Code>{`{ value, label }`}</Code> objects to Root. Base UI automatically maps values to labels.
-            </Text>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
+              Pass <Typography.Code>{`{ value, label }`}</Typography.Code> objects to Root. Base UI automatically maps
+              values to labels.
+            </Typography.Text>
           </div>
 
           {/* Using itemToStringLabel */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="2" weight="bold">
-              Using <Code>itemToStringLabel</Code>
-            </Text>
+            <Typography.Text size="2" weight="bold">
+              Using <Typography.Code>itemToStringLabel</Typography.Code>
+            </Typography.Text>
             <Select.Root
               defaultValue="roboto"
               itemToStringLabel={(value) => {
@@ -344,16 +346,16 @@ export default {
                 <Select.Item value="poppins">Poppins</Select.Item>
               </Select.Content>
             </Select.Root>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Provide a function to transform any value into its display label.
-            </Text>
+            </Typography.Text>
           </div>
 
           {/* Custom render function */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="2" weight="bold">
-              Using <Code>renderValue</Code>
-            </Text>
+            <Typography.Text size="2" weight="bold">
+              Using <Typography.Code>renderValue</Typography.Code>
+            </Typography.Text>
             <Select.Root defaultValue="EUR">
               <Select.Trigger
                 {...args}
@@ -375,16 +377,16 @@ export default {
                 ))}
               </Select.Content>
             </Select.Root>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Full control via render function. Great for icons or complex formatting.
-            </Text>
+            </Typography.Text>
           </div>
 
           {/* Value equals label */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-            <Text size="2" weight="bold">
+            <Typography.Text size="2" weight="bold">
               Value = Label
-            </Text>
+            </Typography.Text>
             <Select.Root defaultValue="Roboto">
               <Select.Trigger {...args} style={{ width: 160 }} />
               <Select.Content alignItemWithTrigger={false}>
@@ -393,17 +395,17 @@ export default {
                 <Select.Item value="Poppins">Poppins</Select.Item>
               </Select.Content>
             </Select.Root>
-            <Text size="1" color="gray" style={{ maxWidth: 180 }}>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 180 }}>
               Simplest: use display text as value. Works for simple cases.
-            </Text>
+            </Typography.Text>
           </div>
         </div>
 
-        <Text render={<div />} size="2" color="gray" style={{ maxWidth: 700, marginTop: 'var(--space-2)' }}>
-          <strong>Recommendation:</strong> Use <Code>items</Code> prop for data-driven selects, or{' '}
-          <Code>renderValue</Code> for custom formatting. Using value=label works for simple cases but can be
-          problematic if you need stable IDs for form submission.
-        </Text>
+        <Typography.Text render={<div />} size="2" color="gray" style={{ maxWidth: 700, marginTop: 'var(--space-2)' }}>
+          <strong>Recommendation:</strong> Use <Typography.Code>items</Typography.Code> prop for data-driven selects, or{' '}
+          <Typography.Code>renderValue</Typography.Code> for custom formatting. Using value=label works for simple cases
+          but can be problematic if you need stable IDs for form submission.
+        </Typography.Text>
       </div>
     );
   },
@@ -416,16 +418,16 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
           By default, Base UI Select aligns the selected item with the trigger (native select behavior). Set{' '}
-          <Code>alignItemWithTrigger=&#123;false&#125;</Code> for standard dropdown positioning.
-        </Text>
+          <Typography.Code>alignItemWithTrigger=&#123;false&#125;</Typography.Code> for standard dropdown positioning.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-4)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', alignItems: 'center' }}>
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               Default (item-aligned)
-            </Text>
+            </Typography.Text>
             <Select.Root defaultValue="banana">
               <Select.Trigger {...args} />
               <Select.Content>
@@ -439,9 +441,9 @@ export default {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', alignItems: 'center' }}>
-            <Text size="1" color="gray">
+            <Typography.Text size="1" color="gray">
               alignItemWithTrigger=false
-            </Text>
+            </Typography.Text>
             <Select.Root defaultValue="banana">
               <Select.Trigger {...args} />
               <Select.Content alignItemWithTrigger={false}>
@@ -466,10 +468,11 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Control where the popup appears using <Code>side</Code> and <Code>align</Code> props. These only take effect
-          when <Code>alignItemWithTrigger=&#123;false&#125;</Code>.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Control where the popup appears using <Typography.Code>side</Typography.Code> and{' '}
+          <Typography.Code>align</Typography.Code> props. These only take effect when{' '}
+          <Typography.Code>alignItemWithTrigger=&#123;false&#125;</Typography.Code>.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <Select.Root defaultValue="Apple">
@@ -540,10 +543,11 @@ export default {
     };
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Fine-tune positioning with <Code>sideOffset</Code> (distance from trigger) and <Code>alignOffset</Code> (shift
-          along the alignment axis). Requires <Code>alignItemWithTrigger=&#123;false&#125;</Code>.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Fine-tune positioning with <Typography.Code>sideOffset</Typography.Code> (distance from trigger) and{' '}
+          <Typography.Code>alignOffset</Typography.Code> (shift along the alignment axis). Requires{' '}
+          <Typography.Code>alignItemWithTrigger=&#123;false&#125;</Typography.Code>.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-4)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <Select.Root defaultValue="Apple">
@@ -587,9 +591,10 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Control the select's value externally with <Code>value</Code> and <Code>onValueChange</Code> props.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Control the select's value externally with <Typography.Code>value</Typography.Code> and{' '}
+          <Typography.Code>onValueChange</Typography.Code> props.
+        </Typography.Text>
 
         <Select.Root value={value} onValueChange={(newValue) => setValue(newValue as string | null)}>
           <Select.Trigger {...args} placeholder="Pick a fruit" />
@@ -601,9 +606,9 @@ export default {
           </Select.Content>
         </Select.Root>
 
-        <Text size="2" color="gray">
-          Selected: <Code>{value ?? 'none'}</Code>
-        </Text>
+        <Typography.Text size="2" color="gray">
+          Selected: <Typography.Code>{value ?? 'none'}</Typography.Code>
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
           <button onClick={() => setValue('cherry')}>Set to Cherry</button>
@@ -623,15 +628,15 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 600, textAlign: 'center' }}>
-          Select with many items. Compare <Code>alignItemWithTrigger</Code> behavior.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 600, textAlign: 'center' }}>
+          Select with many items. Compare <Typography.Code>alignItemWithTrigger</Typography.Code> behavior.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap', justifyContent: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', alignItems: 'center' }}>
-            <Text size="2" weight="medium">
+            <Typography.Text size="2" weight="medium">
               alignItemWithTrigger={'{true}'} (default)
-            </Text>
+            </Typography.Text>
             <Select.Root defaultValue="Item 25">
               <Select.Trigger {...args} />
               <Select.Content>
@@ -642,15 +647,15 @@ export default {
                 ))}
               </Select.Content>
             </Select.Root>
-            <Text size="1" color="gray" style={{ maxWidth: 200, textAlign: 'center' }}>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 200, textAlign: 'center' }}>
               Selected item aligns with trigger. Popup expands as you scroll.
-            </Text>
+            </Typography.Text>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', alignItems: 'center' }}>
-            <Text size="2" weight="medium">
+            <Typography.Text size="2" weight="medium">
               alignItemWithTrigger={'{false}'}
-            </Text>
+            </Typography.Text>
             <Select.Root defaultValue="Item 25">
               <Select.Trigger {...args} />
               <Select.Content alignItemWithTrigger={false}>
@@ -661,9 +666,9 @@ export default {
                 ))}
               </Select.Content>
             </Select.Root>
-            <Text size="1" color="gray" style={{ maxWidth: 200, textAlign: 'center' }}>
+            <Typography.Text size="1" color="gray" style={{ maxWidth: 200, textAlign: 'center' }}>
               Standard dropdown positioning below trigger.
-            </Text>
+            </Typography.Text>
           </div>
         </div>
       </div>
@@ -689,10 +694,11 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Add the <Code>multiple</Code> prop to <Code>Select.Root</Code> to allow multiple selections. Use the{' '}
-          <Code>renderValue</Code> prop on the Trigger to customize how the selection is displayed.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Add the <Typography.Code>multiple</Typography.Code> prop to <Typography.Code>Select.Root</Typography.Code> to
+          allow multiple selections. Use the <Typography.Code>renderValue</Typography.Code> prop on the Trigger to
+          customize how the selection is displayed.
+        </Typography.Text>
 
         <Select.Root multiple defaultValue={['javascript', 'typescript']}>
           <Select.Trigger {...args} renderValue={renderValue} />
@@ -721,18 +727,19 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-        <Text render={<div />} style={{ maxWidth: 600 }}>
-          Use <Code>value</Code> and <Code>onValueChange</Code> props to control the Select. When <Code>multiple</Code>{' '}
-          is set, value types automatically become arrays. Use generics like <Code>{'Select.Root<string>'}</Code> or{' '}
-          <Code>{'Select.Root<string, true>'}</Code> for full type safety.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 600 }}>
+          Use <Typography.Code>value</Typography.Code> and <Typography.Code>onValueChange</Typography.Code> props to
+          control the Select. When <Typography.Code>multiple</Typography.Code> is set, value types automatically become
+          arrays. Use generics like <Typography.Code>{'Select.Root<string>'}</Typography.Code> or{' '}
+          <Typography.Code>{'Select.Root<string, true>'}</Typography.Code> for full type safety.
+        </Typography.Text>
 
         <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap' }}>
           {/* Single Selection - value is typed as string */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-            <Text size="2" weight="bold">
+            <Typography.Text size="2" weight="bold">
               Single Selection
-            </Text>
+            </Typography.Text>
             <Select.Root<string>
               value={singleValue}
               onValueChange={(value) => {
@@ -749,14 +756,14 @@ export default {
                 ))}
               </Select.Content>
             </Select.Root>
-            <Code size="1">value: "{singleValue}"</Code>
+            <Typography.Code size="1">value: "{singleValue}"</Typography.Code>
           </div>
 
           {/* Multiple Selection - value is typed as string[] */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-            <Text size="2" weight="bold">
+            <Typography.Text size="2" weight="bold">
               Multiple Selection
-            </Text>
+            </Typography.Text>
             <Select.Root<string, true>
               multiple
               value={multipleValue}
@@ -783,7 +790,7 @@ export default {
                 ))}
               </Select.Content>
             </Select.Root>
-            <Code size="1">value: [{multipleValue.map((v) => `"${v}"`).join(', ')}]</Code>
+            <Typography.Code size="1">value: [{multipleValue.map((v) => `"${v}"`).join(', ')}]</Typography.Code>
           </div>
         </div>
 
@@ -863,11 +870,13 @@ export default {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
-        <Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
-          Select items can use objects as values instead of primitives. Use <Code>itemToStringValue</Code> to convert
-          objects to strings for comparison, and <Code>renderValue</Code> to display the full object. Note:{' '}
-          <Code>alignItemWithTrigger=&#123;false&#125;</Code> is recommended for variable-height items.
-        </Text>
+        <Typography.Text render={<div />} style={{ maxWidth: 500, textAlign: 'center' }}>
+          Select items can use objects as values instead of primitives. Use{' '}
+          <Typography.Code>itemToStringValue</Typography.Code> to convert objects to strings for comparison, and{' '}
+          <Typography.Code>renderValue</Typography.Code> to display the full object. Note:{' '}
+          <Typography.Code>alignItemWithTrigger=&#123;false&#125;</Typography.Code> is recommended for variable-height
+          items.
+        </Typography.Text>
 
         <Select.Root
           defaultValue={shippingMethods[0]}
