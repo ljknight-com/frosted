@@ -34,16 +34,56 @@
   --accent-950: color-mix(in oklab, var(--fui-ca-l950), var(--fui-ca-d950) calc(var(--fui-dark) * 100%));
   --accent-alpha-10: color-mix(in srgb, var(--fui-ca-lalpha-10), var(--fui-ca-dalpha-10) calc(var(--fui-dark) * 100%));
   --accent-alpha-50: color-mix(in srgb, var(--fui-ca-lalpha-50), var(--fui-ca-dalpha-50) calc(var(--fui-dark) * 100%));
-  --accent-alpha-100: color-mix(in srgb, var(--fui-ca-lalpha-100), var(--fui-ca-dalpha-100) calc(var(--fui-dark) * 100%));
-  --accent-alpha-200: color-mix(in srgb, var(--fui-ca-lalpha-200), var(--fui-ca-dalpha-200) calc(var(--fui-dark) * 100%));
-  --accent-alpha-300: color-mix(in srgb, var(--fui-ca-lalpha-300), var(--fui-ca-dalpha-300) calc(var(--fui-dark) * 100%));
-  --accent-alpha-400: color-mix(in srgb, var(--fui-ca-lalpha-400), var(--fui-ca-dalpha-400) calc(var(--fui-dark) * 100%));
-  --accent-alpha-500: color-mix(in srgb, var(--fui-ca-lalpha-500), var(--fui-ca-dalpha-500) calc(var(--fui-dark) * 100%));
-  --accent-alpha-600: color-mix(in srgb, var(--fui-ca-lalpha-600), var(--fui-ca-dalpha-600) calc(var(--fui-dark) * 100%));
-  --accent-alpha-700: color-mix(in srgb, var(--fui-ca-lalpha-700), var(--fui-ca-dalpha-700) calc(var(--fui-dark) * 100%));
-  --accent-alpha-800: color-mix(in srgb, var(--fui-ca-lalpha-800), var(--fui-ca-dalpha-800) calc(var(--fui-dark) * 100%));
-  --accent-alpha-900: color-mix(in srgb, var(--fui-ca-lalpha-900), var(--fui-ca-dalpha-900) calc(var(--fui-dark) * 100%));
-  --accent-alpha-950: color-mix(in srgb, var(--fui-ca-lalpha-950), var(--fui-ca-dalpha-950) calc(var(--fui-dark) * 100%));
+  --accent-alpha-100: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-100),
+    var(--fui-ca-dalpha-100) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-200: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-200),
+    var(--fui-ca-dalpha-200) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-300: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-300),
+    var(--fui-ca-dalpha-300) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-400: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-400),
+    var(--fui-ca-dalpha-400) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-500: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-500),
+    var(--fui-ca-dalpha-500) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-600: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-600),
+    var(--fui-ca-dalpha-600) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-700: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-700),
+    var(--fui-ca-dalpha-700) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-800: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-800),
+    var(--fui-ca-dalpha-800) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-900: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-900),
+    var(--fui-ca-dalpha-900) calc(var(--fui-dark) * 100%)
+  );
+  --accent-alpha-950: color-mix(
+    in srgb,
+    var(--fui-ca-lalpha-950),
+    var(--fui-ca-dalpha-950) calc(var(--fui-dark) * 100%)
+  );
 }
 
 [data-gray-color='custom'] {

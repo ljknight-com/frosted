@@ -19,7 +19,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.stories.ts", "**/*.stories.tsx", "**/widget-stack/widget-stack.tsx"],
+      "files": ["**/*.fixture.ts", "**/*.fixture.tsx", "**/cosmos/controls.ts", "**/widget-stack/widget-stack.tsx"],
       "rules": {
         "react-hooks/rules-of-hooks": "off"
       }
@@ -31,7 +31,7 @@
     "**/.source/**",
     "**/.nitro/**",
     "**/.tanstack/**",
-    "**/storybook-static/**",
+    "**/cosmos-export/**",
     "**/src/generated/**",
     "**/*.gen.ts"
   ]

@@ -1,6 +1,6 @@
 /**
- * Generates `packages/frosted-ui/.storybook/generated/component-props.json` from
- * the @aussieljk/frosted sources, for storybook's `<PropsTable component="…" />` block.
+ * Generates `packages/frosted-ui/cosmos/generated/component-props.json` from
+ * the @aussieljk/frosted sources, for the cosmos fixture controls (`cosmos/controls.ts`).
  *
  * For every component exported from `packages/frosted-ui/src/index.ts` (including
  * namespace parts like `Dialog.Root` and attached parts like `Grid.Row`) it extracts:
@@ -26,7 +26,7 @@ import ts from 'typescript';
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const frostedSrc = path.join(repoRoot, 'packages/frosted-ui/src');
 const entryFile = path.join(frostedSrc, 'index.ts');
-const outFile = path.join(repoRoot, 'packages/frosted-ui/.storybook/generated/component-props.json');
+const outFile = path.join(repoRoot, 'packages/frosted-ui/cosmos/generated/component-props.json');
 
 interface PropInfo {
   name: string;
@@ -281,7 +281,7 @@ const output = {
 };
 
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
-// Minified: this is generated, gitignored, and imported into the storybook preview on every boot,
+// Minified: this is generated, gitignored, and imported into the cosmos renderer on every boot,
 // so nobody reads it by hand and the indentation was ~20% of the bytes.
 fs.writeFileSync(outFile, `${JSON.stringify(output)}\n`);
 

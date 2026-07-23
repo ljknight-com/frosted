@@ -14,8 +14,12 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "alwaysStrict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@aussieljk/frosted": ["./src"],
+      "@aussieljk/frosted/icons/*": ["./src/icons/adapters/*"]
+    }
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "scripts", "**/*.stories.tsx", "**/*.stories.ts"]
+  "include": ["src/**/*", "cosmos/**/*", "demos/**/*"],
+  "exclude": ["node_modules", "dist", "scripts"]
 }

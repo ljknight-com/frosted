@@ -31,11 +31,9 @@ yarn-error.log*
 
 # turbo
 .turbo
-packages/frosted-ui/build-storybook.log
 
-#storybook
-storybook-static
+# cosmos
+cosmos-export
 screenshots
-packages/frosted-ui/.storybook/generated
-packages/frosted-ui/.storybook/public
+packages/frosted-ui/cosmos/generated
 .vercel

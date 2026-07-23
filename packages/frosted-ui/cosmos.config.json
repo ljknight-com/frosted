@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/react-cosmos/config.schema.json",
+  "plugins": ["react-cosmos-plugin-vite"],
+  "globalImports": ["./cosmos/preview.css"],
+  "lazy": true,
+  "exportPath": "cosmos-export",
+  "vite": { "port": 5050 }
+}

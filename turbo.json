@@ -20,9 +20,9 @@
     "lint:css": {
       "outputs": []
     },
-    "@aussieljk/frosted#build-storybook": {
+    "@aussieljk/frosted#build-cosmos": {
       "dependsOn": ["build:css"],
-      "outputs": ["storybook-static/**"]
+      "outputs": ["cosmos-export/**"]
     },
     "typecheck": {
       "dependsOn": ["^build"],

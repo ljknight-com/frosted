@@ -1,20 +1,19 @@
 #!/usr/bin/env bun
 // Scaffold a new @aussieljk/frosted component and wire it into every place the repo
-// expects: component files, the components barrel, the CSS aggregate, the
-// storybook demo registry, and an authored storybook MDX docs page.
+// expects: component files, the components barrel, the CSS aggregate, a cosmos
+// fixture, and a usage demo.
 //
 // Usage:
 //   bun run new:component <kebab-name> [--namespace] [--no-docs]
 //
 //   --namespace  namespace-style component (<Name>.Root / <Name>.Item, `export * as`)
-//   --no-docs    skip the demo + MDX docs page (the story then uses autodocs)
+//   --no-docs    skip the usage demo in packages/frosted-ui/demos
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const UI = join(ROOT, 'packages/frosted-ui');
-const SB = join(UI, '.storybook');
 
 const args = process.argv.slice(2);
 const flags = new Set(args.filter((a) => a.startsWith('--')));
@@ -164,33 +163,29 @@ create(
 );
 
 create(
-  join(componentDir, `${name}.stories.tsx`),
-  `import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
+  join(componentDir, `${name}.fixture.tsx`),
+  namespace
+    ? `import React from 'react';
 
-import { ${pascal} } from '../../../src/components';
+import { ${pascal} } from '..';
 
-const meta = {
-  title: 'Components/${title}',
-  component: ${namespace ? `${pascal}.Root` : pascal},
-  parameters: { layout: 'centered' },
-  ${withDocs ? `// Docs page is authored in .storybook/stories/components/${name}.mdx.\n  tags: ['!autodocs'],` : `tags: ['autodocs'],`}
-} satisfies Meta<typeof ${namespace ? `${pascal}.Root` : pascal}>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {${
-    namespace
-      ? `
-  render: () => (
+export default function ${pascal}Fixture() {
+  return (
     <${pascal}.Root>
       <${pascal}.Item>Item</${pascal}.Item>
     </${pascal}.Root>
-  ),
+  );
+}
 `
-      : ''
-  }};
+    : `import React from 'react';
+
+import { ${pascal} } from '..';
+import { useComponentControls } from '../../../cosmos/controls';
+
+export default function ${pascal}Fixture() {
+  const props = useComponentControls('${pascal}');
+  return <${pascal} {...props} />;
+}
 `,
 );
 
@@ -222,11 +217,11 @@ edit(
 );
 
 // ---------------------------------------------------------------------------
-// storybook docs: demo + registry entry + authored MDX page
+// usage demo (a standalone cosmos fixture in packages/frosted-ui/demos)
 
 if (withDocs) {
   create(
-    join(SB, 'demos', `${name}.tsx`),
+    join(UI, 'demos', `${name}.fixture.tsx`),
     namespace
       ? `import React from 'react';
 import { ${pascal} } from '@aussieljk/frosted';
@@ -247,66 +242,11 @@ export default function ${pascal}Demo() {
 }
 `,
   );
-
-  edit(
-    join(SB, 'demos/index.ts'),
-    (src) => {
-      const withImports = insertAfterLast(
-        src,
-        /^import \w+Source from '\.\/.*\?raw';$/,
-        `import ${pascal}Demo from './${name}';\nimport ${camel}Source from './${name}?raw';`,
-      );
-      if (!withImports) return null;
-      const entry = `  { id: '${name}', title: '${title}', component: ${pascal}Demo, source: ${camel}Source },`;
-      const end = withImports.lastIndexOf('\n];');
-      if (end === -1) return null;
-      return `${withImports.slice(0, end)}\n${entry}${withImports.slice(end)}`;
-    },
-    'demo registry entry',
-  );
-
-  create(
-    join(SB, 'stories/components', `${name}.mdx`),
-    `import { Controls, Meta, Primary, Stories } from '@storybook/addon-docs/blocks';
-
-import * as ${pascal}Stories from '../../../src/components/${name}/${name}.stories';
-import { Demo } from '../../components/demo';
-import { PropsTable } from '../../components/props-table';
-
-<Meta of={${pascal}Stories} />
-
-# ${title}
-
-TODO — one line describing ${title}.
-
-<Demo id="${name}" />
-
-## Usage
-
-\`\`\`tsx
-import { ${pascal} } from '@aussieljk/frosted';
-\`\`\`
-
-## Props
-
-<PropsTable component="${namespace ? `${pascal}.Root` : pascal}" />
-
-## Playground
-
-<Primary />
-
-<Controls />
-
-## Stories
-
-<Stories includePrimary={false} />
-`,
-  );
 }
 
 console.log(`
 Done. Next steps:
   1. Implement ${pascal} in packages/frosted-ui/src/components/${name}/${name}.tsx (+ its .css and .props.ts)
-  2. Flesh out the story and the demo${withDocs ? '' : ' (docs skipped — rerun without --no-docs or wire by hand)'}
-  3. Run it (regenerates prop tables): bun run dev
+  2. Flesh out the fixture${withDocs ? ' and the demo' : ' (demo skipped — rerun without --no-docs or add one by hand)'}
+  3. Run it (regenerates prop data): bun run dev
 `);

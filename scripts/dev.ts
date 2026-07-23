@@ -4,10 +4,10 @@
  * Starts the dev processes in parallel, prefixes their output with short colored
  * labels, polls the portless URL, and opens it in Safari as it becomes ready.
  *
- * - Storybook reads frosted straight from src/, so no dist/ watch build runs here
- *   at all; only the CSS watchers, which produce the styles.css storybook imports.
- * - `generate:props` (the docs prop tables) is skipped when frosted src is unchanged
- *   since the last run, and refreshes in the background otherwise.
+ * - Cosmos reads frosted straight from src/, so no dist/ watch build runs here
+ *   at all; only the CSS watchers, which produce the styles.css the renderer imports.
+ * - `generate:props` (the fixture-control prop data) is skipped when frosted src is
+ *   unchanged since the last run, and refreshes in the background otherwise.
  * - Stale dev processes from a previous session (they squat the portless routes)
  *   are killed on startup; `--kill` does only that and exits.
  */
@@ -46,8 +46,6 @@ const NOISE = [
   /^portless$/, // portless prints its own banner…
   /^-- /, // …plus proxy/route status lines…
   /^-> |^Running: /, // …and the resolved command with its port mapping
-  /^\s*[╭│╰┌└]/, // storybook banner box
-  /telemetry/i,
 ];
 
 interface Proc {
@@ -58,12 +56,12 @@ interface Proc {
 }
 
 const allProcs: Record<string, Proc[]> = {
-  sb: [
+  cosmos: [
     {
-      name: 'sb',
+      name: 'cos',
       paint: c.yellow,
       cwd: frostedDir,
-      cmd: ['portless', 'frosted', 'sh', '-c', 'storybook dev -p "$PORT" --no-open --quiet'],
+      cmd: ['portless', 'frosted', 'sh', '-c', 'cosmos --port "$PORT"'],
     },
   ],
   css: [
@@ -82,8 +80,8 @@ const allProcs: Record<string, Proc[]> = {
   ],
 };
 
-const servers = [{ name: 'storybook', url: 'https://frosted.localhost' }];
-const procs = [...allProcs.sb, ...allProcs.css];
+const servers = [{ name: 'cosmos', url: 'https://frosted.localhost' }];
+const procs = [...allProcs.cosmos, ...allProcs.css];
 
 // --- stale sessions ---
 
@@ -99,7 +97,7 @@ function killStale(): number {
     const [, pid, command] = match;
     if (mine.has(Number(pid))) continue;
     if (!command.includes(`${root}/node_modules/.bin/`)) continue; // never touches the global proxy
-    if (!/\.bin\/(portless|vite|storybook|tsdown|postcss|concurrently)/.test(command)) continue;
+    if (!/\.bin\/(portless|vite|cosmos|tsdown|postcss|concurrently)/.test(command)) continue;
     try {
       process.kill(Number(pid), 'SIGTERM');
       killed++;
@@ -137,7 +135,6 @@ function start({ name, paint, cwd, cmd }: Proc) {
     env: {
       ...process.env,
       FORCE_COLOR: '1',
-      SB_DISABLE_TELEMETRY: '1',
       PATH: `${join(cwd, 'node_modules/.bin')}:${join(root, 'node_modules/.bin')}:${process.env.PATH}`,
     },
   });
@@ -185,10 +182,10 @@ function propsFingerprint(): string {
   return `${count}:${maxMtime}`;
 }
 
-const propsJson = join(frostedDir, '.storybook/generated/component-props.json');
+const propsJson = join(frostedDir, 'cosmos/generated/component-props.json');
 
 async function refreshProps() {
-  const stampFile = join(frostedDir, '.storybook/generated/.props-stamp');
+  const stampFile = join(frostedDir, 'cosmos/generated/.props-stamp');
   const stamp = propsFingerprint();
   const fresh = existsSync(propsJson) && existsSync(stampFile) && readFileSync(stampFile, 'utf8') === stamp;
   if (fresh) return;
@@ -199,8 +196,6 @@ async function refreshProps() {
     });
 
   if ((await run(['bun', 'generate-props.ts'], propsGenDir)) !== 0) return;
-  // llms.txt inlines the prop tables, so it regenerates with them.
-  await run(['bun', 'scripts/generate-llms.ts'], frostedDir);
   writeFileSync(stampFile, stamp);
   if (!shuttingDown) console.log(`${c.green('✓')} ${c.bold('props')}     refreshed  ${c.dim(elapsed())}`);
 }
@@ -216,8 +211,8 @@ if (killOnly) {
 console.log(`\n${c.bold('❄ frosted dev')}\n`);
 if (stale) console.log(c.dim(`killed ${stale} stale dev process${stale === 1 ? '' : 'es'} from a previous session`));
 
-// Storybook imports the built styles.css/theme.css; the watchers recreate them, but
-// on a pristine checkout build once up-front so the very first request can't 404.
+// The cosmos renderer imports the built styles.css/theme.css; the watchers recreate them,
+// but on a pristine checkout build once up-front so the very first request can't 404.
 if (!existsSync(join(frostedDir, 'styles.css')) || !existsSync(join(frostedDir, 'theme.css'))) {
   console.log(c.dim('first run — building css…'));
   const build = Bun.spawnSync(['bun', 'run', 'build:css'], {
@@ -227,8 +222,8 @@ if (!existsSync(join(frostedDir, 'styles.css')) || !existsSync(join(frostedDir, 
   if (build.exitCode !== 0) process.exit(build.exitCode);
 }
 
-// Storybook imports the prop-table JSON, so on a pristine checkout it must exist before
-// storybook spawns; otherwise the freshness check (a stat-walk of src/) and any
+// The fixture controls import the prop JSON, so on a pristine checkout it must exist
+// before cosmos spawns; otherwise the freshness check (a stat-walk of src/) and any
 // regeneration run behind the servers while they boot.
 if (!existsSync(propsJson)) {
   console.log(c.dim('generating prop tables…'));

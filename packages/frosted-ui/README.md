@@ -3,7 +3,7 @@
 <p align="center">@aussieljk/frosted — a React design system with a themeable component library, SwiftUI-style layout primitives, and pluggable icon sets</p>
 
 <h3 align="center">
-  <a href="https://frosted.localhost">Docs &amp; Storybook</a>
+  <a href="https://frosted.localhost">Component workbench (react-cosmos)</a>
 </h3>
 
 > [!WARNING]

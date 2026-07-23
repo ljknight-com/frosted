@@ -37,8 +37,8 @@
 
   & :where(.fui-SliderThumb) {
     --slider-thumb-box-shadow:
-      0 0 0 1px var(--black-alpha-100), 0 0 0 1px var(--gray-alpha-50), 0 0 0 1px var(--accent-alpha-50), 0 1px 2px var(--gray-alpha-200),
-      0 1px 3px -0.5px var(--gray-alpha-100);
+      0 0 0 1px var(--black-alpha-100), 0 0 0 1px var(--gray-alpha-50), 0 0 0 1px var(--accent-alpha-50),
+      0 1px 2px var(--gray-alpha-200), 0 1px 3px -0.5px var(--gray-alpha-100);
 
     &:where([data-disabled])::after {
       background-color: var(--gray-10);

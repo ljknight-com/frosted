@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "turbo run build",
-    "build:storybook": "turbo run build-storybook",
+    "build:cosmos": "turbo run build-cosmos",
     "check": "turbo run lint typecheck build && bun run --filter=@aussieljk/frosted health",
     "dev": "bun scripts/dev.ts",
     "doctor": "bun scripts/doctor.ts",
