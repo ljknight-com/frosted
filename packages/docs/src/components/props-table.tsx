@@ -8,13 +8,18 @@ const data = propsData as Record<
   Record<string, { type: string; default?: string; description?: string; required?: boolean }>
 >;
 
+// Index by a hyphen/case-insensitive key so guide pages can reference components however they read
+// naturally — <PropsTable component="HStack" />, "IconButton", "Theme" all resolve.
+const normalize = (s: string) => s.replace(/-/g, '').toLowerCase();
+const byNormalized = new Map(Object.entries(data).map(([k, v]) => [normalize(k), v]));
+
 /**
  * Renders the design-system props for a component (the ones its `propDefs` declare — size,
  * variant, color, … — not every inherited HTML attribute). Renders nothing when a component has
  * no documented props, so it's safe to drop on every page.
  */
 export function PropsTable({ component }: { component: string }) {
-  const props = data[component];
+  const props = data[component] ?? byNormalized.get(normalize(component));
   if (!props) return null;
 
   return <TypeTable type={props} />;

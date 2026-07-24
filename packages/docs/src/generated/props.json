@@ -960,5 +960,39 @@
       "default": "center",
       "description": "Two-dimensional alignment of children within the stack, using SwiftUI-style values (leading/trailing resolve against the writing direction)."
     }
+  },
+  "theme": {
+    "hasBackground": {
+      "type": "boolean",
+      "default": "true"
+    },
+    "appearance": {
+      "type": "\"inherit\" | \"light\" | \"dark\"",
+      "default": "inherit"
+    },
+    "accentColor": {
+      "type": "\"red\" | \"orange\" | \"amber\" | \"yellow\" | \"lime\" | \"green\" | \"emerald\" | \"teal\" | \"cyan\" | \"sky\" | \"blue\" | \"indigo\" | \"violet\" | \"purple\" | \"fuchsia\" | \"pink\" | \"rose\" | \"slate\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\"",
+      "default": "blue"
+    },
+    "grayColor": {
+      "type": "\"slate\" | \"gray\" | \"zinc\" | \"neutral\" | \"stone\" | \"auto\"",
+      "default": "neutral"
+    },
+    "dangerColor": {
+      "type": "\"red\" | \"rose\"",
+      "default": "red"
+    },
+    "warningColor": {
+      "type": "\"amber\" | \"yellow\" | \"orange\"",
+      "default": "amber"
+    },
+    "successColor": {
+      "type": "\"green\" | \"emerald\" | \"teal\"",
+      "default": "green"
+    },
+    "infoColor": {
+      "type": "\"sky\" | \"blue\" | \"cyan\"",
+      "default": "sky"
+    }
   }
 }

@@ -100,9 +100,15 @@ async function propsForFile(full: string): Promise<Record<string, PropRow> | nul
   return Object.keys(rows).length > 0 ? rows : null;
 }
 
+// The `<Theme>` props live in theme-options.tsx as `themePropDefs` (same shape, not a *.props.ts
+// file), so pull them in explicitly under the `theme` key.
+const propsFiles = [...findPropsFiles(srcDir), join(srcDir, 'theme-options.tsx')];
+
 const all: Record<string, Record<string, PropRow>> = {};
-for (const full of findPropsFiles(srcDir).sort()) {
-  const name = basename(full).replace('.props.ts', '');
+for (const full of propsFiles.sort()) {
+  const name = basename(full)
+    .replace(/\.props\.ts$|\.tsx$/, '')
+    .replace('theme-options', 'theme');
   try {
     const rows = await propsForFile(full);
     if (rows) all[name] = rows;

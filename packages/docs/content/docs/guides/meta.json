@@ -1,0 +1,4 @@
+{
+  "title": "Guides",
+  "pages": ["theming", "color", "typography", "layout", "breakpoints", "tailwind", "icons", "render-prop", "examples"]
+}
